@@ -10,26 +10,16 @@ import Alamofire
 
 class NetworkManger {
     
-        
-    func getData<T: Decodable>(url: String, completionHandler: @escaping (Result<T, Error>) -> Void) {
-        AF.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).response {
-            response in
+    
+    func getData(url: String,handler: @escaping (Response?) -> Void) {
+        AF.request(url,parameters: nil, headers: nil).responseDecodable(of: Response.self) { response in
             switch response.result {
             case .success(let data):
-                do {
-                    let jsonData = try JSONDecoder().decode(T.self, from: data!)
-                    completionHandler(.success(jsonData))
-                } catch {
-                    completionHandler(.failure(error))
-                }
+                handler(data)
             case .failure(let error):
-                completionHandler(.failure(error))
+                print("Error: \(error)")
             }
         }
     }
-    
-    
-    
-    
 }
 
