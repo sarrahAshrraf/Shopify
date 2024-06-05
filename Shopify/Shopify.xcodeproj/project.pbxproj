@@ -12,6 +12,7 @@
 		8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */; };
 		8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */; };
 		8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */; };
+		8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849F2C10C1DD00BB28C6 /* Response.swift */; };
 		93A552BB7BABFCA0665F05A7 /* Pods_ShopifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265B32CF562A1F8B76337625 /* Pods_ShopifyTests.framework */; };
 		94EEE273EB7E4859300EBC1A /* Pods_Shopify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B149AC4424639B8F2011FAB1 /* Pods_Shopify.framework */; };
 		E6174BD82C0BA57F004CE96E /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6174BD72C0BA57F004CE96E /* Order.storyboard */; };
@@ -60,6 +61,7 @@
 		8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondStoryboard.storyboard; sourceTree = "<group>"; };
 		8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
 		8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMangerProtocol.swift; sourceTree = "<group>"; };
+		8BE8849F2C10C1DD00BB28C6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		8E8846A44B1348DFC3F949E2 /* Pods_Shopify_ShopifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shopify_ShopifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C1A045119129F99B582947 /* Pods-Shopify-ShopifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopify-ShopifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Shopify-ShopifyUITests/Pods-Shopify-ShopifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B149AC4424639B8F2011FAB1 /* Pods_Shopify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shopify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +142,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		8BE8849E2C10C1C900BB28C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8BE8849F2C10C1DD00BB28C6 /* Response.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9196EAB69B43E7B49B460DA4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 		E7F5EF472C0B35800096F476 /* Shopify */ = {
 			isa = PBXGroup;
 			children = (
+				8BE8849E2C10C1C900BB28C6 /* Model */,
 				8BE884992C10A8BF00BB28C6 /* Service */,
 				E6174BD92C0BA6C2004CE96E /* Orders */,
 				E6C97DFD2C0B92FE00B2CA81 /* Home */,
@@ -502,6 +513,7 @@
 				E6C97E002C0B934100B2CA81 /* HomeViewController.swift in Sources */,
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
+				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
 				E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */,
 				8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */,
 				E7F5EF532C0B35800096F476 /* Shopify.xcdatamodeld in Sources */,
