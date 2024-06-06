@@ -10,6 +10,7 @@
 		0436641635E14DEE9E365C8D /* Pods_Shopify_ShopifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8846A44B1348DFC3F949E2 /* Pods_Shopify_ShopifyUITests.framework */; };
 		8B48D4EB2C0DEA80005E5C37 /* Auhentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */; };
 		8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */; };
+		8B95A60D2C11A18900D5A592 /* BrandProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B95A60C2C11A18900D5A592 /* BrandProduct.storyboard */; };
 		8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */; };
 		8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */; };
 		8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849F2C10C1DD00BB28C6 /* Response.swift */; };
@@ -65,6 +66,7 @@
 		2AB4CC9C6805F8F13B3F83DB /* Pods-ShopifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopifyTests.release.xcconfig"; path = "Target Support Files/Pods-ShopifyTests/Pods-ShopifyTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auhentication.storyboard; sourceTree = "<group>"; };
 		8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondStoryboard.storyboard; sourceTree = "<group>"; };
+		8B95A60C2C11A18900D5A592 /* BrandProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BrandProduct.storyboard; sourceTree = "<group>"; };
 		8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
 		8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMangerProtocol.swift; sourceTree = "<group>"; };
 		8BE8849F2C10C1DD00BB28C6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */,
 				E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */,
 				E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */,
+				8B95A60C2C11A18900D5A592 /* BrandProduct.storyboard */,
 			);
 			path = Shopify;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				E7F5EF502C0B35800096F476 /* Main.storyboard in Resources */,
 				8B48D4EB2C0DEA80005E5C37 /* Auhentication.storyboard in Resources */,
 				E6C97DFC2C0B8C9000B2CA81 /* Home.storyboard in Resources */,
+				8B95A60D2C11A18900D5A592 /* BrandProduct.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
