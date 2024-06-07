@@ -14,14 +14,14 @@ class ProductDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         viewModel = ProductDetailsViewModel()
-        fetchData()
+        //fetchData()
         // Do any additional setup after loading the view.
     }
     
-    func fetchData(){
-        print("success")
-        viewModel.getItems()
-    }
+//    func fetchData(){
+//        print("success")
+//        viewModel.getItems()
+//    }
     
 
     

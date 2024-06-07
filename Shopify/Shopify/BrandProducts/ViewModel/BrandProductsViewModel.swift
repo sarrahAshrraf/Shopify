@@ -20,8 +20,8 @@ class BrandProductsViewModel{
     
     
     func getItems(){
-        
-        NetworkManger().getData(url: url){ [weak self] (response : Response?) in
+        let url = URLs.shared.brandProductsURL(id: brandId)
+        NetworkManger.shared.getData(url: url){ [weak self] (response : Response?) in
             self?.result = (response?.products)!
             print(self?.result)
         }

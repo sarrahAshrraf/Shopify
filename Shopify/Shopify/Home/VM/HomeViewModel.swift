@@ -15,8 +15,8 @@ class HomeViewModel {
         }
     }
     func getItems(){
-        let path = ""
-        NetworkManger().getData(url: path){ [weak self] (response: Response?) in
+        let url = URLs.shared.getBrandsURL()
+        NetworkManger.shared.getData(url: url){ [weak self] (response: Response?) in
             self?.result = response?.smartCollections
 //            print(self?.result)
 //            print(self?.result?.count)
