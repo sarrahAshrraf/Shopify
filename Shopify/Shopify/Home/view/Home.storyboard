@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jnd-Qu-VRa">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -10,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Item-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController id="Y6W-OH-hqX" customClass="HomeViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DTi-1b-LIg">
-                                <rect key="frame" x="0.0" y="154" width="393" height="664"/>
+                                <rect key="frame" x="0.0" y="105" width="393" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="664" id="T0B-7m-m9V"/>
@@ -98,16 +99,16 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFg-20-t3O">
-                                <rect key="frame" x="8" y="40" width="393" height="70"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LFg-20-t3O">
+                                <rect key="frame" x="8" y="84" width="393" height="66.333333333333314"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-GW-7Gq">
-                                        <rect key="frame" x="334" y="16" width="51" height="38"/>
+                                        <rect key="frame" x="334" y="16.000000000000004" width="51" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abR-uU-3Sg">
-                                        <rect key="frame" x="32" y="16" width="50" height="38"/>
+                                        <rect key="frame" x="32" y="16.000000000000004" width="50" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
                                     </button>
@@ -149,15 +150,17 @@
                             <constraint firstItem="DTi-1b-LIg" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="xid-5i-YpK"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="eJs-sC-cdB"/>
+                    <navigationItem key="navigationItem" id="Nez-Y5-y6E"/>
                     <connections>
                         <outlet property="collectionView" destination="DTi-1b-LIg" id="izZ-6F-mCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820.61068702290072" y="19.718309859154932"/>
+            <point key="canvasLocation" x="2673" y="-724"/>
         </scene>
-        <!--Ctegory View Controller-->
+        <!--Item-->
         <scene sceneID="evv-wY-bHl">
             <objects>
                 <viewController id="bPf-dT-KXd" customClass="CtegoryViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
@@ -166,7 +169,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ge9-MM-UZv">
-                                <rect key="frame" x="0.0" y="59" width="393" height="70"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="26"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4j-ph-ZdR">
                                         <rect key="frame" x="297" y="16" width="54" height="34"/>
@@ -284,13 +287,13 @@
                                     <segment title="Sales"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fd-dd-8QI">
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fd-dd-8QI">
                                 <rect key="frame" x="325" y="670" width="52" height="43.666666666666629"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pin-nf-cWK">
-                                <rect key="frame" x="325" y="739.66666666666663" width="52" height="34.333333333333371"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pin-nf-cWK">
+                                <rect key="frame" x="325" y="739.66666666666652" width="52" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="dollarsign" catalog="system"/>
                             </button>
@@ -323,13 +326,62 @@
                             <constraint firstAttribute="trailing" secondItem="7nM-5p-S2P" secondAttribute="trailing" id="w12-Z4-Oeo"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="DSa-qn-4n3"/>
                     <connections>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="Z7J-BN-ldp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybY-1s-XaS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1712.2137404580153" y="19.718309859154932"/>
+            <point key="canvasLocation" x="2784" y="20"/>
+        </scene>
+        <!--ProfileStoryboard-->
+        <scene sceneID="cDO-yW-bNw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProfileStoryboard" id="FKz-nR-lc3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="MHN-VT-ImQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-LV-Jpo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2762" y="451"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uB8-Ha-imt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jnd-Qu-VRa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f0q-Lt-5vo">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gk8-pw-niM" kind="relationship" relationship="rootViewController" id="PqX-UF-Z59"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NQT-bu-xms" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="820.61068702290072" y="19.718309859154932"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="flU-1F-hTc">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Gk8-pw-niM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="GGA-Tj-Ilp"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YPY-HY-Vbi">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="viewControllers" id="NjO-LX-qko"/>
+                        <segue destination="bPf-dT-KXd" kind="relationship" relationship="viewControllers" id="D90-Wg-qct"/>
+                        <segue destination="FKz-nR-lc3" kind="relationship" relationship="viewControllers" id="Nud-br-qVJ"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mrz-zb-Q4V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747.3282442748091" y="19.718309859154932"/>
         </scene>
     </scenes>
     <resources>
