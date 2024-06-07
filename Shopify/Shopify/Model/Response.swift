@@ -9,5 +9,6 @@ import Foundation
 
 
 class Response : Codable{
-    
+//    let customers: [Customer]
+    let addresses: [Address] 
 }
