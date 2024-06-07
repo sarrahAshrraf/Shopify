@@ -2,6 +2,10 @@
 //  Image.swift
 //  Shopify
 //
+//  Created by Mohamed Kotb Saied Kotb on 07/06/2024.
+//
+
+import Foundation
 //  Created by Ahmed Refat on 06/06/2024.
 //
 

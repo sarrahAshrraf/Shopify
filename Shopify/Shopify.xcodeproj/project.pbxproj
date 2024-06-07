@@ -31,6 +31,10 @@
 		E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6174BDB2C0BA850004CE96E /* CustomTableViewCell.swift */; };
 		E6174BDE2C0BA850004CE96E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6174BDC2C0BA850004CE96E /* CustomTableViewCell.xib */; };
 		E6174BE02C0BAB3A004CE96E /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6174BDF2C0BAB3A004CE96E /* OrderViewController.swift */; };
+		E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC842C1331DC000845AA /* HomeViewModel.swift */; };
+		E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC862C13321C000845AA /* SmartCollection.swift */; };
+		E63EAC892C13324A000845AA /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC882C13324A000845AA /* Rules.swift */; };
+		E63EAC8B2C1332E5000845AA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC8A2C1332E5000845AA /* Image.swift */; };
 		E6B549DB2C0F3667003C6328 /* CtegoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */; };
 		E6B549DD2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */; };
 		E6C97DFC2C0B8C9000B2CA81 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6C97DFB2C0B8C9000B2CA81 /* Home.storyboard */; };
@@ -110,6 +114,10 @@
 		E6174BDB2C0BA850004CE96E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		E6174BDC2C0BA850004CE96E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		E6174BDF2C0BAB3A004CE96E /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		E63EAC842C1331DC000845AA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E63EAC862C13321C000845AA /* SmartCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCollection.swift; sourceTree = "<group>"; };
+		E63EAC882C13324A000845AA /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		E63EAC8A2C1332E5000845AA /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtegoryViewController.swift; sourceTree = "<group>"; };
 		E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtegoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6C97DFB2C0B8C9000B2CA81 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -255,6 +263,9 @@
 			isa = PBXGroup;
 			children = (
 				8BE8849F2C10C1DD00BB28C6 /* Response.swift */,
+				E63EAC862C13321C000845AA /* SmartCollection.swift */,
+				E63EAC882C13324A000845AA /* Rules.swift */,
+				E63EAC8A2C1332E5000845AA /* Image.swift */,
 				8B95A6132C11A3C200D5A592 /* Product.swift */,
 				8B95A6152C11AC1C00D5A592 /* Variants.swift */,
 				8B95A6172C11AC5300D5A592 /* Options.swift */,
@@ -296,9 +307,18 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		E63EAC832C1331BD000845AA /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				E63EAC842C1331DC000845AA /* HomeViewModel.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 		E6C97DFD2C0B92FE00B2CA81 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E63EAC832C1331BD000845AA /* VM */,
 				E6C97DFE2C0B930A00B2CA81 /* view */,
 			);
 			path = Home;
@@ -782,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */,
 				E6B549DD2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift in Sources */,
 				8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */,
 				8B95A6162C11AC1C00D5A592 /* Variants.swift in Sources */,
@@ -790,6 +811,7 @@
 				E7FB2C8D2C10E851003A8D9D /* ProfileViewController.swift in Sources */,
 				E6C97E042C0B937800B2CA81 /* BrandsCollectionViewCell.swift in Sources */,
 				8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */,
+				E63EAC892C13324A000845AA /* Rules.swift in Sources */,
 				8B95A6212C11B18900D5A592 /* ProductDetailsViewModel.swift in Sources */,
 				E7FB2C7A2C10D1AA003A8D9D /* ShoppingCartViewModel.swift in Sources */,
 				E7FB2C992C10EA5B003A8D9D /* AddAdressViewController.swift in Sources */,
@@ -797,6 +819,7 @@
 				E6C97E002C0B934100B2CA81 /* HomeViewController.swift in Sources */,
 				8B95A6232C11B31100D5A592 /* ProductDetailsViewController.swift in Sources */,
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
+				E63EAC8B2C1332E5000845AA /* Image.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
 				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
 				E7FB2CA22C10F918003A8D9D /* AddressCell.swift in Sources */,
@@ -806,6 +829,7 @@
 				E7F5EF532C0B35800096F476 /* Shopify.xcdatamodeld in Sources */,
 				8B95A6182C11AC5300D5A592 /* Options.swift in Sources */,
 				E6C97E022C0B936900B2CA81 /* AddsCollectionViewCell.swift in Sources */,
+				E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */,
 				E7F5EF4B2C0B35800096F476 /* SceneDelegate.swift in Sources */,
 				8B95A61C2C11AD5900D5A592 /* BrandViewController.swift in Sources */,
 				E6B549DB2C0F3667003C6328 /* CtegoryViewController.swift in Sources */,

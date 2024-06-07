@@ -8,6 +8,8 @@
 import Foundation
 
 
+struct Response : Codable{
+    let smartCollections: [SmartCollections]?
 class Response : Codable{
 //    let customers: [Customer]
     let addresses: [Address] 
@@ -15,4 +17,8 @@ class Response : Codable{
     let product: Product?
     //let productDetails : ProductDetails?
     
+    private enum CodingKeys: String, CodingKey {
+        case smartCollections = "smart_collections"
+        
+    }
 }
