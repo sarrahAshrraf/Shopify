@@ -55,6 +55,10 @@
                             <constraint firstItem="trP-qX-Uec" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="s0j-ja-H7u"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addressTableView" destination="trP-qX-Uec" id="Vf7-F4-gfj"/>
+                        <outlet property="navBar" destination="19f-7d-GEi" id="3PA-CB-eYB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rL-Dv-c9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

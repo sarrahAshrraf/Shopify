@@ -28,7 +28,6 @@ class AddNewAddressVC: UIViewController {
             DispatchQueue.main.async {
                 func configure(with address: Address) {
                     self?.viewModel.addresses[0] = address
-                    self?.populateAddressFields(with: self!.viewModel.addresses[0])
                 }
                 
             }
@@ -41,14 +40,7 @@ class AddNewAddressVC: UIViewController {
     func configure(with address: Address) {
        viewModel.addresses[0] = address}
 
-    private func populateAddressFields(with address: Address) {
-        countryTF.text = address.country
-        cityTF.text = address.city
-        provinceTF.text = address.province
-        addressTwoTF.text = address.address2
-        addressOneTF.text = address.address1
-        fullNameTF.text = address.firstName
-    }
+
     /*
     // MARK: - Navigation
 
