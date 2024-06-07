@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Address View Controller-->
+        <scene sceneID="eGG-nQ-MVh">
+            <objects>
+                <viewController storyboardIdentifier="addressVC" id="jhz-cq-Jo0" customClass="AddressViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yel-ms-bhN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19f-7d-GEi">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <items>
+                                    <navigationItem title="Your Address" id="1rE-BF-IWz">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="czP-HQ-iQP">
+                                            <connections>
+                                                <action selector="backBtn:" destination="jhz-cq-Jo0" id="ItH-AU-ola"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="plus.circle.fill" catalog="system" id="aNd-ig-Qha">
+                                            <connections>
+                                                <action selector="addNewAddressBtn:" destination="jhz-cq-Jo0" id="4VW-cC-d62"/>
+                                                <segue destination="c8F-8Z-bCP" kind="show" id="IrM-UC-V1o"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="trP-qX-Uec">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="jhz-cq-Jo0" id="8Zj-KP-bGl"/>
+                                    <outlet property="delegate" destination="jhz-cq-Jo0" id="GzJ-X1-Ofa"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jTJ-lT-cDD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="trP-qX-Uec" firstAttribute="leading" secondItem="jTJ-lT-cDD" secondAttribute="leading" id="4Nb-0r-UHH"/>
+                            <constraint firstItem="19f-7d-GEi" firstAttribute="leading" secondItem="jTJ-lT-cDD" secondAttribute="leading" id="6h6-Tc-oIV"/>
+                            <constraint firstItem="trP-qX-Uec" firstAttribute="top" secondItem="19f-7d-GEi" secondAttribute="bottom" id="aOc-oI-XNX"/>
+                            <constraint firstItem="19f-7d-GEi" firstAttribute="top" secondItem="jTJ-lT-cDD" secondAttribute="top" id="fYi-Zb-Enn"/>
+                            <constraint firstItem="19f-7d-GEi" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="hmg-Zz-O4t"/>
+                            <constraint firstAttribute="bottom" secondItem="trP-qX-Uec" secondAttribute="bottom" id="ibV-tf-0iG"/>
+                            <constraint firstItem="trP-qX-Uec" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="s0j-ja-H7u"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressTableView" destination="trP-qX-Uec" id="Wp5-eI-t45"/>
+                        <outlet property="navBar" destination="19f-7d-GEi" id="bCy-EO-7ge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7rL-Dv-c9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.671755725190835" y="-27.464788732394368"/>
+        </scene>
+        <!--Add Adress View Controller-->
+        <scene sceneID="fbK-xp-vra">
+            <objects>
+                <viewController storyboardIdentifier="AddAddressViewController" id="c8F-8Z-bCP" customClass="AddAdressViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QFU-xL-KMB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="address One" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EkP-QZ-KdS">
+                                <rect key="frame" x="31" y="237" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="address two" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bsQ-BX-syJ">
+                                <rect key="frame" x="31" y="317" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="city" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="afy-Tf-UH9">
+                                <rect key="frame" x="31" y="391" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M6E-1d-kja">
+                                <rect key="frame" x="31" y="465" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="province" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8lp-Sg-d1f">
+                                <rect key="frame" x="31" y="531" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQx-ym-vZn">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Add new address" id="SL6-al-bcP">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="t02-xj-r58"/>
+                                        <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="LhP-nL-Mkh">
+                                            <connections>
+                                                <action selector="saveBtn:" destination="c8F-8Z-bCP" id="wcP-0y-mha"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="full name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcB-Xd-l1o">
+                                <rect key="frame" x="31" y="161" width="312" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zqG-9I-mot"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qSm-SI-BHZ"/>
+                    <connections>
+                        <outlet property="addressOneTF" destination="EkP-QZ-KdS" id="Twn-no-KaO"/>
+                        <outlet property="addressTwoTF" destination="bsQ-BX-syJ" id="mcx-3S-y6K"/>
+                        <outlet property="cityTF" destination="afy-Tf-UH9" id="n3U-ff-dUU"/>
+                        <outlet property="countryTF" destination="M6E-1d-kja" id="wGV-me-fRf"/>
+                        <outlet property="fullNameTF" destination="FcB-Xd-l1o" id="sWU-Rt-B3Y"/>
+                        <outlet property="provinceTF" destination="8lp-Sg-d1f" id="8JD-wK-UZK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCf-R5-Dsg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="771.75572519083971" y="-27.464788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

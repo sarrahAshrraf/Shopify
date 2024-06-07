@@ -46,6 +46,7 @@
 		E74C7BDE2C13918300B30AFB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C7BDD2C13918300B30AFB /* SettingsViewModel.swift */; };
 		E74C7BE02C1391D900B30AFB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C7BDF2C1391D900B30AFB /* ProfileViewModel.swift */; };
 		E74C7BE22C13921700B30AFB /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74C7BE12C13921700B30AFB /* ProfileModel.swift */; };
+		E764E0052C139B1800740DFA /* Address_SB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E764E0042C139B1800740DFA /* Address_SB.storyboard */; };
 		E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF482C0B35800096F476 /* AppDelegate.swift */; };
 		E7F5EF4B2C0B35800096F476 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF4A2C0B35800096F476 /* SceneDelegate.swift */; };
 		E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF4C2C0B35800096F476 /* ViewController.swift */; };
@@ -134,6 +135,7 @@
 		E74C7BDD2C13918300B30AFB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		E74C7BDF2C1391D900B30AFB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		E74C7BE12C13921700B30AFB /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		E764E0042C139B1800740DFA /* Address_SB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Address_SB.storyboard; sourceTree = "<group>"; };
 		E7F5EF452C0B35800096F476 /* Shopify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7F5EF482C0B35800096F476 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7F5EF4A2C0B35800096F476 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				E7FB2C982C10EA5B003A8D9D /* AddAdressViewController.swift */,
 				E7FB2CA02C10F918003A8D9D /* AddressCell.swift */,
 				E7FB2CA12C10F918003A8D9D /* AddressCell.xib */,
+				E764E0042C139B1800740DFA /* Address_SB.storyboard */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				E7F5EF582C0B35830096F476 /* LaunchScreen.storyboard in Resources */,
 				E7FB2C8B2C10E556003A8D9D /* ProfleStoryboard.storyboard in Resources */,
 				E6174BDE2C0BA850004CE96E /* CustomTableViewCell.xib in Resources */,
+				E764E0052C139B1800740DFA /* Address_SB.storyboard in Resources */,
 				E7F5EF552C0B35830096F476 /* Assets.xcassets in Resources */,
 				E7FB2CA32C10F918003A8D9D /* AddressCell.xib in Resources */,
 				8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */,
