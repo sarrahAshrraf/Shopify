@@ -9,5 +9,8 @@ import Foundation
 
 
 class Response : Codable{
+    let products: [Product]?
+    let product: Product?
+    //let productDetails : ProductDetails?
     
 }

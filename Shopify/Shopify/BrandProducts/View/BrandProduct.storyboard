@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k2j-yq-J9a">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-65" y="-27"/>
         </scene>
-        <!--View Controller-->
+        <!--Brand View Controller-->
         <scene sceneID="so8-pg-dpU">
             <objects>
-                <viewController storyboardIdentifier="brandDetails" id="k2j-yq-J9a" sceneMemberID="viewController">
+                <viewController id="k2j-yq-J9a" customClass="BrandViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXb-zE-ffR">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,17 +64,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0k-Lw-X7E">
-                                <rect key="frame" x="351.33333333333331" y="58.999999999999993" width="25.666666666666686" height="25.666666666666664"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="n0k-Lw-X7E" secondAttribute="height" id="uT8-do-3Vz"/>
-                                </constraints>
-                                <color key="tintColor" name="pink"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="dollarsign.circle.fill" catalog="system">
-                                    <color key="titleColor" name="pink"/>
-                                </state>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iUF-f8-PqV">
                                 <rect key="frame" x="0.0" y="138.66666666666669" width="393" height="679.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -85,6 +74,10 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="k2j-yq-J9a" id="Wer-2G-wDb"/>
+                                    <outlet property="delegate" destination="k2j-yq-J9a" id="6a5-lZ-4Rr"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="s1A-2v-N8M"/>
@@ -100,15 +93,16 @@
                             <constraint firstItem="iUF-f8-PqV" firstAttribute="leading" secondItem="s1A-2v-N8M" secondAttribute="leading" id="Zbz-t8-0ZS"/>
                             <constraint firstItem="ORr-Yk-fHC" firstAttribute="leading" secondItem="s1A-2v-N8M" secondAttribute="leading" constant="16" id="dOJ-PT-59A"/>
                             <constraint firstItem="ORr-Yk-fHC" firstAttribute="top" secondItem="s1A-2v-N8M" secondAttribute="top" id="hC7-sM-b1M"/>
-                            <constraint firstItem="s1A-2v-N8M" firstAttribute="trailing" secondItem="n0k-Lw-X7E" secondAttribute="trailing" constant="16" id="hdc-IJ-xyz"/>
                             <constraint firstItem="Dvf-nw-2rf" firstAttribute="width" secondItem="IXb-zE-ffR" secondAttribute="width" multiplier="0.5" id="ivr-tu-1Ll"/>
-                            <constraint firstItem="n0k-Lw-X7E" firstAttribute="top" secondItem="ORr-Yk-fHC" secondAttribute="top" id="ja2-zU-ECE"/>
                             <constraint firstItem="Dvf-nw-2rf" firstAttribute="top" secondItem="s1A-2v-N8M" secondAttribute="top" id="lye-WY-lf3"/>
                             <constraint firstItem="s1A-2v-N8M" firstAttribute="bottom" secondItem="iUF-f8-PqV" secondAttribute="bottom" id="vvd-oE-jjf"/>
                             <constraint firstItem="Lvq-9g-QIp" firstAttribute="width" secondItem="IXb-zE-ffR" secondAttribute="width" id="waZ-HO-Q3u"/>
                             <constraint firstItem="Lvq-9g-QIp" firstAttribute="top" secondItem="ORr-Yk-fHC" secondAttribute="bottom" constant="8" id="zcP-6W-UOy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="productsCollectionView" destination="iUF-f8-PqV" id="zRO-jK-rOz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9PH-2x-amJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,7 +111,6 @@
     </scenes>
     <resources>
         <image name="back" width="35" height="35"/>
-        <image name="dollarsign.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="pink">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

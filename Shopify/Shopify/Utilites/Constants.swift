@@ -11,6 +11,8 @@ class Constants{
   let apiKey = ""
   let BaseUrl = ""
     
+    static let noImage = "noImage"
+    
     
     
     
