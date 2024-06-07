@@ -11,4 +11,8 @@ import Foundation
 class Response : Codable{
 //    let customers: [Customer]
     let addresses: [Address] 
+    let products: [Product]?
+    let product: Product?
+    //let productDetails : ProductDetails?
+    
 }
