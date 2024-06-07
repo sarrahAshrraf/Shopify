@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0A8C943EF5CB0B747A82882C5D3ECF93"
-               BuildableName = "ReachabilitySwift-ReachabilitySwift.bundle"
+               BuildableName = "ReachabilitySwift.bundle"
                BlueprintName = "ReachabilitySwift-ReachabilitySwift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

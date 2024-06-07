@@ -6,6 +6,11 @@
 //
 
 import Foundation
+//  Created by Ahmed Refat on 06/06/2024.
+//
+
+import Foundation
+
 struct Image:Hashable, Codable {
     let id: Int?
     let productId: Int?
