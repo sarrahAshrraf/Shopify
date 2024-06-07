@@ -8,6 +8,11 @@
 import Foundation
 
 
-class Response : Codable{
+struct Response : Codable{
+    let smartCollections: [SmartCollections]?
     
+    private enum CodingKeys: String, CodingKey {
+        case smartCollections = "smart_collections"
+        
+    }
 }
