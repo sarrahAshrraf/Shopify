@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jhz-cq-Jo0">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Address View Controller-->
+        <!--AddressVC-->
         <scene sceneID="eGG-nQ-MVh">
             <objects>
-                <viewController storyboardIdentifier="addressVC" id="jhz-cq-Jo0" customClass="AddressViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addressVC" id="jhz-cq-Jo0" customClass="AddressVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yel-ms-bhN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,13 +23,12 @@
                                     <navigationItem title="Your Address" id="1rE-BF-IWz">
                                         <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="czP-HQ-iQP">
                                             <connections>
-                                                <action selector="backBtn:" destination="jhz-cq-Jo0" id="ItH-AU-ola"/>
+                                                <action selector="backBtn:" destination="jhz-cq-Jo0" id="hLN-zu-6Fd"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="plus.circle.fill" catalog="system" id="aNd-ig-Qha">
                                             <connections>
-                                                <action selector="addNewAddressBtn:" destination="jhz-cq-Jo0" id="4VW-cC-d62"/>
-                                                <segue destination="c8F-8Z-bCP" kind="show" id="IrM-UC-V1o"/>
+                                                <segue destination="c8F-8Z-bCP" kind="show" id="kLn-iO-1V2"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -56,19 +55,15 @@
                             <constraint firstItem="trP-qX-Uec" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="s0j-ja-H7u"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="addressTableView" destination="trP-qX-Uec" id="Wp5-eI-t45"/>
-                        <outlet property="navBar" destination="19f-7d-GEi" id="bCy-EO-7ge"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rL-Dv-c9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52.671755725190835" y="-27.464788732394368"/>
         </scene>
-        <!--Add Adress View Controller-->
+        <!--Add New AddressVC-->
         <scene sceneID="fbK-xp-vra">
             <objects>
-                <viewController storyboardIdentifier="AddAddressViewController" id="c8F-8Z-bCP" customClass="AddAdressViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddAddressViewController" id="c8F-8Z-bCP" customClass="AddNewAddressVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QFU-xL-KMB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -111,7 +106,7 @@
                                         <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="t02-xj-r58"/>
                                         <barButtonItem key="rightBarButtonItem" image="checkmark" catalog="system" id="LhP-nL-Mkh">
                                             <connections>
-                                                <action selector="saveBtn:" destination="c8F-8Z-bCP" id="wcP-0y-mha"/>
+                                                <action selector="saveBtn:" destination="c8F-8Z-bCP" id="obN-lO-GjU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -129,12 +124,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="qSm-SI-BHZ"/>
                     <connections>
-                        <outlet property="addressOneTF" destination="EkP-QZ-KdS" id="Twn-no-KaO"/>
-                        <outlet property="addressTwoTF" destination="bsQ-BX-syJ" id="mcx-3S-y6K"/>
-                        <outlet property="cityTF" destination="afy-Tf-UH9" id="n3U-ff-dUU"/>
-                        <outlet property="countryTF" destination="M6E-1d-kja" id="wGV-me-fRf"/>
-                        <outlet property="fullNameTF" destination="FcB-Xd-l1o" id="sWU-Rt-B3Y"/>
-                        <outlet property="provinceTF" destination="8lp-Sg-d1f" id="8JD-wK-UZK"/>
+                        <outlet property="addressOneTF" destination="EkP-QZ-KdS" id="61z-uH-Vxg"/>
+                        <outlet property="addressTwoTF" destination="bsQ-BX-syJ" id="UXQ-Es-zz2"/>
+                        <outlet property="cityTF" destination="afy-Tf-UH9" id="LQ1-O1-g4M"/>
+                        <outlet property="countryTF" destination="M6E-1d-kja" id="5xz-BT-GcQ"/>
+                        <outlet property="fullNameTF" destination="FcB-Xd-l1o" id="qDw-jJ-kxr"/>
+                        <outlet property="provinceTF" destination="8lp-Sg-d1f" id="dOX-ve-FTV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCf-R5-Dsg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
