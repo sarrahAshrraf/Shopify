@@ -335,10 +335,10 @@
             </objects>
             <point key="canvasLocation" x="2784" y="20"/>
         </scene>
-        <!--ProfileStoryboard-->
+        <!--ProfleStoryboard-->
         <scene sceneID="cDO-yW-bNw">
             <objects>
-                <viewControllerPlaceholder storyboardName="ProfileStoryboard" id="FKz-nR-lc3" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="ProfleStoryboard" id="FKz-nR-lc3" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="MHN-VT-ImQ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Im-LV-Jpo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -370,6 +370,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="GGA-Tj-Ilp"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="YPY-HY-Vbi">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
