@@ -18,37 +18,22 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var addressTwoTF: UITextField!
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
-    var  viewModel: AddressViewModel!
-
+    var viewModel: AddNewAddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = AddressViewModel()
-        
-        viewModel.bindToVC = { [weak self] in
-            DispatchQueue.main.async {
-                func configure(with address: Address) {
-                    self?.viewModel.addresses[0] = address
-                    self?.populateAddressFields(with: self!.viewModel.addresses[0])
-                }
-                
-            }
-        }
+        populateTextFields()
         
     }
+    private func populateTextFields() {
+        fullNameTF.text = viewModel.fullName
+        addressOneTF.text = viewModel.addressOne
+        addressTwoTF.text = viewModel.addressTwo
+        cityTF.text = viewModel.city
+        provinceTF.text = viewModel.province
+        countryTF.text = viewModel.country
+    }
     
-    
-    
-    func configure(with address: Address) {
-       viewModel.addresses[0] = address}
 
-    private func populateAddressFields(with address: Address) {
-        countryTF.text = address.country
-        cityTF.text = address.city
-        provinceTF.text = address.province
-        addressTwoTF.text = address.address2
-        addressOneTF.text = address.address1
-        fullNameTF.text = address.firstName
-    }
     /*
     // MARK: - Navigation
 

@@ -26,7 +26,7 @@ class AddressCell: UITableViewCell {
     func configure(with addresses: Address, indexPath: Int) {
         addressLabel.text = addresses.address1
         countryLabel.text = addresses.country
-        fullNameLabel.text = addresses.firstName
+        fullNameLabel.text = addresses.first_name
 
     }
 }

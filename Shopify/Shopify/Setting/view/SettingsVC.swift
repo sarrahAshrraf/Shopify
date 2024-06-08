@@ -1,14 +1,13 @@
-//
-//  SettingsVC.swift
+//  SettingsTableViewController.swift
 //  Shopify
 //
-//  Created by sarrah ashraf on 07/06/2024.
+//  Created by sarrah ashraf on 05/06/2024.
 //
 
 import UIKit
 
-class SettingsVC: UITableViewController {
-    
+class SettingsTableViewController: UITableViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,7 +75,7 @@ class SettingsVC: UITableViewController {
        }
     func navigateToAddress(){
         
-                if let storyboard = UIStoryboard(name: "Address_SB", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
+                if let storyboard = UIStoryboard(name: "AddressStoryboard", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
                     self.navigationController?.pushViewController(storyboard, animated: true)
                 }
         

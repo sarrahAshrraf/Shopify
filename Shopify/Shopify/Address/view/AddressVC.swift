@@ -8,12 +8,15 @@
 import UIKit
 
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
-    
+    var coordinator: AddressCoordinatorP?
+
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
 
     }
     @IBAction func addNewAddressBtn(_ sender: Any) {
+//        coordinator?.showAddNewAddress(with: nil)
+
     }
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var addressTableView: UITableView!
@@ -29,6 +32,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        coordinator = AddressCoordinator(navigationController: self.navigationController!)
         addressTableView.register(UINib(nibName: "AddressCell", bundle: nil), forCellReuseIdentifier: "AddressCell")
 
         viewModel.bindToVC = { [weak self] in
@@ -54,6 +58,12 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: viewModel.addresses[indexPath.row], indexPath: indexPath.row)
            return cell
        }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+          let selectedAddress = viewModel.addresses[indexPath.row]
+          coordinator?.showAddNewAddress(with: selectedAddress)
+        print("inside select row")
+      }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)

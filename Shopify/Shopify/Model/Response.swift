@@ -9,16 +9,20 @@ import Foundation
 
 
 struct Response : Codable{
-    let smartCollections: [SmartCollections]?
-    //let addresses: [Address]
+    let smart_collections: [SmartCollections]?
+    let customer: User?
+    let customers: [User]?
+    let addresses: [Address]?
+    let customer_address: Address?
     let products: [Product]?
     let product: Product?
     
-    private enum CodingKeys: String, CodingKey {
-        case smartCollections = "smart_collections"
-        //case addresses
-        case products = "products"
-        case product = "product"
-        
-    }
+//    private enum CodingKeys: String, CodingKey {
+//        case smartCollections = "smart_collections"
+//        case customer,customers, addresses, customer_address
+//        case products = "products"
+//        case product = "product"
+//        
+//    }
+//    Address_SB
 }
