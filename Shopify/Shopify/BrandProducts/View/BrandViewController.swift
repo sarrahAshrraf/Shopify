@@ -69,9 +69,13 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
         productDetailsViewModel?.productId = viewModel?.result[indexPath.row].id ?? 0
         
         products.viewModel = productDetailsViewModel
+        products.modalPresentationStyle = .fullScreen
         present(products, animated: true, completion: nil)
         
     }
     
+    @IBAction func backBtn(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
