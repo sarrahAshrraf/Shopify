@@ -35,6 +35,7 @@
 		E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC842C1331DC000845AA /* HomeViewModel.swift */; };
 		E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC862C13321C000845AA /* SmartCollection.swift */; };
 		E63EAC892C13324A000845AA /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC882C13324A000845AA /* Rules.swift */; };
+		E67C25E42C1477CA000E5F5E /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */; };
 		E6B549DB2C0F3667003C6328 /* CtegoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */; };
 		E6B549DD2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */; };
 		E6C97DFC2C0B8C9000B2CA81 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6C97DFB2C0B8C9000B2CA81 /* Home.storyboard */; };
@@ -121,6 +122,7 @@
 		E63EAC842C1331DC000845AA /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E63EAC862C13321C000845AA /* SmartCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCollection.swift; sourceTree = "<group>"; };
 		E63EAC882C13324A000845AA /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtegoryViewController.swift; sourceTree = "<group>"; };
 		E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtegoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6C97DFB2C0B8C9000B2CA81 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -322,6 +324,32 @@
 			path = VM;
 			sourceTree = "<group>";
 		};
+		E67C25E02C147782000E5F5E /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E67C25E22C1477B2000E5F5E /* viewModel */,
+				E67C25E12C14778E000E5F5E /* view */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		E67C25E12C14778E000E5F5E /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */,
+				E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		E67C25E22C1477B2000E5F5E /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 		E6C97DFD2C0B92FE00B2CA81 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +411,7 @@
 		E7F5EF472C0B35800096F476 /* Shopify */ = {
 			isa = PBXGroup;
 			children = (
+				E67C25E02C147782000E5F5E /* Category */,
 				E7BC1B222C1466EF0015C552 /* Setting */,
 				E7FB2C862C10E539003A8D9D /* Profile */,
 				E7FB2C822C10E524003A8D9D /* Address */,
@@ -404,8 +433,6 @@
 				E7F5EF512C0B35800096F476 /* Shopify.xcdatamodeld */,
 				8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */,
 				8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */,
-				E6B549DA2C0F3667003C6328 /* CtegoryViewController.swift */,
-				E6B549DC2C0F5FCD003C6328 /* CtegoryCollectionViewCell.swift */,
 			);
 			path = Shopify;
 			sourceTree = "<group>";
@@ -815,6 +842,7 @@
 				E7FB2C7F2C10D309003A8D9D /* Constants.swift in Sources */,
 				E764E0092C139BAC00740DFA /* AddressVC.swift in Sources */,
 				E7FB2C9D2C10EC44003A8D9D /* AddressViewModel.swift in Sources */,
+				E67C25E42C1477CA000E5F5E /* CategoryViewModel.swift in Sources */,
 				8B2FCFB42C13888E00C613E3 /* URLs.swift in Sources */,
 				8B95A6142C11A3C200D5A592 /* Product.swift in Sources */,
 				E7FB2C7F2C10D309003A8D9D /* Constants.swift in Sources */,

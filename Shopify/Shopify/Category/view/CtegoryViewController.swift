@@ -6,34 +6,62 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CtegoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var categorySegmented: UISegmentedControl!
+    
+    var categoryViewModel: CategoryViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        categorySegmented.selectedSegmentIndex = 0
+        categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
 
         // Do any additional setup after loading the view.
+        categoryViewModel = CategoryViewModel()
         
+        fetchCategoryData()
         
     }
+    @objc func segmentChanged(_ sender: UISegmentedControl) {
+            fetchCategoryData()
+        }
+        
+        func fetchCategoryData() {
+            
+            let categoryID: Int
+            switch categorySegmented.selectedSegmentIndex {
+            case 0:
+                categoryID = 306236653741 // Man
+            case 1:
+                categoryID = 306236686509 // Women
+            case 2:
+                categoryID = 306236719277 // Kids
+            case 3:
+                categoryID = 306236752045 // Sell
+            default:
+                return
+            }
+            categoryViewModel?.bindResultToViewController = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+            categoryViewModel?.getItems(id: categoryID)
+            collectionView.reloadData()
+        }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: view.frame.width / 2.4, height: view.frame.width / 2)
-//    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Calculate the padding space between the cells
         let padding: CGFloat = 32
-        // Calculate the available width for each cell (considering 2 cells per row)
         let availableWidth = view.frame.width - (padding )
-        // Calculate the width for each cell
         let width = availableWidth / 2
-        // Set a desired height, adjust as needed
-        let height = width + 100  // Adjust height based on your content needs
+        let height = width + 100
         
         return CGSize(width: width, height: height)
     }
@@ -44,7 +72,7 @@ class CtegoryViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return categoryViewModel?.result?.count ?? 0
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -53,7 +81,14 @@ class CtegoryViewController: UIViewController, UICollectionViewDataSource, UICol
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CtegoryCollectionViewCell
-                return cell
+         let results = categoryViewModel?.result
+         let result = results?[indexPath.row]
+         
+         cell.productImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
+         cell.productName.text = result?.title
+         cell.productPrice.text = result?.templateSuffix
+         
+        return cell
     }
 
     /*
