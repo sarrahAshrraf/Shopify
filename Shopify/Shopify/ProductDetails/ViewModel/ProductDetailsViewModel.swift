@@ -11,12 +11,20 @@ class ProductDetailsViewModel {
     
     var productId:Int = 7748774527149
     var bindResultToViewController: (()->()) = {}
-    var result: ProductDetails? {
+    var result: Product? {
         didSet{
             self.bindResultToViewController()
         }
     }
-    
-    
+   
+    func getItems(){
+
+        let url = URLs.shared.productDetails(id: productId)
+        
+        NetworkManger.shared.getData(url: url){ [weak self] (response : Response?) in
+            self?.result = (response?.product)!
+            print(self?.result)
+        }
+    }
 }
 
