@@ -11,12 +11,14 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     var viewModel: BrandProductsViewModel!
+    var productDetailsViewModel: ProductDetailsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         productsCollectionView.register(UINib(nibName: "BrandProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BrandProductCollectionViewCell")
         
         //viewModel = BrandProductsViewModel()
+        productDetailsViewModel = ProductDetailsViewModel()
         fetchData()
         showData()
 
@@ -62,5 +64,18 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
         return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+        productDetailsViewModel?.productId = viewModel?.result[indexPath.row].id ?? 0
+        
+        products.viewModel = productDetailsViewModel
+        products.modalPresentationStyle = .fullScreen
+        present(products, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func backBtn(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 

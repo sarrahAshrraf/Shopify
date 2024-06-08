@@ -15,7 +15,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
 
     }
     @IBAction func addNewAddressBtn(_ sender: Any) {
-//        coordinator?.showAddNewAddress(with: nil)
+        coordinator?.showAddNewAddressWithEmptyFields()
+        
 
     }
     @IBOutlet weak var navBar: UINavigationBar!

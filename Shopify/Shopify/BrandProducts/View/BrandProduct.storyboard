@@ -64,6 +64,9 @@
                                 <state key="normal" image="back">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="backBtn:" destination="k2j-yq-J9a" eventType="touchUpInside" id="SsY-mo-dtb"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iUF-f8-PqV">
                                 <rect key="frame" x="0.0" y="138.66666666666669" width="393" height="679.33333333333326"/>

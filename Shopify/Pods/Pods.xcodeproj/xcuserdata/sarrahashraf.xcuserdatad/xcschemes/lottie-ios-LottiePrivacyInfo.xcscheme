@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BF2A15FEC3F3424BBC4B9AD5F86F2D54"
-               BuildableName = "lottie-ios-LottiePrivacyInfo.bundle"
+               BuildableName = "LottiePrivacyInfo.bundle"
                BlueprintName = "lottie-ios-LottiePrivacyInfo"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
