@@ -150,6 +150,9 @@
             <point key="canvasLocation" x="-1964" y="-36"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="OPY-Lt-aTy"/>
+    </designables>
     <resources>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

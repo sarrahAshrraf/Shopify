@@ -36,12 +36,10 @@ class SplashViewController: UIViewController {
     
     private func setupGuestButton() {
         guestButton.backgroundColor = .white
-        guestButton.tintColor = UIColor(named: "PrimaryColor")
+        guestButton.tintColor = .black
         guestButton.layer.borderWidth = 2
-        if let primaryColor = UIColor(named: "PrimaryColor") {
-            guestButton.layer.borderColor = primaryColor.cgColor
-        }
-        guestButton.layer.cornerRadius = guestButton.frame.height / 7
+        guestButton.layer.borderColor = UIColor.black.cgColor
+        guestButton.layer.cornerRadius = guestButton.frame.height / 2
         guestButton.clipsToBounds = true
         guestButton.setTitle("Start Shopping", for: .normal)
         guestButton.addAction(.init(handler: { [weak self] _ in self?.guestButtonTapped() }), for: .touchUpInside)
@@ -49,8 +47,8 @@ class SplashViewController: UIViewController {
     
     private func setupSignupButton() {
         signUpButton.tintColor = .white
-        signUpButton.backgroundColor = UIColor(named: "PrimaryColor")
-        signUpButton.layer.cornerRadius = signUpButton.frame.height / 7
+        signUpButton.backgroundColor = .black
+        signUpButton.layer.cornerRadius = signUpButton.frame.height / 2
         signUpButton.clipsToBounds = true
         signUpButton.setTitle("Sign Up", for: .normal)
         signUpButton.addAction(.init(handler: { [weak self] _ in self?.signupButtonTapped() }), for: .touchUpInside)
