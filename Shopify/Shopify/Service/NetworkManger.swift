@@ -26,10 +26,11 @@ class NetworkManger {
     func postData(path: String, parameters: Parameters,handler: @escaping (Response?,Int?) -> Void) {
         
         let headers: HTTPHeaders = [
-            
+            "Content-Type": "application/json",
+            "X-Shopify-Access-Token": "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"
         ]
         
-        AF.request("",method: .post,parameters: parameters,encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200 ..< 299).responseData{ response in
+        AF.request(path,method: .post,parameters: parameters,encoding: JSONEncoding.default, headers: headers).validate(statusCode: 200 ..< 299).responseData{ response in
             switch response.result {
             case .success(let data):
                 do {

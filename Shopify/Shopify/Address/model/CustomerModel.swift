@@ -6,9 +6,6 @@
 //
 
 import Foundation
-
-
-
 struct Address: Codable {
     let id: Int?
     let customer_id: Int?
@@ -16,17 +13,39 @@ struct Address: Codable {
     let first_name: String?
     let last_name: String?
     let phone: String?
+        let company: String?
+
     let address1: String?
     let address2: String?
     let city: String?
     let province: String?
     let country: String?
+    let zip: String?
+    let province_code: String?
+    let country_code: String?
+    let country_name: String?
     var `default`: Bool?
-
 }
 
+//
+//struct Address: Codable {
+//    let id: Int?
+//    let customer_id: Int?
+//    let name: String?
+//    let first_name: String?
+//    let last_name: String?
+//    let phone: String?
+//    let address1: String?
+//    let address2: String?
+//    let city: String?
+//    let province: String?
+//    let country: String?
+//    var `default`: Bool?
+//
+//}
 
 
+//
 //struct Address: Codable {
 //    let id: Int
 //    let customerID: Int
@@ -40,32 +59,32 @@ struct Address: Codable {
 //    let country: String
 //    let zip: String
 //    let phone: String
-////    let name: String
-////    let provinceCode: String?
-////    let countryCode: String
-////    let countryName: String
-////    let isDefault: Bool
-////
-////    enum CodingKeys: String, CodingKey {
-////        case id
-////        case customerID = "customer_id"
-////        case firstName = "first_name"
-////        case lastName = "last_name"
-////        case company
-////        case address1
-////        case address2
-////        case city
-////        case province
-////        case country
-////        case zip
-////        case phone
-////        case name
-////        case provinceCode = "province_code"
-////        case countryCode = "country_code"
-////        case countryName = "country_name"
-////        case isDefault = "default"
-////    }
-////}
+//    let name: String
+//    let provinceCode: String?
+//    let countryCode: String
+//    let countryName: String
+//    let isDefault: Bool
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case customerID = "customer_id"
+//        case firstName = "first_name"
+//        case lastName = "last_name"
+//        case company
+//        case address1
+//        case address2
+//        case city
+//        case province
+//        case country
+//        case zip
+//        case phone
+//        case name
+//        case provinceCode = "province_code"
+//        case countryCode = "country_code"
+//        case countryName = "country_name"
+//        case isDefault = "default"
+//    }
+//}
 ////
 ////struct MarketingConsent: Codable {
 ////    let state: String
