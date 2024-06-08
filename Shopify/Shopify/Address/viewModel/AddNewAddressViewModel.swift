@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 class AddNewAddressViewModel{
     var fullName: String?
     var addressOne: String?
@@ -23,76 +24,91 @@ class AddNewAddressViewModel{
         self.country = address?.country
     }
     init(){}
+
     
-    
+//    func postCustomerAddress(customerID: Int, address: Address, completion: @escaping (Bool) -> ()) {
+//        let url = "https://mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(customerID)/addresses.json"
+//        let headers: HTTPHeaders = [
+//            "Content-Type": "application/json",
+//            "X-Shopify-Access-Token": "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"
+//        ]
+//        
+//        let addressDict: [String: Any] = [
+//            "address1": address.address1 ?? "",
+//            "address2": address.address2 ?? "",
+//            "city": address.city ?? "",
+//            "company": address.company ?? "",
+//            "first_name": address.first_name ?? "",
+//            "last_name": address.last_name ?? "",
+//            "phone": address.phone ?? "",
+//            "province": address.province ?? "",
+//            "country": address.country ?? "",
+//            "zip": address.zip ?? "",
+//            "name": address.name ?? "",
+//            "province_code": address.province_code ?? "",
+//            "country_code": address.country_code ?? "",
+//            "country_name": address.country_name ?? "",
+//            "default": address.default ?? false
+//        ]
+//        
+//        let finalDict: [String: Any] = ["address": addressDict]
+//        
+//        AF.request(url, method: .post, parameters: finalDict, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//            switch response.result {
+//            case .success:
+//                if let httpResponse = response.response, (200...299).contains(httpResponse.statusCode) {
+//                    print("HTTP Status Code: \(httpResponse.statusCode)")
+//                    print("Success response from server")
+//                    completion(true)
+//                } else {
+//                    print("Invalid response from server")
+//                    if let data = response.data {
+//                        print("Response data: \(String(data: data, encoding: .utf8) ?? "No response data")")
+//                    }
+//                    completion(false)
+//                }
+//            case .failure(let error):
+//                print("Failed to post address: \(error)")
+//                completion(false)
+//            }
+//        }
+//    }
     func postCustomerAddress(customerID: Int, address: Address, completion: @escaping (Bool) -> ()) {
-        guard let url = URL(string: "https://mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(7309504250029)/addresses.json") else {
-            print("Invalid URL")
-            completion(false)
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("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", forHTTPHeaderField: "X-Shopify-Access-Token")
-        
-        let addressDict: [String: Any] = [
-            "address1": address.address1 ?? "",
-            "address2": address.address2 ?? "",
-            "city": address.city ?? "",
-            "company": address.company ?? "",
-            "first_name": address.first_name ?? "",
-            "last_name": address.last_name ?? "",
-            "phone": address.phone ?? "",
-            "province": address.province ?? "",
-            "country": address.country ?? "",
-            "zip": address.zip ?? "",
-            "name": address.name ?? "",
-            "province_code": address.province_code ?? "",
-            "country_code": address.country_code ?? "",
-            "country_name": address.country_name ?? "",
-            "default": address.default ?? false
-        ]
-        
-        let finalDict: [String: Any] = ["address": addressDict]
-        
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: finalDict, options: [])
-            request.httpBody = jsonData
-        } catch {
-            print("Failed to serialize JSON: \(error)")
-            completion(false)
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Failed to post address: \(error)")
-                completion(false)
-                return
-            }
+            let url = "https://mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(customerID)/addresses.json"
             
-            guard let httpResponse = response as? HTTPURLResponse else {
-                print("No response from server")
-                completion(false)
-                return
-            }
+            let addressDict: [String: Any] = [
+                "address1": address.address1 ?? "",
+                "address2": address.address2 ?? "",
+                "city": address.city ?? "",
+                "company": address.company ?? "",
+                "first_name": address.first_name ?? "",
+                "last_name": address.last_name ?? "",
+                "phone": address.phone ?? "",
+                "province": address.province ?? "",
+                "country": address.country ?? "",
+                "zip": address.zip ?? "",
+                "name": address.name ?? "",
+                "province_code": address.province_code ?? "",
+                "country_code": address.country_code ?? "",
+                "country_name": address.country_name ?? "",
+                "default": address.default ?? false
+            ]
             
-            print("HTTP Status Code: \(httpResponse.statusCode)")
+            let finalDict: [String: Any] = ["address": addressDict]
             
-            if (200...299).contains(httpResponse.statusCode) {
-                print("Success response from server")
-                completion(true)
-            } else {
-                print("Invalid response from server")
-                if let data = data {
-                    print("Response data: \(String(data: data, encoding: .utf8) ?? "No response data")")
+            NetworkManger.shared.postData(path: url, parameters: finalDict) { response, statusCode in
+                if let statusCode = statusCode, (200...299).contains(statusCode) {
+                    print("HTTP Status Code: \(statusCode)")
+                    print("Success response from server")
+                    completion(true)
+                } else {
+                    print("Invalid response from server")
+                    if let response = response {
+                        print("Response data: \(response)")
+                    }
+                    completion(false)
                 }
-                completion(false)
             }
         }
-        
-        task.resume()
     }
-}
+
