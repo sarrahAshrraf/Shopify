@@ -33,4 +33,8 @@ class URLs{
         return baseURL + "products/\(id).json"
     }
     
+    func getProductCategory(id: Int) -> String{
+        return baseURL + "collections/\(id)/products.json"
+    }
+    
 }
