@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var collectionView: UICollectionView!
     
     var homeViewModel: HomeViewModel?
+    var brandProductViewModel: BrandProductsViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.setCollectionViewLayout(layout, animated: true)
         fetchBrands()
         homeViewModel?.getItems()
+        brandProductViewModel = BrandProductsViewModel()
     }
     
     
@@ -94,7 +96,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cellIdentifier = ""
-
+        
         switch indexPath.section {
         case 0:
             cellIdentifier = "adds"
@@ -107,7 +109,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! BrandsCollectionViewCell
             let results = homeViewModel?.result
             let result = results?[indexPath.row]
-            print(result?.title)
+            //print(result?.title)
             cell.brandImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
             //cell.brandName.text = result.title
             return cell
@@ -115,10 +117,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             fatalError("Unexpected section \(indexPath.section)")
         }
     }
-
-    
-    
-    
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
+            brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
+            
+            products.viewModel = brandProductViewModel
+            present(products, animated: true, completion: nil)
+            
+        }
     
 }
 

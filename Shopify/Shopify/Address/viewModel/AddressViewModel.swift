@@ -29,6 +29,7 @@ class AddressViewModel{
             } else {
                 print("Failed to fetch addresses")
             }
+
         }
         
 //        func address(at index: Int) -> Address? {
