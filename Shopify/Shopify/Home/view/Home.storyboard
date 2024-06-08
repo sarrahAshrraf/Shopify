@@ -163,7 +163,7 @@
         <!--Category-->
         <scene sceneID="evv-wY-bHl">
             <objects>
-                <viewController id="bPf-dT-KXd" customClass="CtegoryViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bPf-dT-KXd" customClass="CategoryViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uCD-eM-nM5">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,6 +273,10 @@
                                         <size key="customSize" width="290" height="260"/>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="bPf-dT-KXd" id="x8Z-NG-iNV"/>
+                                    <outlet property="delegate" destination="bPf-dT-KXd" id="5SY-6H-0ef"/>
+                                </connections>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-GG-cjl">
                                 <rect key="frame" x="0.0" y="193" width="393" height="32"/>
@@ -329,8 +333,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Category" image="category" id="DSa-qn-4n3"/>
                     <connections>
-                        <outlet property="categorySegmented" destination="c5g-GG-cjl" id="jS0-4K-D2D"/>
-                        <outlet property="collectionView" destination="7nM-5p-S2P" id="Z7J-BN-ldp"/>
+                        <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
+                        <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybY-1s-XaS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
