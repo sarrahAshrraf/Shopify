@@ -16,7 +16,7 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
         super.viewDidLoad()
         productsCollectionView.register(UINib(nibName: "BrandProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BrandProductCollectionViewCell")
         
-        viewModel = BrandProductsViewModel()
+        //viewModel = BrandProductsViewModel()
         fetchData()
         showData()
 

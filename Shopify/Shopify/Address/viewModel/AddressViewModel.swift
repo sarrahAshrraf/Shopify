@@ -23,12 +23,12 @@ class AddressViewModel{
         let url = ""
         
         NetworkManger.shared.getData(url: url) { response in
-            if let response = response {
-                self.addresses = response.addresses 
-                print("Fetched Addresses: \(response.addresses)")
-            } else {
-                print("Failed to fetch addresses")
-            }
+//            if let response = response {
+//                self.addresses = response.addresses 
+//                print("Fetched Addresses: \(response.addresses)")
+//            } else {
+//                print("Failed to fetch addresses")
+//            }
         }
         
         func address(at index: Int) -> Address? {
