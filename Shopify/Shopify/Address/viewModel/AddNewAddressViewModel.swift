@@ -14,6 +14,7 @@ class AddNewAddressViewModel{
     var city: String?
     var province: String?
     var country: String?
+    var phone : String?
     
     required init(address: Address?) {
         self.fullName = address?.name ?? ""
@@ -22,10 +23,13 @@ class AddNewAddressViewModel{
               self.city = address?.city ?? ""
               self.province = address?.province ?? ""
               self.country = address?.country ?? ""
+             self.phone = address?.phone ?? ""
+
     }
     init(){}
     func postCustomerAddress(customerID: Int, address: Address, completion: @escaping (Bool) -> ()) {
-            let url = "https://mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(customerID)/addresses.json"
+        let url = URLs.shared.getAddressURL()
+//        "https://mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(customerID)/addresses.json"
             
             let addressDict: [String: Any] = [
                 "address1": address.address1 ?? "",
