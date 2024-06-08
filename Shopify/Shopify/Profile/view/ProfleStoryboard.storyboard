@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="780" y="-439"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Settings Table View Controller-->
         <scene sceneID="NOn-AX-VSL">
             <objects>
-                <tableViewController storyboardIdentifier="settingsVC" id="4TA-gi-XY8" customClass="SettingsVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="settingsVC" id="4TA-gi-XY8" customClass="SettingsTableViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="pWl-ly-caJ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

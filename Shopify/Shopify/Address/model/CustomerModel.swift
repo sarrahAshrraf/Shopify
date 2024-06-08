@@ -18,10 +18,8 @@ struct Address: Codable {
     let phone: String?
     let address1: String?
     let address2: String?
-
     let city: String?
-        let province: String?
-
+    let province: String?
     let country: String?
     var `default`: Bool?
 
