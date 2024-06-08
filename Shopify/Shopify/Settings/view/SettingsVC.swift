@@ -66,7 +66,8 @@ class SettingsVC: UITableViewController {
            
            switch (indexPath.section, indexPath.row) {
            case (1, 0):
-               navigateToAddress()
+//               navigateToAddress()
+               print("address")
            case (2, 0):
                print("logout")
            default:
@@ -75,7 +76,7 @@ class SettingsVC: UITableViewController {
        }
     func navigateToAddress(){
         
-                if let storyboard = UIStoryboard(name: "AddressStoryboard", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
+                if let storyboard = UIStoryboard(name: "Address_SB", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
                     self.navigationController?.pushViewController(storyboard, animated: true)
                 }
         

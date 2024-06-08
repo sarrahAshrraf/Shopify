@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="780" y="-439"/>
         </scene>
-        <!--Settings Table View Controller-->
+        <!--SettingsVC-->
         <scene sceneID="NOn-AX-VSL">
             <objects>
-                <tableViewController storyboardIdentifier="settingsVC" id="4TA-gi-XY8" customClass="SettingsTableViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="settingsVC" id="4TA-gi-XY8" customClass="SettingsVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="pWl-ly-caJ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,6 +187,9 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="sej-RS-d93" kind="show" id="mjL-hb-0m1"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="a3H-sm-01y">
                                         <rect key="frame" x="0.0" y="215.33333587646484" width="393" height="43.666667938232422"/>
@@ -250,10 +253,12 @@
             </objects>
             <point key="canvasLocation" x="1013" y="-27"/>
         </scene>
-        <!--AddressStoryboard-->
+        <!--Address_SB-->
         <scene sceneID="dXQ-z1-f4H">
             <objects>
-                <viewControllerPlaceholder storyboardName="AddressStoryboard" id="sej-RS-d93" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Address_SB" id="sej-RS-d93" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cjF-I8-w0B"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sr0-dN-kNW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1552" y="-172"/>
