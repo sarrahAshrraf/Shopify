@@ -25,7 +25,7 @@ class AddNewAddressVC: UIViewController {
 //        let nameParts = fullName.split(separator: " ")
 //        let firstName = nameParts.first.map(String.init) ?? ""
 //        let lastName = nameParts.dropFirst().joined(separator: " ")
-//        
+//
         let address = Address(
                     id: nil,
                     customer_id: 7309504250029,
@@ -46,7 +46,7 @@ class AddNewAddressVC: UIViewController {
                     default: false
                 )
         
-        viewModel.postCustomerAddress(customerID: 7309504250029, address: address) { success in
+        viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
             DispatchQueue.main.async {
                 if success {
                     print("posted")
@@ -66,21 +66,26 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var addressTwoTF: UITextField!
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
-    var viewModel: AddNewAddressViewModel!
+    var viewModell: AddNewAddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = AddNewAddressViewModel()
-//        populateTextFields()
+//        viewModel = AddNewAddressViewModel()
+        populateTextFields()
         
     }
-//    private func populateTextFields() {
-//        fullNameTF.text = viewModel.fullName
-//        addressOneTF.text = viewModel.addressOne
-//        addressTwoTF.text = viewModel.addressTwo
-//        cityTF.text = viewModel.city
-//        provinceTF.text = viewModel.province
-//        countryTF.text = viewModel.country
-//    }
+    private func populateTextFields() {
+      
+        guard let viewModel = viewModell else {
+                  print("ViewModel is nil")
+                  return
+              }
+        fullNameTF.text = viewModel.fullName
+        addressOneTF.text = viewModel.addressOne
+        addressTwoTF.text = viewModel.addressTwo
+        cityTF.text = viewModel.city
+        provinceTF.text = viewModel.province
+        countryTF.text = viewModel.country
+    }
     
     
     
