@@ -9,7 +9,7 @@ import Foundation
 
 class ProductDetailsViewModel {
     
-    var productId:Int = 7748774527149
+    var productId:Int = 0
     var bindResultToViewController: (()->()) = {}
     var result: Product? {
         didSet{

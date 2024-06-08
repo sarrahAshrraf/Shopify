@@ -14,7 +14,7 @@
         <!--Product Details View Controller-->
         <scene sceneID="Gfz-nc-jkB">
             <objects>
-                <viewController id="tZ2-PJ-7Hd" customClass="ProductDetailsViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetails" id="tZ2-PJ-7Hd" customClass="ProductDetailsViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tJy-yG-JA0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
