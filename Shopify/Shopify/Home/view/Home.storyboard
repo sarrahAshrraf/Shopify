@@ -271,11 +271,6 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="290" height="260"/>
-                                        <connections>
-                                            <outlet property="productImage" destination="M7G-a7-Jij" id="v8w-Sy-hKD"/>
-                                            <outlet property="productName" destination="Q48-GP-KYl" id="0Oa-cV-jEs"/>
-                                            <outlet property="productPrice" destination="Bpb-fL-I1v" id="PCb-sB-Nq1"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -407,7 +402,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

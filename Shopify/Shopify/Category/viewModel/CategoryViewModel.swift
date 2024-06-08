@@ -9,7 +9,7 @@ import Foundation
 class CategoryViewModel{
     var bindResultToViewController: (()->()) = {}
     
-    var result: [Product]? = [] {
+    var result: [Product] = [] {
         didSet{
             self.bindResultToViewController()
         }
@@ -19,9 +19,7 @@ class CategoryViewModel{
     func getItems(id: Int){
         let url = URLs.shared.getProductCategory(id: id)
         NetworkManger.shared.getData(url: url){ [weak self] (response: Response?) in
-            self?.result = response?.products
-//            print(self?.result)
-//            print(self?.result?.count)
+            self?.result = (response?.products)!
         }
     }
     

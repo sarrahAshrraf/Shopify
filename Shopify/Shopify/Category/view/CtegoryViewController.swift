@@ -14,12 +14,15 @@ class CtegoryViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBOutlet weak var categorySegmented: UISegmentedControl!
     
-    var categoryViewModel: CategoryViewModel?
+    var categoryViewModel: CategoryViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+        collectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        
         categorySegmented.selectedSegmentIndex = 0
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
 
@@ -72,33 +75,19 @@ class CtegoryViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryViewModel?.result?.count ?? 0
+        return categoryViewModel?.result.count ?? 0
     }
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
+    
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CtegoryCollectionViewCell
-         let results = categoryViewModel?.result
-         let result = results?[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
          
-         cell.productImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
-         cell.productName.text = result?.title
-         cell.productPrice.text = result?.templateSuffix
+         cell.setValues(product: self.categoryViewModel.result[indexPath.row])
+
          
         return cell
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
