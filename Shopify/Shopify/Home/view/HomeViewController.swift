@@ -122,6 +122,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
             
             products.viewModel = brandProductViewModel
+            products.modalPresentationStyle = .fullScreen
             present(products, animated: true, completion: nil)
             
         }

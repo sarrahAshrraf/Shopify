@@ -349,7 +349,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uB8-Ha-imt">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jnd-Qu-VRa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="jnd-Qu-VRa" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="f0q-Lt-5vo">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -401,7 +401,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

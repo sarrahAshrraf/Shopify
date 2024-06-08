@@ -28,4 +28,8 @@ class URLs{
         return baseURL + endPoint + ".json"
     }
     
+    func productDetails(id : Int) -> String{
+        return baseURL + "products/\(id).json"
+    }
+    
 }
