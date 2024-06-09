@@ -20,7 +20,7 @@ class AddressViewModel{
     }
     
     func fetchCustomerAddress(customerID: Int) {
-//        let url = "https://349c94c1c855b8b029a39104a4ae2e13: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@mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(7309504250029)/addresses.json?limit=4"
+        //        let url = "https://349c94c1c855b8b029a39104a4ae2e13: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@mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(7309504250029)/addresses.json?limit=4"
         let url = URLs.shared.getAddressURL()
         NetworkManger.shared.getData(url: url) { response in
             if let response = response {
@@ -29,17 +29,27 @@ class AddressViewModel{
             } else {
                 print("Failed to fetch addresses")
             }
-
+            
         }
-        
-//        func address(at index: Int) -> Address? {
-//             guard index >= 0 && index < addresses.count else {
-//                 return nil
-//             }
-//             return addresses[index]
-//         }
-        
-        func postNewAddress(){}
     }
-}
+        
+    func deleteAddress(customerID: Int, addressID: Int, address: Address, completion: @escaping (Bool) -> Void) {
+        let path = URLs.shared.getAddressURLForModification(customerID: String(7309504250029), addressID: String(addressID))
+           NetworkManger.shared.deleteData(path: path) { success, statusCode in
+               if success {
+                   if let index = self.addresses.firstIndex(where: { $0.id == address.id }) {
+                       self.addresses.remove(at: index)
+                       self.bindToVC()
+                       print("deelte in vm")
+                   }
+                   completion(true)
+               } else {
+                   print("not deleted")
+
+                   completion(false)
+               }
+           }
+       }
+   }
+    
 

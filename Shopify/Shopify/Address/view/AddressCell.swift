@@ -6,7 +6,12 @@
 //
 
 import UIKit
-
+//9-6:
+//set as deafult
+//edit addresss
+//reload table view
+//delete address
+//scroll view
 class AddressCell: UITableViewCell {
     
     @IBOutlet weak var locationImg: UIImageView!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
+class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
 
     @IBAction func backBtn(_ sender: Any) {
@@ -26,6 +26,13 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        viewModel.fetchCustomerAddress(customerID: 7309504250029)
+        viewModel.bindToVC = { [weak self] in
+                  DispatchQueue.main.async {
+                      self?.addressTableView.reloadData()
+                  }
+              }
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -63,29 +70,36 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          let selectedAddress = viewModel.addresses[indexPath.row]
-          coordinator?.showAddNewAddress(with: selectedAddress)
+          coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
         print("inside select row")
       }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        guard let selectedAddress = viewModel.address(at: indexPath.row) else {
-//            return
-//        }
-//
-//        let addAddressViewModel = AddAddressViewModel(address: selectedAddress)
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        guard let addAddressVC = storyboard.instantiateViewController(withIdentifier: "AddAddressViewController") as? AddAddressViewController else {
-//            return
-//        }
-//
-//        addAddressVC.viewModel = addAddressViewModel
-//        navigationController?.pushViewController(addAddressVC, animated: true)
-//    }
-
-}
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                let addressToDelete = viewModel.addresses[indexPath.row]
+                viewModel.deleteAddress(customerID: 7309504250029, addressID: addressToDelete.id ?? 0, address: addressToDelete) { success in
+                    DispatchQueue.main.async {
+                        if success {
+                            print("Address deleted successfully")
+//                            self.viewModel.addresses.remove(at: indexPath.row)
+//                            self.addressTableView.deleteRows(at: [indexPath], with: .automatic)
+                            self.viewModel.fetchCustomerAddress(customerID: 7309504250029)
+                            self.addressTableView.reloadData()
+                        } else {
+                            print("Error in deleting address")
+                            let alert = UIAlertController(title: "Error", message: "You can not delete deafult address.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+        }
+    
+    func didUpdateAddress() {
+          viewModel.fetchCustomerAddress(customerID: 7309504250029)
+      }
+    }
 
   
 

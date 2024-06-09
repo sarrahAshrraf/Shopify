@@ -8,7 +8,10 @@
 import UIKit
 
 class AddNewAddressVC: UIViewController {
-    
+      var isEditingAddress = true
+       var addressID: Int?
+    weak var delegate: AddressProtocol?
+
     @IBAction func saveBtn(_ sender: Any) {
             
         guard let fullName = fullNameTF.text,
@@ -20,7 +23,9 @@ class AddNewAddressVC: UIViewController {
               let phone = phoneTF.text else {
             print("empty fields")
 //            MARK: ALerttttttttttt
-            
+            let alert = UIAlertController(title: "Warning", message: "You must fill out all the fields", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             return
         }
         
@@ -29,7 +34,7 @@ class AddNewAddressVC: UIViewController {
         let lastName = nameParts.dropFirst().joined(separator: " ")
 
         let address = Address(
-                    id: nil,
+                    id: addressID,
                     customer_id: 7309504250029,
                     name: "\(firstName)\(" ")\(lastName)",
                     first_name: firstName,
@@ -48,15 +53,45 @@ class AddNewAddressVC: UIViewController {
                     default: false
                 )
 //        MARK: customerid is given from keychain
-        viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
-            DispatchQueue.main.async {
-                if success {
-                    print("posted")
-                } else {
-                    print("error in posting")
-                }
-            }
-        }
+//        viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
+//            DispatchQueue.main.async {
+//                if success {
+//                    print("posted")
+//                } else {
+//                    print("error in posting")
+//                }
+//            }
+//        }
+        
+        
+        
+        if isEditingAddress, let addressID = addressID {
+                   viewModell.editAddress(customerID: 7309504250029, addressID: addressID, address: address) { success in
+                      print(address)
+                       DispatchQueue.main.async {
+                           if success {
+                               print("Address updated successfully")
+                               self.delegate?.didUpdateAddress()
+
+                           } else {
+                               print("Error in updating address")
+                           }
+                       }
+                   }
+               } else {
+                   viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
+                       DispatchQueue.main.async {
+                           if success {
+                               print("Address posted successfully")
+                               self.delegate?.didUpdateAddress()
+
+                           } else {
+                               print("Error in posting address")
+                           }
+                       }
+                   }
+               }
+        
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -74,6 +109,7 @@ class AddNewAddressVC: UIViewController {
         super.viewDidLoad()
 //        viewModel = AddNewAddressViewModel()
         populateTextFields()
+        print(isEditingAddress)
 //        self.cityTF.delegate = self
     }
     
