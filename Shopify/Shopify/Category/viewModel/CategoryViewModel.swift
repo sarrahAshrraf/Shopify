@@ -8,7 +8,11 @@
 import Foundation
 class CategoryViewModel{
     var bindResultToViewController: (()->()) = {}
-    
+    var filteredProducts : [Product] = []{
+        didSet {
+            self.bindResultToViewController()
+        }
+    }
     var result: [Product] = [] {
         didSet{
             self.bindResultToViewController()
@@ -20,6 +24,7 @@ class CategoryViewModel{
         let url = URLs.shared.getProductCategory(id: id)
         NetworkManger.shared.getData(url: url){ [weak self] (response: Response?) in
             self?.result = (response?.products)!
+            self?.filteredProducts = (response?.products)!
         }
     }
     

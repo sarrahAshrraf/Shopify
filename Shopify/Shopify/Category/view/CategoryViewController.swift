@@ -9,11 +9,17 @@ import UIKit
 import Kingfisher
 
 class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
-    
+    let defaultColor = UIColor.black
+    let selectedColor = UIColor.gray
+    //var originalResult: [Product] = []
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var categorySegmented: UISegmentedControl!
-    
+    @IBOutlet weak var subCategoryToolbar: UIToolbar!
+    @IBOutlet weak var allProduct: UIBarButtonItem!
+    @IBOutlet weak var shoes: UIBarButtonItem!
+    @IBOutlet weak var t_shirt: UIBarButtonItem!
+    @IBOutlet weak var accesories: UIBarButtonItem!
+    var isFiltered:Bool!
     
     var categoryViewModel: CategoryViewModel!
     override func viewDidLoad() {
@@ -57,18 +63,66 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                     }
                 }
                 categoryViewModel?.getItems(id: categoryID)
-                collectionView.reloadData()
+                //collectionView.reloadData()
             }
     
+    
+    @IBAction func allProduct(_ sender: UIBarButtonItem) {
+        updateButtonColors(selectedButton: sender)
+        isFiltered = true
+        categoryViewModel.filteredProducts = categoryViewModel.result
+        collectionView.reloadData()
+    }
+    @IBAction func shoes(_ sender: UIBarButtonItem) {
+        updateButtonColors(selectedButton: sender)
+        isFiltered = true
+        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "SHOES"}
+        collectionView.reloadData()
+    }
+    
+    @IBAction func t_shirt(_ sender: UIBarButtonItem) {
+        updateButtonColors(selectedButton: sender)
+        isFiltered = true
+        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "T-SHIRTS"}
+        collectionView.reloadData()
+    }
+    @IBAction func accesories(_ sender: UIBarButtonItem) {
+        updateButtonColors(selectedButton: sender)
+        isFiltered = true
+        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "ACCESSORIES"}
+        collectionView.reloadData()
+    }
+    
+    func updateButtonColors(selectedButton: UIBarButtonItem) {
+        // Reset all buttons to default color
+        allProduct.tintColor = defaultColor
+        shoes.tintColor = defaultColor
+        t_shirt.tintColor = defaultColor
+        accesories.tintColor = defaultColor
+        
+        // Set the selected button color
+        selectedButton.tintColor = selectedColor
+    }
+   
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryViewModel?.result.count ?? 0
+        if (isFiltered == true){
+            return categoryViewModel.filteredProducts.count
+        } else {
+            return categoryViewModel?.result.count ?? 0
+        }
     }
 
 
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
-         cell.setValues(product: self.categoryViewModel.result[indexPath.row])
+         if(isFiltered == true){
+             cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
+         }else{
+             cell.setValues(product: self.categoryViewModel.result[indexPath.row])
+         }
 
          
         return cell
