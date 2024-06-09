@@ -291,50 +291,64 @@
                                     <segment title="Sales"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fd-dd-8QI">
-                                <rect key="frame" x="325" y="699" width="52" height="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pin-nf-cWK">
-                                <rect key="frame" x="325" y="725" width="52" height="0.0"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="dollarsign" catalog="system"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXG-uf-E8l">
-                                <rect key="frame" x="259" y="699" width="57.666666666666686" height="39"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="ABC"/>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYU-aa-GAj">
+                                <rect key="frame" x="0.0" y="684" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Jel-Qa-Sf2"/>
+                                    <barButtonItem title="ALL" id="vb7-kE-Igc">
+                                        <connections>
+                                            <action selector="allProduct:" destination="bPf-dT-KXd" id="ziB-oU-fa6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="q8x-mz-wVR"/>
+                                    <barButtonItem title="SHOES" id="bk9-sM-4Zj">
+                                        <connections>
+                                            <action selector="shoes:" destination="bPf-dT-KXd" id="hjg-Ct-5KJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4dV-aL-Z3V"/>
+                                    <barButtonItem title="T-SHIRT" id="G88-EH-EfX">
+                                        <connections>
+                                            <action selector="t_shirt:" destination="bPf-dT-KXd" id="r8b-vC-2RG"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ZSN-Gy-fGO"/>
+                                    <barButtonItem title="ACCESSORIES" id="yOS-1B-yTK">
+                                        <connections>
+                                            <action selector="accesories:" destination="bPf-dT-KXd" id="pgn-tB-pgV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Pbi-9e-OOn"/>
+                                </items>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o7y-Ni-5IQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="o7y-Ni-5IQ" firstAttribute="bottom" secondItem="pin-nf-cWK" secondAttribute="bottom" constant="44" id="4IP-rY-lvK"/>
-                            <constraint firstItem="pin-nf-cWK" firstAttribute="leading" secondItem="CXG-uf-E8l" secondAttribute="trailing" constant="8" symbolic="YES" id="8Aj-h5-QK6"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="c5g-GG-cjl" secondAttribute="trailing" id="8UZ-Xo-s5U"/>
                             <constraint firstItem="ge9-MM-UZv" firstAttribute="top" secondItem="o7y-Ni-5IQ" secondAttribute="top" id="CCo-kw-ozh"/>
                             <constraint firstItem="ge9-MM-UZv" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="COg-TM-hh8"/>
                             <constraint firstItem="7nM-5p-S2P" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="ESE-4L-tD6"/>
-                            <constraint firstItem="pin-nf-cWK" firstAttribute="top" secondItem="0Fd-dd-8QI" secondAttribute="bottom" constant="26" id="LKF-KF-928"/>
-                            <constraint firstItem="CXG-uf-E8l" firstAttribute="top" secondItem="7nM-5p-S2P" secondAttribute="bottom" constant="62" id="Qzo-aA-a4u"/>
-                            <constraint firstItem="0Fd-dd-8QI" firstAttribute="trailing" secondItem="uCD-eM-nM5" secondAttribute="trailingMargin" id="SJT-DH-ORr"/>
                             <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="64" id="VhH-JI-uSW"/>
                             <constraint firstItem="7nM-5p-S2P" firstAttribute="top" secondItem="c5g-GG-cjl" secondAttribute="bottom" constant="32" id="dN7-D1-ogD"/>
                             <constraint firstAttribute="bottom" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="723" id="f66-9Y-kjm"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="ge9-MM-UZv" secondAttribute="trailing" id="nfJ-y7-hU6"/>
-                            <constraint firstItem="pin-nf-cWK" firstAttribute="leading" secondItem="0Fd-dd-8QI" secondAttribute="leading" id="oO3-ps-34s"/>
                             <constraint firstItem="c5g-GG-cjl" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="qXQ-1G-H6o"/>
-                            <constraint firstItem="0Fd-dd-8QI" firstAttribute="top" secondItem="7nM-5p-S2P" secondAttribute="bottom" constant="32" id="s6e-hr-fAK"/>
-                            <constraint firstItem="pin-nf-cWK" firstAttribute="trailing" secondItem="0Fd-dd-8QI" secondAttribute="trailing" id="sV0-oC-uWw"/>
                             <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="64" id="tGJ-hu-RHo"/>
                             <constraint firstAttribute="trailing" secondItem="7nM-5p-S2P" secondAttribute="trailing" id="w12-Z4-Oeo"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Category" image="category" id="DSa-qn-4n3"/>
                     <connections>
+                        <outlet property="accesories" destination="yOS-1B-yTK" id="cyC-CW-PNq"/>
+                        <outlet property="allProduct" destination="vb7-kE-Igc" id="3DS-De-ZGZ"/>
                         <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
+                        <outlet property="shoes" destination="bk9-sM-4Zj" id="B8z-Hc-n1a"/>
+                        <outlet property="subCategoryToolbar" destination="dYU-aa-GAj" id="kMF-xY-pRn"/>
+                        <outlet property="t_shirt" destination="G88-EH-EfX" id="75s-yj-7NJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybY-1s-XaS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -400,10 +414,8 @@
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="category" width="32" height="32"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
-        <image name="dollarsign" catalog="system" width="89" height="128"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
-        <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -414,7 +426,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
