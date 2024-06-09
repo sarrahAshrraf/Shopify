@@ -41,6 +41,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate {
                       self?.addressTableView.reloadData()
                   }
               }
+        addressTableView.separatorStyle = .none
+
               
               viewModel.fetchCustomerAddress(customerID: 7309504250029)
         // Do any additional setup after loading the view.
