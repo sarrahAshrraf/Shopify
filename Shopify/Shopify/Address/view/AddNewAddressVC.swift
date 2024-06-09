@@ -11,15 +11,17 @@ class AddNewAddressVC: UIViewController {
       var isEditingAddress = true
        var addressID: Int?
     weak var delegate: AddressProtocol?
+    var isDefaultAddress = false
+    @IBOutlet weak var switchDeafultBtn: UISwitch!
+    @objc private func saveButtonTapped() {
 
-    @IBAction func saveBtn(_ sender: Any) {
             
         guard let fullName = fullNameTF.text,
                !fullName.isEmpty,
                let address1 = addressOneTF.text,
                !address1.isEmpty,
-               let address2 = addressTwoTF.text,
-               !address2.isEmpty,
+//               let address2 = addressTwoTF.text,
+//               !address2.isEmpty,
                let city = cityTF.text,
                !city.isEmpty,
                let country = countryTF.text,
@@ -46,7 +48,7 @@ class AddNewAddressVC: UIViewController {
                     phone: phone,
                     company: "ITI",
                     address1: address1,
-                    address2: address2,
+                    address2: "",
                     city: city,
                     province: "",
                     country: country,
@@ -54,7 +56,7 @@ class AddNewAddressVC: UIViewController {
                     province_code: "",
                     country_code: "",
                     country_name: "",
-                    default: false
+                    default: switchDeafultBtn.isOn
                 )
 //        MARK: customerid is given from keychain
 //        viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
@@ -105,7 +107,7 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var countryTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
 //    @IBOutlet weak var provinceTF: UITextField!
-    @IBOutlet weak var addressTwoTF: UITextField!
+//    @IBOutlet weak var addressTwoTF: UITextField!
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     var viewModell: AddNewAddressViewModel!
@@ -127,13 +129,30 @@ class AddNewAddressVC: UIViewController {
               }
         fullNameTF.text = viewModel.fullName
         addressOneTF.text = viewModel.addressOne
-        addressTwoTF.text = viewModel.addressTwo
+//        addressTwoTF.text = viewModel.addressTwo
         cityTF.text = viewModel.city
         phoneTF.text = viewModel.phone
         countryTF.text = viewModel.country
     }
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
+        switchDeafultBtn.isOn = isDefaultAddress
 
+    }
+
+    private func setupNavigationBar() {
+           self.title = isEditingAddress ? "Edit Address" : "Add Address"
+           let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+           self.navigationItem.leftBarButtonItem = backButton
+           let saveButton = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveButtonTapped))
+           self.navigationItem.rightBarButtonItem = saveButton
+       }
     
+    
+    @objc private func backButtonTapped() {
+         self.navigationController?.popViewController(animated: true)
+     }
+     
 
 }
 
@@ -146,7 +165,7 @@ extension  AddNewAddressVC:  UITextFieldDelegate{
         self.phoneTF.resignFirstResponder()
 //        self.provinceTF.resignFirstResponder()
         self.addressOneTF.resignFirstResponder()
-        self.addressTwoTF.resignFirstResponder()
+//        self.addressTwoTF.resignFirstResponder()
 
         return true
     }
