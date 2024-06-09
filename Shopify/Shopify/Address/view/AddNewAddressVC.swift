@@ -15,14 +15,18 @@ class AddNewAddressVC: UIViewController {
     @IBAction func saveBtn(_ sender: Any) {
             
         guard let fullName = fullNameTF.text,
-              let address1 = addressOneTF.text,
-              let address2 = addressTwoTF.text,
-              let city = cityTF.text,
-//              let province = provinceTF.text,
-              let country = countryTF.text,
-              let phone = phoneTF.text else {
+               !fullName.isEmpty,
+               let address1 = addressOneTF.text,
+               !address1.isEmpty,
+               let address2 = addressTwoTF.text,
+               !address2.isEmpty,
+               let city = cityTF.text,
+               !city.isEmpty,
+               let country = countryTF.text,
+               !country.isEmpty,
+               let phone = phoneTF.text,
+              !phone.isEmpty else {
             print("empty fields")
-//            MARK: ALerttttttttttt
             let alert = UIAlertController(title: "Warning", message: "You must fill out all the fields", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -128,6 +132,7 @@ class AddNewAddressVC: UIViewController {
         phoneTF.text = viewModel.phone
         countryTF.text = viewModel.country
     }
+
     
 
 }

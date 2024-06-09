@@ -27,6 +27,8 @@ class AddressCoordinator: AddressCoordinatorP {
         addNewAddressVC.viewModell = viewModel
         addNewAddressVC.isEditingAddress = true
         addNewAddressVC.addressID = address?.id
+        addNewAddressVC.delegate = navigationController.viewControllers.first(where: { $0 is AddressVC }) as? AddressProtocol
+
         print("inside the show func \(addNewAddressVC.isEditingAddress) ")
         navigationController.pushViewController(addNewAddressVC, animated: true)
     }
@@ -38,7 +40,7 @@ class AddressCoordinator: AddressCoordinatorP {
         addNewAddressVC.viewModell = viewModel
         addNewAddressVC.isEditingAddress = false
 //        addNewAddressVC.addressID = address?.id
-
+        addNewAddressVC.delegate = navigationController.viewControllers.first(where: { $0 is AddressVC }) as? AddressProtocol
         print("inside the show func \(addNewAddressVC.isEditingAddress) ")
 
         navigationController.pushViewController(addNewAddressVC, animated: true)

@@ -75,14 +75,19 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
       }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let addressToDelete = viewModel.addresses[indexPath.row]
-                viewModel.deleteAddress(customerID: 7309504250029, addressID: addressToDelete.id ?? 0, address: addressToDelete) { success in
+        if editingStyle == .delete {
+          
+            let alertController = UIAlertController(title: "Confirm Deletion", message: "Are you sure you want to delete this address?", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
+                guard let self = self else { return }
+                
+                viewModel.deleteAddress(customerID: 7309504250029, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: viewModel.addresses[indexPath.row]) { success in
                     DispatchQueue.main.async {
                         if success {
                             print("Address deleted successfully")
-//                            self.viewModel.addresses.remove(at: indexPath.row)
-//                            self.addressTableView.deleteRows(at: [indexPath], with: .automatic)
+                            //                            self.viewModel.addresses.remove(at: indexPath.row)
+                            //                            self.addressTableView.deleteRows(at: [indexPath], with: .automatic)
                             self.viewModel.fetchCustomerAddress(customerID: 7309504250029)
                             self.addressTableView.reloadData()
                         } else {
@@ -94,7 +99,13 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
                     }
                 }
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
         }
+    }
     
     func didUpdateAddress() {
           viewModel.fetchCustomerAddress(customerID: 7309504250029)
