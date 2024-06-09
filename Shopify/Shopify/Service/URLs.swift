@@ -22,7 +22,7 @@ class URLs{
         return baseURL + "products.json?collection_id=\(id)"
     }
     
-    func getAddressURL(addressId: String = "") -> String{
+    func getAddressURL(customerId: String = "") -> String{
         //MARK: TODO: Change the customer id to take it from keychainnnnn
         endPoint = "customers/\(7309504250029)/addresses"
         return baseURL + endPoint + ".json"
@@ -36,5 +36,11 @@ class URLs{
     func getProductCategory(id: Int) -> String{
         return baseURL + "collections/\(id)/products.json"
     }
+    func getAddressURLForModification(customerID: String = "", addressID: String = "") -> String{
+        //MARK: TODO: Change the customer id to take it from keychainnnnn
+        endPoint = "customers/\(7309504250029)/addresses/\(addressID)"
+        return baseURL + endPoint + ".json"
+    }
+
     
 }

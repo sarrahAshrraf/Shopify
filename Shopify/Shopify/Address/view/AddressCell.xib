@@ -36,8 +36,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eFu-Bj-T0O">
-                        <rect key="frame" x="8" y="30" width="59" height="62"/>
+                        <rect key="frame" x="8" y="30" width="59" height="61.999999999999986"/>
+                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-ue-Umm">
+                        <rect key="frame" x="323" y="17" width="55" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1113000157" green="0.1112454878" blue="0.12406960490000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="UhB-WL-Hvz" secondAttribute="bottom" constant="21" id="1VZ-w1-UaR"/>
@@ -62,7 +70,9 @@
             <connections>
                 <outlet property="addressLabel" destination="WjA-TC-5CT" id="E8J-1w-xWK"/>
                 <outlet property="countryLabel" destination="UhB-WL-Hvz" id="NYV-gx-goW"/>
+                <outlet property="deafultLabel" destination="QAZ-ue-Umm" id="aNZ-Tv-6hn"/>
                 <outlet property="fullNameLabel" destination="EwD-dv-19W" id="fpk-pg-p7t"/>
+                <outlet property="locationImg" destination="eFu-Bj-T0O" id="fOU-3f-C3M"/>
             </connections>
             <point key="canvasLocation" x="111.45038167938931" y="19.014084507042256"/>
         </tableViewCell>
