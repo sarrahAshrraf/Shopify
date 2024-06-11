@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Do any additional setup after loading the view.
         collectionView.dataSource = self
         collectionView.delegate = self
-        
+        collectionView.register(CustomHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
         let layout = UICollectionViewCompositionalLayout { sectionIndex, environment in
             switch sectionIndex {
             case 0:
@@ -50,25 +50,38 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func drawTheTopSection() -> NSCollectionLayoutSection {
+
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .absolute(230))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 8)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15)
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 0, bottom: 0, trailing: 0)
-        section.visibleItemsInvalidationHandler = { items, offset, environment in
+        
+        
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: headerSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+            section.boundarySupplementaryItems = [header]
+        
+        
+        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            let centerX = offset.x + environment.container.contentSize.width / 2.0
             items.forEach { item in
-                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-                let minScale: CGFloat = 0.8
-                let maxScale: CGFloat = 1.2
-                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                let distanceFromCenter = abs(item.frame.midX - centerX)
+                let scale: CGFloat = distanceFromCenter < 50 ? 1.2 : 1.0
                 item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                
             }
         }
+        
         return section
     }
 
@@ -82,8 +95,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-        
-        return section
+        section.orthogonalScrollingBehavior = .none
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        section.boundarySupplementaryItems = [header]
+
+       return section
+
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -127,5 +150,52 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             
         }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+       if kind == UICollectionView.elementKindSectionHeader {
+           let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! CustomHeaderView
+           
+           switch indexPath.section {
+           case 0:
+               header.titleLabel.text = "Adds"
+           case 1:
+               header.titleLabel.text = "Brands"
+           default:
+               header.titleLabel.text = "Section"
+           }
+           
+           return header
+       }
+       return UICollectionReusableView()
+   }
+    
 }
+
+class CustomHeaderView: UICollectionReusableView {
+    let titleLabel = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViews()
+    }
+
+    private func setupViews() {
+        addSubview(titleLabel)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+    }
+}
+
 
