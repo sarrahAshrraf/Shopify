@@ -30,5 +30,10 @@ class CartCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+    func configure(with item: [LineItems], index: Int) {
+        titleLabel.text = item[index].name
+        priceLabel.text = item[index].price
+        print(item[index].name)
+
+    }
 }
