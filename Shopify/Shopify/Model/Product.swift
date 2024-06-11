@@ -27,6 +27,7 @@ struct Product: Hashable, Codable {
     var images: [Image]?
     var image: Image?
     var templateSuffix: String?
+    //var price: Double?
     
     private enum CodingKeys: String, CodingKey {
         case id = "id"

@@ -103,25 +103,27 @@
                                 <rect key="frame" x="8" y="84" width="393" height="66.333333333333314"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-GW-7Gq">
-                                        <rect key="frame" x="334" y="16.000000000000004" width="51" height="34.333333333333343"/>
+                                        <rect key="frame" x="334" y="16" width="51" height="34"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abR-uU-3Sg">
-                                        <rect key="frame" x="32" y="16.000000000000004" width="50" height="34.333333333333343"/>
+                                        <rect key="frame" x="32" y="16" width="50" height="34"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ma-re-cFb">
-                                        <rect key="frame" x="272" y="16.000000000000004" width="54" height="34.333333333333343"/>
+                                        <rect key="frame" x="272" y="16" width="54" height="34"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="cart" catalog="system"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUs-jM-zrG">
-                                        <rect key="frame" x="159" y="23" width="46" height="20.333333333333329"/>
+                                        <rect key="frame" x="159" y="23" width="54" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="AccentColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -169,7 +171,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ge9-MM-UZv">
-                                <rect key="frame" x="0.0" y="103" width="393" height="26"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4j-ph-ZdR">
                                         <rect key="frame" x="297" y="16" width="54" height="34"/>
@@ -202,12 +204,51 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-GG-cjl">
+                                <rect key="frame" x="0.0" y="161" width="393" height="32"/>
+                                <segments>
+                                    <segment title="Men"/>
+                                    <segment title="Women"/>
+                                    <segment title="Kids"/>
+                                    <segment title="Sales"/>
+                                </segments>
+                            </segmentedControl>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYU-aa-GAj">
+                                <rect key="frame" x="0.0" y="200" width="393" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Jel-Qa-Sf2"/>
+                                    <barButtonItem title="ALL" id="vb7-kE-Igc">
+                                        <connections>
+                                            <action selector="allProduct:" destination="bPf-dT-KXd" id="ziB-oU-fa6"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="q8x-mz-wVR"/>
+                                    <barButtonItem title="SHOES" id="bk9-sM-4Zj">
+                                        <connections>
+                                            <action selector="shoes:" destination="bPf-dT-KXd" id="hjg-Ct-5KJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4dV-aL-Z3V"/>
+                                    <barButtonItem title="T-SHIRT" id="G88-EH-EfX">
+                                        <connections>
+                                            <action selector="t_shirt:" destination="bPf-dT-KXd" id="r8b-vC-2RG"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ZSN-Gy-fGO"/>
+                                    <barButtonItem title="ACCESSORIES" id="yOS-1B-yTK">
+                                        <connections>
+                                            <action selector="accesories:" destination="bPf-dT-KXd" id="pgn-tB-pgV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Pbi-9e-OOn"/>
+                                </items>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7nM-5p-S2P">
-                                <rect key="frame" x="0.0" y="256" width="393" height="411"/>
+                                <rect key="frame" x="0.0" y="252" width="393" height="438"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="393" id="2Lg-Pe-AYs"/>
-                                    <constraint firstAttribute="height" constant="411" id="cZv-Gg-a5J"/>
+                                    <constraint firstAttribute="height" constant="438" id="mku-oF-1Sj"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GrB-84-38Z">
                                     <size key="itemSize" width="290" height="260"/>
@@ -249,7 +290,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWZ-3b-scq">
-                                                    <rect key="frame" x="137" y="165.66666666666666" width="121" height="34.333333333333343"/>
+                                                    <rect key="frame" x="137" y="166" width="121" height="34"/>
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
@@ -278,66 +319,27 @@
                                     <outlet property="delegate" destination="bPf-dT-KXd" id="5SY-6H-0ef"/>
                                 </connections>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c5g-GG-cjl">
-                                <rect key="frame" x="0.0" y="193" width="393" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="Kcr-e1-OGF"/>
-                                    <constraint firstAttribute="width" constant="393" id="e9l-jN-CzE"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Men"/>
-                                    <segment title="Women"/>
-                                    <segment title="Kids"/>
-                                    <segment title="Sales"/>
-                                </segments>
-                            </segmentedControl>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYU-aa-GAj">
-                                <rect key="frame" x="0.0" y="684" width="393" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Jel-Qa-Sf2"/>
-                                    <barButtonItem title="ALL" id="vb7-kE-Igc">
-                                        <connections>
-                                            <action selector="allProduct:" destination="bPf-dT-KXd" id="ziB-oU-fa6"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="q8x-mz-wVR"/>
-                                    <barButtonItem title="SHOES" id="bk9-sM-4Zj">
-                                        <connections>
-                                            <action selector="shoes:" destination="bPf-dT-KXd" id="hjg-Ct-5KJ"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4dV-aL-Z3V"/>
-                                    <barButtonItem title="T-SHIRT" id="G88-EH-EfX">
-                                        <connections>
-                                            <action selector="t_shirt:" destination="bPf-dT-KXd" id="r8b-vC-2RG"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ZSN-Gy-fGO"/>
-                                    <barButtonItem title="ACCESSORIES" id="yOS-1B-yTK">
-                                        <connections>
-                                            <action selector="accesories:" destination="bPf-dT-KXd" id="pgn-tB-pgV"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Pbi-9e-OOn"/>
-                                </items>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o7y-Ni-5IQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="c5g-GG-cjl" secondAttribute="trailing" id="8UZ-Xo-s5U"/>
-                            <constraint firstItem="ge9-MM-UZv" firstAttribute="top" secondItem="o7y-Ni-5IQ" secondAttribute="top" id="CCo-kw-ozh"/>
-                            <constraint firstItem="ge9-MM-UZv" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="COg-TM-hh8"/>
-                            <constraint firstItem="7nM-5p-S2P" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="ESE-4L-tD6"/>
-                            <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="64" id="VhH-JI-uSW"/>
-                            <constraint firstItem="7nM-5p-S2P" firstAttribute="top" secondItem="c5g-GG-cjl" secondAttribute="bottom" constant="32" id="dN7-D1-ogD"/>
-                            <constraint firstAttribute="bottom" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="723" id="f66-9Y-kjm"/>
-                            <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="ge9-MM-UZv" secondAttribute="trailing" id="nfJ-y7-hU6"/>
-                            <constraint firstItem="c5g-GG-cjl" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="qXQ-1G-H6o"/>
-                            <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="64" id="tGJ-hu-RHo"/>
-                            <constraint firstAttribute="trailing" secondItem="7nM-5p-S2P" secondAttribute="trailing" id="w12-Z4-Oeo"/>
+                            <constraint firstItem="dYU-aa-GAj" firstAttribute="trailing" secondItem="o7y-Ni-5IQ" secondAttribute="trailing" id="1BR-yJ-n6Z"/>
+                            <constraint firstItem="7nM-5p-S2P" firstAttribute="height" secondItem="uCD-eM-nM5" secondAttribute="height" multiplier="0.514085" id="50f-IP-pQz"/>
+                            <constraint firstItem="c5g-GG-cjl" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="8ct-Fe-UUK"/>
+                            <constraint firstItem="o7y-Ni-5IQ" firstAttribute="bottom" secondItem="7nM-5p-S2P" secondAttribute="bottom" constant="79" id="AXT-Gq-s09"/>
+                            <constraint firstItem="ge9-MM-UZv" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="KYa-Z3-O77"/>
+                            <constraint firstItem="7nM-5p-S2P" firstAttribute="top" secondItem="dYU-aa-GAj" secondAttribute="bottom" constant="8" id="LyR-4Q-mAA"/>
+                            <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="c5g-GG-cjl" secondAttribute="trailing" id="SGq-33-KrP"/>
+                            <constraint firstItem="dYU-aa-GAj" firstAttribute="height" secondItem="uCD-eM-nM5" secondAttribute="height" multiplier="0.0516432" id="SXs-9W-yjY"/>
+                            <constraint firstItem="dYU-aa-GAj" firstAttribute="top" secondItem="c5g-GG-cjl" secondAttribute="bottom" constant="8" id="ZCz-BE-tMj"/>
+                            <constraint firstItem="ge9-MM-UZv" firstAttribute="height" secondItem="uCD-eM-nM5" secondAttribute="height" multiplier="0.0586854" id="awc-rw-nKQ"/>
+                            <constraint firstItem="ge9-MM-UZv" firstAttribute="top" secondItem="o7y-Ni-5IQ" secondAttribute="top" id="gcW-2y-fgd"/>
+                            <constraint firstItem="dYU-aa-GAj" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="gvD-KQ-co5"/>
+                            <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="ge9-MM-UZv" secondAttribute="bottom" constant="8" id="h9u-wx-QA4"/>
+                            <constraint firstItem="ge9-MM-UZv" firstAttribute="trailing" secondItem="o7y-Ni-5IQ" secondAttribute="trailing" id="m4X-ss-yNY"/>
+                            <constraint firstItem="7nM-5p-S2P" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="p2S-Kv-9wm"/>
+                            <constraint firstItem="c5g-GG-cjl" firstAttribute="height" secondItem="uCD-eM-nM5" secondAttribute="height" multiplier="0.036385" id="vT7-sx-fk3"/>
+                            <constraint firstItem="7nM-5p-S2P" firstAttribute="trailing" secondItem="o7y-Ni-5IQ" secondAttribute="trailing" id="wZd-Ps-NOw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Category" image="category" id="DSa-qn-4n3"/>
@@ -416,17 +418,17 @@
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="PrimaryColor">
             <color red="0.21176470588235294" green="0.41176470588235292" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

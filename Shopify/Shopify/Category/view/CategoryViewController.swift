@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Dispatch
 
 class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     let defaultColor = UIColor.black
@@ -21,6 +22,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var accesories: UIBarButtonItem!
     var isFiltered:Bool!
     
+    var prices : [String] = []
+    
+    
+    
     var categoryViewModel: CategoryViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,26 +39,74 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         categorySegmented.selectedSegmentIndex = 0
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         
-        fetchCategoryData()
+        
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchCategoryData()
+        //fetchPrice()
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
-                fetchCategoryData()
+        fetchCategoryData()
+    }
+            
+    
+
+    
+    func fetchPrice() {
+        
+        guard let categoryViewModel = self.categoryViewModel else { return }
+        
+        let group = DispatchGroup()
+        
+        for i in 0..<categoryViewModel.result.count {
+            let productId = categoryViewModel.result[i].id
+            group.enter()
+            
+            categoryViewModel.getPrice(productId: productId) { fetchedProduct in
+                if let product = fetchedProduct, !categoryViewModel.result.contains(where: { $0.id == product.id }) {
+                    categoryViewModel.result.append(product)
+                }
+                group.leave()
             }
+        }
+        
+        group.notify(queue: .main) {
+            // This block will execute when all network requests are done
+            // You can perform any updates to the UI or other actions here
+            print("All prices fetched and processed")
+        }
+    }
+
             
             func fetchCategoryData() {
                 
                 let categoryID: Int
                 switch categorySegmented.selectedSegmentIndex {
                 case 0:
+//                    self.categoryViewModel.result = []
                     categoryID = 306236653741 // Man
+                    //fetchPrice()
+                    self.categoryViewModel?.getItems(id: categoryID)
+//                    fetchPrice()
                 case 1:
+//                    self.categoryViewModel.result = []
+                    //fetchPrice()
                     categoryID = 306236686509 // Women
+                    self.categoryViewModel?.getItems(id: categoryID)
+                    
                 case 2:
+//                    self.categoryViewModel.result = []
+                    //fetchPrice()
                     categoryID = 306236719277 // Kids
+                    self.categoryViewModel?.getItems(id: categoryID)
+                    
                 case 3:
+//                    self.categoryViewModel.result = []
+                    //fetchPrice()
                     categoryID = 306236752045 // Sell
+                    self.categoryViewModel?.getItems(id: categoryID)
                 default:
                     return
                 }
@@ -61,9 +114,11 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                     DispatchQueue.main.async {
                         self?.collectionView.reloadData()
                     }
+//                    self?.categoryViewModel?.getItems(id: categoryID)
+                    
                 }
-                categoryViewModel?.getItems(id: categoryID)
-                //collectionView.reloadData()
+                self.fetchPrice()
+                
             }
     
     
@@ -118,10 +173,14 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
+         
          if(isFiltered == true){
              cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
+                
          }else{
              cell.setValues(product: self.categoryViewModel.result[indexPath.row])
+             
+            
          }
 
          
