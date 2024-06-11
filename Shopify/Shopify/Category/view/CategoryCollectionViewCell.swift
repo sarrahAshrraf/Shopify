@@ -30,11 +30,6 @@ class CategoryCollectionViewCell: UICollectionViewCell {
                                       placeholder: UIImage(named: Constants.noImage))
         
         
-        
-//        if product.variants?.count ?? 0 > 0{
-//            print(product.variants![0].price)
-//            self.productPrice.text = product.variants![0].price
-//        }
         if product.variants?.count ?? 0 > 0{
             
             self.productPrice.text = String(format: "%.1f", Double(product.variants![0].price)! )

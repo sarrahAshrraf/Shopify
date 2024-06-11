@@ -37,4 +37,8 @@ class URLs{
         return baseURL + "collections/\(id)/products.json"
     }
     
+    func getAllProducts() -> String {
+        return baseURL + "products.json"
+    }
+    
 }

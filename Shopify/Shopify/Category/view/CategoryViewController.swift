@@ -24,6 +24,8 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var prices : [String] = []
     
+    var allProducts: [Product] = []
+    
     
     
     var categoryViewModel: CategoryViewModel!
@@ -38,13 +40,19 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         categorySegmented.selectedSegmentIndex = 0
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
-        
-        
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        fetchCategoryData()
-        //fetchPrice()
+        categoryViewModel?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+        self.categoryViewModel.getAllProducts()
+        allProducts = categoryViewModel.result
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.fetchCategoryData() // Fetch the default category data (Men's products)
+                }
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
@@ -53,109 +61,88 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             
     
 
+
     
-    func fetchPrice() {
-        
-        guard let categoryViewModel = self.categoryViewModel else { return }
-        
-        let group = DispatchGroup()
-        
-        for i in 0..<categoryViewModel.result.count {
-            let productId = categoryViewModel.result[i].id
-            group.enter()
-            
-            categoryViewModel.getPrice(productId: productId) { fetchedProduct in
-                if let product = fetchedProduct, !categoryViewModel.result.contains(where: { $0.id == product.id }) {
-                    categoryViewModel.result.append(product)
-                }
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) {
-            // This block will execute when all network requests are done
-            // You can perform any updates to the UI or other actions here
-            print("All prices fetched and processed")
+    func getProductsWithTag(products: [Product], tag: String) -> [Product] {
+        return products.filter { product in
+            return product.tags!.contains(tag)
         }
     }
 
+
             
-            func fetchCategoryData() {
-                
-                let categoryID: Int
-                switch categorySegmented.selectedSegmentIndex {
-                case 0:
-//                    self.categoryViewModel.result = []
-                    categoryID = 306236653741 // Man
-                    //fetchPrice()
-                    self.categoryViewModel?.getItems(id: categoryID)
-//                    fetchPrice()
-                case 1:
-//                    self.categoryViewModel.result = []
-                    //fetchPrice()
-                    categoryID = 306236686509 // Women
-                    self.categoryViewModel?.getItems(id: categoryID)
-                    
-                case 2:
-//                    self.categoryViewModel.result = []
-                    //fetchPrice()
-                    categoryID = 306236719277 // Kids
-                    self.categoryViewModel?.getItems(id: categoryID)
-                    
-                case 3:
-//                    self.categoryViewModel.result = []
-                    //fetchPrice()
-                    categoryID = 306236752045 // Sell
-                    self.categoryViewModel?.getItems(id: categoryID)
-                default:
-                    return
-                }
-                categoryViewModel?.bindResultToViewController = { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.collectionView.reloadData()
-                    }
-//                    self?.categoryViewModel?.getItems(id: categoryID)
-                    
-                }
-                self.fetchPrice()
-                
-            }
+
     
+    func fetchCategoryData() {
+        print("Segment Index: \(categorySegmented.selectedSegmentIndex)")
+        var tag: String
+        
+        switch categorySegmented.selectedSegmentIndex {
+        case 0:
+            tag = " men"
+            
+        case 1:
+            tag = " women"
+        case 2:
+            tag = "kid"
+        case 3:
+            tag = "sale"
+        default:
+            return
+        }
+        
+        print("Filtering products with tag: \(tag)")
+        
+        allProducts = getProductsWithTag(products: categoryViewModel.result, tag: tag)
+        
+        categoryViewModel.filteredProducts = allProducts
+        collectionView.reloadData()
+        
+        print("Filtered products count: \(allProducts.count)")
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            print("Collection view reloaded")
+        }
+    }
+
     
     @IBAction func allProduct(_ sender: UIBarButtonItem) {
         updateButtonColors(selectedButton: sender)
         isFiltered = true
-        categoryViewModel.filteredProducts = categoryViewModel.result
+        
+        categoryViewModel.filteredProducts = allProducts
         collectionView.reloadData()
     }
     @IBAction func shoes(_ sender: UIBarButtonItem) {
         updateButtonColors(selectedButton: sender)
         isFiltered = true
-        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "SHOES"}
+        
+        categoryViewModel.filteredProducts = allProducts.filter{$0.productType == "SHOES"}
         collectionView.reloadData()
     }
     
     @IBAction func t_shirt(_ sender: UIBarButtonItem) {
         updateButtonColors(selectedButton: sender)
         isFiltered = true
-        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "T-SHIRTS"}
+       
+        categoryViewModel.filteredProducts = allProducts.filter{$0.productType == "T-SHIRTS"}
         collectionView.reloadData()
     }
     @IBAction func accesories(_ sender: UIBarButtonItem) {
         updateButtonColors(selectedButton: sender)
         isFiltered = true
-        categoryViewModel.filteredProducts = categoryViewModel.result.filter{$0.productType == "ACCESSORIES"}
+        
+        categoryViewModel.filteredProducts = allProducts.filter{$0.productType == "ACCESSORIES"}
         collectionView.reloadData()
     }
     
     func updateButtonColors(selectedButton: UIBarButtonItem) {
-        // Reset all buttons to default color
         allProduct.tintColor = defaultColor
         shoes.tintColor = defaultColor
         t_shirt.tintColor = defaultColor
         accesories.tintColor = defaultColor
         
-        // Set the selected button color
         selectedButton.tintColor = selectedColor
     }
    
@@ -165,7 +152,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         if (isFiltered == true){
             return categoryViewModel.filteredProducts.count
         } else {
-            return categoryViewModel?.result.count ?? 0
+            return allProducts.count
         }
     }
 
@@ -178,9 +165,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
              cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
                 
          }else{
-             cell.setValues(product: self.categoryViewModel.result[indexPath.row])
-             
-            
+             cell.setValues(product: self.allProducts[indexPath.row])
          }
 
          
