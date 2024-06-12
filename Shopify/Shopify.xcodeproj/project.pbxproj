@@ -77,6 +77,7 @@
 		E7FB2C9F2C10F03E003A8D9D /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2C9E2C10F03E003A8D9D /* CustomerModel.swift */; };
 		E7FB2CA22C10F918003A8D9D /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB2CA02C10F918003A8D9D /* AddressCell.swift */; };
 		E7FB2CA32C10F918003A8D9D /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FB2CA12C10F918003A8D9D /* AddressCell.xib */; };
+		E7FF07D02C198F5E004ACAE7 /* InventoryLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FF07CF2C198F5E004ACAE7 /* InventoryLevel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		E7FB2C9E2C10F03E003A8D9D /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
 		E7FB2CA02C10F918003A8D9D /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		E7FB2CA12C10F918003A8D9D /* AddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
+		E7FF07CF2C198F5E004ACAE7 /* InventoryLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryLevel.swift; sourceTree = "<group>"; };
 		EF8648017C42EC1B94AA5976 /* Pods-Shopify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopify.debug.xcconfig"; path = "Target Support Files/Pods-Shopify/Pods-Shopify.debug.xcconfig"; sourceTree = "<group>"; };
 		F262D17719D4900A164B01C0 /* Pods-Shopify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shopify.release.xcconfig"; path = "Target Support Files/Pods-Shopify/Pods-Shopify.release.xcconfig"; sourceTree = "<group>"; };
 		FFCDDF33D78AF5876D25B2EA /* Pods-ShopifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopifyTests.debug.xcconfig"; path = "Target Support Files/Pods-ShopifyTests/Pods-ShopifyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				8B95A6242C11B97300D5A592 /* ProductDetails.swift */,
 				8B2FCFB12C13846C00C613E3 /* Image.swift */,
 				E764E0112C13AD7500740DFA /* User.swift */,
+				E7FF07CF2C198F5E004ACAE7 /* InventoryLevel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				E6C97E042C0B937800B2CA81 /* BrandsCollectionViewCell.swift in Sources */,
 				E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */,
 				8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */,
+				E7FF07D02C198F5E004ACAE7 /* InventoryLevel.swift in Sources */,
 				E63EAC892C13324A000845AA /* Rules.swift in Sources */,
 				8B95A6212C11B18900D5A592 /* ProductDetailsViewModel.swift in Sources */,
 				E7FB2C7A2C10D1AA003A8D9D /* ShoppingCartViewModel.swift in Sources */,
