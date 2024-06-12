@@ -41,6 +41,10 @@ class URLs{
         endPoint = "customers/\(7309504250029)/addresses/\(addressID)"
         return baseURL + endPoint + ".json"
     }
+    
+    func getOrders() -> String {
+        return baseURL + "orders.json"
+    }
 
     
 }

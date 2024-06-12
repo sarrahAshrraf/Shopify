@@ -16,6 +16,8 @@ struct Response : Codable{
     let customer_address: Address?
     let products: [Product]?
     let product: Product?
+    let orders: [Orders]?
+    let order: Orders?
     
 //    private enum CodingKeys: String, CodingKey {
 //        case smartCollections = "smart_collections"
