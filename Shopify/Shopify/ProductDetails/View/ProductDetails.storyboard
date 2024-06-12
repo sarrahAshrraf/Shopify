@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tZ2-PJ-7Hd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tZ2-PJ-7Hd">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -296,14 +296,17 @@
                                 <rect key="frame" x="0.0" y="737" width="393" height="115"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSy-Vf-Srk">
-                                        <rect key="frame" x="32" y="52.666666666666629" width="329" height="38.333333333333343"/>
+                                        <rect key="frame" x="32" y="56.666666666666629" width="329" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" image="cart" catalog="system" title="   Add to cart">
                                             <color key="baseBackgroundColor" systemColor="tintColor"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="addToCart:" destination="tZ2-PJ-7Hd" eventType="touchUpInside" id="nr4-8c-jhC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V09-1L-dEW">
-                                        <rect key="frame" x="321" y="14.666666666666629" width="26" height="26"/>
+                                        <rect key="frame" x="321" y="18.666666666666629" width="26" height="26"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -315,9 +318,12 @@
                                                 </hierarchicalColors>
                                             </imageReference>
                                         </state>
+                                        <connections>
+                                            <action selector="addBtn:" destination="tZ2-PJ-7Hd" eventType="touchUpInside" id="Nem-6j-5Kd"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgw-AT-wcX">
-                                        <rect key="frame" x="46" y="14.666666666666629" width="26" height="26"/>
+                                        <rect key="frame" x="46" y="18.666666666666629" width="26" height="26"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
                                             <imageReference key="image" image="minus.circle.fill" catalog="system" symbolScale="large" renderingMode="hierarchical">
@@ -328,9 +334,12 @@
                                                 </hierarchicalColors>
                                             </imageReference>
                                         </state>
+                                        <connections>
+                                            <action selector="minusBtn:" destination="tZ2-PJ-7Hd" eventType="touchUpInside" id="1xD-Rt-we6"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dp3-8k-Ta6">
-                                        <rect key="frame" x="80" y="17.333333333333371" width="233" height="20.333333333333329"/>
+                                        <rect key="frame" x="80" y="21.333333333333371" width="233" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -385,7 +394,10 @@
                     </view>
                     <size key="freeformSize" width="393" height="852"/>
                     <connections>
+                        <outlet property="addBtn" destination="V09-1L-dEW" id="gHt-4x-jwn"/>
+                        <outlet property="counterTextField" destination="dp3-8k-Ta6" id="xxg-Ws-zd5"/>
                         <outlet property="descriptionLabel" destination="Vyc-25-sEk" id="G1N-bp-lwE"/>
+                        <outlet property="minusBtn" destination="bgw-AT-wcX" id="J4q-F1-R7g"/>
                         <outlet property="price" destination="7an-rl-r1z" id="PMY-Ce-EO6"/>
                         <outlet property="productImage" destination="SM6-EE-2M1" id="dms-NK-Dpw"/>
                         <outlet property="productName" destination="wRG-sf-YJU" id="qLU-yc-PlP"/>
