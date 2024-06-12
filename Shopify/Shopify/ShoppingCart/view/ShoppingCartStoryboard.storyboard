@@ -42,6 +42,10 @@
                                 <color key="tintColor" red="0.46667682736675148" green="0.68473362846390939" blue="0.50338635382850461" alpha="0.83846236248405615" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Check Out"/>
+                                <connections>
+                                    <action selector="checkOutBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="i0N-2x-Ke9"/>
+                                    <segue destination="ZgG-hQ-hh9" kind="show" id="BLk-lt-ybV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -75,10 +79,20 @@
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
         </scene>
+        <!--Payment_SB-->
+        <scene sceneID="i4I-7a-XuZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Payment_SB" id="ZgG-hQ-hh9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="GTa-7n-tjX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xVL-48-k5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="778" y="-68"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

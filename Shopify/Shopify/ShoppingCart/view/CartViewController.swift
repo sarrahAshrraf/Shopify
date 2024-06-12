@@ -8,6 +8,9 @@
 import UIKit
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBAction func checkOutBtn(_ sender: Any) {
+        
+    }
     @IBOutlet weak var priceLavel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var itemsTableView: UITableView!
@@ -18,6 +21,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }   
     var viewModel : ShoppingCartViewModel!
     var totalPrice = 0.0
+    override func viewWillAppear(_ animated: Bool) {
+        showData()
+        prepareCartPrice()
+        viewModel.showCartItems()
+        viewModel.getCartItems()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsTableView.dataSource = self

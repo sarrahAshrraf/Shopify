@@ -17,6 +17,9 @@ struct Response : Codable{
     let products: [Product]?
     let product: Product?
     let draft_order: DraftOrder?
+    var orders: [Order]?
+    var order: OrderPost?
+
 //    let variants: [Variant]
 
 //    private enum CodingKeys: String, CodingKey {
