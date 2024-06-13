@@ -15,7 +15,14 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoundedTextfield" customModule="Shopify" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoundedTextfield" customModule="Shopify" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="fuf-ET-kHc" id="f0y-y9-ePY"/>
+                <outlet property="uiActionButton" destination="eyO-qs-9pH" id="24k-Az-ovn"/>
+                <outlet property="uiPrefixImage" destination="1is-zf-dgx" id="mwi-uB-dtf"/>
+                <outlet property="uiTextfield" destination="xMh-BM-9fA" id="fov-At-5uU"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fuf-ET-kHc">
             <rect key="frame" x="0.0" y="0.0" width="712" height="226"/>
@@ -48,6 +55,9 @@
                             <color key="tintColor" name="SecondaryFont"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="xmark.circle.fill" catalog="system"/>
+                            <connections>
+                                <action selector="uiActionButtonTapped:" destination="-1" eventType="touchUpInside" id="0FQ-HD-8cn"/>
+                            </connections>
                         </button>
                     </subviews>
                     <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
