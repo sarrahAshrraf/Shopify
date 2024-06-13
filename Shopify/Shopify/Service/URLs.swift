@@ -51,6 +51,14 @@ class URLs{
     func customersURL() -> String{
         return baseURL + "customers.json"
     }
+    
+    func postDraftOrder() -> String{
+        return baseURL + "draft_orders.json"
+    }
+    
+    func customerWithDraftOrder() -> String{
+        return baseURL + "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId)).json"
+    }
   
 
     
