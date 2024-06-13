@@ -32,6 +32,10 @@ class SignUpViewController: UIViewController {
         signUpViewModel.bindUsersListToSignUpController = { [weak self] in
             self?.checkUserRegistration()
        }
+        
+        signUpViewModel.bindDraftOrderToSignUpController = {[weak self] in
+            self?.handleDraftOrder()
+        }
     }
     
 
@@ -65,6 +69,21 @@ class SignUpViewController: UIViewController {
             self.present(alert, animated: true)
         } else if signUpViewModel.code == 422 {
             showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
+        }
+    }
+    
+    func handleDraftOrder(){
+        if(signUpViewModel.cartDraftOrder?.id != nil && signUpViewModel.favoritesDraftOrder?.id != nil){
+            guard let cartId = signUpViewModel.cartDraftOrder?.id else {return}
+            guard let favoritesId = signUpViewModel.favoritesDraftOrder?.id else {return}
+            defaults.set(cartId, forKey: Constants.cartId)
+            defaults.set(favoritesId, forKey: Constants.favoritesId)
+            var user = User()
+            user.note = "\(favoritesId),\(cartId)"
+            let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil)
+            print("response: \(response)")
+            let params = encodeToJson(objectClass: response)
+            signUpViewModel.putUser(parameters: params ?? [:])
         }
     }
     
