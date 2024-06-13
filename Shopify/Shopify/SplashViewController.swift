@@ -64,6 +64,11 @@ class SplashViewController: UIViewController {
     }
     
     private func signupButtonTapped() {
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        let home = storyboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
+        home.modalPresentationStyle = .fullScreen
+        home.modalTransitionStyle = .crossDissolve
+        present(home, animated: true)
     }
 
     
