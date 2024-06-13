@@ -60,6 +60,8 @@ class SignUpViewController: UIViewController {
      func handleUserSignUp() {
         if(signUpViewModel.user?.id != nil){
             defaults.setValue(self.signUpViewModel.user?.id, forKey: Constants.customerId)
+            createDraftOrder(note: "favorite")
+            createDraftOrder(note: "cart")
             let alert = Alert().showAlertWithPositiveButtons(title: Constants.congratulations, msg: Constants.registeredSuccessfully, positiveButtonTitle: Constants.ok){_ in
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
                 let home = storyboard.instantiateViewController(identifier: "home") as! UINavigationController
