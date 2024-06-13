@@ -33,6 +33,7 @@
 		8BB6863E2C1B460D0051A015 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6863D2C1B460D0051A015 /* AuthenticationViewModel.swift */; };
 		8BB686402C1B47300051A015 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6863F2C1B47300051A015 /* SignUpViewController.swift */; };
 		8BB686422C1B48F70051A015 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686412C1B48F70051A015 /* Alert.swift */; };
+		8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686432C1B54490051A015 /* LoginViewController.swift */; };
 		8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */; };
 		8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */; };
 		8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849F2C10C1DD00BB28C6 /* Response.swift */; };
@@ -137,6 +138,7 @@
 		8BB6863D2C1B460D0051A015 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		8BB6863F2C1B47300051A015 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8BB686412C1B48F70051A015 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		8BB686432C1B54490051A015 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
 		8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMangerProtocol.swift; sourceTree = "<group>"; };
 		8BE8849F2C10C1DD00BB28C6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			children = (
 				8BB6862F2C1B43090051A015 /* Authentication.storyboard */,
 				8BB6863F2C1B47300051A015 /* SignUpViewController.swift */,
+				8BB686432C1B54490051A015 /* LoginViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -975,6 +978,7 @@
 				8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */,
 				E7F5EF532C0B35800096F476 /* Shopify.xcdatamodeld in Sources */,
 				E6BC3D392C14E0CC00DA604B /* CategoryViewController.swift in Sources */,
+				8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */,
 				8B95A6182C11AC5300D5A592 /* Options.swift in Sources */,
 				E6C97E022C0B936900B2CA81 /* AddsCollectionViewCell.swift in Sources */,
 				E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */,
