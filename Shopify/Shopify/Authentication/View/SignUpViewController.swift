@@ -114,7 +114,10 @@ class SignUpViewController: UIViewController {
         return anyResult as? [String : Any]
     }
     
-    @IBAction func navigateToLogin(_ sender: UIButton) {
+    @IBAction func navigateToLogin(_ sender: UIButton) {let login = storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        login.modalPresentationStyle = .fullScreen
+        present(login, animated: true)
+        
         
     }
     func isValidPassword(password: String) -> Bool{
