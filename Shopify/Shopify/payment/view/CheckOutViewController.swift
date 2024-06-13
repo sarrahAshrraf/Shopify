@@ -16,6 +16,7 @@ import UIKit
  */
 class CheckOutViewController: UIViewController {
 
+    @IBOutlet weak var discountValue: UILabel!
     @IBOutlet weak var deliveryPrice: UILabel!
     @IBOutlet weak var totalPrice: UILabel!
     @IBOutlet weak var orderPrice: UILabel!
@@ -51,6 +52,8 @@ class CheckOutViewController: UIViewController {
                 self?.totalPrice.text = self?.cartViewModel.result?.total_price
                 print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.total_price))")
                 print("RESULT IS: \(String(describing:self?.cartViewModel.result))")
+                self?.discountValue.text = self?.cartViewModel.result?.applied_discount?.amount
+
             }
         }
     }
@@ -66,19 +69,6 @@ class CheckOutViewController: UIViewController {
             }
         }
     }
-//    func getTotalPrice(){
-//        cartViewModel.bindResultToViewController = { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.totalPrice.text = self?.cartViewModel.result?.total_price
-//                print("TOTAAAL")
-//                print(self?.cartViewModel.result?.total_price)
-//            }
-//            
-//            
-//        }
-        
-        
-    
     
 
 

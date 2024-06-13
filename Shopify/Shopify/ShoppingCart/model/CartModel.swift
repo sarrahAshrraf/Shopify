@@ -39,7 +39,7 @@ struct DraftOrder : Codable {
 //    var shipping_address : Shipping_address?
 //    var billing_address : Billing_address?
     var invoice_url : String?
-//    var applied_discount : Applied_discount?
+    var applied_discount : Applied_discount?
     var order_id : Int?
     var shipping_line : String?
 //    var tax_lines : [TaxLine]?
@@ -53,7 +53,15 @@ struct DraftOrder : Codable {
     var customer : User?
 
 }
+struct Applied_discount : Codable {
+    let description : String?
+    let value : String?
+    let title : String?
+    let amount : String?
+    let value_type : String?
 
+
+}
 struct LineItems: Codable {
     
     var id: Int?
