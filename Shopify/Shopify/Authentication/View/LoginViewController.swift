@@ -9,21 +9,53 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextField: RoundedTextfield!
+    @IBOutlet weak var passwordTextField: RoundedTextfield!
+    var loginViewModel: AuthenticationViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginViewModel = AuthenticationViewModel()
+        setupLoginButton()
+    }
 
-        // Do any additional setup after loading the view.
+    
+    @IBAction func navigateBack(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+
+    @IBAction func login(_ sender: UIButton) {
+        guard areFieldsValid() else { return }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func areFieldsValid() -> Bool {
+        let fields = [emailTextField, passwordTextField]
+        let messages = [Constants.emailIsEmpty, Constants.passwordIsEmpty]
+        for (index, field) in fields.enumerated() where field?.text?.isEmpty ?? true
+        {
+            showAlert(title: Constants.warning, message: messages[index])
+            return false
+        }
+        return true
+        
     }
-    */
-
+    
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+            
+        let alert = Alert().showAlertWithPositiveButtons(title: title, msg: message, positiveButtonTitle: Constants.ok, positiveHandler: { _ in completion?() })
+        present(alert, animated: true)
+    }
+    
+    private func setupLoginButton() {
+        loginButton.tintColor = .white
+        loginButton.backgroundColor = .black
+        loginButton.layer.cornerRadius = loginButton.frame.height / 2
+        loginButton.clipsToBounds = true
+        loginButton.setTitle("LogIn", for: .normal)
+    }
 }
+
+
+
+
