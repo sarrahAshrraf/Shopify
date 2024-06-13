@@ -9,7 +9,11 @@ import UIKit
 
 class OrderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var back: UIBarButtonItem!
     
+    @IBAction func back(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @IBOutlet weak var tableView: UITableView!
     var profileViewModel: ProfileViewModel!
@@ -20,7 +24,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
@@ -52,6 +56,13 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = self.storyboard?.instantiateViewController(withIdentifier:"OrdersDetailsViewController") as! OrdersDetailsViewController
+        storyboard.modalPresentationStyle = .fullScreen
+        storyboard.order = orders[indexPath.row]
+        present(storyboard, animated: true)
     }
     
     //    /*

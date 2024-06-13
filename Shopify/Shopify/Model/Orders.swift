@@ -48,6 +48,7 @@ struct Orders: Codable {
     let totalWeight: Int?
     let updatedAt: String?
     let customer: Customer?
+    let lineItems: [LineItems]?
     
    
         
@@ -95,6 +96,7 @@ struct Orders: Codable {
         case totalWeight = "total_weight"
         case updatedAt = "updated_at"
         case customer = "customer"
+        case lineItems = "line_items"
         
     }
     
