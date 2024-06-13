@@ -17,21 +17,59 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: RoundedTextfield!
     @IBOutlet weak var confirmPasswordTextField: RoundedTextfield!
     var signUpViewModel: AuthenticationViewModel!
+    var registered = false
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpViewModel = AuthenticationViewModel()
         setupRegisterButton()
+        signUpViewModel.bindUserToSignUpController = { [weak self] in
+            self?.handleUserSignUp()
+        }
         
+    
+        signUpViewModel.bindUsersListToSignUpController = { [weak self] in
+            self?.checkUserRegistration()
+       }
     }
     
 
         
     
+    func checkUserRegistration() {
+            if let email = emailTextField.text, signUpViewModel.usersList.contains(where: { $0.email == email }) {
+                registered = true
+            }
+            if registered {
+                registered = false
+                showAlertWithNegativeAndPositiveButtons(title: Constants.warning, message: Constants.emailUsedBefore)
+            } else {
+                let user = User(id: nil, firstName: firstNameTextField.text, lastName: lastNameTextField.text, email: emailTextField.text, phone: phoneTextField.text, tags: passwordTextField.text)
+                let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil)
+                let params = encodeToJson(objectClass: response)
+                signUpViewModel.postUser(parameters: params ?? [:])
+            }
+        }
     
+     func handleUserSignUp() {
+        if(signUpViewModel.user?.id != nil){
+            defaults.setValue(self.signUpViewModel.user?.id, forKey: Constants.customerId)
+            let alert = Alert().showAlertWithPositiveButtons(title: Constants.congratulations, msg: Constants.registeredSuccessfully, positiveButtonTitle: Constants.ok){_ in
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let home = storyboard.instantiateViewController(identifier: "home") as! UINavigationController
+                home.modalPresentationStyle = .fullScreen
+                home.modalTransitionStyle = .crossDissolve
+                self.present(home, animated: true)
+            }
+            self.present(alert, animated: true)
+        } else if signUpViewModel.code == 422 {
+            showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
+        }
+    }
     
     @IBAction func navigateBack(_ sender: UIButton) {
-    
+        self.dismiss(animated: true)
     }
     
     @IBAction func SignUpUser(_ sender: UIButton) {
@@ -39,13 +77,33 @@ class SignUpViewController: UIViewController {
     }
     
     
- 
+    func encodeToJson(objectClass: Response) -> [String: Any]?{
+        do{
+            let jsonData = try JSONEncoder().encode(objectClass)
+            let json = String(data: jsonData, encoding: String.Encoding.utf8)!
+            return jsonToDictionary(from: json)
+        }catch let error{
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
+    func jsonToDictionary(from text: String) -> [String: Any]? {
+        guard let data = text.data(using: .utf8) else { return nil }
+        let anyResult = try? JSONSerialization.jsonObject(with: data, options: [])
+        return anyResult as? [String : Any]
+    }
     
     @IBAction func navigateToLogin(_ sender: UIButton) {
         
     }
+    func isValidPassword(password: String) -> Bool{
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
+        return passwordRegex.evaluate(with: password)
+    }
     
 
+    
     private func validateAndSignUp() {
         guard areFieldsValid() else { return }
         if !isValidPassword(password: passwordTextField.text ?? "") {
@@ -62,11 +120,6 @@ class SignUpViewController: UIViewController {
         } else {
                 signUpViewModel.getUsers()
         }
-    }
-    
-    func isValidPassword(password: String) -> Bool{
-        let passwordRegex = NSPredicate(format: "SELF MATCHES %@ ", "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[d$@$!%*?&#])[A-Za-z\\dd$@$!%*?&#]{8,}")
-        return passwordRegex.evaluate(with: password)
     }
 
     private func areFieldsValid() -> Bool {
