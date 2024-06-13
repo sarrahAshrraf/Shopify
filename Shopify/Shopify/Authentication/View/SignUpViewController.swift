@@ -155,6 +155,20 @@ class SignUpViewController: UIViewController {
         registerBtn.clipsToBounds = true
         registerBtn.setTitle("Sign Up", for: .normal)
     }
+    
+    
+    func createDraftOrder(note: String){
+        let properties = [Properties(name: "image_url", value: "")]
+        let lineItems = [LineItems(price: "20.0", quantity: 1, title: "dummy", properties:properties)]
+
+        let user = User(id: defaults.integer(forKey: Constants.customerId), firstName: self.firstNameTextField.text, lastName: self.lastNameTextField.text, email: self.emailTextField.text, phone: self.phoneTextField.text, addresses: nil, tags: self.passwordTextField.text)
+
+        let draft = DraftOrder(id: nil, note: note, lineItems: lineItems, user: user)
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft)
+        let params = self.encodeToJson(objectClass: response)
+    
+        self.signUpViewModel.postDraftOrder(parameters: params ?? [:])
+    }
 
 }
 
