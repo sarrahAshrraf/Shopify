@@ -13,12 +13,45 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: RoundedTextfield!
     @IBOutlet weak var passwordTextField: RoundedTextfield!
     var loginViewModel: AuthenticationViewModel!
+    var exists = false
+    let defaults = UserDefaults.standard
+    var customerId: Int? = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         loginViewModel = AuthenticationViewModel()
         setupLoginButton()
+
+        loginViewModel.bindUsersListToSignUpController = { [weak self] in
+            self?.handleUsersList()
+        }
+    }
+    
+    private func handleUsersList() {
+        guard let list = loginViewModel.usersList else { return }
+        for user in list {
+            if user.email == emailTextField.text && user.tags == passwordTextField.text {
+                exists = true
+                customerId = user.id
+                break
+            }
+        }
+        DispatchQueue.main.async {
+            if self.exists {
+                self.navigateToHome()
+            } else {
+                self.showAlert(title: Constants.warning, message: Constants.checkEmailAndPassword)
+            }
+        }
     }
 
+    private func navigateToHome() {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let home = storyboard.instantiateViewController(identifier: "home") as? UINavigationController {
+            home.modalPresentationStyle = .fullScreen
+            home.modalTransitionStyle = .crossDissolve
+            present(home, animated: true)
+        }
+    }
     
     @IBAction func navigateBack(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -26,7 +59,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func login(_ sender: UIButton) {
         guard areFieldsValid() else { return }
-        
+        loginViewModel.getUsers()
     }
     
     private func areFieldsValid() -> Bool {
