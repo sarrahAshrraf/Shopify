@@ -47,6 +47,10 @@ class URLs{
         endPoint = "draft_orders/\(cartId)"
         return baseURL + endPoint + ".json"
     }
+    
+    func customersURL() -> String{
+        return baseURL + "customers.json"
+    }
   
 
     

@@ -30,6 +30,7 @@
 		8BB686392C1B43E70051A015 /* RoundedTextfield.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB686382C1B43E70051A015 /* RoundedTextfield.xib */; };
 		8BB6863A2C1B43E70051A015 /* RoundedTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686372C1B43E70051A015 /* RoundedTextfield.swift */; };
 		8BB6863C2C1B44250051A015 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6863B2C1B44250051A015 /* NibLoadableView.swift */; };
+		8BB6863E2C1B460D0051A015 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB6863D2C1B460D0051A015 /* AuthenticationViewModel.swift */; };
 		8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */; };
 		8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */; };
 		8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849F2C10C1DD00BB28C6 /* Response.swift */; };
@@ -131,6 +132,7 @@
 		8BB686372C1B43E70051A015 /* RoundedTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextfield.swift; sourceTree = "<group>"; };
 		8BB686382C1B43E70051A015 /* RoundedTextfield.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundedTextfield.xib; sourceTree = "<group>"; };
 		8BB6863B2C1B44250051A015 /* NibLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
+		8BB6863D2C1B460D0051A015 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
 		8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMangerProtocol.swift; sourceTree = "<group>"; };
 		8BE8849F2C10C1DD00BB28C6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		8BB6862E2C1B42E10051A015 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8BB6863D2C1B460D0051A015 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				E7D50B012C1A16B600F6FD41 /* CheckOutViewModel.swift in Sources */,
 				E7BC1B1F2C145E2B0015C552 /* AddressCoordinator.swift in Sources */,
 				E71FCF232C1612D6008E2252 /* AddressProtocol.swift in Sources */,
+				8BB6863E2C1B460D0051A015 /* AuthenticationViewModel.swift in Sources */,
 				8B2FCFB22C13846C00C613E3 /* Image.swift in Sources */,
 				E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */,
 				E7FB2C7C2C10D1B5003A8D9D /* CartModel.swift in Sources */,
