@@ -59,16 +59,12 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         switch categorySegmented.selectedSegmentIndex {
         case 0:
-            
             tag = " men"
         case 1:
-            
             tag = " women"
         case 2:
-            
             tag = "kid"
         case 3:
-           
             tag = "sale"
         default:
             return
@@ -112,6 +108,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         updateButtonColors(selectedButton: sender)
         isFiltered = true
         categoryViewModel.filteredProducts = allProducts.filter { $0.productType == "T-SHIRTS" }
+        
         collectionView.reloadData()
     }
     
@@ -119,8 +116,41 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         updateButtonColors(selectedButton: sender)
         isFiltered = true
         categoryViewModel.filteredProducts = allProducts.filter { $0.productType == "ACCESSORIES" }
+        print("Filtered products count: \(categoryViewModel.filteredProducts.count)")
+        //checkForProductsCount()
+        
         collectionView.reloadData()
     }
+    
+    func checkForProductsCount(){
+        if categoryViewModel.filteredProducts.count == 0 {
+                collectionView.isHidden = true
+                if let existingNoDataView = self.view.viewWithTag(999) as? UIImageView {
+                    existingNoDataView.removeFromSuperview()
+                }
+
+                let noProductImg = UIImageView()
+                noProductImg.tag = 999
+                noProductImg.image = UIImage(named: "no_product")
+                noProductImg.contentMode = .scaleAspectFit
+                noProductImg.translatesAutoresizingMaskIntoConstraints = false
+                self.view.addSubview(noProductImg)
+
+                NSLayoutConstraint.activate([
+                    noProductImg.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                    noProductImg.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                    noProductImg.widthAnchor.constraint(equalToConstant: 250),
+                    noProductImg.heightAnchor.constraint(equalToConstant: 250)
+                ])
+            } else {
+                if let existingNoDataView = self.view.viewWithTag(999) as? UIImageView {
+                    existingNoDataView.removeFromSuperview()
+                }
+                collectionView.isHidden = false
+                
+            }
+    }
+
     
     func updateButtonColors(selectedButton: UIBarButtonItem) {
     
@@ -135,7 +165,15 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isFiltered {
-            return categoryViewModel.filteredProducts.count
+            if categoryViewModel.filteredProducts.count == 0{
+                checkForProductsCount()
+                return 0
+            } else {
+                checkForProductsCount()
+                collectionView.isHidden = false
+                return categoryViewModel.filteredProducts.count
+            }
+            
         } else {
             return allProducts.count
         }
