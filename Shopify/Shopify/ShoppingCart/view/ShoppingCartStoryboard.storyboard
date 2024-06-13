@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cart View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="CartViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bh3-lU-dt3">
+                                <rect key="frame" x="0.0" y="83" width="393" height="624"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="pYF-Qx-mno"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="VVd-sB-eLR"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total price:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yo-ET-tkN">
+                                <rect key="frame" x="16" y="744" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1086$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeZ-b9-K2A">
+                                <rect key="frame" x="108" y="744" width="207" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awN-Bg-nde">
+                                <rect key="frame" x="88" y="773" width="217" height="35"/>
+                                <color key="tintColor" red="0.46667682736675148" green="0.68473362846390939" blue="0.50338635382850461" alpha="0.83846236248405615" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Check Out"/>
+                                <connections>
+                                    <action selector="checkOutBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="i0N-2x-Ke9"/>
+                                    <segue destination="ZgG-hQ-hh9" kind="show" id="BLk-lt-ybV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4Yo-ET-tkN" secondAttribute="bottom" constant="53" id="2mD-qn-aiL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="awN-Bg-nde" secondAttribute="trailing" constant="88" id="2yg-jh-dfH"/>
+                            <constraint firstItem="yeZ-b9-K2A" firstAttribute="top" secondItem="bh3-lU-dt3" secondAttribute="bottom" constant="37" id="E8e-YQ-zOl"/>
+                            <constraint firstItem="yeZ-b9-K2A" firstAttribute="leading" secondItem="4Yo-ET-tkN" secondAttribute="trailing" constant="8" id="I6z-RV-t50"/>
+                            <constraint firstItem="bh3-lU-dt3" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="Xf9-31-FK9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4Yo-ET-tkN" secondAttribute="trailing" constant="293" id="Yo7-wm-U9C"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="bh3-lU-dt3" secondAttribute="bottom" constant="111" id="aPU-ez-hwH"/>
+                            <constraint firstItem="awN-Bg-nde" firstAttribute="top" secondItem="4Yo-ET-tkN" secondAttribute="bottom" constant="8" symbolic="YES" id="boH-FD-YSQ"/>
+                            <constraint firstItem="awN-Bg-nde" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="88" id="dfq-kG-Fn3"/>
+                            <constraint firstItem="4Yo-ET-tkN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="e8r-wF-8ic"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="awN-Bg-nde" secondAttribute="bottom" constant="10" id="eXh-Tg-LZn"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yeZ-b9-K2A" secondAttribute="trailing" constant="78" id="g9s-C6-0A2"/>
+                            <constraint firstItem="bh3-lU-dt3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lZg-Za-GvN"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yeZ-b9-K2A" secondAttribute="bottom" constant="53" id="mfu-lq-pE0"/>
+                            <constraint firstItem="4Yo-ET-tkN" firstAttribute="top" secondItem="bh3-lU-dt3" secondAttribute="bottom" constant="37" id="rJO-Q3-ChD"/>
+                            <constraint firstItem="bh3-lU-dt3" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="xU3-ll-DiG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="itemsTableView" destination="bh3-lU-dt3" id="WTX-vc-cIa"/>
+                        <outlet property="priceLavel" destination="yeZ-b9-K2A" id="5R8-I0-kOU"/>
+                        <outlet property="totalPriceLabel" destination="4Yo-ET-tkN" id="dUV-N3-qzv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Payment_SB-->
+        <scene sceneID="i4I-7a-XuZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Payment_SB" id="ZgG-hQ-hh9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="GTa-7n-tjX"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xVL-48-k5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="778" y="-68"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

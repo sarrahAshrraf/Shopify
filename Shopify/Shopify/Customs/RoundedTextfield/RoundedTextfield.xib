@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SofiaProRegular.ttf">
+            <string>SofiaProRegular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RoundedTextfield" customModule="Shopify" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="fuf-ET-kHc" id="f0y-y9-ePY"/>
+                <outlet property="uiActionButton" destination="eyO-qs-9pH" id="24k-Az-ovn"/>
+                <outlet property="uiPrefixImage" destination="1is-zf-dgx" id="mwi-uB-dtf"/>
+                <outlet property="uiTextfield" destination="xMh-BM-9fA" id="fov-At-5uU"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fuf-ET-kHc">
+            <rect key="frame" x="0.0" y="0.0" width="712" height="226"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5HY-Tk-uIi">
+                    <rect key="frame" x="0.0" y="0.0" width="712" height="226"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1is-zf-dgx">
+                            <rect key="frame" x="16" y="110.66666666666667" width="30" height="30.000000000000014"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="03c-p9-4cG"/>
+                                <constraint firstAttribute="height" constant="30" id="RPl-AZ-pYO"/>
+                            </constraints>
+                        </imageView>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xMh-BM-9fA">
+                            <rect key="frame" x="54" y="114.66666666666667" width="604" height="21.666666666666671"/>
+                            <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="17"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localeKey" value="Location"/>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyO-qs-9pH">
+                            <rect key="frame" x="666" y="110.66666666666667" width="30" height="30.000000000000014"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="tUH-75-4iy"/>
+                                <constraint firstAttribute="height" constant="30" id="taW-fr-TP8"/>
+                            </constraints>
+                            <color key="tintColor" name="SecondaryFont"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="xmark.circle.fill" catalog="system"/>
+                            <connections>
+                                <action selector="uiActionButtonTapped:" destination="-1" eventType="touchUpInside" id="0FQ-HD-8cn"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="m0s-8W-ZLq"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5HY-Tk-uIi" secondAttribute="trailing" id="Td9-qs-nsx"/>
+                <constraint firstItem="5HY-Tk-uIi" firstAttribute="leading" secondItem="fuf-ET-kHc" secondAttribute="leading" id="XLE-My-LUt"/>
+                <constraint firstAttribute="bottom" secondItem="5HY-Tk-uIi" secondAttribute="bottom" id="Y5G-gO-ZMm"/>
+                <constraint firstItem="5HY-Tk-uIi" firstAttribute="top" secondItem="fuf-ET-kHc" secondAttribute="top" id="of0-Ye-MD9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="99.236641221374043" y="818.30985915492965"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="SecondaryFont">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

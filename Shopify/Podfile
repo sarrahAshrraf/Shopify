@@ -9,7 +9,9 @@ target 'Shopify' do
 pod 'Alamofire', '~> 5.8.0'
 pod 'ReachabilitySwift'
 pod 'Kingfisher'
-
+pod 'lottie-ios'
+pod 'RxSwift', '6.5.0'
+pod 'RxCocoa', '6.5.0'
 
 post_install do |installer|
     installer.generated_projects.each do |project|
