@@ -7,8 +7,8 @@
 
 import UIKit
 /* MARK: 
- 1- fetch default address
- 2- fetch payment method -> table view ykhtab menooo
+ 1- fetch default address (done)
+ 2- fetch payment method -> table view ykhtab menooo (TODO) now is cash
  3- total price -> draft order CartVc price
  4- discount
  5- delivery
@@ -33,9 +33,30 @@ class CheckOutViewController: UIViewController {
         cartViewModel = ShoppingCartViewModel()
         addressVM = AddressViewModel()
         getDeafultAddress()
-        cartViewModel.showCartItems()
+        cartViewModel.getCartItems()
+        setupBindings()
         getTotalPrice()
         
+    }
+    
+    private func setupBindings() {
+        addressVM.bindDefaultAddress = { [weak self] in
+            DispatchQueue.main.async {
+                self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
+            }
+        }
+        
+        cartViewModel.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.totalPrice.text = self?.cartViewModel.result?.total_price
+                print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.total_price))")
+                print("RESULT IS: \(String(describing:self?.cartViewModel.result))")
+            }
+        }
+    }
+    
+    func getTotalPrice() {
+        cartViewModel.bindResultToViewController()
     }
     func getDeafultAddress(){
         
@@ -45,19 +66,19 @@ class CheckOutViewController: UIViewController {
             }
         }
     }
-    func getTotalPrice(){
-        cartViewModel.bindResultToViewController = { [weak self] in
-            DispatchQueue.main.async {
-                self?.totalPrice.text = self?.cartViewModel.result?.lineItems?.first?.price
-                print("TOTAAAL")
-                print(self?.cartViewModel.result?.total_price)
-            }
-            
-            
-        }
+//    func getTotalPrice(){
+//        cartViewModel.bindResultToViewController = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.totalPrice.text = self?.cartViewModel.result?.total_price
+//                print("TOTAAAL")
+//                print(self?.cartViewModel.result?.total_price)
+//            }
+//            
+//            
+//        }
         
         
-    }
+    
     
 
 

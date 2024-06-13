@@ -65,16 +65,16 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = viewModel.result?.lineItems?.count ?? 0
+        let count = viewModel.result?.line_items?.count ?? 0
               print("Number of rows: \(count)")
-        return viewModel.result?.lineItems?.count ?? 0
+        return viewModel.result?.line_items?.count ?? 0
     }
    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as? CartCell else {
                return UITableViewCell()
            }
-                if let lineItems = viewModel.result?.lineItems {
+                if let lineItems = viewModel.result?.line_items {
 
         cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
 //        if let lineItems = viewModel.result?.lineItems {

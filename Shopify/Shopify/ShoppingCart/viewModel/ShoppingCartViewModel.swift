@@ -13,6 +13,8 @@ class ShoppingCartViewModel{
             self.bindResultToViewController()
         }
     }
+    
+    
     func showCartItems(){
         let url = URLs.shared.getCartItems(cartId: 945806409901)
         NetworkManger.shared.getData(url: url) { response in
@@ -31,7 +33,7 @@ class ShoppingCartViewModel{
     func editCart(){
         print("Cart Items: \(CartList.cartItems)")
 
-        let draftOrder = DraftOrder(id: nil, note: nil, lineItems: CartList.cartItems, user: nil)
+        let draftOrder = DraftOrder(id: nil, note: nil, line_items: CartList.cartItems)
         let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draftOrder)
         guard let params = JSONCoding().encodeToJson(objectClass: response) else {
             print("Failed to encode JSON")
@@ -58,7 +60,7 @@ class ShoppingCartViewModel{
     func getCartItems() {
         let url = URLs.shared.getCartItems(cartId: 945806409901)
         NetworkManger.shared.getData(url: url) { response in
-            if var lineItems = response?.draft_order?.lineItems {
+            if var lineItems = response?.draft_order?.line_items {
                 for (index, lineItem) in lineItems.enumerated() {
                     if lineItem.title == "dummy" {
                         lineItems.remove(at: index)
@@ -66,6 +68,7 @@ class ShoppingCartViewModel{
                     }
                 }
                 CartList.cartItems = lineItems
+                self.result = response?.draft_order
             } else {
                 print("Failed to retrieve draft order or line items")
             }
