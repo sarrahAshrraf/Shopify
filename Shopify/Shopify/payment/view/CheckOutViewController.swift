@@ -16,7 +16,7 @@ import UIKit
  5- delivery
  6- total after calculations
  */
-class CheckOutViewController: UIViewController {
+class CheckOutViewController: UIViewController, AddressSelectionDelegate {
 
     @IBOutlet weak var discountValue: UILabel!
     @IBOutlet weak var deliveryPrice: UILabel!
@@ -39,6 +39,12 @@ class CheckOutViewController: UIViewController {
         addressVM.fetchDeafultCustomerAddress(customerID: 7309504250029)
     }
     
+    func didSelectAddress(_ address: Address) {
+        addressdetails.text = address.address1
+        print("inside Checout")
+        print(address.address1)
+        addressVM.defautltAdress = address
+    }
     
     func createOrder(){
         let customer = Customer(id:7309504250029)
@@ -79,6 +85,19 @@ class CheckOutViewController: UIViewController {
 
             }
         }
+        checkOutVM.bindOrderToViewController = { [weak self] in
+             DispatchQueue.main.async {
+                 self?.showOrderSuccessAlert()
+                 CartList.cartItems = []
+                 self?.cartViewModel.editCart()
+             }
+         }
+     }
+    
+    func showOrderSuccessAlert() {
+        let alert = UIAlertController(title: "Success", message: "Order placed successfully!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func getTotalPrice() {
@@ -107,30 +126,18 @@ class CheckOutViewController: UIViewController {
 
 
     @IBAction func changeAddress(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
+        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
+            let navController = UINavigationController(rootViewController: addressVC)
+           addressVC.coordinator = AddressCoordinator(navigationController: navController)
+            addressVC.delegate = self 
+            addressVC.shipmentAdress = true
+           navController.modalPresentationStyle = .fullScreen
+           self.present(navController, animated: true, completion: nil)
+        }
         
         print("adddddressssss")
     }
     
-//    func didSelectAddress(_ address: Address) {
-//        print("in did select addresss")
-//           addressdetails.text = address.address1
-//           let newShippingAddress = Shipping_address(
-//               first_name: "sarah",
-//               address1: "Miaaaami",
-//               phone: "012873654",
-//               city: "alexxxxxx",
-//               zip: address.zip,
-//               province: address.province,
-//               country: "Egypt",
-//               last_name: "ashraf",
-//               address2: address.address2,
-//               company: address.company,
-//               latitude: "",
-//               longitude:"",
-//               name: address.name,
-//               country_code: address.country_code,
-//               province_code: address.province_code
-//           )
-//           cartViewModel.updateShippingAddress(newAddress: newShippingAddress)
-//       }
+
 }

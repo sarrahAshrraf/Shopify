@@ -32,8 +32,12 @@ class ShoppingCartViewModel{
     
     func editCart(){
         print("Cart Items: \(CartList.cartItems)")
-
-        let draftOrder = DraftOrder(id: nil, note: nil, line_items: CartList.cartItems)
+        var tempArr = CartList.cartItems
+        if tempArr.isEmpty {
+            let lineItem = LineItems(price: "20.0", quantity: 1, title: "dummy")
+            tempArr.append(lineItem)
+        }
+        let draftOrder = DraftOrder(id: nil, note: nil, line_items: tempArr)
         let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draftOrder, orders: nil, order: nil)
         guard let params = JSONCoding().encodeToJson(objectClass: response) else {
             print("Failed to encode JSON")
@@ -72,7 +76,7 @@ class ShoppingCartViewModel{
                     }
                 }
                 CartList.cartItems = lineItems
-                self.result = response?.draft_order
+//                self.result = response?.draft_order
             } else {
                 print("Failed to retrieve draft order or line items")
             }

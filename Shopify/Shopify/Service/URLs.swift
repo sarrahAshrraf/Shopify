@@ -54,6 +54,10 @@ class URLs{
         return baseURL + endPoint + ".json"
     }
     
-
+    func postInventoryURL() -> String{
+        endPoint = "inventory_levels/set"
+        print(baseURL + endPoint + ".json")
+        return baseURL + endPoint + ".json"
+    }
     
 }
