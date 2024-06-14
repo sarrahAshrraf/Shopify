@@ -13,6 +13,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var checkOutBtn: UIButton!
     func updateEmptyCartImageVisibility() {
+//        if ((viewModel.result?.line_items?.isEmpty) != nil) {
+
         if CartList.cartItems.isEmpty {
             emptyTableImg.isHidden = false
             itemsTableView.isHidden = true
@@ -48,11 +50,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var viewModel : ShoppingCartViewModel!
     var totalPrice = 0.0
     override func viewWillAppear(_ animated: Bool) {
-        showData()
+        
        
         viewModel.showCartItems()
         viewModel.getCartItems()
         updateEmptyCartImageVisibility()
+        showData()
         prepareCartPrice()
     }
     override func viewDidLoad() {
@@ -62,9 +65,11 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
             viewModel = ShoppingCartViewModel()
-        showData()
         viewModel.showCartItems()
         viewModel.getCartItems()
+        updateEmptyCartImageVisibility()
+        showData()
+       
         prepareCartPrice()
 
     }
