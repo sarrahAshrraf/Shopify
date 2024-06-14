@@ -51,7 +51,12 @@ struct DraftOrder : Codable {
     var payment_terms : String?
     var admin_graphql_api_id : String?
     var customer : User?
-
+    init(id: Int?, note: String?, line_items: [LineItems]?, customer: User?) {
+        self.id = id
+        self.note = note
+        self.line_items = line_items
+        self.customer = customer
+    }
 }
 struct Shipping_address : Codable {
     let first_name : String?
