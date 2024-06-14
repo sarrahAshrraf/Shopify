@@ -49,6 +49,35 @@ class URLs{
     func getAllProducts() -> String {
         return baseURL + "products.json"
     }
+    func getCartItems(cartId: Int) -> String{
+        //945806409901
+        endPoint = "draft_orders/\(cartId)"
+        return baseURL + endPoint + ".json"
+    }
+    
+    func postOrderURL() -> String{
+        endPoint = "orders"
+        print(baseURL + endPoint + ".json")
+        return baseURL + endPoint + ".json"
+    }
+    
+    func postInventoryURL() -> String{
+        endPoint = "inventory_levels/set"
+        print(baseURL + endPoint + ".json")
+        return baseURL + endPoint + ".json"
+    }
+    func customersURL() -> String{
+        return baseURL + "customers.json"
+    }
+    
+    func postDraftOrder() -> String{
+        return baseURL + "draft_orders.json"
+    }
+    
+    func customerWithDraftOrder() -> String{
+        return baseURL + "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId)).json"
+    }
+  
 
     
 }

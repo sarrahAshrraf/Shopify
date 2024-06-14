@@ -7,9 +7,11 @@
 
 import UIKit
 
+
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
 
+    var shipmentAdress : Bool = false
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
 
@@ -70,8 +72,19 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
-        print("inside select row")
+          if(shipmentAdress == false){
+              coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
+            print("inside select row")
+          }else {
+//                     delegate?.didSelectAddress(viewModel.addresses[indexPath.row])
+//              print(viewModel.addresses[indexPath.row])
+//              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
+//              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
+//                  let navController = UINavigationController(rootViewController: checkOutVC)
+//                 navController.modalPresentationStyle = .fullScreen
+//                 self.present(navController, animated: true, completion: nil)
+//              }
+          }
       }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -86,8 +99,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
                     DispatchQueue.main.async {
                         if success {
                             print("Address deleted successfully")
-                            //                            self.viewModel.addresses.remove(at: indexPath.row)
-                            //                            self.addressTableView.deleteRows(at: [indexPath], with: .automatic)
+                        
                             self.viewModel.fetchCustomerAddress(customerID: 7309504250029)
                             self.addressTableView.reloadData()
                         } else {
