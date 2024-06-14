@@ -16,7 +16,14 @@ import UIKit
  5- delivery
  6- total after calculations
  */
-class CheckOutViewController: UIViewController, AddressSelectionDelegate {
+class CheckOutViewController: UIViewController, ShippingAddressDelegate {
+    func didSelectAddress(_ address: Address) {
+        addressVM.defautltAdress = address
+        addressdetails.text = address.address1
+        print("inside Checout")
+        print(address.address1)
+    }
+    
 
     @IBOutlet weak var applePayBtn: UIButton!
     @IBOutlet weak var cashOnBtn: UIButton!
@@ -37,12 +44,6 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
         addressVM.fetchDeafultCustomerAddress(customerID: 7309504250029)
     }
     
-    func didSelectAddress(_ address: Address) {
-        addressdetails.text = address.address1
-        print("inside Checout")
-        print(address.address1)
-        addressVM.defautltAdress = address
-    }
     
     func createOrder(){
         let customer = Customer(id:7309504250029)
@@ -81,7 +82,8 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
                 print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.total_price))")
                 print("RESULT IS: \(String(describing:self?.cartViewModel.result))")
                 self?.discountValue.text = self?.cartViewModel.result?.applied_discount?.amount ?? "0.0"
-
+//                self?.orderItemsCount.text = String(self?.cartViewModel.result?.line_items?[CartList.cartItems.count].quantity ?? 0)
+               
             }
         }
         checkOutVM.bindOrderToViewController = { [weak self] in
@@ -118,14 +120,10 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
 
 
     @IBAction func changeAddress(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
-        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
-            let navController = UINavigationController(rootViewController: addressVC)
-           addressVC.coordinator = AddressCoordinator(navigationController: navController)
-            addressVC.delegate = self 
-            addressVC.shipmentAdress = true
-           navController.modalPresentationStyle = .fullScreen
-           self.present(navController, animated: true, completion: nil)
+        if let addressVC = storyboard?.instantiateViewController(withIdentifier: "shippingAddressVC") as? shippingAddressVC {
+            addressVC.delegate = self
+
+            self.navigationController?.pushViewController(addressVC, animated: true)
         }
         
         print("adddddressssss")
