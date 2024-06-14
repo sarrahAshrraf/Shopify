@@ -50,3 +50,13 @@ struct Product: Hashable, Codable {
         case templateSuffix = "template_suffix"
     }
 }
+
+
+struct LocalProduct {
+    var id: Int
+    var customer_id: Int
+    var variant_id: Int
+    var title: String
+    var price: String
+    var image: String
+}
