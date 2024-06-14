@@ -55,7 +55,11 @@ class ShoppingCartViewModel{
     }
 
     
-    
+    func updateShippingAddress(newAddress: Shipping_address) {
+        result?.shipping_address = newAddress
+        print(newAddress)
+        editCart()
+    }
     
     func getCartItems() {
         let url = URLs.shared.getCartItems(cartId: 945806409901)

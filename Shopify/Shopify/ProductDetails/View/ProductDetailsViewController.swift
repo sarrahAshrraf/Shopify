@@ -27,9 +27,9 @@ class ProductDetailsViewController: UIViewController {
     var viewModel: ProductDetailsViewModel!
     var customerID = 7309504250029
     var generalViewModel: ShoppingCartViewModel!
-//    var productImagesArr: [InputSource] = []
     var orderCount = 1
     var productInCart = false
+//MARK: To be changed color and sizeeee values !!!!
     var selectedSize: String = "10"
         var selectedColor =  "white"
                 
@@ -141,7 +141,6 @@ class ProductDetailsViewController: UIViewController {
                     let lineItem = LineItems(name: viewModel.result?.title,price: variant.price, productId: viewModel.result?.id , quantity: orderCount, variantId: variant.id, variantTitle: variantName ,vendor: viewModel.result?.vendor, properties: [Properties(name: String(variant.inventoryQuantity!), value: "\((viewModel.result?.image?.src)!)$\(variant.inventoryItemId!)")])
                     CartList.cartItems.append(lineItem)
                     orderCount = 1
-//                    resetVariantsUI()
                 }else{
                     print("you can not")
                     let alert = UIAlertController(title: "Warning", message: "You can not order more than \(variant.inventoryQuantity!/3).", preferredStyle: .alert)
@@ -177,7 +176,6 @@ class ProductDetailsViewController: UIViewController {
         CartList.cartItems[variantIndex].quantity! += orderCount
         orderCount = 1
         generalViewModel.editCart()
-//        resetVariantsUI()
     }
     
     func presentAmountErrorAlert(variantIndex: Int){

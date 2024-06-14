@@ -36,7 +36,7 @@ struct DraftOrder : Codable {
     var name : String?
     var status : String?
     var line_items : [LineItems]?
-//    var shipping_address : Shipping_address?
+    var shipping_address : Shipping_address?
 //    var billing_address : Billing_address?
     var invoice_url : String?
     var applied_discount : Applied_discount?
@@ -51,6 +51,24 @@ struct DraftOrder : Codable {
     var payment_terms : String?
     var admin_graphql_api_id : String?
     var customer : User?
+
+}
+struct Shipping_address : Codable {
+    let first_name : String?
+    let address1 : String?
+    let phone : String?
+    let city : String?
+    let zip : String?
+    let province : String?
+    let country : String?
+    let last_name : String?
+    let address2 : String?
+    let company : String?
+    let latitude : String?
+    let longitude : String?
+    let name : String?
+    let country_code : String?
+    let province_code : String?
 
 }
 struct Applied_discount : Codable {
