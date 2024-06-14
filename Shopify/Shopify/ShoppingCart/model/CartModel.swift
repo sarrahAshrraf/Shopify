@@ -7,22 +7,79 @@
 
 import Foundation
 
-struct DraftOrder: Codable {
-    let id: Int?
-    let note: String?
-    var lineItems: [LineItems]?
-    let user: User?
+//struct DraftOrder: Codable {
+//    let id: Int?
+//    let note: String?
+//    var lineItems: [LineItems]?
+//    let user: User?
+//    var total_price : String?
+//    var subtotal_price : String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case note
+//        case lineItems = "line_items"
+//        case user = "customer"
+//    }
+//}
+struct DraftOrder : Codable {
+    var id : Int?
+    var note : String?
+    var email : String?
+    var taxes_included : Bool?
+    var currency : String?
+    var invoice_sent_at : String?
+    var created_at : String?
+    var updated_at : String?
+    var tax_exempt : Bool?
+    var compvared_at : String?
+    var name : String?
+    var status : String?
+    var line_items : [LineItems]?
+    var shipping_address : Shipping_address?
+//    var billing_address : Billing_address?
+    var invoice_url : String?
+    var applied_discount : Applied_discount?
+    var order_id : Int?
+    var shipping_line : String?
+//    var tax_lines : [TaxLine]?
+    var tags : String?
+    var note_attributes : [String]?
     var total_price : String?
     var subtotal_price : String?
+    var total_tax : String?
+    var payment_terms : String?
+    var admin_graphql_api_id : String?
+    var customer : User?
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case note
-        case lineItems = "line_items"
-        case user = "customer"
-    }
 }
+struct Shipping_address : Codable {
+    let first_name : String?
+    let address1 : String?
+    let phone : String?
+    let city : String?
+    let zip : String?
+    let province : String?
+    let country : String?
+    let last_name : String?
+    let address2 : String?
+    let company : String?
+    let latitude : String?
+    let longitude : String?
+    let name : String?
+    let country_code : String?
+    let province_code : String?
 
+}
+struct Applied_discount : Codable {
+    let description : String?
+    let value : String?
+    let title : String?
+    let amount : String?
+    let value_type : String?
+
+
+}
 struct LineItems: Codable {
     
     var id: Int?

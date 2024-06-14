@@ -71,6 +71,12 @@ class CartCell: UITableViewCell {
         contentView.layer.masksToBounds = true
         backgroundColor = .clear
         contentView.backgroundColor = .white
+        
+        for (index , item) in CartList.cartItems.enumerated() {
+            if item.title == "dummy" {
+                
+            }
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

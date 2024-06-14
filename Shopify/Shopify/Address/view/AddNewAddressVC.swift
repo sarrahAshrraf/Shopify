@@ -106,17 +106,14 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var phoneTF: UITextField!
     @IBOutlet weak var countryTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
-//    @IBOutlet weak var provinceTF: UITextField!
-//    @IBOutlet weak var addressTwoTF: UITextField!
+
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     var viewModell: AddNewAddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel = AddNewAddressViewModel()
         populateTextFields()
         print(isEditingAddress)
-//        self.cityTF.delegate = self
     }
     
 

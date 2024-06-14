@@ -9,3 +9,6 @@ import Foundation
 protocol AddressProtocol: AnyObject {
     func didUpdateAddress()
 }
+protocol AddressSelectionDelegate: AnyObject {
+    func didSelectAddress(_ address: Address)
+}

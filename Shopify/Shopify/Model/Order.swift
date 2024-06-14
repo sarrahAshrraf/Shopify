@@ -6,293 +6,292 @@
 //
 
 import Foundation
-// MARK: - OrderResponse
-//struct OrderResponse: Codable {
-//    var orders: [Order]?
-//}
-struct OrderResponsePost: Codable {
-    var order: OrderPost?
-}
 
-struct OrderPost : Codable{
-    var lineItems: [LineItems]?
-    var customer: OrderCustomer?
-    var shippingAddress: OrderAddress?
-    var financialStatus: String?
-    var discountCodes: [DiscountCode]?
-    var shipping_lines: [ShippingLine]?
-
-  enum CodingKeys: String, CodingKey {
-    case lineItems = "line_items"
-    case customer
-    case shippingAddress = "shipping_address"
-    case financialStatus = "financial_status"
-    case discountCodes = "discount_codes"
-  }
-
-}
-struct ShippingLine: Codable {
-    let code, price, title: String?
-}
-// MARK: - Order
-struct Order: Codable {
-    var id: Int?
-    var adminGraphqlAPIID: String?
-    var appID: Int?
-    var browserIP: String?
-    var buyerAcceptsMarketing: Bool?
-    var cancelReason, cancelledAt, cartToken, checkoutID: String?
-    var checkoutToken, clientDetails, closedAt, company: String?
-    var confirmed: Bool?
-    var contactEmail: String?
-    var createdAt: String?
-    var currency: String?
-    var currentSubtotalPrice: String?
-    var currentSubtotalPriceSet: OrderSet?
-    var currentTotalAdditionalFeesSet: String?
-    var currentTotalDiscounts: String?
-    var currentTotalDiscountsSet: OrderSet?
-    var currentTotalDutiesSet: String?
-    var currentTotalPrice: String?
-    var currentTotalPriceSet: OrderSet?
-    var currentTotalTax: String?
-    var currentTotalTaxSet: OrderSet?
-    var customerLocale, deviceID: String?
-    var discountCodes: [DiscountCode]?
-    var email: String?
-    var estimatedTaxes: Bool?
-    var financialStatus: String?
-    var fulfillmentStatus, landingSite, landingSiteRef, locationID: String?
-    var merchantOfRecordAppID: String?
-    var name: String?
-    var note: String?
-    var noteAttributes: [String]?
-    var number, orderNumber: Int?
-    var orderStatusURL: String?
-    var originalTotalAdditionalFeesSet, originalTotalDutiesSet: String?
-    var paymentGatewayNames: [String]?
-    var phone: String?
-    var presentmentCurrency: String?
-    var processedAt: String?
-    var reference, referringSite, sourceIdentifier: String?
-    var sourceName: String?
-    var sourceURL: String?
-    var subtotalPrice: String?
-    var subtotalPriceSet: OrderSet?
-    var tags: String?
-    var taxLines: [String]?
-    var taxesIncluded, test: Bool?
-    var token, totalDiscounts: String?
-    var totalDiscountsSet: OrderSet?
-    var totalLineItemsPrice: String?
-    var totalLineItemsPriceSet: OrderSet?
-    var totalOutstanding, totalPrice: String?
-    var totalPriceSet, totalShippingPriceSet: OrderSet?
-    var totalTax: String?
-    var totalTaxSet: OrderSet?
-    var totalTipReceived: String?
-    var totalWeight: Int?
-    var updatedAt: String?
-    var userID: String?
-    var billingAddress: Address?
-    var customer: OrderCustomer?
-    //var discountApplications: [String]?
-    var fulfillments: [String]?
-    var lineItems: [LineItems]?
-    var paymentTerms: String?
-    var refunds: [String]?
-    var shippingAddress: OrderAddress?
-    var shippingLines: [String]?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case adminGraphqlAPIID = "admin_graphql_api_id"
-        case appID = "app_id"
-        case browserIP = "browser_ip"
-        case buyerAcceptsMarketing = "buyer_accepts_marketing"
-        case cancelReason = "cancel_reason"
-        case cancelledAt = "cancelled_at"
-        case cartToken = "cart_token"
-        case checkoutID = "checkout_id"
-        case checkoutToken = "checkout_token"
-        case clientDetails = "client_details"
-        case closedAt = "closed_at"
-        case company, confirmed
+struct Orders: Codable {
+    
+    let id: Int?
+    let contactEmail: String?
+    let createdAt: String?
+    let currency: String?
+    let currentSubtotalPrice: String?
+    let currentSubtotalPriceSet: TotalPriceSet?
+    let currentTotalDiscounts: String?
+    let currentTotalDiscountsSet: TotalPriceSet?
+    let currentTotalPrice: String?
+    let currentTotalPriceSet: TotalPriceSet?
+    let currentTotalTax: String?
+    let currentTotalTaxSet: TotalPriceSet?
+    let email: String?
+    let estimatedTaxes: Bool?
+    let financialStatus: String?
+    let name: String?
+    let number: Int?
+    let orderNumber: Int?
+    let orderStatusUrl: String?
+    let presentmentCurrency: String?
+    let processedAt: String?
+    let sourceName: String?
+    let subtotalPrice: String?
+    let subtotalPriceSet: TotalPriceSet?
+    let tags: String?
+    let taxesIncluded: Bool?
+    let test: Bool?
+    let token: String?
+    let totalDiscounts: String?
+    let totalDiscountsSet: TotalPriceSet?
+    let totalLineItemsPrice: String?
+    let totalLineItemsPriceSet: TotalPriceSet?
+    let totalOutstanding: String?
+    let totalPrice: String?
+    let totalTax: String?
+    let totalTaxSet: TotalPriceSet?
+    let totalTipReceived: String?
+    let totalWeight: Int?
+    let updatedAt: String?
+    let customer: Customer?
+    let lineItems: [LineItems]?
+    let shippingAddress: BillingAddress?
+    
+    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String) {
+        self.currency = currency
+        self.lineItems = lineItems
+        self.totalPrice = totalPrice
+        self.number = number
+        self.id = nil
+        self.customer = customer
+        self.shippingAddress = nil
+        self.updatedAt = nil
+        self.totalWeight = nil
+        self.totalTax = nil
+        self.totalTaxSet = nil
+        self.totalTipReceived = nil
+        self.presentmentCurrency = nil
+        self.processedAt = nil
+        self.sourceName = nil
+        self.subtotalPrice = nil
+        self.subtotalPriceSet = nil
+        self.tags = nil
+        self.taxesIncluded = nil
+        self.test = nil
+        self.token = nil
+        self.totalDiscounts = nil
+        self.totalDiscountsSet = nil
+        self.totalLineItemsPrice = nil
+        self.totalLineItemsPriceSet = nil
+        self.totalOutstanding = nil
+        self.email = nil
+        self.estimatedTaxes = nil
+        self.financialStatus = nil
+        self.name = nil
+        self.orderNumber = nil
+        self.orderStatusUrl = nil
+        self.contactEmail = nil
+        self.createdAt = nil
+        self.currentSubtotalPrice = nil
+        self.currentSubtotalPriceSet = nil
+        self.currentTotalDiscounts = nil
+        self.currentTotalDiscountsSet = nil
+        self.currentTotalPrice = nil
+        self.currentTotalPriceSet = nil
+        self.currentTotalTax = nil
+        self.currentTotalTaxSet = nil
+        
+    }
+    
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
         case contactEmail = "contact_email"
         case createdAt = "created_at"
-        case currency
+        case currency = "currency"
         case currentSubtotalPrice = "current_subtotal_price"
         case currentSubtotalPriceSet = "current_subtotal_price_set"
-        case currentTotalAdditionalFeesSet = "current_total_additional_fees_set"
         case currentTotalDiscounts = "current_total_discounts"
         case currentTotalDiscountsSet = "current_total_discounts_set"
-        case currentTotalDutiesSet = "current_total_duties_set"
         case currentTotalPrice = "current_total_price"
         case currentTotalPriceSet = "current_total_price_set"
         case currentTotalTax = "current_total_tax"
         case currentTotalTaxSet = "current_total_tax_set"
-        case customerLocale = "customer_locale"
-        case deviceID = "device_id"
-        case discountCodes = "discount_codes"
-        case email
+        case email = "email"
         case estimatedTaxes = "estimated_taxes"
         case financialStatus = "financial_status"
-        case fulfillmentStatus = "fulfillment_status"
-        case landingSite = "landing_site"
-        case landingSiteRef = "landing_site_ref"
-        case locationID = "location_id"
-        case merchantOfRecordAppID = "merchant_of_record_app_id"
-        case name, note
-        case noteAttributes = "note_attributes"
-        case number
+        case name = "name"
+        case number = "number"
         case orderNumber = "order_number"
-        case orderStatusURL = "order_status_url"
-        case originalTotalAdditionalFeesSet = "original_total_additional_fees_set"
-        case originalTotalDutiesSet = "original_total_duties_set"
-        case paymentGatewayNames = "payment_gateway_names"
-        case phone
+        case orderStatusUrl = "order_status_url"
         case presentmentCurrency = "presentment_currency"
         case processedAt = "processed_at"
-        case reference
-        case referringSite = "referring_site"
-        case sourceIdentifier = "source_identifier"
         case sourceName = "source_name"
-        case sourceURL = "source_url"
         case subtotalPrice = "subtotal_price"
         case subtotalPriceSet = "subtotal_price_set"
-        case tags
-        case taxLines = "tax_lines"
+        case tags = "tags"
         case taxesIncluded = "taxes_included"
-        case test, token
+        case test = "test"
+        case token = "token"
         case totalDiscounts = "total_discounts"
         case totalDiscountsSet = "total_discounts_set"
         case totalLineItemsPrice = "total_line_items_price"
         case totalLineItemsPriceSet = "total_line_items_price_set"
         case totalOutstanding = "total_outstanding"
         case totalPrice = "total_price"
-        case totalPriceSet = "total_price_set"
-        case totalShippingPriceSet = "total_shipping_price_set"
         case totalTax = "total_tax"
         case totalTaxSet = "total_tax_set"
         case totalTipReceived = "total_tip_received"
         case totalWeight = "total_weight"
         case updatedAt = "updated_at"
-        case userID = "user_id"
-        case billingAddress = "billing_address"
-        case customer
-       // case discountApplications = "discount_applications"
-        case fulfillments
+        case customer = "customer"
         case lineItems = "line_items"
-        case paymentTerms = "payment_terms"
-        case refunds
         case shippingAddress = "shipping_address"
-        case shippingLines = "shipping_lines"
+        
     }
+    
 }
-// MARK: - DiscountCode
-struct DiscountCode: Codable {
-    var code, amount, type: String?
-}
-// MARK: - Address
-struct OrderAddress: Codable {
-    var firstName, address1, phone, city: String?
-    var zip, province, country, lastName: String?
-    var address2, company: String?
-    var latitude, longitude: Double?
-    var name, countryCode, provinceCode: String?
-    var id, customerID: Int?
-    var countryName: String?
-    var addressDefault: Bool?
-
-    enum CodingKeys: String, CodingKey {
-        case firstName = "first_name"
-        case address1, phone, city, zip, province, country
-        case lastName = "last_name"
-        case address2, company, latitude, longitude, name
-        case countryCode = "country_code"
-        case provinceCode = "province_code"
-        case id
-        case customerID = "customer_id"
-        case countryName = "country_name"
-        case addressDefault = "default"
+struct Customer: Codable {
+    
+    let id: Int
+    let email: String?
+    let acceptsMarketing: Bool?
+    let createdAt: String?
+    let updatedAt: String?
+    let firstName: String?
+    let lastName: String?
+    let state: String?
+    let verifiedEmail: Bool?
+    let taxExempt: Bool?
+    let phone: String?
+    let tags: String?
+    let currency: String?
+    let acceptsMarketingUpdatedAt: String?
+    let adminGraphqlApiId: String?
+    let defaultAddress: DefaultAddress?
+    
+    init(id: Int, email: String?, acceptsMarketing: Bool?, createdAt: String?, updatedAt: String?, firstName: String?, lastName: String?, state: String?, verifiedEmail: Bool?, taxExempt: Bool?, phone: String?, tags: String?, currency: String?, acceptsMarketingUpdatedAt: String?, adminGraphqlApiId: String?, defaultAddress: DefaultAddress?) {
+        self.id = id
+        self.email = email
+        self.acceptsMarketing = acceptsMarketing
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.firstName = firstName
+        self.lastName = lastName
+        self.state = state
+        self.verifiedEmail = verifiedEmail
+        self.taxExempt = taxExempt
+        self.phone = phone
+        self.tags = tags
+        self.currency = currency
+        self.acceptsMarketingUpdatedAt = acceptsMarketingUpdatedAt
+        self.adminGraphqlApiId = adminGraphqlApiId
+        self.defaultAddress = defaultAddress
     }
-}
-
-
-// MARK: - Set
-struct OrderSet: Codable {
-    var shopMoney, presentmentMoney: Money?
-
-    enum CodingKeys: String, CodingKey {
-        case shopMoney = "shop_money"
-        case presentmentMoney = "presentment_money"
+    init(id: Int) {
+        self.id = id
+        self.email = nil
+        self.acceptsMarketing = nil
+        self.createdAt = nil
+        self.updatedAt = nil
+        self.firstName = nil
+        self.lastName = nil
+        self.state = nil
+        self.verifiedEmail = nil
+        self.taxExempt = nil
+        self.phone = nil
+        self.tags = nil
+        self.currency = nil
+        self.acceptsMarketingUpdatedAt = nil
+        self.adminGraphqlApiId = nil
+        self.defaultAddress = nil
     }
-}
-
-// MARK: - Money
-struct Money: Codable {
-    var amount: String?
-    var currencyCode: String?
-
-    enum CodingKeys: String, CodingKey {
-        case amount
-        case currencyCode = "currency_code"
-    }
-}
-
-// MARK: - Customer
-struct OrderCustomer: Codable {
-    var id: Int?
-    var email: String?
-    var acceptsMarketing: Bool?
-    var createdAt, updatedAt: String?
-    var firstName, lastName, state: String?
-    var note: String?
-    var verifiedEmail: Bool?
-    var multipassIdentifier: String?
-    var taxExempt: Bool?
-    var phone: String?
-    var emailMarketingConsent: OrderEmailMarketingConsent?
-    var smsMarketingConsent: String?
-    var tags: String?
-    var currency: String?
-    var acceptsMarketingUpdatedAt: String?
-    var marketingOptInLevel: String?
-    var taxExemptions: [String]?
-    var adminGraphqlAPIID: String?
-    var defaultAddress: OrderAddress?
-
-    enum CodingKeys: String, CodingKey {
-        case id, email
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case email = "email"
         case acceptsMarketing = "accepts_marketing"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case firstName = "first_name"
         case lastName = "last_name"
-        case state, note
+        case state = "state"
         case verifiedEmail = "verified_email"
-        case multipassIdentifier = "multipass_identifier"
         case taxExempt = "tax_exempt"
-        case phone
-        case emailMarketingConsent = "email_marketing_consent"
-        case smsMarketingConsent = "sms_marketing_consent"
-        case tags, currency
+        case phone = "phone"
+        case tags = "tags"
+        case currency = "currency"
         case acceptsMarketingUpdatedAt = "accepts_marketing_updated_at"
-        case marketingOptInLevel = "marketing_opt_in_level"
-        case taxExemptions = "tax_exemptions"
-        case adminGraphqlAPIID = "admin_graphql_api_id"
+        case adminGraphqlApiId = "admin_graphql_api_id"
         case defaultAddress = "default_address"
     }
+    
 }
-
-// MARK: - EmailMarketingConsent
-struct OrderEmailMarketingConsent: Codable {
-    var state, optInLevel: String?
-    var consentUpdatedAt: String?
-
-    enum CodingKeys: String, CodingKey {
-        case state
-        case optInLevel = "opt_in_level"
-        case consentUpdatedAt = "consent_updated_at"
+struct BillingAddress: Codable {
+    
+    let firstName: String
+    let address1: String?
+    let phone: String?
+    let city: String?
+    let zip: String?
+    let country: String?
+    let lastName: String?
+    //    let address2: Any?
+    //    let company: Any?
+    //    let latitude: Any?
+    //    let longitude: Any?
+    let name: String?
+    let countryCode: String?
+    
+    
+    private enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case address1 = "address1"
+        case phone = "phone"
+        case city = "city"
+        case zip = "zip"
+        case country = "country"
+        case lastName = "last_name"
+        //        case address2 = "address2"
+        //        case company = "company"
+        //        case latitude = "latitude"
+        //        case longitude = "longitude"
+        case name = "name"
+        case countryCode = "country_code"
+    }
+    
+}
+struct DefaultAddress: Codable {
+    
+    let id: Int
+    let customerId: Int?
+    let firstName: String?
+    let lastName: String?
+    let company: String?
+    let address1: String?
+    let address2: String?
+    let city: String?
+    // let province: Any?
+    let country: String?
+    let zip: String?
+    let phone: String?
+    let name: String?
+    //   let provinceCode: Any?
+    let countryCode: String?
+    let countryName: String?
+    let defaultField: Bool?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case customerId = "customer_id"
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case company = "company"
+        case address1 = "address1"
+        case address2 = "address2"
+        case city = "city"
+        //    case province = "province"
+        case country = "country"
+        case zip = "zip"
+        case phone = "phone"
+        case name = "name"
+        //   case provinceCode = "province_code"
+        case countryCode = "country_code"
+        case countryName = "country_name"
+        case defaultField = "default"
     }
 }
