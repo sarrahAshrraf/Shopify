@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , CartCellDelegate{
     
     @IBOutlet weak var emptyTableImg: UIImageView!
     
@@ -103,8 +103,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                return UITableViewCell()
            }
                 if let lineItems = viewModel.result?.line_items {
-
+                    cell.delegate = self
         cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
+                    
 //        if let lineItems = viewModel.result?.lineItems {
 //                cell.configure(with: lineItems, index: indexPath.row)
 //            print("inside celllllllllll")
@@ -112,5 +113,15 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return cell
         }
  
-
+    func deleteItem(_ cell: CartCell) {
+        if let indexPath = itemsTableView.indexPath(for: cell) {
+            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
+            viewModel.result?.line_items?.remove(at: indexPath.row)
+            viewModel.editCart()
+            itemsTableView.deleteRows(at: [indexPath], with: .fade)
+            prepareCartPrice()
+            updateEmptyCartImageVisibility()
+            print("Deleted item: \(deletedItem)")
+        }
+    }
 }

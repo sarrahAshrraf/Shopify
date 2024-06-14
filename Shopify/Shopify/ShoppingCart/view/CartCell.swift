@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol CartCellDelegate: AnyObject {
+    func deleteItem(_ cell: CartCell)
+}
 /*
  MARK: TODO: check quantityyyyy and present alert
  display img
@@ -14,6 +17,8 @@ import UIKit
  */
 class CartCell: UITableViewCell {
     var viewController: CartViewController?
+    weak var delegate: CartCellDelegate?
+
     var totalAvailableVariantInStock: Int = 0
     var productCount = 1
     var itemInCart: LineItems!
@@ -57,6 +62,9 @@ class CartCell: UITableViewCell {
         
     }
     @IBAction func deleteBtn(_ sender: Any) {
+        delegate?.deleteItem(self)
+        print("delete btn")
+
     }
     
     override func awakeFromNib() {
@@ -71,12 +79,7 @@ class CartCell: UITableViewCell {
         contentView.layer.masksToBounds = true
         backgroundColor = .clear
         contentView.backgroundColor = .white
-        
-        for (index , item) in CartList.cartItems.enumerated() {
-            if item.title == "dummy" {
-                
-            }
-        }
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
