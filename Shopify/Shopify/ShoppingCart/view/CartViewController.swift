@@ -49,10 +49,11 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var totalPrice = 0.0
     override func viewWillAppear(_ animated: Bool) {
         showData()
-        prepareCartPrice()
+       
         viewModel.showCartItems()
         viewModel.getCartItems()
         updateEmptyCartImageVisibility()
+        prepareCartPrice()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +63,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
             viewModel = ShoppingCartViewModel()
         showData()
-        prepareCartPrice()
         viewModel.showCartItems()
         viewModel.getCartItems()
+        prepareCartPrice()
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
