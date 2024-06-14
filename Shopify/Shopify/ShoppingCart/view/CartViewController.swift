@@ -35,7 +35,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
             let navController = UINavigationController(rootViewController: checkOutVC)
             checkOutVC.total = totalPrice
-           navController.modalPresentationStyle = .fullScreen
+//           navController.modalPresentationStyle = .fullScreen
            self.present(navController, animated: true, completion: nil)
         }
     }
@@ -129,4 +129,15 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("Deleted item: \(deletedItem)")
         }
     }
+    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        viewModel.getProductDetails(productId: viewModel.result?.line_items?[indexPath.row].productId ?? 0) { [weak self] product in
+//            let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+//            let productDetails = storyboard.instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+//            productDetails.viewModel.result = product
+//            productDetails.modalPresentationStyle = .fullScreen
+//            self?.present(productDetails, animated: true)
+//        }
+//    }
 }

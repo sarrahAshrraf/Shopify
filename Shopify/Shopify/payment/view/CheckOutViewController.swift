@@ -80,7 +80,7 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
                 self?.totalPrice.text = self?.cartViewModel.result?.total_price
                 print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.total_price))")
                 print("RESULT IS: \(String(describing:self?.cartViewModel.result))")
-                self?.discountValue.text = self?.cartViewModel.result?.applied_discount?.amount
+                self?.discountValue.text = self?.cartViewModel.result?.applied_discount?.amount ?? "0.0"
 
             }
         }

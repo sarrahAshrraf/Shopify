@@ -123,6 +123,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxZ-6Y-Jds">
                                 <rect key="frame" x="74" y="537" width="244" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.46667682739999999" green="0.68473362849999997" blue="0.50338635379999996" alpha="0.83846236249999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.46667682739999999" green="0.68473362849999997" blue="0.50338635379999996" alpha="0.83846236249999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Purchase"/>

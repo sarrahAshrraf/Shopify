@@ -6,13 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
 protocol CartCellDelegate: AnyObject {
     func deleteItem(_ cell: CartCell)
 }
 /*
- MARK: TODO: check quantityyyyy and present alert
- display img
- display no data here view
  fix total price bug
  */
 class CartCell: UITableViewCell {
@@ -56,9 +54,11 @@ class CartCell: UITableViewCell {
             if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
                 
             }else{
+                print("Can not Add more")
                 plusBtn.isEnabled = false
             }
         }
+
         
     }
     @IBAction func deleteBtn(_ sender: Any) {
@@ -96,8 +96,8 @@ class CartCell: UITableViewCell {
     
     
     func setCartItemValues(lineItem: LineItems, viewController: CartViewController){
-
-//        self.itemImg.kf.setImage(with: URL(string: String(imageUrl)),placeholder: UIImage(named: Constants.noImage))
+        let imageUrl = (lineItem.properties?[0].value?.split(separator: "$")[0])!
+        self.itemImg.kf.setImage(with: URL(string: String(imageUrl)),placeholder: UIImage(named: "noImage"))
         self.titleLabel.text = lineItem.name
         self.brandLabel.text = "\(lineItem.vendor ?? "") / \((lineItem.variantTitle) ?? "")"
         self.priceLabel.text = lineItem.price
@@ -106,12 +106,12 @@ class CartCell: UITableViewCell {
         if productCount == 1 {
             minusBtn.isEnabled = false
         }
-//        totalAvailableVariantInStock = Int(lineItem.properties?[0].name ?? "1") ?? 1
-//        if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
-//            
-//        }else{
-//            plusBtn.isEnabled = false
-//        }
+        totalAvailableVariantInStock = Int(lineItem.properties?[0].name ?? "1") ?? 1
+        if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
+            
+        }else{
+            plusBtn.isEnabled = false
+        }
         
         self.viewController = viewController
         self.itemInCart = lineItem
@@ -119,7 +119,7 @@ class CartCell: UITableViewCell {
     
     func updateItemsQuantityInShoppingCartList (){
         for (index , item) in CartList.cartItems.enumerated() {
-            if item.title == itemInCart.title {
+            if item.variantId == itemInCart.variantId {
                 CartList.cartItems[index].quantity = productCount
             }
 //            CartList.cartItems[index].quantity = productCount
