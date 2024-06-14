@@ -7,12 +7,14 @@
 
 import UIKit
 
-class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , CartCellDelegate{
     
     @IBOutlet weak var emptyTableImg: UIImageView!
     
     @IBOutlet weak var checkOutBtn: UIButton!
     func updateEmptyCartImageVisibility() {
+//        if ((viewModel.result?.line_items?.isEmpty) != nil) {
+
         if CartList.cartItems.isEmpty {
             emptyTableImg.isHidden = false
             itemsTableView.isHidden = true
@@ -32,8 +34,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
         if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
             let navController = UINavigationController(rootViewController: checkOutVC)
-            checkOutVC.total = totalPrice
-           navController.modalPresentationStyle = .fullScreen
+            checkOutVC.total = cartPrice
+//           navController.modalPresentationStyle = .fullScreen
            self.present(navController, animated: true, completion: nil)
         }
     }
@@ -48,11 +50,13 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var viewModel : ShoppingCartViewModel!
     var totalPrice = 0.0
     override func viewWillAppear(_ animated: Bool) {
-        showData()
-        prepareCartPrice()
+        
+       
         viewModel.showCartItems()
         viewModel.getCartItems()
         updateEmptyCartImageVisibility()
+        showData()
+        prepareCartPrice()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +65,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
             viewModel = ShoppingCartViewModel()
-        showData()
-        prepareCartPrice()
         viewModel.showCartItems()
         viewModel.getCartItems()
+        updateEmptyCartImageVisibility()
+        showData()
+       
+        prepareCartPrice()
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,8 +108,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                return UITableViewCell()
            }
                 if let lineItems = viewModel.result?.line_items {
-
+                    cell.delegate = self
         cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
+                    
 //        if let lineItems = viewModel.result?.lineItems {
 //                cell.configure(with: lineItems, index: indexPath.row)
 //            print("inside celllllllllll")
@@ -111,5 +118,17 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return cell
         }
  
+    func deleteItem(_ cell: CartCell) {
+        if let indexPath = itemsTableView.indexPath(for: cell) {
+            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
+            viewModel.result?.line_items?.remove(at: indexPath.row)
+            viewModel.editCart()
+            itemsTableView.deleteRows(at: [indexPath], with: .fade)
+            prepareCartPrice()
+            updateEmptyCartImageVisibility()
+            print("Deleted item: \(deletedItem)")
+        }
+    }
+    
 
 }

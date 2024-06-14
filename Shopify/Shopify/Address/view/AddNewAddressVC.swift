@@ -67,15 +67,17 @@ class AddNewAddressVC: UIViewController {
 //                    print("error in posting")
 //                }
 //            }
-//        }
+//        } 
         
         
         
         if isEditingAddress, let addressID = addressID {
                    viewModell.editAddress(customerID: 7309504250029, addressID: addressID, address: address) { success in
-                      print(address)
+                      print("addressssdghjk")
+                       print(address)
                        DispatchQueue.main.async {
                            if success {
+                               print(address)
                                print("Address updated successfully")
                                self.delegate?.didUpdateAddress()
 

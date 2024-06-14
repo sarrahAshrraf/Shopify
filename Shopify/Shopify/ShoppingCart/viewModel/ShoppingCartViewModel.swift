@@ -90,7 +90,15 @@ class ShoppingCartViewModel{
             }
         }
     }
-//    
+    
+    
+    func getProductDetails(productId: Int, completionHandler:@escaping (Product) -> Void){
+        let path = "products/\(productId)"
+        NetworkManger.shared.getData(url: URLs.shared.productDetails(id: productId), handler: { response in
+            completionHandler((response?.product)!)
+        })
+    }
+//
 //    func getCartItems() {
 //        let url = URLs.shared.getCartItems(cartId: 945806409901)
 //        NetworkManger.shared.getData(url: url) { response in

@@ -10,7 +10,6 @@ import UIKit
 
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
-    weak var delegate: AddressSelectionDelegate?
 
     var shipmentAdress : Bool = false
     @IBAction func backBtn(_ sender: Any) {
@@ -77,15 +76,14 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
               coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
             print("inside select row")
           }else {
-                     delegate?.didSelectAddress(viewModel.addresses[indexPath.row])
-              print(viewModel.addresses[indexPath.row])
-              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
-              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
-                  let navController = UINavigationController(rootViewController: checkOutVC)
-//                  checkOutVC.shippingAddress = viewModel.addresses[indexPath.row].address1 ?? ""
-                 navController.modalPresentationStyle = .fullScreen
-                 self.present(navController, animated: true, completion: nil)
-              }
+//                     delegate?.didSelectAddress(viewModel.addresses[indexPath.row])
+//              print(viewModel.addresses[indexPath.row])
+//              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
+//              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
+//                  let navController = UINavigationController(rootViewController: checkOutVC)
+//                 navController.modalPresentationStyle = .fullScreen
+//                 self.present(navController, animated: true, completion: nil)
+//              }
           }
       }
     

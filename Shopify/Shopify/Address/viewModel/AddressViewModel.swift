@@ -57,19 +57,7 @@ class AddressViewModel{
             
         }
     }
-//    
-//    func transferAddress(){
-//      self.address.firstName = self.defautltAdress?.first_name
-//      self.address.lastName = self.defautltAdress?.last_name
-//      self.address.address1 = self.defautltAdress?.address1
-//      self.address.address2 = self.defautltAdress?.address2
-//      self.address.city = self.defautltAdress?.city
-//      self.address.country = self.defautltAdress?.country
-//      self.address.province = self.defautltAdress?.province
-//      self.address.id = self.defautltAdress?.id
-//      self.address.customerID = self.defautltAdress?.customer_id
-//      self.address.phone = self.defautltAdress?.phone
-//    }
+
 
     
     func deleteAddress(customerID: Int, addressID: Int, address: Address, completion: @escaping (Bool) -> Void) {
