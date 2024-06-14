@@ -71,6 +71,12 @@ class URLs{
         return baseURL + "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId)).json"
     }
   
-
+    func getOrders() -> String {
+        return baseURL + "orders.json"
+    }
+    
+    func getAllProducts() -> String {
+        return baseURL + "products.json"
+    }
     
 }
