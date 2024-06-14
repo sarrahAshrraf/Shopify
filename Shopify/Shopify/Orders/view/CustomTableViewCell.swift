@@ -11,13 +11,14 @@ class CustomTableViewCell: UITableViewCell {
     
     static let identifier = "CustomTableViewCell"
     
-    @IBOutlet weak var orderImage: UIImageView!
-    
-    
+
     @IBOutlet weak var orderName: UILabel!
+    
+    @IBOutlet weak var numOfItems: UILabel!
     
     @IBOutlet weak var orderPrice: UILabel!
     
+    @IBOutlet weak var orderStatus: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,6 +28,14 @@ class CustomTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setOrderValues(order: Orders){
+        self.orderName.text = order.name
+        self.numOfItems.text = order.customer?.createdAt
+        self.orderPrice.text = order.totalPrice
+        
+        self.orderStatus.text = order.financialStatus
     }
     
 }
