@@ -18,6 +18,8 @@ import UIKit
  */
 class CheckOutViewController: UIViewController, AddressSelectionDelegate {
 
+    @IBOutlet weak var applePayBtn: UIButton!
+    @IBOutlet weak var cashOnBtn: UIButton!
     @IBOutlet weak var discountValue: UILabel!
     @IBOutlet weak var deliveryPrice: UILabel!
     @IBOutlet weak var totalPrice: UILabel!
