@@ -50,6 +50,7 @@ class URLs{
     
     func postOrderURL() -> String{
         endPoint = "orders"
+        print(baseURL + endPoint + ".json")
         return baseURL + endPoint + ".json"
     }
     

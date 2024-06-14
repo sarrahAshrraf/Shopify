@@ -29,11 +29,27 @@ class CheckOutViewController: UIViewController {
     var cartViewModel : ShoppingCartViewModel!
     var checkOutVM : CheckOutViewModel!
 
+    var total: Double = 0.0 {
+        didSet{
+            totalPrice.text! = String(format: "%.1f", total)
+        }
+    }
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
-
         addressVM.fetchDeafultCustomerAddress(customerID: 7309504250029)
     }
+    
+    
+    func createOrder(){
+        let customer = Customer(id:7309504250029)
+        let order = Orders(currency: "EGP", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
+        checkOutVM.postOrder(order: order)
+        print(order)
+        
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cartViewModel = ShoppingCartViewModel()
@@ -84,7 +100,10 @@ class CheckOutViewController: UIViewController {
         
     }
     
-
+    @IBAction func PurcasheVtn(_ sender: Any) {
+        createOrder()
+    }
+    
 
 
     @IBAction func changeAddress(_ sender: Any) {
