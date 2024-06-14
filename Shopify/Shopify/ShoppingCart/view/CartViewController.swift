@@ -8,8 +8,34 @@
 import UIKit
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var emptyTableImg: UIImageView!
+    
+    @IBOutlet weak var checkOutBtn: UIButton!
+    func updateEmptyCartImageVisibility() {
+        if CartList.cartItems.isEmpty {
+            emptyTableImg.isHidden = false
+            itemsTableView.isHidden = true
+            checkOutBtn.isHidden = true
+            totalPriceLabel.isHidden = true
+            priceLavel.isHidden = true
+        } else {
+            emptyTableImg.isHidden = true
+            itemsTableView.isHidden = false
+            checkOutBtn.isHidden = false
+            totalPriceLabel.isHidden = false
+            priceLavel.isHidden = false
+        }
+    }
+    
     @IBAction func checkOutBtn(_ sender: Any) {
-        
+        let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
+        if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
+            let navController = UINavigationController(rootViewController: checkOutVC)
+            checkOutVC.total = totalPrice
+           navController.modalPresentationStyle = .fullScreen
+           self.present(navController, animated: true, completion: nil)
+        }
     }
     @IBOutlet weak var priceLavel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
@@ -26,6 +52,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         prepareCartPrice()
         viewModel.showCartItems()
         viewModel.getCartItems()
+        updateEmptyCartImageVisibility()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

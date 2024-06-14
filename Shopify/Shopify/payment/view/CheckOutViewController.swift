@@ -29,11 +29,7 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
     var cartViewModel : ShoppingCartViewModel!
     var checkOutVM : CheckOutViewModel!
 
-    var total: Double = 0.0 {
-        didSet{
-            totalPrice.text! = String(format: "%.1f", total)
-        }
-    }
+    var total: Double = 9.0
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
         addressVM.fetchDeafultCustomerAddress(customerID: 7309504250029)
@@ -66,6 +62,7 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
         cartViewModel.editCart()
         setupBindings()
         getTotalPrice()
+        orderPrice.text = String(total)
         
     }
     
@@ -110,13 +107,6 @@ class CheckOutViewController: UIViewController, AddressSelectionDelegate {
                 self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
             }
         }
-    }
-    
-    func checkOutProcess(){
-        //post the order 
-        
-        
-        
     }
     
     @IBAction func PurcasheVtn(_ sender: Any) {
