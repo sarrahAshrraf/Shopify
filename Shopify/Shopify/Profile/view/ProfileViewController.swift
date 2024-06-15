@@ -8,11 +8,12 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
-    @IBAction func backBtn(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
+//   
+//    @IBAction func backBtn(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+//    }
     
+    @IBOutlet weak var welcomeUser: UILabel!
     @IBAction func moreOrdersBtn(_ sender: Any) {
         // Implement more orders action
         
@@ -34,8 +35,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         getOrdersFromApi()
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,16 +53,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 //        ordersTableView.delegate = self
 //        ordersTableView.dataSource = self
         getOrdersFromApi()
+        print("Seeeeetingsssssssssssss")
+        print(orders)
+        print(orders.first?.customer)
+
+        print(profileViewModel.result)
+        print(profileViewModel.result?.first?.customer?.firstName)
     }
     
     func getOrdersFromApi() {
         let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
 
         profileViewModel = ProfileViewModel()
+
         profileViewModel.bindOrdersToViewController = { [weak self] in
             self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == customerId } ?? []
             DispatchQueue.main.async {
                 self?.ordersTableView.reloadData()
+                self?.welcomeUser.text = "Welcome, \(self?.profileViewModel.result?.first?.customer?.firstName ?? "")!"
             }
             
         }
