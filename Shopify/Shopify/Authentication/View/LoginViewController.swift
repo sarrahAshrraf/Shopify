@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
         loginViewModel.bindUsersListToSignUpController = { [weak self] in
             self?.handleUsersList()
         }
+        print(customerId)
+
     }
     
     private func handleUsersList() {
@@ -32,6 +34,7 @@ class LoginViewController: UIViewController {
             if user.email == emailTextField.text && user.tags == passwordTextField.text {
                 exists = true
                 customerId = user.id
+                defaults.setValue(user.id, forKey: Constants.customerId)
                 break
             }
         }

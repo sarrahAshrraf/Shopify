@@ -43,6 +43,7 @@ class AddressViewModel{
             }
             
         }
+
     }
     func fetchDeafultCustomerAddress(customerID: Int) {
         let url = URLs.shared.getAddressURL()
@@ -61,7 +62,9 @@ class AddressViewModel{
 
     
     func deleteAddress(customerID: Int, addressID: Int, address: Address, completion: @escaping (Bool) -> Void) {
-        let path = URLs.shared.getAddressURLForModification(customerID: String(7309504250029), addressID: String(addressID))
+        let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
+        let path = URLs.shared.getAddressURLForModification(customerID: String(customerId), addressID: String(addressID))
            NetworkManger.shared.deleteData(path: path) { success, statusCode in
                if success {
                    if let index = self.addresses.firstIndex(where: { $0.id == address.id }) {

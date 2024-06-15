@@ -14,10 +14,12 @@ class shippingAddressVC: UITableViewController {
     private var viewModel = AddressViewModel()
     var editAdressVM = AddNewAddressViewModel()
     weak var delegate: ShippingAddressDelegate?
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
 //    var addressID: Int?
     override func viewWillAppear(_ animated: Bool) {
         tableView.register(UINib(nibName: "AddressCell", bundle: nil), forCellReuseIdentifier: "AddressCell")
-        viewModel.fetchCustomerAddress(customerID: 7309504250029)
+        viewModel.fetchCustomerAddress(customerID: customerId)
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.tableView.reloadData()
