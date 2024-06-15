@@ -39,6 +39,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         brandProductViewModel = BrandProductsViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+            
+        }
+    
+    
+    @IBAction func navigateToFavorite(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "FavouriteStoryboard", bundle: nil)
+        let favoriteVC = storyboard.instantiateViewController(identifier: "FavouriteViewController") as! FavouriteViewController
+        
+        favoriteVC.modalPresentationStyle = .fullScreen
+        favoriteVC.modalTransitionStyle = .crossDissolve
+        present(favoriteVC, animated: true , completion: nil)
+        
+    }
     
     func fetchBrands(){
         homeViewModel = HomeViewModel()
@@ -196,6 +218,7 @@ class CustomHeaderView: UICollectionReusableView {
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
         ])
     }
+    
 }
 
 
