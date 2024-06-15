@@ -62,22 +62,25 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
         true
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        index = indexPath.row
-        favouriteViewModel.getRemoteProducts()
-    }
+    
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == .delete){
             let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) {[weak self] action in
-                var id  = self?.favouriteProducts[self!.index].id
+                var id  = self?.favouriteProducts[indexPath.row].id
+                print(id)
                 self?.favouriteViewModel.removeProduct(id: id!)
-                self?.favouriteProducts.remove(at: self!.index)
+                self?.favouriteProducts.remove(at: indexPath.row)
                 self?.favouriteProductsTable.reloadData()
-                self?.favouriteViewModel.getAllProducts()
+                //self?.favouriteViewModel.getAllProducts()
                 self?.checkIfThereAreFavoriteProducts(allProductsList: (self?.favouriteProducts)!)
             }
             self.present(alert, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        index = indexPath.row
+        favouriteViewModel.getRemoteProducts()
     }
 }
