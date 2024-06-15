@@ -67,15 +67,17 @@ class AddNewAddressVC: UIViewController {
 //                    print("error in posting")
 //                }
 //            }
-//        }
+//        } 
         
         
         
         if isEditingAddress, let addressID = addressID {
                    viewModell.editAddress(customerID: 7309504250029, addressID: addressID, address: address) { success in
-                      print(address)
+                      print("addressssdghjk")
+                       print(address)
                        DispatchQueue.main.async {
                            if success {
+                               print(address)
                                print("Address updated successfully")
                                self.delegate?.didUpdateAddress()
 
@@ -106,17 +108,14 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var phoneTF: UITextField!
     @IBOutlet weak var countryTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
-//    @IBOutlet weak var provinceTF: UITextField!
-//    @IBOutlet weak var addressTwoTF: UITextField!
+
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     var viewModell: AddNewAddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel = AddNewAddressViewModel()
         populateTextFields()
         print(isEditingAddress)
-//        self.cityTF.delegate = self
     }
     
 

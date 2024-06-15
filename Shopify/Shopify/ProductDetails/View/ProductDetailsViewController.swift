@@ -27,9 +27,9 @@ class ProductDetailsViewController: UIViewController {
     var viewModel: ProductDetailsViewModel!
     var customerID = 7309504250029
     var generalViewModel: ShoppingCartViewModel!
-//    var productImagesArr: [InputSource] = []
     var orderCount = 1
     var productInCart = false
+//MARK: To be changed color and sizeeee values !!!!
     var selectedSize: String = "10"
         var selectedColor =  "white"
                 
@@ -140,8 +140,9 @@ class ProductDetailsViewController: UIViewController {
                 if variant.inventoryQuantity! > 3 && orderCount <= variant.inventoryQuantity!/3 || variant.inventoryQuantity! <= 3 && orderCount <= variant.inventoryQuantity! {
                     let lineItem = LineItems(name: viewModel.result?.title,price: variant.price, productId: viewModel.result?.id , quantity: orderCount, variantId: variant.id, variantTitle: variantName ,vendor: viewModel.result?.vendor, properties: [Properties(name: String(variant.inventoryQuantity!), value: "\((viewModel.result?.image?.src)!)$\(variant.inventoryItemId!)")])
                     CartList.cartItems.append(lineItem)
+                    generalViewModel.result?.line_items?.append(lineItem)
+                    generalViewModel.editCart()
                     orderCount = 1
-//                    resetVariantsUI()
                 }else{
                     print("you can not")
                     let alert = UIAlertController(title: "Warning", message: "You can not order more than \(variant.inventoryQuantity!/3).", preferredStyle: .alert)
@@ -175,14 +176,16 @@ class ProductDetailsViewController: UIViewController {
     
     func updateCartAmountAndResetCounter(variantIndex: Int){
         CartList.cartItems[variantIndex].quantity! += orderCount
+        generalViewModel.result?.line_items?[variantIndex].quantity! += orderCount
         orderCount = 1
         generalViewModel.editCart()
-//        resetVariantsUI()
     }
     
     func presentAmountErrorAlert(variantIndex: Int){
         let currentAmountInCart = CartList.cartItems[variantIndex].quantity!
+//        let currentAmountIncart = generalViewModel.result?.line_items?[variantIndex].quantity ?? 0
         let totalAmountInStock = Int(CartList.cartItems[variantIndex].properties?[0].name ?? "1") ?? 1
+//        let totalAmountInstock = Int(generalViewModel.result?.line_items?[variantIndex].properties?[0].name ?? "1") ?? 1
         var cartCount = 0
         if totalAmountInStock <= 3{
             cartCount = totalAmountInStock

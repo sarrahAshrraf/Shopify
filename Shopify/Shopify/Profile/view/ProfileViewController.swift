@@ -1,63 +1,90 @@
-//
+
 //  ProfileViewController.swift
 //  Shopify
 //
 //  Created by sarrah ashraf on 05/06/2024.
-//
+
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-    
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-        
     }
+    
     @IBAction func moreOrdersBtn(_ sender: Any) {
+        // Implement more orders action
+        
+        let ordersStoryBoard = UIStoryboard(name: "Order", bundle: nil).instantiateViewController(withIdentifier: "OrderViewController") as! OrderViewController
+        ordersStoryBoard.modalPresentationStyle = .fullScreen
+        present(ordersStoryBoard, animated: true)
     }
+    
     @IBAction func moreFavBtn(_ sender: Any) {
+        // Implement more favorites action
     }
     
     @IBOutlet weak var favTableView: UITableView!
     @IBOutlet weak var ordersTableView: UITableView!
     
+    var profileViewModel: ProfileViewModel!
+    var orders: [Orders] = []
+    
     override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        getOrdersFromApi()
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
+    
     override func viewDidLoad() {
+        print("viewDidLoad()")
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        setupNavigationBar()
+        
+        self.ordersTableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
+//        ordersTableView.delegate = self
+//        ordersTableView.dataSource = self
+        getOrdersFromApi()
     }
     
-//    func setupNavigationBar() {
-//        self.title = "Profile"
-//        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-//        self.navigationItem.leftBarButtonItem = backButton
-//        
-//        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsButtonTapped))
-//        
-//        let cartButton = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartButtonTapped))
-//        
-//        self.navigationItem.rightBarButtonItems = [settingsButton, cartButton]
-//    }
-//    
-//    @objc func backButtonTapped() {
-//        self.navigationController?.popViewController(animated: true)
-//    }
-//    
-//    @objc func settingsButtonTapped() {
-////        if let storyboard = UIStoryboard(name: "ProfileStoryboard", bundle: nil).instantiateViewController(withIdentifier: "settingsVC") as? SettingsViewController {
-////            self.navigationController?.pushViewController(storyboard, animated: true)
-////        }
-//    }
-//    
-//    @objc func cartButtonTapped() {
-//        
-//    }
+    func getOrdersFromApi() {
+        profileViewModel = ProfileViewModel()
+        profileViewModel.bindOrdersToViewController = { [weak self] in
+            self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == 7309503922349 } ?? []
+            DispatchQueue.main.async {
+                self?.ordersTableView.reloadData()
+            }
+            
+        }
+        profileViewModel.getOrders()
+    }
+    
+    
+    // UITableViewDataSource Methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == ordersTableView {
+            return min(orders.count, 2)
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == ordersTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell", for: indexPath) as! CustomTableViewCell
+                
+                let order = orders[indexPath.row]
+                cell.setOrderValues(order: order)
+            
+            return cell
+        }
+        
+        // Provide a default cell in case the tableView is not ordersTableView
+        return UITableViewCell()
+    }
 }

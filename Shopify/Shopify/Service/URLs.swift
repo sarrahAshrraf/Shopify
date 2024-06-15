@@ -53,6 +53,17 @@ class URLs{
         return baseURL + endPoint + ".json"
     }
     
+    func postOrderURL() -> String{
+        endPoint = "orders"
+        print(baseURL + endPoint + ".json")
+        return baseURL + endPoint + ".json"
+    }
+    
+    func postInventoryURL() -> String{
+        endPoint = "inventory_levels/set"
+        print(baseURL + endPoint + ".json")
+        return baseURL + endPoint + ".json"
+    }
     func customersURL() -> String{
         return baseURL + "customers.json"
     }
@@ -71,6 +82,12 @@ class URLs{
         
     }
   
-
+    func getOrders() -> String {
+        return baseURL + "orders.json"
+    }
+    
+    func getAllProducts() -> String {
+        return baseURL + "products.json"
+    }
     
 }
