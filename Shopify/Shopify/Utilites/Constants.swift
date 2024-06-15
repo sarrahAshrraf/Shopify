@@ -40,6 +40,13 @@ class Constants{
     static let favoritesId = "favorites_id"
     
     
+    static let removeAlertTitle = "Removing Product"
+    static let removeAlertMessage = "Are you sure to remove this product from Wishlist?"
+    
+    static let heart = "heart"
+    static let fillHeart = "heart.fill"
+    
+    
     
     
 }

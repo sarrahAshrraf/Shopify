@@ -18,21 +18,26 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: RoundedTextfield!
     @IBOutlet weak var confirmPasswordTextField: RoundedTextfield!
     var signUpViewModel: AuthenticationViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     var registered = false
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpViewModel = AuthenticationViewModel()
+        favoritesViewModel = FavoritesViewModel()
         setupRegisterButton()
         signUpViewModel.bindUserToSignUpController = { [weak self] in
             self?.handleUserSignUp()
         }
         
+        favoritesViewModel.bindGetFavoriteDraftOrderToController = {[weak self] in
+            self?.getFavouriteDraftOrder()
+        }
     
         signUpViewModel.bindUsersListToSignUpController = { [weak self] in
             self?.checkUserRegistration()
-       }
+        }
         
         signUpViewModel.bindDraftOrderToSignUpController = {[weak self] in
             self?.handleDraftOrder()
@@ -73,6 +78,16 @@ class SignUpViewController: UIViewController {
         } else if signUpViewModel.code == 422 {
             showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
         }
+    }
+    
+    func getFavouriteDraftOrder(){
+        guard let lineItemsList = favoritesViewModel.getFavoriteDraftOrder?.lineItems else {return}
+        let list = lineItemsList.filter{$0.title != "dummy"}
+        for item in list {
+                let localProduct = LocalProduct(id: item.productId ?? 0, customer_id: (defaults.integer(forKey: Constants.customerId)), variant_id: item.variantId!, title: item.title!, price: item.price!, image: item.properties![0].value!)
+                favoritesViewModel.addProduct(product: localProduct)
+        }
+        
     }
     
     func handleDraftOrder(){
