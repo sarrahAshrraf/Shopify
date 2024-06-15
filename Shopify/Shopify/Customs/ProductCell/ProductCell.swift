@@ -15,6 +15,9 @@ class ProductCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
 
     @IBOutlet weak var curencyLabel: UILabel!
+    
+    var localProduct: LocalProduct!
+    var product: Product!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,6 +27,13 @@ class ProductCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setDataToTableCell(product: LocalProduct) {
+        self.localProduct = product
+        productImageView.kf.setImage(with: URL(string: localProduct.image))
+        productNameLabel.text = localProduct.title
+        productPriceLabel.text = localProduct.price 
     }
     
 }

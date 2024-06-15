@@ -9,6 +9,7 @@ import Foundation
 class URLs{
     
     static let shared = URLs()
+    let defaults = UserDefaults.standard
     private init(){}
     let baseURL = "https://349c94c1c855b8b029a39104a4ae2e13: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@mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/"
     private var endPoint = ""
@@ -31,6 +32,10 @@ class URLs{
     
     func productDetails(id : Int) -> String{
         return baseURL + "products/\(id).json"
+    }
+    
+    func allProduct() -> String{
+        return baseURL + "products.json"
     }
     
     func getProductCategory(id: Int) -> String{
@@ -58,6 +63,12 @@ class URLs{
     
     func customerWithDraftOrder() -> String{
         return baseURL + "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId)).json"
+    }
+    
+    
+    func favouriteDraftOrder() -> String{
+        return baseURL + "draft_orders/\(defaults.integer(forKey: Constants.favoritesId)).json"
+        
     }
   
 
