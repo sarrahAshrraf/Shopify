@@ -11,17 +11,25 @@ import Alamofire
 class FavoritesViewModel{
     
     var bindallProductsListToController:(()->Void) = {}
-    let defaults = UserDefaults.standard
-    var allProductsList = [LocalProduct](){
-        didSet{
-            bindallProductsListToController()
-        }
-    }
+    var bindGetFavoriteDraftOrderToController:(()->Void) = {}
     var bindResultToViewController: (()->()) = {}
+    let defaults = UserDefaults.standard
+    
     
     var result: [Product] = []  {
         didSet{
             self.bindResultToViewController()
+        }
+    }
+    
+    var getFavoriteDraftOrder: DraftOrder?{
+        didSet{
+            bindGetFavoriteDraftOrderToController()
+        }
+    }
+    var allProductsList = [LocalProduct](){
+        didSet{
+            bindallProductsListToController()
         }
     }
     
@@ -32,6 +40,7 @@ class FavoritesViewModel{
     }
     
     func removeProduct(id : Int ) {
+
         DatabaseManager.sharedProductDB.delete(id: id)
     }
     
@@ -58,6 +67,15 @@ class FavoritesViewModel{
         let url = URLs.shared.allProduct()
         NetworkManger.shared.getData(url: url){ [weak self] (response : Response?) in
             self?.result = response?.products ?? []
+        }
+    }
+    
+    
+    func getFavoriteDraftOrderFromAPI(){
+        let url = URLs.shared.favouriteDraftOrder()
+        NetworkManger.shared.getData(url: url) { [weak self] response in
+            self?.getFavoriteDraftOrder = response?.draft_order
+            
         }
     }
 }
