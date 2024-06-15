@@ -25,7 +25,7 @@ class URLs{
     
     func getAddressURL(customerId: String = "") -> String{
         //MARK: TODO: Change the customer id to take it from keychainnnnn
-        endPoint = "customers/\(7309504250029)/addresses"
+        endPoint = "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId))/addresses"
         return baseURL + endPoint + ".json"
     }
 
@@ -43,7 +43,7 @@ class URLs{
     }
     func getAddressURLForModification(customerID: String = "", addressID: String = "") -> String{
         //MARK: TODO: Change the customer id to take it from keychainnnnn
-        endPoint = "customers/\(7309504250029)/addresses/\(addressID)"
+        endPoint = "customers/\(UserDefaults.standard.integer(forKey: Constants.customerId))/addresses/\(addressID)"
         return baseURL + endPoint + ".json"
     }
     

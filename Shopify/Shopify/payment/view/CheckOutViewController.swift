@@ -46,7 +46,9 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     
     
     func createOrder(){
-        let customer = Customer(id:7309504250029)
+        let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
+        let customer = Customer(id:customerId)
         let order = Orders(currency: "EGP", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
         checkOutVM.postOrder(order: order)
         print(order)

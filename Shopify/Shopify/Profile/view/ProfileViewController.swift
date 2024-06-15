@@ -54,9 +54,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getOrdersFromApi() {
+        let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
         profileViewModel = ProfileViewModel()
         profileViewModel.bindOrdersToViewController = { [weak self] in
-            self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == 7309503922349 } ?? []
+            self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == customerId } ?? []
             DispatchQueue.main.async {
                 self?.ordersTableView.reloadData()
             }

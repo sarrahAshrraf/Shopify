@@ -10,6 +10,7 @@ import UIKit
 
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
 
     var shipmentAdress : Bool = false
     @IBAction func backBtn(_ sender: Any) {
@@ -28,7 +29,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        viewModel.fetchCustomerAddress(customerID: 7309504250029)
+        viewModel.fetchCustomerAddress(customerID: customerId)
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
@@ -51,9 +52,10 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
                   }
               }
         addressTableView.separatorStyle = .none
+        print(customerId)
 
               
-              viewModel.fetchCustomerAddress(customerID: 7309504250029)
+              viewModel.fetchCustomerAddress(customerID: customerId)
         // Do any additional setup after loading the view.
     }
     
@@ -95,12 +97,12 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
             let okAction = UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
                 guard let self = self else { return }
                 
-                viewModel.deleteAddress(customerID: 7309504250029, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: viewModel.addresses[indexPath.row]) { success in
+                viewModel.deleteAddress(customerID: customerId, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: viewModel.addresses[indexPath.row]) { success in
                     DispatchQueue.main.async {
                         if success {
                             print("Address deleted successfully")
                         
-                            self.viewModel.fetchCustomerAddress(customerID: 7309504250029)
+                            self.viewModel.fetchCustomerAddress(customerID: self.customerId)
                             self.addressTableView.reloadData()
                         } else {
                             print("Error in deleting address")
@@ -120,7 +122,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     }
     
     func didUpdateAddress() {
-          viewModel.fetchCustomerAddress(customerID: 7309504250029)
+          viewModel.fetchCustomerAddress(customerID: customerId)
       }
     }
 

@@ -12,6 +12,7 @@ class AddNewAddressVC: UIViewController {
        var addressID: Int?
     weak var delegate: AddressProtocol?
     var isDefaultAddress = false
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
     @IBOutlet weak var switchDeafultBtn: UISwitch!
     @objc private func saveButtonTapped() {
 
@@ -41,7 +42,7 @@ class AddNewAddressVC: UIViewController {
 
         let address = Address(
                     id: addressID,
-                    customer_id: 7309504250029,
+                    customer_id: customerId,
                     name: "\(firstName)\(" ")\(lastName)",
                     first_name: firstName,
                     last_name: lastName,
@@ -72,7 +73,7 @@ class AddNewAddressVC: UIViewController {
         
         
         if isEditingAddress, let addressID = addressID {
-                   viewModell.editAddress(customerID: 7309504250029, addressID: addressID, address: address) { success in
+                   viewModell.editAddress(customerID: customerId, addressID: addressID, address: address) { success in
                       print("addressssdghjk")
                        print(address)
                        DispatchQueue.main.async {
@@ -87,7 +88,7 @@ class AddNewAddressVC: UIViewController {
                        }
                    }
                } else {
-                   viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
+                   viewModell.postCustomerAddress(customerID: customerId, address: address) { success in
                        DispatchQueue.main.async {
                            if success {
                                print("Address posted successfully")
@@ -116,6 +117,8 @@ class AddNewAddressVC: UIViewController {
         super.viewDidLoad()
         populateTextFields()
         print(isEditingAddress)
+        print(customerId)
+
     }
     
 

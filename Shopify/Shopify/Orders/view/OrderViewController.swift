@@ -8,7 +8,8 @@
 import UIKit
 
 class OrderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func back(_ sender: Any) {
@@ -34,7 +35,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     func getOrdersFromApi() {
         profileViewModel = ProfileViewModel()
         profileViewModel.bindOrdersToViewController = { [weak self] in
-            self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == 7309503922349 } ?? []
+            self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == self?.customerId } ?? []
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
