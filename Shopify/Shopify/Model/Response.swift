@@ -20,6 +20,8 @@ struct Response : Codable{
     let orders: [Orders]?
     let order: Orders?
     let currencies: [Currency]?
+    let base: String?
+    let rates: Rates?
 
 //    let variants: [Variant]
 

@@ -44,7 +44,7 @@ class ShoppingCartViewModel{
             tempArr.append(lineItem)
         }
         let draftOrder = DraftOrder(id: nil, note: nil, line_items: tempArr, customer: nil)
-        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draftOrder, orders: nil, order: nil, currencies: nil)
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draftOrder, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
         guard let params = JSONCoding().encodeToJson(objectClass: response) else {
             print("Failed to encode JSON")
             return

@@ -8,15 +8,17 @@
 import Foundation
 
 class SettingsViewmodel{
+    var currencyRates: [String: Double] = [:]
 
   let defaults = UserDefaults.standard
   var bindCurrencyToViewController: ()->() = {}
+    var bindRatesToViewController: ()->() = {}
 
     
-    var result: [String: Double]? {
-        didSet {
+    var rates: Rates? {
+        didSet{
             DispatchQueue.main.async {
-                self.bindCurrencyToViewController()
+                self.bindRatesToViewController()
             }
         }
     }
@@ -25,27 +27,30 @@ class SettingsViewmodel{
     func deleteAllFromDB(){
         DatabaseManager.sharedProductDB.deleteAll()
     }
+
     
     func loadLatestCurrency(currency: String) {
-        NetworkManger.shared.getData(url: URLs.shared.getCurrencyURL()) { [weak self] (response: Response?) in
-            guard let self = self else { return }
-
-            if let response = response?.currencies?.first {
-                self.result = response.rates
-                if let rate = response.rates?[currency] {
-                    self.defaults.set(currency, forKey: Constants.CURRENCY_KEY)
-                    self.defaults.set(rate, forKey: Constants.CURRENCY_VALUE)
-                } else {
-                    self.handleFailure("Currency rate not found.")
+            guard let url = URL(string: URLs.shared.getCurrencyURL()) else { return }
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let data = data, error == nil else { return }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let response = try decoder.decode(Currency.self, from: data)
+                    if let rates = response.rates {
+                        self?.currencyRates = rates
+                    }
+                    if let rate = self?.currencyRates[currency] {
+                        print("Rate for \(currency): \(rate)")
+                      
+                    }
+                } catch {
+                    print("Failed to decode JSON: \(error)")
                 }
-            } else {
-                self.handleFailure("Failed to load currency data.")
             }
+            task.resume()
         }
     }
 
-    private func handleFailure(_ message: String) {
-        print("Error: \(message)")
-    }
-}
+
 

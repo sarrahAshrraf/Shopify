@@ -22,7 +22,7 @@ class CheckOutViewModel{
     }
     
     func postOrder(order: Orders) {
-        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil)
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil, base: nil, rates: nil)
         
         guard let params = JSONCoding().encodeToJson(objectClass: response) else {
             print("Failed to encode JSON")

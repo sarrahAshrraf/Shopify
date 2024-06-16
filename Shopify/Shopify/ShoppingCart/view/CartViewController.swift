@@ -13,8 +13,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var checkOutBtn: UIButton!
     func updateEmptyCartImageVisibility() {
-//        if ((viewModel.result?.line_items?.isEmpty) != nil) {
-
+        //        if ((viewModel.result?.line_items?.isEmpty) != nil) {
+        
         if CartList.cartItems.isEmpty {
             emptyTableImg.isHidden = false
             itemsTableView.isHidden = true
@@ -35,8 +35,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
             let navController = UINavigationController(rootViewController: checkOutVC)
             checkOutVC.total = cartPrice
-//           navController.modalPresentationStyle = .fullScreen
-           self.present(navController, animated: true, completion: nil)
+            //           navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
         }
     }
     @IBOutlet weak var priceLavel: UILabel!
@@ -51,7 +51,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var totalPrice = 0.0
     override func viewWillAppear(_ animated: Bool) {
         
-       
+        
         viewModel.showCartItems()
         viewModel.getCartItems()
         updateEmptyCartImageVisibility()
@@ -64,28 +64,28 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         itemsTableView.delegate = self
         
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
-            viewModel = ShoppingCartViewModel()
+        viewModel = ShoppingCartViewModel()
         viewModel.showCartItems()
         viewModel.getCartItems()
         updateEmptyCartImageVisibility()
         showData()
-       
+        
         prepareCartPrice()
-
+        
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
     }
-
+    
     func showData(){
-      viewModel.bindResultToViewController = { [weak self] in
-
-        DispatchQueue.main.async {
-//            self?.noItemsView.isHidden = true
-          self?.itemsTableView.reloadData()
-
+        viewModel.bindResultToViewController = { [weak self] in
+            
+            DispatchQueue.main.async {
+                //            self?.noItemsView.isHidden = true
+                self?.itemsTableView.reloadData()
+                
+            }
         }
-      }
     }
     
     func prepareCartPrice(){
@@ -96,39 +96,57 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cartPrice = totalPrice
         itemsTableView.reloadData()
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = viewModel.result?.line_items?.count ?? 0
-              print("Number of rows: \(count)")
+        print("Number of rows: \(count)")
         return viewModel.result?.line_items?.count ?? 0
     }
-   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as? CartCell else {
-               return UITableViewCell()
-           }
-                if let lineItems = viewModel.result?.line_items {
-                    cell.delegate = self
-        cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
-                    
-//        if let lineItems = viewModel.result?.lineItems {
-//                cell.configure(with: lineItems, index: indexPath.row)
-//            print("inside celllllllllll")
-            }
-            return cell
+            return UITableViewCell()
         }
- 
-    func deleteItem(_ cell: CartCell) {
-        if let indexPath = itemsTableView.indexPath(for: cell) {
-            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
-            viewModel.result?.line_items?.remove(at: indexPath.row)
-            viewModel.editCart()
-            itemsTableView.deleteRows(at: [indexPath], with: .fade)
-            prepareCartPrice()
-            updateEmptyCartImageVisibility()
-            print("Deleted item: \(deletedItem)")
+        if let lineItems = viewModel.result?.line_items {
+            cell.delegate = self
+            cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
+            
+            //        if let lineItems = viewModel.result?.lineItems {
+            //                cell.configure(with: lineItems, index: indexPath.row)
+            //            print("inside celllllllllll")
         }
+        return cell
     }
+    func deleteItem(_ cell: CartCell) {
+        guard let indexPath = itemsTableView.indexPath(for: cell) else { return }
+        let alert = UIAlertController(title: "Delete Item", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] _ in
+            guard let self = self else { return }
+            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
+            self.viewModel.result?.line_items?.remove(at: indexPath.row)
+            self.viewModel.editCart()
+            self.itemsTableView.deleteRows(at: [indexPath], with: .fade)
+            self.prepareCartPrice()
+            self.updateEmptyCartImageVisibility()
+            print("Deleted item: \(deletedItem)")
+        }))
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+//    func deleteItem(_ cell: CartCell) {
+//        if let indexPath = itemsTableView.indexPath(for: cell) {
+//            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
+//            viewModel.result?.line_items?.remove(at: indexPath.row)
+//            viewModel.editCart()
+//            itemsTableView.deleteRows(at: [indexPath], with: .fade)
+//            prepareCartPrice()
+//            updateEmptyCartImageVisibility()
+//            print("Deleted item: \(deletedItem)")
+//        }
+//    }
     
 
 }

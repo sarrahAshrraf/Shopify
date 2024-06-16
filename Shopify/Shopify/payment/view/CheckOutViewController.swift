@@ -9,12 +9,9 @@ import UIKit
 
 
 /* MARK: 
- 1- fetch default address (done)
- 2- fetch payment method -> table view ykhtar menooo (TODO) now is cash
- 3- total price -> draft order CartVc price
- 4- discount
- 5- delivery
- 6- total after calculations
+navigation to home mesh full screen
+- discount
+- delivery
  */
 class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     func didSelectAddress(_ address: Address) {
@@ -37,6 +34,7 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     @IBOutlet weak var addressType: UILabel!
     var cartViewModel : ShoppingCartViewModel!
     var checkOutVM : CheckOutViewModel!
+    let defaults = UserDefaults.standard
 
     var total: Double = 9.0
     var addressVM : AddressViewModel!
@@ -49,10 +47,13 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
         let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
 
         let customer = Customer(id:customerId)
-        let order = Orders(currency: "EGP", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
+        let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
         checkOutVM.postOrder(order: order)
+        print("order cuurencyyyyyyyyyyyyyyy")
+        print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
+
         print(order)
-        
+
         
     }
     
@@ -99,8 +100,17 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     
     func showOrderSuccessAlert() {
         let alert = UIAlertController(title: "Success", message: "Order placed successfully!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            self?.navigateToHome()
+        }))
         present(alert, animated: true, completion: nil)
+    }
+
+    func navigateToHome() {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     func getTotalPrice() {
@@ -117,7 +127,7 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     
     @IBAction func PurcasheVtn(_ sender: Any) {
         createOrder()
-    }
+        }
     
 
 

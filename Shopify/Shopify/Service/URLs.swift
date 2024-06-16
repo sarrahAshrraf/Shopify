@@ -90,7 +90,7 @@ class URLs{
         return baseURL + "products.json"
     }
     func getCurrencyURL()-> String{
-        let url = "https://api.apilayer.com/exchangerates_data/latest?base=USD&apikey=Qflgr2kG5V3sQQ92JoP8zUe38qGZZlFg"
+        let url = "https://api.apilayer.com/exchangerates_data/latest?base=USD&apikey=Ao0HHmdzCOImg5XzjZs3B48Qhv4IfZV7"
       return url
     }
 }
