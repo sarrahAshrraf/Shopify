@@ -56,7 +56,7 @@ class SignUpViewController: UIViewController {
                 showAlertWithNegativeAndPositiveButtons(title: Constants.warning, message: Constants.emailUsedBefore)
             } else {
                 let user = User(id: nil, firstName: firstNameTextField.text, lastName: lastNameTextField.text, email: emailTextField.text, phone: phoneTextField.text, tags: passwordTextField.text)
-                let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil)
+                let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil, currencies: nil)
                 let params = encodeToJson(objectClass: response)
                 signUpViewModel.postUser(parameters: params ?? [:])
             }
@@ -98,7 +98,7 @@ class SignUpViewController: UIViewController {
             defaults.set(favoritesId, forKey: Constants.favoritesId)
             var user = User()
             user.note = "\(favoritesId),\(cartId)"
-            let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil)
+            let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil, currencies: nil)
             print("response: \(response)")
             let params = encodeToJson(objectClass: response)
             signUpViewModel.putUser(parameters: params ?? [:])
@@ -205,7 +205,7 @@ class SignUpViewController: UIViewController {
 
         let draft = DraftOrder(id: nil, note: note, line_items: lineItems, customer: user)
         
-        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft ,  orders: nil, order: nil)
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft ,  orders: nil, order: nil, currencies: nil)
         let params = self.encodeToJson(objectClass: response)
     
         self.signUpViewModel.postDraftOrder(parameters: params ?? [:])

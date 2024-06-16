@@ -8,7 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//   
+    @IBOutlet weak var guestModeView: UIView!
+    //   
 //    @IBAction func backBtn(_ sender: Any) {
 //        self.navigationController?.popViewController(animated: true)
 //    }
@@ -31,12 +32,23 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var profileViewModel: ProfileViewModel!
     var orders: [Orders] = []
-    
+    var isGuestUser: Bool = false
+
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
+        guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
+        isGuestUser = (state == Constants.USER_STATE_GUEST)
+        
+        if isGuestUser {
+            guestModeView.isHidden = false
+            
+        } else {
+            guestModeView.isHidden = true
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         getOrdersFromApi()
+        
        
     }
     
@@ -98,5 +110,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // Provide a default cell in case the tableView is not ordersTableView
         return UITableViewCell()
+    }
+    @IBAction func signUpBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true, completion: nil)
+      
     }
 }

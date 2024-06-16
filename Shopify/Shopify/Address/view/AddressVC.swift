@@ -11,7 +11,9 @@ import UIKit
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
     let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+    var isGuestUser: Bool = false
 
+    @IBOutlet weak var addAddressBtn: UIBarButtonItem!
     var shipmentAdress : Bool = false
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -29,6 +31,18 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
+        isGuestUser = (state == Constants.USER_STATE_GUEST)
+        
+        if isGuestUser {
+            updateBackgroundView()
+            addAddressBtn.isEnabled = false
+
+        }
+    
+        
+        
         viewModel.fetchCustomerAddress(customerID: customerId)
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
@@ -124,6 +138,19 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     func didUpdateAddress() {
           viewModel.fetchCustomerAddress(customerID: customerId)
       }
+    
+    
+    private func updateBackgroundView() {
+        let signUpLabel = UILabel()
+        signUpLabel.text = "Please, sign up first."
+        signUpLabel.textColor = .gray
+        signUpLabel.numberOfLines = 0
+        signUpLabel.textAlignment = .center
+        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+        signUpLabel.sizeToFit()
+       addressTableView.backgroundView = signUpLabel
+       
+    }
     }
 
   

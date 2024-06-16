@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
                 exists = true
                 customerId = user.id
                 defaults.setValue(user.id, forKey: Constants.customerId)
+                defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
                 break
             }
         }

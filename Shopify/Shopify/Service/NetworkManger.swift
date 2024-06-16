@@ -86,8 +86,9 @@ class NetworkManger {
                 handler(false, error.responseCode)
             }
         }
+        
     }
-    
+
     private init() {}
     
 }
