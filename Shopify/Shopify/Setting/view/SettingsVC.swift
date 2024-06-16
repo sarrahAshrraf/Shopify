@@ -17,6 +17,7 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = SettingsViewmodel()
+
         setPopUpButton()
         // Check user state and set guest mode
                guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
@@ -61,7 +62,8 @@ class SettingsTableViewController: UITableViewController {
 
                switch (indexPath.section, indexPath.row) {
                case (1, 0):
-                   navigateToAddress()
+//                   navigateToAddress()
+                   print("AddressStoryboard")
                case (2, 0):
                    logout()
                default:
@@ -70,7 +72,7 @@ class SettingsTableViewController: UITableViewController {
            }
     func navigateToAddress(){
         
-                if let storyboard = UIStoryboard(name: "AddressStoryboard", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
+                if let storyboard = UIStoryboard(name: "Address_SB", bundle: nil).instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
                     self.navigationController?.pushViewController(storyboard, animated: true)
                 }
         
@@ -83,7 +85,7 @@ class SettingsTableViewController: UITableViewController {
             
             alert.addAction(UIAlertAction(title: "Logout", style: .destructive,handler: { [weak self] action in
                 guard let my_Customer_id = UserDefaults.standard.string(forKey: Constants.customerId) else {return}
-                self?.defaults.set(Constants.USER_STATE_LOGOUT, forKey: Constants.KEY_USER_STATE)
+                self?.defaults.set(Constants.USER_STATE_GUEST, forKey: Constants.KEY_USER_STATE)
                 //MARK: user cart id TODOOOOOOOOO
 
                 self?.defaults.set("", forKey: Constants.customerId)
@@ -169,8 +171,4 @@ extension SettingsTableViewController  {
         popUpBtn.changesSelectionAsPrimaryAction = true
     }
 }
-//guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else{return}
-//if(state == Constants.USER_STATE_GUEST){
-//   
-//
-//} else {
+

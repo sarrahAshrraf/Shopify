@@ -13,8 +13,8 @@ class SettingsViewmodel{
   var bindCurrencyToViewController: ()->() = {}
 
     
-    var result: [Currency]? = [] {
-        didSet{
+    var result: [String: Double]? {
+        didSet {
             DispatchQueue.main.async {
                 self.bindCurrencyToViewController()
             }
@@ -26,12 +26,26 @@ class SettingsViewmodel{
         DatabaseManager.sharedProductDB.deleteAll()
     }
     
-  func loadLatestCurrency(currency: String){
-      NetworkManger.shared.getData(url: URLs.shared.getCurrencyURL(), handler: { [weak self] (response : Response?) in
-          self?.result = response?.currencies
-          self?.defaults.set(currency, forKey: Constants.CURRENCY_KEY)
-          self?.defaults.set(self?.result?.first?.rates?[currency], forKey: Constants.CURRENCY_VALUE)
-      })
-  }
+    func loadLatestCurrency(currency: String) {
+        NetworkManger.shared.getData(url: URLs.shared.getCurrencyURL()) { [weak self] (response: Response?) in
+            guard let self = self else { return }
+
+            if let response = response?.currencies?.first {
+                self.result = response.rates
+                if let rate = response.rates?[currency] {
+                    self.defaults.set(currency, forKey: Constants.CURRENCY_KEY)
+                    self.defaults.set(rate, forKey: Constants.CURRENCY_VALUE)
+                } else {
+                    self.handleFailure("Currency rate not found.")
+                }
+            } else {
+                self.handleFailure("Failed to load currency data.")
+            }
+        }
+    }
+
+    private func handleFailure(_ message: String) {
+        print("Error: \(message)")
+    }
 }
 

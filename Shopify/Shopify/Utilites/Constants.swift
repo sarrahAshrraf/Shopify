@@ -51,7 +51,6 @@ class Constants{
     static let KEY_USER_STATE = "State"
     static let USER_STATE_LOGIN = "Login"
     static let USER_STATE_GUEST = "Guest"
-    static let USER_STATE_LOGOUT = "Logout"
     
     
     var currencySymbol: String {
@@ -60,8 +59,6 @@ class Constants{
     
     var currencyValue: Double {
       var value = UserDefaults.standard.double(forKey: Constants.CURRENCY_VALUE)
-    //  print("liwurhgiuohlitg1111")
-    //  print(value)
       if value == 0.0 { value = 1.0 }
       return value
     }
