@@ -46,7 +46,25 @@ class Constants{
     static let heart = "heart"
     static let fillHeart = "heart.fill"
     
+    static let CURRENCY_KEY = "CURRENCY_KEY"
+    static let CURRENCY_VALUE = "CURRENCY_VALUE"
+    static let KEY_USER_STATE = "State"
+    static let USER_STATE_LOGIN = "Login"
+    static let USER_STATE_GUEST = "Guest"
+    static let USER_STATE_LOGOUT = "Logout"
     
     
+    var currencySymbol: String {
+      return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+    }
+    
+    var currencyValue: Double {
+      var value = UserDefaults.standard.double(forKey: Constants.CURRENCY_VALUE)
+    //  print("liwurhgiuohlitg1111")
+    //  print(value)
+      if value == 0.0 { value = 1.0 }
+      return value
+    }
+
     
 }
