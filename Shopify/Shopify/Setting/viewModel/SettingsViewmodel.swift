@@ -42,6 +42,10 @@ class SettingsViewmodel{
                     }
                     if let rate = self?.currencyRates[currency] {
                         print("Rate for \(currency): \(rate)")
+                        self?.defaults.setValue(rate, forKey: Constants.CURRENCY_VALUE)
+                        self?.defaults.setValue(currency, forKey: Constants.CURRENCY_KEY)
+                        
+
                       
                     }
                 } catch {
