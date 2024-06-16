@@ -36,7 +36,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         isGuestUser = (state == Constants.USER_STATE_GUEST)
         
         if isGuestUser {
-            updateBackgroundView()
+            updateBackgroundViewForGuestUser()
             addAddressBtn.isEnabled = false
 
         }
@@ -47,6 +47,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
 
@@ -63,6 +65,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
         addressTableView.separatorStyle = .none
@@ -138,9 +142,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     func didUpdateAddress() {
           viewModel.fetchCustomerAddress(customerID: customerId)
       }
-    
-    
-    private func updateBackgroundView() {
+    private func updateBackgroundViewForGuestUser() {
         let signUpLabel = UILabel()
         signUpLabel.text = "Please, sign up first."
         signUpLabel.textColor = .gray
@@ -148,10 +150,31 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         signUpLabel.textAlignment = .center
         signUpLabel.font = UIFont.systemFont(ofSize: 16)
         signUpLabel.sizeToFit()
-       addressTableView.backgroundView = signUpLabel
-       
+        addressTableView.backgroundView = signUpLabel
     }
+    
+    private func updateBackgroundView() {
+        if viewModel.addresses.isEmpty {
+            let backgroundImageView = UIImageView(image: UIImage(named: "noData"))
+            backgroundImageView.contentMode = .center
+            addressTableView.backgroundView = backgroundImageView
+        } else {
+            addressTableView.backgroundView = nil
+        }
     }
+    
+//    private func updateBackgroundView() {
+//        let signUpLabel = UILabel()
+//        signUpLabel.text = "Please, sign up first."
+//        signUpLabel.textColor = .gray
+//        signUpLabel.numberOfLines = 0
+//        signUpLabel.textAlignment = .center
+//        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+//        signUpLabel.sizeToFit()
+//       addressTableView.backgroundView = signUpLabel
+//       
+//    }
+}
 
   
 
