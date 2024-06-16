@@ -24,7 +24,8 @@ class SettingsTableViewController: UITableViewController {
                
                if isGuestUser {
                    hideAllStaticRows()
-                   setTableBackgroundImage()
+                   updateBackgroundView()
+//                   setTableBackgroundImage()
                }
            }
 
@@ -103,27 +104,39 @@ class SettingsTableViewController: UITableViewController {
            tableView.reloadData()
        }
 
-    func setTableBackgroundImage() {
-        let backgroundImage = UIImage(named: "signUp")
-        let imageView = UIImageView(image: backgroundImage)
-        imageView.contentMode = .scaleAspectFit
-
-        let containerView = UIView(frame: tableView.bounds)
-        imageView.frame = containerView.bounds
-        let label = UILabel()
-        label.text = "Sign up first please."
-        label.textAlignment = .center
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(imageView)
-        containerView.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 100)
-        ])
-
-        tableView.backgroundView = containerView
+//    func setTableBackgroundImage() {
+//        let backgroundImage = UIImage(named: "signUp")
+//        let imageView = UIImageView(image: backgroundImage)
+//        imageView.contentMode = .scaleAspectFit
+//
+//        let containerView = UIView(frame: tableView.bounds)
+//        imageView.frame = containerView.bounds
+//        let label = UILabel()
+//        label.text = "Sign up first please."
+//        label.textAlignment = .center
+//        label.textColor = .black
+//        label.font = UIFont.boldSystemFont(ofSize: 24)
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addSubview(imageView)
+//        containerView.addSubview(label)
+//        NSLayoutConstraint.activate([
+//            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+//            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 100)
+//        ])
+//
+//        tableView.backgroundView = containerView
+//    }
+    private func updateBackgroundView() {
+       
+            let signUpLabel = UILabel()
+        signUpLabel.text = "Please, sign up first."
+        signUpLabel.textColor = .gray
+        signUpLabel.numberOfLines = 0
+        signUpLabel.textAlignment = .center
+        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+        signUpLabel.sizeToFit()
+            tableView.backgroundView = signUpLabel
+       
     }
 }
    
