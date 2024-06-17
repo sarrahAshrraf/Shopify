@@ -18,6 +18,8 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var back: UIBarButtonItem!
     
+    @IBOutlet weak var orderAddress: UILabel!
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
