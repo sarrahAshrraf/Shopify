@@ -48,6 +48,7 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
 
         let customer = Customer(id:customerId)
         let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
+        //TODO: shiiping addressssssssssss
         checkOutVM.postOrder(order: order)
         print("order cuurencyyyyyyyyyyyyyyy")
         print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))

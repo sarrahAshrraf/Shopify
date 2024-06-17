@@ -39,7 +39,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20$" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgl-nV-b58">
-                        <rect key="frame" x="150" y="114" width="90" height="21"/>
+                        <rect key="frame" x="150" y="114" width="170" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.13580080197462999" green="0.27243288530739623" blue="0.51995503533746779" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -109,7 +109,7 @@
                     <constraint firstItem="Jve-xr-Vnu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="m2t-tM-CUQ"/>
                     <constraint firstAttribute="bottom" secondItem="H2s-rD-sFN" secondAttribute="bottom" constant="85" id="qe2-ez-a3Z"/>
                     <constraint firstAttribute="bottom" secondItem="Qgl-nV-b58" secondAttribute="bottom" constant="23" id="sq4-ur-lFC"/>
-                    <constraint firstAttribute="trailing" secondItem="Qgl-nV-b58" secondAttribute="trailing" constant="221" id="vLE-jV-a1P"/>
+                    <constraint firstAttribute="trailing" secondItem="Qgl-nV-b58" secondAttribute="trailing" constant="141" id="vLE-jV-a1P"/>
                     <constraint firstAttribute="trailing" secondItem="1tM-Hc-nOI" secondAttribute="trailing" constant="27" id="wdu-Ff-PJe"/>
                     <constraint firstItem="P9g-KE-Ijs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="76" id="zPF-SP-hSj"/>
                 </constraints>

@@ -80,7 +80,7 @@
                                             <barButtonItem image="cart" catalog="system" id="m73-Zr-XIY">
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <segue destination="2MT-o5-Oev" kind="showDetail" id="WOY-nW-Unk"/>
+                                                    <action selector="shoppingCartBtn:" destination="Y6W-OH-hqX" id="GzE-Nw-Ib7"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem image="gearshape" catalog="system" id="2oN-XB-diW">
@@ -110,13 +110,31 @@
                                         <color key="tintColor" red="0.47064893390955892" green="0.51846140007049402" blue="0.52490423143524478" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" cornerStyle="fixed">
-                                            <backgroundConfiguration key="background" cornerRadius="18"/>
+                                            <backgroundConfiguration key="background" cornerRadius="18">
+                                                <color key="backgroundColor" red="0.46955686810000002" green="0.51776415109999996" blue="0.52502363919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Sign up now"/>
                                             </attributedString>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="signUpBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bNp-4N-VvU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXR-iZ-INz">
+                                        <rect key="frame" x="103" y="214" width="188" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.46955686810000002" green="0.51776415109999996" blue="0.52502363919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Login" cornerStyle="fixed">
+                                            <backgroundConfiguration key="background" cornerRadius="18" strokeWidth="2">
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="strokeColor" red="0.46955686810000002" green="0.51776415109999996" blue="0.52502363919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
+                                            <color key="baseForegroundColor" red="0.2252254873" green="0.2241031242" blue="0.22638269799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="loginBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ODu-9B-fN0"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -169,10 +187,10 @@
                             <tableViewSection headerTitle="Change currency" id="4Iu-zg-tF7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rSm-Mp-w5c">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="40.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rSm-Mp-w5c" id="Mfb-Xx-HrT">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="40.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Currency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFR-H3-N6X">
@@ -188,7 +206,7 @@
                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVo-dP-Yrx">
-                                                    <rect key="frame" x="183" y="3" width="190" height="34.666666666666664"/>
+                                                    <rect key="frame" x="183" y="3" width="190" height="35"/>
                                                     <menu key="menu" id="XaX-Jz-HD9">
                                                         <menuOptions key="menuOptions" displayInline="YES"/>
                                                         <children>
@@ -220,7 +238,7 @@
                             <tableViewSection headerTitle="" id="dwO-UP-KUh">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iup-af-LOU">
-                                        <rect key="frame" x="0.0" y="168.66666793823242" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="169" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iup-af-LOU" id="96O-32-sLp">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
@@ -245,7 +263,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="a3H-sm-01y">
-                                        <rect key="frame" x="0.0" y="212.33333587646484" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="212.66666793823242" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a3H-sm-01y" id="8xk-ZD-lEY">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
@@ -271,7 +289,7 @@
                             <tableViewSection headerTitle="" id="QkU-z4-dpv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PTc-Vz-MPa">
-                                        <rect key="frame" x="0.0" y="334.00000381469727" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="334.33333587646484" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PTc-Vz-MPa" id="35J-p4-Bsr">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>

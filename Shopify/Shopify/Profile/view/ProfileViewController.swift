@@ -9,10 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var guestModeView: UIView!
-    //   
-//    @IBAction func backBtn(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
-//    }
+    //
+    //    @IBAction func backBtn(_ sender: Any) {
+    //        self.navigationController?.popViewController(animated: true)
+    //    }
     
     @IBOutlet weak var welcomeUser: UILabel!
     @IBAction func moreOrdersBtn(_ sender: Any) {
@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var profileViewModel: ProfileViewModel!
     var orders: [Orders] = []
     var isGuestUser: Bool = false
-
+    
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         getOrdersFromApi()
         
-       
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,22 +62,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
         self.ordersTableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
-//        ordersTableView.delegate = self
-//        ordersTableView.dataSource = self
+        //        ordersTableView.delegate = self
+        //        ordersTableView.dataSource = self
         getOrdersFromApi()
         print("Seeeeetingsssssssssssss")
         print(orders)
         print(orders.first?.customer)
-
+        
         print(profileViewModel.result)
         print(profileViewModel.result?.first?.customer?.firstName)
     }
     
     func getOrdersFromApi() {
         let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
-
+        
         profileViewModel = ProfileViewModel()
-
+        
         profileViewModel.bindOrdersToViewController = { [weak self] in
             self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == customerId } ?? []
             DispatchQueue.main.async {
@@ -101,9 +101,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == ordersTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell", for: indexPath) as! CustomTableViewCell
-                
-                let order = orders[indexPath.row]
-                cell.setOrderValues(order: order)
+            
+            let order = orders[indexPath.row]
+            cell.setOrderValues(order: order)
             
             return cell
         }
@@ -116,6 +116,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
         nextViewController.modalPresentationStyle = .fullScreen
         self.present(nextViewController, animated: true, completion: nil)
-      
+        
+    }
+    @IBAction func loginBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true, completion: nil)
+    }
+    @IBAction func shoppingCartBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
+        if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(cartVC, animated: true)
+        } else {
+            print("Could not find CartViewController in ShoppingCartStoryboard")
+        }
     }
 }
