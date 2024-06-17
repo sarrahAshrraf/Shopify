@@ -89,6 +89,9 @@ class SettingsTableViewController: UITableViewController {
                 //MARK: user cart id TODOOOOOOOOO
 
                 self?.defaults.set("", forKey: Constants.customerId)
+                self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
+                self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)
+                self?.defaults.set("", forKey: Constants.cartId)
                 let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
 //                TODO: NAVIGTAE TO SPLASH SCREEN
                 let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController

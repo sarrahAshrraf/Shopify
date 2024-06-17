@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var profileViewModel: ProfileViewModel!
     var orders: [Orders] = []
     var isGuestUser: Bool = false
-    
+
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
@@ -47,6 +47,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             guestModeView.isHidden = true
         }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let customerName = UserDefaults.standard.string(forKey: Constants.USER_FirstName) {
+            welcomeUser.text = "Welcome, \(customerName)!"
+        } else {
+            welcomeUser.text = "Welcome!"
+        }
+        
         getOrdersFromApi()
         
         
@@ -55,6 +61,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     override func viewDidLoad() {
@@ -82,7 +89,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == customerId } ?? []
             DispatchQueue.main.async {
                 self?.ordersTableView.reloadData()
-                self?.welcomeUser.text = "Welcome, \(self?.profileViewModel.result?.first?.customer?.firstName ?? "")!"
+//                self?.welcomeUser.text = "Welcome, \(self?.profileViewModel.result?.first?.customer?.firstName ?? "")!"
+           print("CUSTOMER DATAAA")
+                print(self?.profileViewModel.result?.first?.customer)
             }
             
         }

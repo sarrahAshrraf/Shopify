@@ -36,6 +36,9 @@ class LoginViewController: UIViewController {
                 customerId = user.id
                 defaults.setValue(user.id, forKey: Constants.customerId)
                 defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
+                defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
+              print("NAAAAME")
+                print(UserDefaults.standard.string(forKey:Constants.USER_FirstName ))
                 break
             }
         }
