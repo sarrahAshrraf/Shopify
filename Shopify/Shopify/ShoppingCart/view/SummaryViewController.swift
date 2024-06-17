@@ -83,8 +83,9 @@ class SummaryViewController: UIViewController {
     if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
         let navController = UINavigationController(rootViewController: checkOutVC)
         checkOutVC.total = self.total
-//                   navController.modalPresentationStyle = .fullScreen
-        self.present(navController, animated: true, completion: nil)
+                   navController.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(checkOutVC, animated: true)
+//        self.present(navController, animated: true, completion: nil)
     }
 
     }

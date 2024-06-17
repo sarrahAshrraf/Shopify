@@ -12,9 +12,11 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     var coordinator: AddressCoordinatorP?
     let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
     var isGuestUser: Bool = false
-
     @IBOutlet weak var addAddressBtn: UIBarButtonItem!
     var shipmentAdress : Bool = false
+    var delegate : AddressSelectionDelegate!
+    var editAdressVM = AddNewAddressViewModel()
+
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
 
@@ -96,8 +98,22 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
               coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
             print("inside select row")
           }else {
-//                     delegate?.didSelectAddress(viewModel.addresses[indexPath.row])
+              var selected_address = viewModel.addresses[indexPath.row]
+              selected_address.default = true
+              editAdressVM.editAddress(customerID: customerId, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: selected_address) { success in
+                  print("selectedAddress")
+                  DispatchQueue.main.async {
+                      if success {
+                          print("Address updated successfully")
+                          self.delegate?.didSelectAddress(selected_address)
+                      } else {
+                          print("Error in updating address")
+                      }
+                  }
+              }
+//                     delegate?.didSelectAddress(selected_address)
 //              print(viewModel.addresses[indexPath.row])
+              self.navigationController?.popViewController(animated: true)
 //              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
 //              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
 //                  let navController = UINavigationController(rootViewController: checkOutVC)

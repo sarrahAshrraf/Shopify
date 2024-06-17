@@ -230,7 +230,6 @@
                                 <rect key="frame" x="13" y="294" width="282" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.69099556993984423" green="0.69189233737425027" blue="0.74682507072527382" alpha="0.12" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go"/>
                             </textField>
@@ -262,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3b9-9O-Luf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113.7404580152672" y="-24.647887323943664"/>
+            <point key="canvasLocation" x="1115" y="-35"/>
         </scene>
     </scenes>
     <resources>

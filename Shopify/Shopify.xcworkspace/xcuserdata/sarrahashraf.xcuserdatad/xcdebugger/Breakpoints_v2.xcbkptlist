@@ -94,73 +94,10 @@
             filePath = "Shopify/payment/view/CheckOutViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BD12F4C0-1A32-4A39-BF14-9D3BF55C1E7E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shopify/payment/view/CheckOutViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "createOrder()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BD12F4C0-1A32-4A39-BF14-9D3BF55C1E7E - 1859a19c489b9f71"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Shopify.CheckOutViewController.createOrder() -&gt; ()"
-                  moduleName = "Shopify"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sarrahashraf/Documents/GitHub/Shopify/Shopify/Shopify/payment/view/CheckOutViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "884">
-               </Location>
-               <Location
-                  uuid = "BD12F4C0-1A32-4A39-BF14-9D3BF55C1E7E - 1859a19c489b9f71"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Shopify.CheckOutViewController.createOrder() -&gt; ()"
-                  moduleName = "Shopify"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sarrahashraf/Documents/GitHub/Shopify/Shopify/Shopify/payment/view/CheckOutViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "53"
-                  endingLineNumber = "53"
-                  offsetFromSymbolStart = "280">
-               </Location>
-               <Location
-                  uuid = "BD12F4C0-1A32-4A39-BF14-9D3BF55C1E7E - 1859a19c489b9edc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Shopify.CheckOutViewController.createOrder() -&gt; ()"
-                  moduleName = "Shopify"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sarrahashraf/Documents/GitHub/Shopify/Shopify/Shopify/payment/view/CheckOutViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "280">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -189,8 +126,8 @@
             filePath = "Shopify/payment/view/CheckOutViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "createOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -205,8 +142,8 @@
             filePath = "Shopify/payment/view/CheckOutViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -221,8 +158,8 @@
             filePath = "Shopify/payment/view/CheckOutViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "createOrder()"
             landmarkType = "7">
          </BreakpointContent>

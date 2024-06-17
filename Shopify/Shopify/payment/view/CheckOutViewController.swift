@@ -12,8 +12,14 @@ import UIKit
 navigation to home mesh full screen
 - discount
 - delivery
+ - default address
+ if addressVM.addresses.count == 0 {
+     
+     coordinator?.showAddNewAddressWithEmptyFields()
+ }
+ else{
  */
-class CheckOutViewController: UIViewController, ShippingAddressDelegate {
+class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     func didSelectAddress(_ address: Address) {
         addressVM.defautltAdress = address
         addressdetails.text = address.address1
@@ -35,41 +41,65 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     var cartViewModel : ShoppingCartViewModel!
     var checkOutVM : CheckOutViewModel!
     let defaults = UserDefaults.standard
+    var currencyRate: Double = 1.0
+    var currencySymbol: String = "USD"
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+    var coordinator: AddressCoordinatorP?
 
     var total: Double = 9.0
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
-        addressVM.fetchDeafultCustomerAddress(customerID: 7309504250029)
+        setupNavigationBar()
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        bindResultToVC()
+        updatePriceLabels()
+        
     }
     
     
     func createOrder(){
-        let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
-
-        let customer = Customer(id:customerId)
-        let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "")
-        //TODO: shiiping addressssssssssss
-        checkOutVM.postOrder(order: order)
-        print("order cuurencyyyyyyyyyyyyyyy")
-        print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
-
-        print(order)
-
+        guard let resultCount = vm.result?.count, resultCount != 0 else {
+            print("No results found, navigating to addressVC")
+            navigateToAddressVC()
+            return
+        }
+            let customer = Customer(id:customerId)
+        guard let addresses = addressVM.defautltAdress else {
+                 print("No default address found")
+                 return
+             }
+            let shippingAddress = Shipping_address(from: addresses)
+        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
+            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "", shippingAddress: shippingAddress)
+            //TODO: shiiping addressssssssssss
+            checkOutVM.postOrder(order: order)
+            print("order cuurencyyyyyyyyyyyyyyy")
+            print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
+            
+            print(order)
+            
         
     }
-    
+    func navigateToAddressVC() {
+        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
+        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddNewAddressVC {
+            navigationController?.pushViewController(addressVC, animated: true)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cartViewModel = ShoppingCartViewModel()
         addressVM = AddressViewModel()
         checkOutVM = CheckOutViewModel()
+        coordinator = AddressCoordinator(navigationController: self.navigationController!)
         getDeafultAddress()
         cartViewModel.getCartItems()
         cartViewModel.editCart()
+        bindResultToVC()
         setupBindings()
-        getTotalPrice()
-        orderPrice.text = String(total)
+//        getTotalPrice()
+//        orderPrice.text = String(total)
         
     }
     
@@ -106,7 +136,18 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
         }))
         present(alert, animated: true, completion: nil)
     }
-
+    func setupNavigationBar() {
+        self.title = "Payment"
+        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            
+            self.navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
     func navigateToHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
@@ -114,9 +155,9 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
         self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-    func getTotalPrice() {
-        cartViewModel.bindResultToViewController()
-    }
+//    func getTotalPrice() {
+//        cartViewModel.bindResultToViewController()
+//    }
     func getDeafultAddress(){
         
         addressVM.bindDefaultAddress = { [weak self] in
@@ -129,13 +170,37 @@ class CheckOutViewController: UIViewController, ShippingAddressDelegate {
     @IBAction func PurcasheVtn(_ sender: Any) {
         createOrder()
         }
-    
-
+    func bindResultToVC() {
+        cartViewModel.bindResultToViewController = { [weak self] in
+            self?.setCurrencyValues()
+            self?.updatePriceLabels()
+        }
+    }
+    func setCurrencyValues() {
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+            currencySymbol = symbol
+        }
+    }
+    func updatePriceLabels() {
+        orderPrice.text = String(format: "\(currencySymbol) %.2f", total)
+        
+        if let totalCartPrice = cartViewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
+            self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
+        } else {
+            totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
+        }
+    }
 
     @IBAction func changeAddress(_ sender: Any) {
-        if let addressVC = storyboard?.instantiateViewController(withIdentifier: "shippingAddressVC") as? shippingAddressVC {
+        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
+        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
             addressVC.delegate = self
-
+            addressVC.shipmentAdress = true
+            let navController = UINavigationController(rootViewController: addressVC)
+            navController.modalPresentationStyle = .formSheet
             self.navigationController?.pushViewController(addressVC, animated: true)
         }
         

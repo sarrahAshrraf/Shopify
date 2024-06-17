@@ -50,7 +50,7 @@ struct Orders: Codable {
     let updatedAt: String?
     let customer: Customer?
     let lineItems: [LineItems]?
-    let shippingAddress: BillingAddress?
+    let shippingAddress: Shipping_address?
     
     init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String) {
         self.currency = currency
@@ -98,7 +98,7 @@ struct Orders: Codable {
         
     }
     
-    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: BillingAddress) {
+    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: Shipping_address) {
         self.currency = currency
         self.lineItems = lineItems
         self.totalPrice = totalPrice
@@ -190,6 +190,27 @@ struct Orders: Codable {
     }
     
 }
+
+extension Shipping_address {
+    init(from address: Address) {
+        self.first_name = address.first_name
+        self.address1 = address.address1
+        self.phone = address.phone
+        self.city = address.city
+        self.zip = address.zip
+        self.province = address.province
+        self.country = address.country
+        self.last_name = address.last_name
+        self.address2 = address.address2
+        self.company = address.company
+        self.name = address.name
+        self.country_code = address.country_code
+        self.province_code = address.province_code
+    }
+}
+
+
+
 struct Customer: Codable {
     
     let id: Int
