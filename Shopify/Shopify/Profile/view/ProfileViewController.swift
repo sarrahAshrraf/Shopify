@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
+        setupNavigationBar()
         guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
         isGuestUser = (state == Constants.USER_STATE_GUEST)
         
@@ -140,5 +141,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             print("Could not find CartViewController in ShoppingCartStoryboard")
         }
+    }
+    private func setupNavigationBar() {
+        self.title = "Profile"
+        let cartImage = UIImage(systemName: "cart")
+        let cartButton = UIBarButtonItem(image: cartImage, style: .plain, target: self, action: #selector(cartButtonTapped))
+        let settingsImage = UIImage(systemName: "gear")
+        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
+  
+        self.navigationItem.setRightBarButtonItems([settingsButton, cartButton], animated: true)
+    }
+
+
+    @objc private func cartButtonTapped() {
+print("cart")
+    }
+
+    @objc private func settingsButtonTapped() {
+        print("settin gs")
+
+
     }
 }

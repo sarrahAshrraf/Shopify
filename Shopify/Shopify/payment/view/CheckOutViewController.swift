@@ -9,8 +9,9 @@ import UIKit
 
 
 /* MARK: 
-navigation to home mesh full screen
+navigation to home byzhar mn 8eer nav bar
 - discount
+ - apple pay
  */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     func didSelectAddress(_ address: Address) {
@@ -43,6 +44,10 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
+        addressVM.bindToVC = { [weak self] in
+            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
+            
+        }
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
         bindResultToVC()
         updatePriceLabels()
