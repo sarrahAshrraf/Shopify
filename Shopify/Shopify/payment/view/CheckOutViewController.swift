@@ -64,7 +64,11 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
              }
             let shippingAddress = Shipping_address(from: addresses)
         cartViewModel.updateShippingAddress(newAddress: shippingAddress)
-            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: cartViewModel.result?.total_price ?? "", shippingAddress: shippingAddress)
+        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var totalPrice = cartViewModel.result?.total_price ?? "0.00"
+           let totalPriceValue = Double(totalPrice)
+        updatedTotalPrice = String((totalPriceValue ?? 0.00) * currencyRate)
+            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress)
             //TODO: shiiping addressssssssssss
             checkOutVM.postOrder(order: order)
             print("order cuurencyyyyyyyyyyyyyyy")
