@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var timer:Timer?
     var currentCellIndex=0
     
-    
+    var staticCoupons : [String] = ["coupon1.png","coupon2.png", "coupon3.jpeg"]
     
     var homeViewModel: HomeViewModel?
     var brandProductViewModel: BrandProductsViewModel?
@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeViewModel?.getItems()
         brandProductViewModel = BrandProductsViewModel()
         timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
-        self.pageController.numberOfPages = 10
+        self.pageController.numberOfPages = staticCoupons.count
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     
     @objc func moveToNextIndex(){
-        if currentCellIndex < 10 - 1 {
+        if currentCellIndex < staticCoupons.count - 1 {
             currentCellIndex += 1
         }else {
             currentCellIndex = 0
@@ -82,7 +82,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == couponsCollectionView {
-            return 10
+            return staticCoupons.count
         }else {
             
             return homeViewModel?.result?.count ?? 0
@@ -92,6 +92,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == couponsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath)as! HomeViewCell
+            cell.homeImage.image = UIImage(named: staticCoupons[indexPath.row])
        
             return cell
         }else {

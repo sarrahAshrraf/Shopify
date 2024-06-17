@@ -333,6 +333,7 @@
                                             <constraint firstItem="ioy-4H-oDx" firstAttribute="centerY" secondItem="cB5-xt-20i" secondAttribute="centerY" id="2ms-Nf-MXb"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="top" secondItem="chd-2C-Vnt" secondAttribute="top" constant="63.333333333333336" id="9S6-jI-P4F"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="leading" secondItem="chd-2C-Vnt" secondAttribute="leading" constant="16" id="GEL-FU-hRN"/>
+                                            <constraint firstItem="cB5-xt-20i" firstAttribute="centerX" secondItem="chd-2C-Vnt" secondAttribute="centerX" id="LgN-Nk-Hqz"/>
                                             <constraint firstItem="cB5-xt-20i" firstAttribute="leading" secondItem="TKo-E0-L5q" secondAttribute="trailing" constant="103.66666666666666" id="Zlb-h8-Lo7"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="centerY" secondItem="cB5-xt-20i" secondAttribute="centerY" id="fdf-gU-KLc"/>
                                             <constraint firstItem="ioy-4H-oDx" firstAttribute="baseline" secondItem="uQT-kW-gs4" secondAttribute="baseline" id="lJS-s5-rys"/>
@@ -428,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFj-qU-6km" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3609.9236641221373" y="-725.35211267605632"/>
+            <point key="canvasLocation" x="3636" y="-673"/>
         </scene>
     </scenes>
     <resources>
