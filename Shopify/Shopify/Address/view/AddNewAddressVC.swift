@@ -113,15 +113,29 @@ class AddNewAddressVC: UIViewController {
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     var viewModell: AddNewAddressViewModel!
+    var addVM : AddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        addVM = AddressViewModel()
+        getAddressArrayCount()
         populateTextFields()
+
         print(isEditingAddress)
         print(customerId)
-
     }
     
-
+    private func getAddressArrayCount() {
+           addVM.bindToVC = { [weak self] in
+               DispatchQueue.main.async {
+                   if self?.addVM.addresses.count == 0 {
+                       self?.isDefaultAddress = true
+                       self?.switchDeafultBtn.isOn = true
+                   } 
+               }
+           }
+           addVM.fetchCustomerAddress(customerID: customerId)
+       }
+    
     
     private func populateTextFields() {
       
@@ -138,6 +152,7 @@ class AddNewAddressVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
+        getAddressArrayCount()
         switchDeafultBtn.isOn = isDefaultAddress
 
     }

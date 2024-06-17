@@ -67,6 +67,7 @@ class ShoppingCartViewModel{
     
     func updateShippingAddress(newAddress: Shipping_address) {
         result?.shipping_address = newAddress
+        print("UPDATE SHIPING")
         print(newAddress)
         editCart()
     }

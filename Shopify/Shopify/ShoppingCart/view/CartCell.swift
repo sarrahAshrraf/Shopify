@@ -9,14 +9,15 @@ import UIKit
 import Kingfisher
 protocol CartCellDelegate: AnyObject {
     func deleteItem(_ cell: CartCell)
+//    func updateCartPrice()
 }
-/*
- fix total price bug
- */
+
 class CartCell: UITableViewCell {
     var viewController: CartViewController?
     weak var delegate: CartCellDelegate?
-
+    let defaults = UserDefaults.standard
+    var currencyRate: Double = 1.0
+    var currencySymbol: String = "USD"
     var totalAvailableVariantInStock: Int = 0
     var productCount = 1
     var itemInCart: LineItems!
@@ -28,39 +29,46 @@ class CartCell: UITableViewCell {
     @IBOutlet weak var brandLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
+    
+    
     @IBAction func minusBtn(_ sender: Any) {
         plusBtn.isEnabled = true
-        viewController!.cartPrice = Double(viewController!.cartPrice) - Double(productCount) * Double(itemInCart.price!)!
-        productCount -= 1
-        viewController!.cartPrice = Double(viewController!.cartPrice) + Double(productCount) * Double(itemInCart.price!)!
-        quantityLabel.text = "\(productCount)"
-        updateItemsQuantityInShoppingCartList()
-        
-        if productCount == 1 {
-            minusBtn.isEnabled = false
-        }
-        
-    }
-    @IBAction func plusBtn(_ sender: Any) {
-        print("plussssssssss")
-        minusBtn.isEnabled = true
-        if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
-            viewController!.cartPrice = Double(viewController!.cartPrice) - Double(productCount) * Double(itemInCart.price!)!
-            productCount += 1
-            viewController!.cartPrice = Double(viewController!.cartPrice) + Double(productCount) * Double(itemInCart.price!)!
+        if let itemPrice = Double(itemInCart.price!) {
+            viewController?.cartPrice -= Double(productCount) * itemPrice * currencyRate
+            productCount -= 1
+            viewController?.cartPrice += Double(productCount) * itemPrice * currencyRate
             quantityLabel.text = "\(productCount)"
             updateItemsQuantityInShoppingCartList()
             
-            if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
+            if productCount == 1 {
+                minusBtn.isEnabled = false
+            }
+            
+//            delegate?.updateCartPrice()
+        }
+    }
+    
+    @IBAction func plusBtn(_ sender: Any) {
+        print("plussssssssss")
+        minusBtn.isEnabled = true
+        if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock / 3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
+            if let itemPrice = Double(itemInCart.price!) {
+                viewController?.cartPrice -= Double(productCount) * itemPrice * currencyRate
+                productCount += 1
+                viewController?.cartPrice += Double(productCount) * itemPrice * currencyRate
+                quantityLabel.text = "\(productCount)"
+                updateItemsQuantityInShoppingCartList()
                 
-            }else{
-                print("Can not Add more")
-                plusBtn.isEnabled = false
+                if !(totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock / 3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock) {
+                    print("Can not Add more")
+                    plusBtn.isEnabled = false
+                }
+                
+//                delegate?.updateCartPrice()
             }
         }
-
-        
     }
+
     @IBAction func deleteBtn(_ sender: Any) {
         delegate?.deleteItem(self)
         print("delete btn")
@@ -79,7 +87,12 @@ class CartCell: UITableViewCell {
         contentView.layer.masksToBounds = true
         backgroundColor = .clear
         contentView.backgroundColor = .white
-
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+            currencySymbol = symbol
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -97,25 +110,38 @@ class CartCell: UITableViewCell {
     
     func setCartItemValues(lineItem: LineItems, viewController: CartViewController){
         let imageUrl = (lineItem.properties?[0].value?.split(separator: "$")[0])!
-        self.itemImg.kf.setImage(with: URL(string: String(imageUrl)),placeholder: UIImage(named: "noImage"))
-        self.titleLabel.text = lineItem.name
-        self.brandLabel.text = "\(lineItem.vendor ?? "") / \((lineItem.variantTitle) ?? "")"
-        self.priceLabel.text = lineItem.price
-        self.quantityLabel.text = "\((lineItem.quantity) ?? 0)"
-        productCount = lineItem.quantity ?? 0
-        if productCount == 1 {
-            minusBtn.isEnabled = false
-        }
-        totalAvailableVariantInStock = Int(lineItem.properties?[0].name ?? "1") ?? 1
-        if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock/3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
-            
-        }else{
-            plusBtn.isEnabled = false
-        }
+               self.itemImg.kf.setImage(with: URL(string: String(imageUrl)), placeholder: UIImage(named: "noImage"))
+               self.titleLabel.text = lineItem.name
+               self.brandLabel.text = "\(lineItem.vendor ?? "") / \((lineItem.variantTitle) ?? "")"
+               
+               // Convert the price to the selected currency
+               if let priceString = lineItem.price, let price = Double(priceString) {
+                   let convertedPrice = price * currencyRate
+                   self.priceLabel.text = "\(currencySymbol) \(String(format: "%.2f", convertedPrice))"
+                   print("AAAAAAAAAAAAAAA")
+                   print("\(currencySymbol) \(String(format: "%.2f", convertedPrice))")
+               } else {
+                   self.priceLabel.text = "\(currencySymbol) 0.00"
+               }
+     
         
-        self.viewController = viewController
-        self.itemInCart = lineItem
-    }
+        
+               self.quantityLabel.text = "\((lineItem.quantity) ?? 0)"
+               productCount = lineItem.quantity ?? 0
+               if productCount == 1 {
+                   minusBtn.isEnabled = false
+               }
+               
+               totalAvailableVariantInStock = Int(lineItem.properties?[0].name ?? "1") ?? 1
+               if totalAvailableVariantInStock > 3 && productCount < totalAvailableVariantInStock / 3 || totalAvailableVariantInStock <= 3 && productCount < totalAvailableVariantInStock {
+                   // Can add more
+               } else {
+                   plusBtn.isEnabled = false
+               }
+               
+               self.viewController = viewController
+               self.itemInCart = lineItem
+           }
     
     func updateItemsQuantityInShoppingCartList (){
         for (index , item) in CartList.cartItems.enumerated() {

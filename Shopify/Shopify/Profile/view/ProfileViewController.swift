@@ -9,10 +9,10 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var guestModeView: UIView!
-    //   
-//    @IBAction func backBtn(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
-//    }
+    //
+    //    @IBAction func backBtn(_ sender: Any) {
+    //        self.navigationController?.popViewController(animated: true)
+    //    }
     
     @IBOutlet weak var welcomeUser: UILabel!
     @IBAction func moreOrdersBtn(_ sender: Any) {
@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
         super.viewWillAppear(animated)
+        setupNavigationBar()
         guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
         isGuestUser = (state == Constants.USER_STATE_GUEST)
         
@@ -47,14 +48,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             guestModeView.isHidden = true
         }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let customerName = UserDefaults.standard.string(forKey: Constants.USER_FirstName) {
+            welcomeUser.text = "Welcome, \(customerName)!"
+        } else {
+            welcomeUser.text = "Welcome!"
+        }
+        
         getOrdersFromApi()
         
-       
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
     }
     
     override func viewDidLoad() {
@@ -62,27 +70,29 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
         self.ordersTableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
-//        ordersTableView.delegate = self
-//        ordersTableView.dataSource = self
+        //        ordersTableView.delegate = self
+        //        ordersTableView.dataSource = self
         getOrdersFromApi()
         print("Seeeeetingsssssssssssss")
         print(orders)
         print(orders.first?.customer)
-
+        
         print(profileViewModel.result)
         print(profileViewModel.result?.first?.customer?.firstName)
     }
     
     func getOrdersFromApi() {
         let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
-
+        
         profileViewModel = ProfileViewModel()
-
+        
         profileViewModel.bindOrdersToViewController = { [weak self] in
             self?.orders = self?.profileViewModel.result?.filter { $0.customer?.id == customerId } ?? []
             DispatchQueue.main.async {
                 self?.ordersTableView.reloadData()
-                self?.welcomeUser.text = "Welcome, \(self?.profileViewModel.result?.first?.customer?.firstName ?? "")!"
+//                self?.welcomeUser.text = "Welcome, \(self?.profileViewModel.result?.first?.customer?.firstName ?? "")!"
+           print("CUSTOMER DATAAA")
+                print(self?.profileViewModel.result?.first?.customer)
             }
             
         }
@@ -101,9 +111,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == ordersTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell", for: indexPath) as! CustomTableViewCell
-                
-                let order = orders[indexPath.row]
-                cell.setOrderValues(order: order)
+            
+            let order = orders[indexPath.row]
+            cell.setOrderValues(order: order)
             
             return cell
         }
@@ -116,6 +126,40 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
         nextViewController.modalPresentationStyle = .fullScreen
         self.present(nextViewController, animated: true, completion: nil)
-      
+        
+    }
+    @IBAction func loginBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true, completion: nil)
+    }
+    @IBAction func shoppingCartBtn(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
+        if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+            self.navigationController?.pushViewController(cartVC, animated: true)
+        } else {
+            print("Could not find CartViewController in ShoppingCartStoryboard")
+        }
+    }
+    private func setupNavigationBar() {
+        self.title = "Profile"
+        let cartImage = UIImage(systemName: "cart")
+        let cartButton = UIBarButtonItem(image: cartImage, style: .plain, target: self, action: #selector(cartButtonTapped))
+        let settingsImage = UIImage(systemName: "gear")
+        let settingsButton = UIBarButtonItem(image: settingsImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
+  
+        self.navigationItem.setRightBarButtonItems([settingsButton, cartButton], animated: true)
+    }
+
+
+    @objc private func cartButtonTapped() {
+print("cart")
+    }
+
+    @objc private func settingsButtonTapped() {
+        print("settin gs")
+
+
     }
 }
