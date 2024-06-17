@@ -11,13 +11,6 @@ import UIKit
 /* MARK: 
 navigation to home mesh full screen
 - discount
-- delivery
- - default address
- if addressVM.addresses.count == 0 {
-     
-     coordinator?.showAddNewAddressWithEmptyFields()
- }
- else{
  */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     func didSelectAddress(_ address: Address) {
@@ -58,11 +51,12 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     
     
     func createOrder(){
-        guard let resultCount = vm.result?.count, resultCount != 0 else {
-            print("No results found, navigating to addressVC")
-            navigateToAddressVC()
-            return
-        }
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        guard addressVM.defautltAdress != nil else {
+             print("No results found, navigating to addressVC")
+            coordinator?.showAddNewAddressWithEmptyFields()
+             return
+         }
             let customer = Customer(id:customerId)
         guard let addresses = addressVM.defautltAdress else {
                  print("No default address found")
@@ -80,12 +74,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             
         
     }
-    func navigateToAddressVC() {
-        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
-        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddNewAddressVC {
-            navigationController?.pushViewController(addressVC, animated: true)
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
