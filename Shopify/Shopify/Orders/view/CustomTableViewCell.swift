@@ -32,10 +32,14 @@ class CustomTableViewCell: UITableViewCell {
     
     func setOrderValues(order: Orders){
         self.orderName.text = order.name
-        self.numOfItems.text = order.customer?.createdAt
+//        self.numOfItems.text = order.customer?.createdAt
+        if let createdAtString = order.customer?.createdAt {
+            self.numOfItems.text = Utilities.formatDateString(createdAtString)
+        }
         self.orderPrice.text = order.totalPrice
         
         self.orderStatus.text = order.financialStatus
     }
     
+
 }

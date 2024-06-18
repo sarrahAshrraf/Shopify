@@ -33,7 +33,9 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         // Do any additional setup after loading the view.
         self.tableView.register(UINib(nibName: "OrdersDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersDetailsTableViewCell")
         self.shopingTo.text = order?.customer?.firstName
-        self.orderCreatedAt.text = order?.createdAt
+        if let createdAtString = order?.createdAt {
+            self.orderCreatedAt.text = Utilities.formatDateString(createdAtString)
+        }
         self.orderAddress.text = order?.shippingAddress?.address1
     }
     
@@ -64,7 +66,6 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     
-
     /*
     // MARK: - Navigation
 
