@@ -51,7 +51,8 @@ class Constants{
     static let KEY_USER_STATE = "State"
     static let USER_STATE_LOGIN = "Login"
     static let USER_STATE_GUEST = "Guest"
-    
+    static let USER_FirstName = "name"
+
     
     var currencySymbol: String {
       return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD"

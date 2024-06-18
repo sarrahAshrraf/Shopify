@@ -18,6 +18,8 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var back: UIBarButtonItem!
     
+    @IBOutlet weak var orderAddress: UILabel!
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -31,7 +33,10 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         // Do any additional setup after loading the view.
         self.tableView.register(UINib(nibName: "OrdersDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersDetailsTableViewCell")
         self.shopingTo.text = order?.customer?.firstName
-        self.orderCreatedAt.text = order?.createdAt
+        if let createdAtString = order?.createdAt {
+            self.orderCreatedAt.text = Utilities.formatDateString(createdAtString)
+        }
+        self.orderAddress.text = order?.shippingAddress?.address1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +66,6 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     
-
     /*
     // MARK: - Navigation
 

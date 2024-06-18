@@ -50,7 +50,7 @@ struct Orders: Codable {
     let updatedAt: String?
     let customer: Customer?
     let lineItems: [LineItems]?
-    let shippingAddress: BillingAddress?
+    let shippingAddress: Shipping_address?
     
     init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String) {
         self.currency = currency
@@ -98,7 +98,51 @@ struct Orders: Codable {
         
     }
     
-    
+    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: Shipping_address) {
+        self.currency = currency
+        self.lineItems = lineItems
+        self.totalPrice = totalPrice
+        self.number = number
+        self.id = nil
+        self.customer = customer
+        self.shippingAddress = shippingAddress
+        self.updatedAt = nil
+        self.totalWeight = nil
+        self.totalTax = nil
+        self.totalTaxSet = nil
+        self.totalTipReceived = nil
+        self.presentmentCurrency = nil
+        self.processedAt = nil
+        self.sourceName = nil
+        self.subtotalPrice = nil
+        self.subtotalPriceSet = nil
+        self.tags = nil
+        self.taxesIncluded = nil
+        self.test = nil
+        self.token = nil
+        self.totalDiscounts = nil
+        self.totalDiscountsSet = nil
+        self.totalLineItemsPrice = nil
+        self.totalLineItemsPriceSet = nil
+        self.totalOutstanding = nil
+        self.email = nil
+        self.estimatedTaxes = nil
+        self.financialStatus = nil
+        self.name = nil
+        self.orderNumber = nil
+        self.orderStatusUrl = nil
+        self.contactEmail = nil
+        self.createdAt = nil
+        self.currentSubtotalPrice = nil
+        self.currentSubtotalPriceSet = nil
+        self.currentTotalDiscounts = nil
+        self.currentTotalDiscountsSet = nil
+        self.currentTotalPrice = nil
+        self.currentTotalPriceSet = nil
+        self.currentTotalTax = nil
+        self.currentTotalTaxSet = nil
+        
+    }
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case contactEmail = "contact_email"
@@ -146,6 +190,27 @@ struct Orders: Codable {
     }
     
 }
+
+extension Shipping_address {
+    init(from address: Address) {
+        self.first_name = address.first_name
+        self.address1 = address.address1
+        self.phone = address.phone
+        self.city = address.city
+        self.zip = address.zip
+        self.province = address.province
+        self.country = address.country
+        self.last_name = address.last_name
+        self.address2 = address.address2
+        self.company = address.company
+        self.name = address.name
+        self.country_code = address.country_code
+        self.province_code = address.province_code
+    }
+}
+
+
+
 struct Customer: Codable {
     
     let id: Int

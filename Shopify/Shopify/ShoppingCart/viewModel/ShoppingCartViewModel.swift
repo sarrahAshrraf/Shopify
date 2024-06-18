@@ -13,15 +13,16 @@ class ShoppingCartViewModel{
             self.bindResultToViewController()
         }
     }
-    
+    let cartID = UserDefaults.standard.integer(forKey: Constants.cartId)
+
     
     func showCartItems(){
-        let url = URLs.shared.getCartItems(cartId: 945806409901)
+        let url = URLs.shared.getCartItems(cartId: cartID)
         NetworkManger.shared.getData(url: url) { response in
             if let response = response {
                 var lineItems = response.draft_order?.line_items
                 lineItems?.removeAll { $0.title == "dummy" }
-                self.result = (response.draft_order)!
+                self.result = (response.draft_order) 
                 self.result?.line_items = lineItems
                 CartList.cartItems = lineItems ?? []
                 print("Fetched cart: \(response.draft_order)")
@@ -55,7 +56,7 @@ class ShoppingCartViewModel{
             print("JSON Payload: \(jsonString)")
         }
 
-        NetworkManger.shared.putData(path: URLs.shared.getCartItems(cartId: 945806409901), parameters: params) { response, code in
+        NetworkManger.shared.putData(path: URLs.shared.getCartItems(cartId: cartID), parameters: params) { response, code in
             if let response = response {
                 print("Draft order updated successfully: \(response)")
             } else {
@@ -67,12 +68,13 @@ class ShoppingCartViewModel{
     
     func updateShippingAddress(newAddress: Shipping_address) {
         result?.shipping_address = newAddress
+        print("UPDATE SHIPING")
         print(newAddress)
         editCart()
     }
     
     func getCartItems() {
-        let url = URLs.shared.getCartItems(cartId: 945806409901)
+        let url = URLs.shared.getCartItems(cartId: cartID)
         NetworkManger.shared.getData(url: url) { response in
             if var lineItems = response?.draft_order?.line_items {
                 for (index, lineItem) in lineItems.enumerated() {

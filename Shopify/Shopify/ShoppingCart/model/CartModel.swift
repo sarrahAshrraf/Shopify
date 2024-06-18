@@ -69,8 +69,6 @@ struct Shipping_address : Codable {
     let last_name : String?
     let address2 : String?
     let company : String?
-    let latitude : String?
-    let longitude : String?
     let name : String?
     let country_code : String?
     let province_code : String?

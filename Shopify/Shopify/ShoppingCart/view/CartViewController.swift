@@ -8,9 +8,13 @@
 import UIKit
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , CartCellDelegate{
+
+    
     
     @IBOutlet weak var emptyTableImg: UIImageView!
-    
+    let defaults = UserDefaults.standard
+    var currencyRate: Double = 1.0
+    var currencySymbol: String = "USD"
     @IBOutlet weak var checkOutBtn: UIButton!
     func updateEmptyCartImageVisibility() {
         //        if ((viewModel.result?.line_items?.isEmpty) != nil) {
@@ -30,48 +34,75 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    @IBAction func checkOutBtn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
-        if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
-            let navController = UINavigationController(rootViewController: checkOutVC)
-            checkOutVC.total = cartPrice
-            //           navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated: true, completion: nil)
+    func setupNavigationBar() {
+        self.title = "Cart"
+        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            
+            self.navigationItem.leftBarButtonItem = backButton
         }
     }
+    
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    @IBAction func checkOutBtn(_ sender: Any) {
+        if let summaryVC = self.storyboard?.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
+            
+            summaryVC.total = cartPrice
+            
+            self.navigationController?.pushViewController(summaryVC, animated: true)
+        } else {
+            print("Could not find CartViewController in ShoppingCartStoryboard")
+        }
+    }
+    
+    
     @IBOutlet weak var priceLavel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var itemsTableView: UITableView!
     var cartPrice  = 0.0{
         didSet{
-            priceLavel.text =  String(cartPrice)
+            priceLavel.text = String(format: "\(currencySymbol) %.2f", cartPrice)
         }
     }   
     var viewModel : ShoppingCartViewModel!
     var totalPrice = 0.0
     override func viewWillAppear(_ animated: Bool) {
         
-        
+        setupNavigationBar()
+        updateEmptyCartImageVisibility()
         viewModel.showCartItems()
         viewModel.getCartItems()
-        updateEmptyCartImageVisibility()
-        showData()
-        prepareCartPrice()
+        updateCartData()
+//        showData()
+//        prepareCartPrice()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsTableView.dataSource = self
         itemsTableView.delegate = self
-        
+//        setupNavigationBar()
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
         viewModel = ShoppingCartViewModel()
-        viewModel.showCartItems()
-        viewModel.getCartItems()
-        updateEmptyCartImageVisibility()
-        showData()
+        viewModel.bindResultToViewController = { [weak self] in
+                  self?.updateCartData()
+              }
+              updateCartData()
+//        viewModel.showCartItems()
+//        viewModel.getCartItems()
+//        showData()
+//        prepareCartPrice()
         
-        prepareCartPrice()
-        
+    }
+    func updateCartData() {
+        DispatchQueue.main.async {
+            self.prepareCartPrice()
+            self.itemsTableView.reloadData()
+            self.updateEmptyCartImageVisibility()
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
@@ -88,10 +119,19 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func prepareCartPrice(){
+    func prepareCartPrice() {
         totalPrice = 0.0
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+            currencySymbol = symbol
+        }
+
         for item in CartList.cartItems {
-            totalPrice += (Double(item.price!) ?? 0.0) * Double(item.quantity!)
+            if let itemPrice = Double(item.price ?? "0.0"), let itemQuantity = item.quantity {
+                totalPrice += (itemPrice * currencyRate) * Double(itemQuantity)
+            }
         }
         cartPrice = totalPrice
         itemsTableView.reloadData()
@@ -136,6 +176,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         present(alert, animated: true, completion: nil)
     }
 
+    
+//    func updateCartPrice() {
+//        prepareCartPrice()
+//    }
 //    func deleteItem(_ cell: CartCell) {
 //        if let indexPath = itemsTableView.indexPath(for: cell) {
 //            let deletedItem = CartList.cartItems.remove(at: indexPath.row)

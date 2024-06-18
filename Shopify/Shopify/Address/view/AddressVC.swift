@@ -12,9 +12,11 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     var coordinator: AddressCoordinatorP?
     let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
     var isGuestUser: Bool = false
-
     @IBOutlet weak var addAddressBtn: UIBarButtonItem!
     var shipmentAdress : Bool = false
+    var delegate : AddressSelectionDelegate!
+    var editAdressVM = AddNewAddressViewModel()
+
     @IBAction func backBtn(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
 
@@ -36,7 +38,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         isGuestUser = (state == Constants.USER_STATE_GUEST)
         
         if isGuestUser {
-            updateBackgroundView()
+            updateBackgroundViewForGuestUser()
             addAddressBtn.isEnabled = false
 
         }
@@ -47,6 +49,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
 
@@ -63,6 +67,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
         addressTableView.separatorStyle = .none
@@ -92,8 +98,22 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
               coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
             print("inside select row")
           }else {
-//                     delegate?.didSelectAddress(viewModel.addresses[indexPath.row])
+              var selected_address = viewModel.addresses[indexPath.row]
+              selected_address.default = true
+              editAdressVM.editAddress(customerID: customerId, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: selected_address) { success in
+                  print("selectedAddress")
+                  DispatchQueue.main.async {
+                      if success {
+                          print("Address updated successfully")
+                          self.delegate?.didSelectAddress(selected_address)
+                      } else {
+                          print("Error in updating address")
+                      }
+                  }
+              }
+//                     delegate?.didSelectAddress(selected_address)
 //              print(viewModel.addresses[indexPath.row])
+              self.navigationController?.popViewController(animated: true)
 //              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
 //              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
 //                  let navController = UINavigationController(rootViewController: checkOutVC)
@@ -138,9 +158,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     func didUpdateAddress() {
           viewModel.fetchCustomerAddress(customerID: customerId)
       }
-    
-    
-    private func updateBackgroundView() {
+    private func updateBackgroundViewForGuestUser() {
         let signUpLabel = UILabel()
         signUpLabel.text = "Please, sign up first."
         signUpLabel.textColor = .gray
@@ -148,10 +166,31 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
         signUpLabel.textAlignment = .center
         signUpLabel.font = UIFont.systemFont(ofSize: 16)
         signUpLabel.sizeToFit()
-       addressTableView.backgroundView = signUpLabel
-       
+        addressTableView.backgroundView = signUpLabel
     }
+    
+    private func updateBackgroundView() {
+        if viewModel.addresses.isEmpty {
+            let backgroundImageView = UIImageView(image: UIImage(named: "noData"))
+            backgroundImageView.contentMode = .center
+            addressTableView.backgroundView = backgroundImageView
+        } else {
+            addressTableView.backgroundView = nil
+        }
     }
+    
+//    private func updateBackgroundView() {
+//        let signUpLabel = UILabel()
+//        signUpLabel.text = "Please, sign up first."
+//        signUpLabel.textColor = .gray
+//        signUpLabel.numberOfLines = 0
+//        signUpLabel.textAlignment = .center
+//        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+//        signUpLabel.sizeToFit()
+//       addressTableView.backgroundView = signUpLabel
+//       
+//    }
+}
 
   
 
