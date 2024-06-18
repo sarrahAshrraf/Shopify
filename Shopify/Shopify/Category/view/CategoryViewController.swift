@@ -31,6 +31,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         categorySegmented.selectedSegmentIndex = 0
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
+        fetchCategoryData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
