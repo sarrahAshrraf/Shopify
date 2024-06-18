@@ -20,7 +20,6 @@ class CheckOutViewModel{
             
         }
     }
-//    TODO: shiiping addddddressssssss
     func postOrder(order: Orders) {
         let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil, base: nil, rates: nil)
         
@@ -51,24 +50,28 @@ class CheckOutViewModel{
     
     
     func updateVariantAfterPostOrder(){
-        let items = CartList.cartItems
-        for item in items {
-            var inventoryItemId = (item.properties?[0].value?.split(separator: "$")[1])!
-            var stockCount = Int(item.properties?[0].name ?? "1") ?? 1
-            let inventoryLevel = InventoryLevel(inventoryItemId: Int(inventoryItemId), locationId: 0000000, available: (stockCount - item.quantity!))
+        let shoppingItems = CartList.cartItems
+        for item in shoppingItems {
+            var itemId = (item.properties?[0].value?.split(separator: "$")[1])!
+            var itemCountInStock = Int(item.properties?[0].name ?? "1") ?? 1
+            let inventoryLevel = InventoryLevel(inventoryItemId: Int(itemId), locationId: 72172896429, available: (itemCountInStock - (item.quantity ?? 0)))
             NetworkManger.shared.postData(path: URLs.shared.postInventoryURL(), parameters: JSONCoding().encodeToJsonFromInvLevel(objectClass: inventoryLevel)!) {[weak self] response, code in
                 if let code = code {
                                     if code == 200 {
-                                        print("Inventory updated successfully for item ID: \(inventoryItemId)")
+                                        print("Inventory updated successfully for item ID: \(itemId)")
                                     } else {
-                                        print("Failed to update inventory for item ID: \(inventoryItemId). HTTP Status Code: \(code)")
+                                        print("Failed to update inventory for item ID: \(itemId). HTTP Status Code: \(code)")
                                     }
                                 }
                             }
                         }
                     }
     
-    func emptyCart(){}
+    
+    func emptyCart(){
+        CartList.cartItems = []
+        
+    }
 }
 
 
