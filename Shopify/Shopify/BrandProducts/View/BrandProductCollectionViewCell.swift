@@ -18,7 +18,7 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
     var favoritesViewModel: FavoritesViewModel!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-      var currencySymbol: String = "USD"
+    var currencySymbol: String = "USD"
     
     override func awakeFromNib() {
         super.awakeFromNib()

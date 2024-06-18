@@ -4,8 +4,8 @@ import Dispatch
 
 class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    let defaultColor = UIColor.black
-    let selectedColor = UIColor.gray
+    let defaultColor = UIColor.gray
+    let selectedColor = UIColor.black
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categorySegmented: UISegmentedControl!
@@ -15,6 +15,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var t_shirt: UIBarButtonItem!
     @IBOutlet weak var accesories: UIBarButtonItem!
     
+    
+    var currencySymbol: String = "USD"
+    
+    var currencyRate: Double = 1.0
     var isFiltered: Bool = false
     var allProducts: [Product] = []
     var categoryViewModel: CategoryViewModel!
@@ -31,12 +35,20 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         categorySegmented.selectedSegmentIndex = 0
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
+        updateSegmentedControlColors()
         fetchCategoryData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        let defaults = UserDefaults.standard
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+            currencySymbol = symbol
+        }
+        print(currencySymbol)
         categoryViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
@@ -45,13 +57,29 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         self.categoryViewModel.getAllProducts()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            
             self.fetchCategoryData()
+            self.collectionView.reloadData()
         }
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
+        updateSegmentedControlColors()
         fetchCategoryData()
     }
+    
+    func updateSegmentedControlColors() {
+            let selectedAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: selectedColor]
+            let defaultAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: defaultColor]
+            
+            for index in 0..<categorySegmented.numberOfSegments {
+                if index == categorySegmented.selectedSegmentIndex {
+                    categorySegmented.setTitleTextAttributes(selectedAttributes, for: .selected)
+                } else {
+                    categorySegmented.setTitleTextAttributes(defaultAttributes, for: .normal)
+                }
+            }
+        }
     
     func fetchCategoryData() {
         print("Segment Index: \(categorySegmented.selectedSegmentIndex)")
@@ -183,10 +211,23 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
         
+        
         if isFiltered {
             cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
+            if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
+                if let price = Double(variant.price) {
+                    let convertedPrice = price * currencyRate
+                    cell.productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
+                }
+            }
         } else {
             cell.setValues(product: self.allProducts[indexPath.row])
+            if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
+                if let price = Double(variant.price) {
+                    let convertedPrice = price * currencyRate
+                    cell.productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
+                }
+            }
         }
         
         return cell

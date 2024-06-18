@@ -235,7 +235,7 @@
         <!--Home-->
         <scene sceneID="uhg-Pu-9oG">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="iE8-Yz-Gc4" customClass="HomeViewController" customModule="Shopify" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeVC" id="iE8-Yz-Gc4" customClass="HomeViewController" customModule="Shopify" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OlM-Yo-JXd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,7 +279,7 @@
                                         <rect key="frame" x="76" y="36" width="369" height="98"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQT-kW-gs4">
-                                                <rect key="frame" x="326" y="63.333333333333329" width="51.666666666666686" height="34"/>
+                                                <rect key="frame" x="326" y="63.333333333333329" width="50.666666666666686" height="34"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
