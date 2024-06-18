@@ -11,48 +11,111 @@ import Kingfisher
 
 class ProductDetailsViewController: UIViewController {
     
-    @IBOutlet weak var minusBtn: UIButton!
-    @IBOutlet weak var addBtn: UIButton!
-    @IBOutlet weak var productImage: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-   
-    @IBOutlet weak var counterTextField: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var ImagesCollectionView: UICollectionView!
     @IBOutlet weak var productName: UILabel!
-    @IBOutlet weak var productVendorAndType: UILabel!
-    
-    
-    @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var stockCount: UILabel!
+    @IBOutlet weak var productDescriptionLabel: UILabel!
+    @IBOutlet weak var productBrand: UILabel!
+    @IBOutlet weak var productSizeCollectionView: UICollectionView!
+    @IBOutlet weak var productColorCollectionView: UICollectionView!
+    @IBOutlet weak var productPriceLabel: UILabel!
+    @IBOutlet weak var productStockCount: UILabel!
+    @IBOutlet weak var steperCount: UILabel!
+    @IBOutlet weak var addToCartView: UIView!
+    @IBOutlet weak var bottomConstriant: NSLayoutConstraint!
+    @IBOutlet weak var favoriteBtnOutlet: UIButton!
+    @IBOutlet weak var minusBtnOutlet: UIButton!
+    @IBOutlet weak var addBtnOutlet: UIButton!
+        
+    var sizeCollectionHandler = SizeCollectionDelegatesHandling()
+    var colorCollectionHandler = ColorCollectionDelegatesHandling()
     
     var viewModel: ProductDetailsViewModel!
     var customerID = 7309504250029
-    var generalViewModel: ShoppingCartViewModel!
+    var shoppingCartViewModel: ShoppingCartViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     var orderCount = 1
+    var defaults: UserDefaults!
     var productInCart = false
-//MARK: To be changed color and sizeeee values !!!!
-    var selectedSize: String = "10"
-        var selectedColor =  "white"
+    var product:Product!
+    var imagesArray : [String] = []
+    var currentIndex = 0
+    var timer:Timer?
+    
+    
+    var selectedSize: String!{
+        didSet{
+            var colorArray:[String] = []
+            for variant in product.variants! {
+                if variant.option1 == selectedSize{
+                    colorArray.append(variant.option2!)
+                }
+            }
+            colorCollectionHandler.colorArr = colorArray
+            productColorCollectionView.reloadData()
+            if selectedSize != nil{
+                productPriceLabel.text = "Select color"
+                productStockCount.text = "Select color"
+            }
+            selectedColor = nil
+            minusBtnOutlet.isEnabled = false
+            addToCartView.isHidden = true
+            steperCount.text = "1"
+            bottomConstriant.constant = 16
+        }
+    }
+    var selectedColor: String!{
+        didSet{
+            checkPriceAndAvailability()
+            if selectedSize != nil && selectedColor != nil {
+                addToCartView.isHidden = false
+                bottomConstriant.constant = 85
+                
+            }
+        }
+    }
                 
     override func viewDidLoad() {
         super.viewDidLoad()
-        generalViewModel = ShoppingCartViewModel()
-        //viewModel = ProductDetailsViewModel()
+        shoppingCartViewModel = ShoppingCartViewModel()
+        favoritesViewModel = FavoritesViewModel()
         fetchData()
         showData()
+        setUpProductImagesArr()
+        setUpSizeCollectionCell()
+        setUpColorCollectionCell()
+        setUpCollectionCells()
+        playTimer()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        addToCartView.isHidden = true
+        bottomConstriant.constant = 16
+        steperCount.text = "1"
+        selectedSize = nil
+        selectedColor = nil
+        colorCollectionHandler.colorArr = product.options?[1].values ?? []
+        resetUI()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        productColorCollectionView.reloadData()
+        productSizeCollectionView.reloadData()
+        ImagesCollectionView.reloadData()
+    }
+    
+    
+    func setUpCollectionCells(){
+        ImagesCollectionView.register(UINib(nibName: "ProductImageCell", bundle: nil), forCellWithReuseIdentifier: "ProductImageCell")
         
-        // Do any additional setup after loading the view.
+        productSizeCollectionView.register(UINib(nibName: "VariantCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "VariantCollectionViewCell")
+        
+        productColorCollectionView.register(UINib(nibName: "VariantCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "VariantCollectionViewCell")
     }
     
     func fetchData(){
-        print("success")
         viewModel.getItems()
-        print("viewModel.result?.variants")
-
-        print(viewModel.result?.variants)
-        print(viewModel.result?.variants?.first?.option1)
-        print(viewModel.result?.variants?.first?.option2)
-
-
     }
     
     func showData(){
@@ -60,28 +123,44 @@ class ProductDetailsViewController: UIViewController {
 
         DispatchQueue.main.async {
             self?.productName.text = self?.viewModel.result?.title
-            self?.descriptionLabel.text = self?.viewModel.result?.bodyHtml
-            self?.price.text = self?.viewModel.result?.variants?.first?.price
-            self?.productVendorAndType.text = (self?.viewModel.result?.vendor ?? "") + "," + (self?.viewModel.result?.productType ?? "")
-
-            self?.productImage.kf.setImage(with: URL(string: self?.viewModel.result?.image?.src ?? " " ),
-                                          placeholder: UIImage(named: Constants.noImage))
-            self?.stockCount.text = "\(self?.viewModel.result?.variants?.first?.inventoryQuantity ?? 0)"
-
+            self?.productDescriptionLabel.text = self?.viewModel.result?.bodyHtml
+            self?.productBrand.text = (self?.viewModel.result?.vendor ?? "") + "," + (self?.viewModel.result?.productType ?? "")
+            
         }
       }
+    }
+    
+    func setUpProductImagesArr(){
+        for image in product.images!{
+            imagesArray.append(image.src!)
+        }
+        self.pageControl.numberOfPages = imagesArray.count
+    }
+
+    func setUpSizeCollectionCell(){
+        sizeCollectionHandler.viewController = self
+        productSizeCollectionView.dataSource = sizeCollectionHandler
+        productSizeCollectionView.delegate = sizeCollectionHandler
+        sizeCollectionHandler.sizeArr = product.options?[0].values ?? []
+    }
+    
+    func setUpColorCollectionCell(){
+        colorCollectionHandler.viewController = self
+        productColorCollectionView.dataSource = colorCollectionHandler
+        productColorCollectionView.delegate = colorCollectionHandler
+        colorCollectionHandler.colorArr = product.options?[1].values ?? []
     }
     func checkPriceAndAvailability(){
         if selectedSize == nil || selectedColor == nil {}
         else{
-            for variant in viewModel.result?.variants ?? []{
-                let variantName = "\(selectedSize) / \(selectedColor)"
+            for variant in product.variants!{
+                let variantName = "\(selectedSize!) / \(selectedColor!)"
                 if variant.title! == variantName{
-                    price.text = String(variant.price)
+                    productPriceLabel.text = String(variant.price)
                     if variant.inventoryQuantity == nil || variant.inventoryQuantity == 0 {
-                        stockCount.text = "Not Available"
+                        productStockCount.text = "Not Available"
                     }else{
-                        stockCount.text = "\(variant.inventoryQuantity!) In Stock"
+                        productStockCount.text = "\(variant.inventoryQuantity!) In Stock"
                     }
                 }
             }
@@ -94,8 +173,8 @@ class ProductDetailsViewController: UIViewController {
        //MARK: TODO: get user id from userDeafulttttt
         
         if customerID != -1{
-            orderCount = Int(counterTextField.text!)!
-            let variantName = "\(selectedSize) / \(selectedColor)"
+            orderCount = Int(steperCount.text!)!
+            let variantName = "\(selectedSize!) / \(selectedColor!)"
             var variantId = 0
             for variant in viewModel.result?.variants ?? [] {
                 if variant.title ?? "" == variantName {
@@ -119,19 +198,19 @@ class ProductDetailsViewController: UIViewController {
         }
     }
     
-    @IBAction func minusBtn(_ sender: Any) {
-        let count = Int(counterTextField.text ?? "1")! - 1
-        counterTextField.text = String(count)
+    @IBAction func minusButton(_ sender: Any) {
+        let count = Int(steperCount.text ?? "1")! - 1
+        steperCount.text = String(count)
         if count != 1 {
-            minusBtn.isEnabled = true
+            minusBtnOutlet.isEnabled = true
         }
     }
     
 
-    @IBAction func addBtn(_ sender: Any) {
-        let count = Int(counterTextField.text ?? "1")
-        counterTextField.text = String((count ?? 1) + 1)
-        minusBtn.isEnabled = true
+    @IBAction func addButton(_ sender: Any) {
+        let count = Int(steperCount.text ?? "1")
+        steperCount.text = String((count ?? 1) + 1)
+        minusBtnOutlet.isEnabled = true
     }
     
     func addVariantToOrders(variantName: String){
@@ -140,8 +219,8 @@ class ProductDetailsViewController: UIViewController {
                 if variant.inventoryQuantity! > 3 && orderCount <= variant.inventoryQuantity!/3 || variant.inventoryQuantity! <= 3 && orderCount <= variant.inventoryQuantity! {
                     let lineItem = LineItems(name: viewModel.result?.title,price: variant.price, productId: viewModel.result?.id , quantity: orderCount, variantId: variant.id, variantTitle: variantName ,vendor: viewModel.result?.vendor, properties: [Properties(name: String(variant.inventoryQuantity!), value: "\((viewModel.result?.image?.src)!)$\(variant.inventoryItemId!)")])
                     CartList.cartItems.append(lineItem)
-                    generalViewModel.result?.line_items?.append(lineItem)
-                    generalViewModel.editCart()
+                    shoppingCartViewModel.result?.line_items?.append(lineItem)
+                    shoppingCartViewModel.editCart()
                     orderCount = 1
                 }else{
                     print("you can not")
@@ -176,16 +255,14 @@ class ProductDetailsViewController: UIViewController {
     
     func updateCartAmountAndResetCounter(variantIndex: Int){
         CartList.cartItems[variantIndex].quantity! += orderCount
-        generalViewModel.result?.line_items?[variantIndex].quantity! += orderCount
+        shoppingCartViewModel.result?.line_items?[variantIndex].quantity! += orderCount
         orderCount = 1
-        generalViewModel.editCart()
+        shoppingCartViewModel.editCart()
     }
     
     func presentAmountErrorAlert(variantIndex: Int){
         let currentAmountInCart = CartList.cartItems[variantIndex].quantity!
-//        let currentAmountIncart = generalViewModel.result?.line_items?[variantIndex].quantity ?? 0
         let totalAmountInStock = Int(CartList.cartItems[variantIndex].properties?[0].name ?? "1") ?? 1
-//        let totalAmountInstock = Int(generalViewModel.result?.line_items?[variantIndex].properties?[0].name ?? "1") ?? 1
         var cartCount = 0
         if totalAmountInStock <= 3{
             cartCount = totalAmountInStock
@@ -199,4 +276,74 @@ class ProductDetailsViewController: UIViewController {
 
     }
     
+    func resetUI(){
+        addToCartView.isHidden = true
+        selectedSize = nil
+        selectedColor = nil
+        colorCollectionHandler.colorArr = product.options?[1].values ?? []
+        productSizeCollectionView.reloadData()
+        productPriceLabel.text = "Select Size"
+        productStockCount.text = "Select Size"
+    }
+    
+    
+    @IBAction func favouriteButton(_ sender: UIButton) {
+        if favoriteBtnOutlet.currentImage == UIImage(systemName: Constants.heart) {
+            let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
+            favoritesViewModel.addProduct(product: localProduct)
+            self.favoritesViewModel.getAllProducts()
+            favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            
+        } else {
+            let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) { [weak self] action in
+                self?.favoritesViewModel.removeProduct(id : self!.product.id)
+                self?.favoritesViewModel.getAllProducts()
+                self?.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
+            }
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    @objc func getCurrentIndex(){
+        if currentIndex != imagesArray.count-1 {
+            currentIndex += 1
+        }else{
+            currentIndex = 0
+        }
+        pageControl.currentPage = currentIndex
+        ImagesCollectionView.scrollToItem(at: IndexPath(row: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    func playTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.getCurrentIndex), userInfo: nil, repeats: true)
+    }
+    
 }
+
+
+extension ProductDetailsViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imagesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
+        cell.productImage.kf.setImage(with: URL(string: imagesArray[indexPath.row]),
+                                      placeholder: UIImage(named: Constants.noImage))
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ImagesCollectionView.frame.width, height: ImagesCollectionView.frame.height)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    
+    
+}
+
+
+
+
