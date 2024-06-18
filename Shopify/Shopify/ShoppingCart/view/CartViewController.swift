@@ -73,25 +73,36 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         
         setupNavigationBar()
+        updateEmptyCartImageVisibility()
         viewModel.showCartItems()
         viewModel.getCartItems()
-        updateEmptyCartImageVisibility()
-        showData()
-        prepareCartPrice()
+        updateCartData()
+//        showData()
+//        prepareCartPrice()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsTableView.dataSource = self
         itemsTableView.delegate = self
-        setupNavigationBar()
+//        setupNavigationBar()
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
         viewModel = ShoppingCartViewModel()
-        viewModel.showCartItems()
-        viewModel.getCartItems()
-        updateEmptyCartImageVisibility()
-        showData()
-        prepareCartPrice()
+        viewModel.bindResultToViewController = { [weak self] in
+                  self?.updateCartData()
+              }
+              updateCartData()
+//        viewModel.showCartItems()
+//        viewModel.getCartItems()
+//        showData()
+//        prepareCartPrice()
         
+    }
+    func updateCartData() {
+        DispatchQueue.main.async {
+            self.prepareCartPrice()
+            self.itemsTableView.reloadData()
+            self.updateEmptyCartImageVisibility()
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175

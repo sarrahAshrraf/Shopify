@@ -74,6 +74,7 @@
 		E735FA222C1A048B001FCD9A /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735FA212C1A048B001FCD9A /* PaymentVC.swift */; };
 		E759B3792C2017C700C33B14 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759B3782C2017C700C33B14 /* SummaryViewController.swift */; };
 		E759B37B2C201A8100C33B14 /* SummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759B37A2C201A8100C33B14 /* SummaryCollectionViewCell.swift */; };
+		E761D8E92C2206E900C93F36 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E761D8E82C2206E900C93F36 /* Utilities.swift */; };
 		E764E0052C139B1800740DFA /* Address_SB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E764E0042C139B1800740DFA /* Address_SB.storyboard */; };
 		E764E0092C139BAC00740DFA /* AddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E0082C139BAC00740DFA /* AddressVC.swift */; };
 		E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E00A2C139BEC00740DFA /* AddNewAddressVC.swift */; };
@@ -198,6 +199,7 @@
 		E735FA212C1A048B001FCD9A /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		E759B3782C2017C700C33B14 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		E759B37A2C201A8100C33B14 /* SummaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCollectionViewCell.swift; sourceTree = "<group>"; };
+		E761D8E82C2206E900C93F36 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		E764E0042C139B1800740DFA /* Address_SB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Address_SB.storyboard; sourceTree = "<group>"; };
 		E764E0082C139BAC00740DFA /* AddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressVC.swift; sourceTree = "<group>"; };
 		E764E00A2C139BEC00740DFA /* AddNewAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAddressVC.swift; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 				8B073EC52C14B33300629214 /* LottieAnimations-JSON */,
 				E7FB2C7E2C10D309003A8D9D /* Constants.swift */,
 				8BB686412C1B48F70051A015 /* Alert.swift */,
+				E761D8E82C2206E900C93F36 /* Utilities.swift */,
 			);
 			path = Utilites;
 			sourceTree = "<group>";
@@ -1061,6 +1064,7 @@
 				8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */,
 				8B95A6162C11AC1C00D5A592 /* Variants.swift in Sources */,
 				E7FB2C772C10D190003A8D9D /* CartCell.swift in Sources */,
+				E761D8E92C2206E900C93F36 /* Utilities.swift in Sources */,
 				E7FB2C8D2C10E851003A8D9D /* ProfileViewController.swift in Sources */,
 				E6C97E042C0B937800B2CA81 /* BrandsCollectionViewCell.swift in Sources */,
 				E60896802C1CE42000FB9AFA /* OrdersDetailsTableViewCell.swift in Sources */,

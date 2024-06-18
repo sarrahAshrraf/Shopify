@@ -35,6 +35,8 @@ class LoginViewController: UIViewController {
                 exists = true
                 customerId = user.id
                 defaults.setValue(user.id, forKey: Constants.customerId)
+                defaults.setValue(945806409901, forKey: Constants.cartId)
+
                 defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
                 defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
               print("NAAAAME")
