@@ -305,24 +305,24 @@
                                         <rect key="frame" x="76" y="36" width="369" height="98"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQT-kW-gs4">
-                                                <rect key="frame" x="325.66666666666669" y="63.333333333333329" width="51.333333333333314" height="34.333333333333329"/>
+                                                <rect key="frame" x="326.33333333333331" y="63.333333333333329" width="51.333333333333314" height="34.333333333333329"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKo-E0-L5q">
-                                                <rect key="frame" x="16" y="63.333333333333329" width="50" height="34.333333333333329"/>
+                                                <rect key="frame" x="15.999999999999996" y="63.333333333333329" width="50.666666666666657" height="34.333333333333329"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cB5-xt-20i">
-                                                <rect key="frame" x="169.66666666666666" y="69" width="53.666666666666657" height="23"/>
+                                                <rect key="frame" x="170.33333333333334" y="69" width="53.666666666666657" height="23"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioy-4H-oDx">
-                                                <rect key="frame" x="263.66666666666669" y="63.333333333333329" width="54" height="34.333333333333329"/>
+                                                <rect key="frame" x="264.33333333333331" y="63.333333333333329" width="54" height="34.333333333333329"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="cart" catalog="system"/>
@@ -330,15 +330,13 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="ioy-4H-oDx" firstAttribute="centerY" secondItem="cB5-xt-20i" secondAttribute="centerY" id="2ms-Nf-MXb"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="top" secondItem="chd-2C-Vnt" secondAttribute="top" constant="63.333333333333336" id="9S6-jI-P4F"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="leading" secondItem="chd-2C-Vnt" secondAttribute="leading" constant="16" id="GEL-FU-hRN"/>
-                                            <constraint firstItem="cB5-xt-20i" firstAttribute="centerX" secondItem="chd-2C-Vnt" secondAttribute="centerX" id="LgN-Nk-Hqz"/>
                                             <constraint firstItem="cB5-xt-20i" firstAttribute="leading" secondItem="TKo-E0-L5q" secondAttribute="trailing" constant="103.66666666666666" id="Zlb-h8-Lo7"/>
                                             <constraint firstItem="TKo-E0-L5q" firstAttribute="centerY" secondItem="cB5-xt-20i" secondAttribute="centerY" id="fdf-gU-KLc"/>
+                                            <constraint firstItem="ioy-4H-oDx" firstAttribute="bottom" secondItem="TKo-E0-L5q" secondAttribute="bottom" id="hBL-QQ-Zai"/>
                                             <constraint firstItem="ioy-4H-oDx" firstAttribute="baseline" secondItem="uQT-kW-gs4" secondAttribute="baseline" id="lJS-s5-rys"/>
                                             <constraint firstItem="uQT-kW-gs4" firstAttribute="leading" secondItem="ioy-4H-oDx" secondAttribute="trailing" constant="8" id="leQ-QA-WfW"/>
-                                            <constraint firstItem="uQT-kW-gs4" firstAttribute="centerY" secondItem="cB5-xt-20i" secondAttribute="centerY" id="q18-Me-u9O"/>
                                             <constraint firstItem="uQT-kW-gs4" firstAttribute="leading" secondItem="cB5-xt-20i" secondAttribute="trailing" constant="102.33333333333334" id="qyO-Xh-hZV"/>
                                         </constraints>
                                     </view>
