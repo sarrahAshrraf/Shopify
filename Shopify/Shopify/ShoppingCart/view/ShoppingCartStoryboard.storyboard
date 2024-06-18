@@ -189,7 +189,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total price:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ln5-DO-zwd">
-                                <rect key="frame" x="16" y="470" width="84" height="21"/>
+                                <rect key="frame" x="16" y="494" width="84" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -210,14 +210,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVx-Xc-1Cf">
-                                <rect key="frame" x="217" y="470" width="156" height="21"/>
+                                <rect key="frame" x="217" y="494" width="156" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OjZ-rG-CKS">
-                                <rect key="frame" x="105" y="543" width="183" height="35"/>
+                                <rect key="frame" x="105" y="567" width="183" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.15442322410000001" green="0.60173176240000004" blue="0.26625035870000002" alpha="0.57851176360000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
@@ -246,6 +246,20 @@
                                     <action selector="applyCopounBtn:" destination="MEh-X8-TUE" eventType="touchUpInside" id="vXr-kK-uzj"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Taxes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfT-qI-l92">
+                                <rect key="frame" x="16" y="456" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVk-nZ-Azc">
+                                <rect key="frame" x="276" y="456" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VQe-bN-TEf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -256,6 +270,7 @@
                         <outlet property="dicountAMountLabel" destination="EbK-xd-8uU" id="0VJ-07-F6a"/>
                         <outlet property="orderCollectionView" destination="9nO-g7-Hhh" id="aWI-E4-4Ua"/>
                         <outlet property="orderPriceLabel" destination="EHU-BJ-gFr" id="ci1-Rr-xvc"/>
+                        <outlet property="taxesLabel" destination="WVk-nZ-Azc" id="fCF-1W-3zv"/>
                         <outlet property="totalPriceLabel" destination="lVx-Xc-1Cf" id="swX-Q7-2dk"/>
                     </connections>
                 </viewController>

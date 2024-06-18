@@ -23,6 +23,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
 
+    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var applePayBtn: UIButton!
     @IBOutlet weak var cashOnBtn: UIButton!
     @IBOutlet weak var discountValue: UILabel!
@@ -46,7 +47,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
         addressVM.bindToVC = { [weak self] in
-            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
+            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "no address was added"
             
         }
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
@@ -187,9 +188,15 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         orderPrice.text = String(format: "\(currencySymbol) %.2f", total)
         
         if let totalCartPrice = cartViewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
-            self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice)
+            self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
         } else {
             totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
+        }
+        
+        if let totalTax = cartViewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
+            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
+        } else {
+            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
         }
     }
 

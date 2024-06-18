@@ -9,6 +9,7 @@ import UIKit
 
 class SummaryViewController: UIViewController {
 
+    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var orderCollectionView: UICollectionView!
     @IBOutlet weak var copounTF: UITextField!
     let defaults = UserDefaults.standard
@@ -71,6 +72,11 @@ class SummaryViewController: UIViewController {
             totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
         } else {
             totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+        }
+        if let totalTax = viewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
+            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
+        } else {
+            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
         }
     }
 
