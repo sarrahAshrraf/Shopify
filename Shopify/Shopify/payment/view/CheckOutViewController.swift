@@ -9,8 +9,7 @@ import UIKit
 import PassKit
 
 
-/* MARK: 
-navigation to home byzhar mn 8eer nav bar
+/* MARK:  navigation to home byzhar mn 8eer TAP BAR
 - discount
  - apple pay
  */
@@ -46,11 +45,11 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
-        addressVM.bindToVC = { [weak self] in
-            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "no address was added"
-            
-        }
-        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+//        addressVM.bindToVC = { [weak self] in
+//            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "no address was added"
+//            
+//        }
+        getDeafultAddress()
         bindResultToVC()
         updatePriceLabels()
         
@@ -165,6 +164,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                 self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
             }
         }
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
     }
     
     @IBAction func PurcasheVtn(_ sender: Any) {

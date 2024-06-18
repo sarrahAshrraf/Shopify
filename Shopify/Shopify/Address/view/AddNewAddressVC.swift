@@ -11,6 +11,7 @@ class AddNewAddressVC: UIViewController {
       var isEditingAddress = true
        var addressID: Int?
     weak var delegate: AddressProtocol?
+    weak var checkOutDelegte : AddressSelectionDelegate!
     var isDefaultAddress = false
     let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
     @IBOutlet weak var switchDeafultBtn: UISwitch!
@@ -81,7 +82,7 @@ class AddNewAddressVC: UIViewController {
                                print(address)
                                print("Address updated successfully")
                                self.delegate?.didUpdateAddress()
-
+                               self.checkOutDelegte?.didSelectAddress(address)
                            } else {
                                print("Error in updating address")
                            }
@@ -93,7 +94,7 @@ class AddNewAddressVC: UIViewController {
                            if success {
                                print("Address posted successfully")
                                self.delegate?.didUpdateAddress()
-
+                               self.checkOutDelegte?.didSelectAddress(address)
                            } else {
                                print("Error in posting address")
                            }
