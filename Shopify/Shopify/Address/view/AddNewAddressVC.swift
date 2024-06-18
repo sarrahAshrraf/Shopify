@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddNewAddressVC: UIViewController {
+class AddNewAddressVC: UIViewController, MapSelectionDelegate {
       var isEditingAddress = true
        var addressID: Int?
     weak var delegate: AddressProtocol?
@@ -171,7 +171,21 @@ class AddNewAddressVC: UIViewController {
          self.navigationController?.popViewController(animated: true)
      }
      
-
+    @IBAction func openMapBtn(_ sender: Any) {
+        let mapVC = MapViewController()
+                mapVC.delegate = self
+                navigationController?.pushViewController(mapVC, animated: true)
+        
+        
+    }
+    func didSelectLocation(address: String, city: String, country: String, latitude: Double, longitude: Double) {
+           addressOneTF.text = address
+           cityTF.text = city
+           countryTF.text = country
+        print("Selected Address: \(address)")
+        print("Coordinates: (\(latitude), \(longitude))")
+    }
+    
 }
 
 extension  AddNewAddressVC:  UITextFieldDelegate{

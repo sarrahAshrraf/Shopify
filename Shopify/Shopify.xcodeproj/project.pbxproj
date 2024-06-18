@@ -79,6 +79,7 @@
 		E764E0092C139BAC00740DFA /* AddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E0082C139BAC00740DFA /* AddressVC.swift */; };
 		E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E00A2C139BEC00740DFA /* AddNewAddressVC.swift */; };
 		E764E0122C13AD7500740DFA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E0112C13AD7500740DFA /* User.swift */; };
+		E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76517282C22343C001BD2F3 /* MapViewController.swift */; };
 		E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */; };
 		E79D10542C1A2389002DB483 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D10532C1A2389002DB483 /* Order.swift */; };
 		E7BC1B1F2C145E2B0015C552 /* AddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */; };
@@ -204,6 +205,7 @@
 		E764E0082C139BAC00740DFA /* AddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressVC.swift; sourceTree = "<group>"; };
 		E764E00A2C139BEC00740DFA /* AddNewAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAddressVC.swift; sourceTree = "<group>"; };
 		E764E0112C13AD7500740DFA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E76517282C22343C001BD2F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shippingAddressVC.swift; sourceTree = "<group>"; };
 		E79D10532C1A2389002DB483 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCoordinator.swift; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 				E764E0082C139BAC00740DFA /* AddressVC.swift */,
 				E764E00A2C139BEC00740DFA /* AddNewAddressVC.swift */,
 				E71FCF222C1612D6008E2252 /* AddressProtocol.swift */,
+				E76517282C22343C001BD2F3 /* MapViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
 				E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */,
 				E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */,
+				E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */,
 				E735FA202C1A040D001FCD9A /* CheckOutViewController.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
 				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
