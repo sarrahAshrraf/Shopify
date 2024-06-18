@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PassKit
 
 
 /* MARK: 
@@ -186,7 +187,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         orderPrice.text = String(format: "\(currencySymbol) %.2f", total)
         
         if let totalCartPrice = cartViewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
-            self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
+            self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice)
         } else {
             totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
         }
@@ -206,4 +207,9 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
 
+    @IBAction func cashBtn(_ sender: Any) {
+    }
+    @IBAction func applePAyBtn(_ sender: Any) {
+        
+    }
 }

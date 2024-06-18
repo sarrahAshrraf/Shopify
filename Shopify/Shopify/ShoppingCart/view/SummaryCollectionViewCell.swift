@@ -18,7 +18,14 @@ class SummaryCollectionViewCell: UICollectionViewCell {
     var currencySymbol: String = "USD"
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        layer.cornerRadius = 8
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.masksToBounds = false
+//        layer.shadowRadius = 2.0
+//        layer.shadowOpacity = 0.5
+//        layer.shadowOffset = CGSize(width: 0, height: 1)
+//        layer.shadowColor = UIColor.black.cgColor
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }

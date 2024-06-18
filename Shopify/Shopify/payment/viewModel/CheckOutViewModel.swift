@@ -7,7 +7,7 @@
 
 import Foundation
 class CheckOutViewModel{
-
+//bind failure + loocation id?
     var bindOrderToViewController: (()->()) = {}
 //    var bindFailureToViewController: (()->()) = {} TODDDDDOOOO
 
@@ -55,7 +55,7 @@ class CheckOutViewModel{
         for item in items {
             var inventoryItemId = (item.properties?[0].value?.split(separator: "$")[1])!
             var stockCount = Int(item.properties?[0].name ?? "1") ?? 1
-            let inventoryLevel = InventoryLevel(inventoryItemId: Int(inventoryItemId), locationId: 83976225055, available: (stockCount - item.quantity!))
+            let inventoryLevel = InventoryLevel(inventoryItemId: Int(inventoryItemId), locationId: 0000000, available: (stockCount - item.quantity!))
             NetworkManger.shared.postData(path: URLs.shared.postInventoryURL(), parameters: JSONCoding().encodeToJsonFromInvLevel(objectClass: inventoryLevel)!) {[weak self] response, code in
                 if let code = code {
                                     if code == 200 {

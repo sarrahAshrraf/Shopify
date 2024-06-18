@@ -12,12 +12,13 @@ class SettingsTableViewController: UITableViewController {
     let defaults = UserDefaults.standard
     var currencies: [String]? = ["EGP", "USD", "EUR"]
     var viewModel: SettingsViewmodel!
+    var cartVM = ShoppingCartViewModel()
     var isGuestUser: Bool = false
-
+    var lineItems:[LineItems]!
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = SettingsViewmodel()
-
+        lineItems = []
         setPopUpButton()
         // Check user state and set guest mode
                guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
@@ -88,10 +89,14 @@ class SettingsTableViewController: UITableViewController {
                 self?.defaults.set(Constants.USER_STATE_GUEST, forKey: Constants.KEY_USER_STATE)
                 //MARK: user cart id TODOOOOOOOOO
 
+                
+                CartList.cartItems = []
+                self?.cartVM.editCart()
+                self?.defaults.set("", forKey: Constants.cartId)
                 self?.defaults.set("", forKey: Constants.customerId)
                 self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
-                self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)
-                self?.defaults.set("", forKey: Constants.cartId)
+                self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)    
+                
                 let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
 //                TODO: NAVIGTAE TO SPLASH SCREEN
                 let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
