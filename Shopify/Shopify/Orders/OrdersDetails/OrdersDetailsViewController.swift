@@ -18,6 +18,8 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var back: UIBarButtonItem!
     
+    @IBOutlet weak var orderAddress: UILabel!
+    
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -32,6 +34,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.register(UINib(nibName: "OrdersDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersDetailsTableViewCell")
         self.shopingTo.text = order?.customer?.firstName
         self.orderCreatedAt.text = order?.createdAt
+        self.orderAddress.text = order?.shippingAddress?.address1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

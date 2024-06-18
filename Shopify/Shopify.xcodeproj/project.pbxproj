@@ -57,6 +57,8 @@
 		E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC862C13321C000845AA /* SmartCollection.swift */; };
 		E63EAC892C13324A000845AA /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC882C13324A000845AA /* Rules.swift */; };
 		E67C25E42C1477CA000E5F5E /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */; };
+		E68E0F422C20A73E00343519 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E0F402C20A73E00343519 /* HomeViewCell.swift */; };
+		E68E0F432C20A73E00343519 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68E0F412C20A73E00343519 /* HomeViewCell.xib */; };
 		E6BC3D362C14D3B400DA604B /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC3D342C14D3B400DA604B /* CategoryCollectionViewCell.swift */; };
 		E6BC3D372C14D3B400DA604B /* CategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BC3D352C14D3B400DA604B /* CategoryCollectionViewCell.xib */; };
 		E6BC3D392C14E0CC00DA604B /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BC3D382C14E0CC00DA604B /* CategoryViewController.swift */; };
@@ -179,6 +181,8 @@
 		E63EAC862C13321C000845AA /* SmartCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCollection.swift; sourceTree = "<group>"; };
 		E63EAC882C13324A000845AA /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		E68E0F402C20A73E00343519 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
+		E68E0F412C20A73E00343519 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		E6BC3D342C14D3B400DA604B /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6BC3D352C14D3B400DA604B /* CategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		E6BC3D382C14E0CC00DA604B /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +554,8 @@
 				E6C97DFF2C0B934100B2CA81 /* HomeViewController.swift */,
 				E6C97E012C0B936900B2CA81 /* AddsCollectionViewCell.swift */,
 				E6C97E032C0B937800B2CA81 /* BrandsCollectionViewCell.swift */,
+				E68E0F402C20A73E00343519 /* HomeViewCell.swift */,
+				E68E0F412C20A73E00343519 /* HomeViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -900,6 +906,7 @@
 				E6174BD82C0BA57F004CE96E /* Order.storyboard in Resources */,
 				8BB686392C1B43E70051A015 /* RoundedTextfield.xib in Resources */,
 				E7FB2C782C10D190003A8D9D /* CartCell.xib in Resources */,
+				E68E0F432C20A73E00343519 /* HomeViewCell.xib in Resources */,
 				E608967F2C1CE42000FB9AFA /* OrdersDetailsTableViewCell.xib in Resources */,
 				E7F5EF582C0B35830096F476 /* LaunchScreen.storyboard in Resources */,
 				E735FA1E2C1A02C3001FCD9A /* Payment_SB.storyboard in Resources */,
@@ -1091,6 +1098,7 @@
 				8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */,
 				8B95A6182C11AC5300D5A592 /* Options.swift in Sources */,
 				E6C97E022C0B936900B2CA81 /* AddsCollectionViewCell.swift in Sources */,
+				E68E0F422C20A73E00343519 /* HomeViewCell.swift in Sources */,
 				E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */,
 				E7F5EF4B2C0B35800096F476 /* SceneDelegate.swift in Sources */,
 				E735FA222C1A048B001FCD9A /* PaymentVC.swift in Sources */,
