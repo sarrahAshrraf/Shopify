@@ -29,7 +29,6 @@ class ProductDetailsViewController: UIViewController {
         
     var sizeCollectionHandler = SizeCollectionDelegatesHandling()
     var colorCollectionHandler = ColorCollectionDelegatesHandling()
-    var imageCollectionHandler = ImageCollectionDelegatesHandling()
     
     var viewModel: ProductDetailsViewModel!
     var customerID = 7309504250029
@@ -304,10 +303,43 @@ class ProductDetailsViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
     }
+    @objc func getCurrentIndex(){
+        if currentIndex != imagesArray.count-1 {
+            currentIndex += 1
+        }else{
+            currentIndex = 0
+        }
+        pageControl.currentPage = currentIndex
+        ImagesCollectionView.scrollToItem(at: IndexPath(row: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    func playTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.getCurrentIndex), userInfo: nil, repeats: true)
+    }
     
+}
 
 
-
+extension ProductDetailsViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imagesArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageCell", for: indexPath) as! ProductImageCell
+        cell.productImage.kf.setImage(with: URL(string: imagesArray[indexPath.row]),
+                                      placeholder: UIImage(named: Constants.noImage))
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: ImagesCollectionView.frame.width, height: ImagesCollectionView.frame.height)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     
     
 }
