@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import PassKit
 
 
-/* MARK: 
-navigation to home byzhar mn 8eer nav bar
+/* MARK:  navigation to home byzhar mn 8eer TAP BAR
 - discount
  - apple pay
  */
@@ -22,6 +22,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
 
+    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var applePayBtn: UIButton!
     @IBOutlet weak var cashOnBtn: UIButton!
     @IBOutlet weak var discountValue: UILabel!
@@ -44,11 +45,11 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     var addressVM : AddressViewModel!
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
-        addressVM.bindToVC = { [weak self] in
-            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
-            
-        }
-        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+//        addressVM.bindToVC = { [weak self] in
+//            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "no address was added"
+//            
+//        }
+        getDeafultAddress()
         bindResultToVC()
         updatePriceLabels()
         
@@ -163,6 +164,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                 self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
             }
         }
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
     }
     
     @IBAction func PurcasheVtn(_ sender: Any) {
@@ -190,6 +192,12 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         } else {
             totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
         }
+        
+        if let totalTax = cartViewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
+            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
+        } else {
+            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+        }
     }
 
     @IBAction func changeAddress(_ sender: Any) {
@@ -206,4 +214,9 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
 
+    @IBAction func cashBtn(_ sender: Any) {
+    }
+    @IBAction func applePAyBtn(_ sender: Any) {
+        
+    }
 }
