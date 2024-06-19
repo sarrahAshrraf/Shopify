@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         print(orders)
         print(orders.first?.customer)
         
+        
         print(profileViewModel.result)
         print(profileViewModel.result?.first?.customer?.firstName)
     }
@@ -118,7 +119,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         }
         
-        // Provide a default cell in case the tableView is not ordersTableView
         return UITableViewCell()
     }
     @IBAction func signUpBtn(_ sender: Any) {
