@@ -23,6 +23,14 @@ class MapViewController: UIViewController {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(_:)))
         mapView.addGestureRecognizer(tapGesture)
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+        
+   
+    }
+
+    @objc private func backButtonTapped() {
+        dismiss(animated: true)
     }
 
     @objc private func handleMapTap(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -41,7 +49,8 @@ class MapViewController: UIViewController {
                 let country = placemark.country ?? ""
 
                 self.delegate?.didSelectLocation(address: address, city: city, country: country, latitude: coordinate.latitude, longitude: coordinate.longitude)
-                self.navigationController?.popViewController(animated: true)
+                dismiss(animated: true)
+//                self.navigationController?.popViewController(animated: true)
             }
         }
     }

@@ -102,8 +102,8 @@ class AddNewAddressVC: UIViewController, MapSelectionDelegate {
                    }
                }
         
-        
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
         
     
@@ -168,13 +168,18 @@ class AddNewAddressVC: UIViewController, MapSelectionDelegate {
     
     
     @objc private func backButtonTapped() {
-         self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//         self.navigationController?.popViewController(animated: true)
      }
      
     @IBAction func openMapBtn(_ sender: Any) {
         let mapVC = MapViewController()
                 mapVC.delegate = self
-                navigationController?.pushViewController(mapVC, animated: true)
+        let navController = UINavigationController(rootViewController: mapVC)
+                navController.modalPresentationStyle = .fullScreen
+                present(navController, animated: true, completion: nil)
+//        present(mapVC, animated: true)
+//                navigationController?.pushViewController(mapVC, animated: true)
         
         
     }

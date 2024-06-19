@@ -18,7 +18,8 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     var editAdressVM = AddNewAddressViewModel()
 
     @IBAction func backBtn(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
 
     }
     @IBAction func addNewAddressBtn(_ sender: Any) {
@@ -61,7 +62,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        coordinator = AddressCoordinator(navigationController: self.navigationController!)
+        coordinator = AddressCoordinator(viewController: self)
         addressTableView.register(UINib(nibName: "AddressCell", bundle: nil), forCellReuseIdentifier: "AddressCell")
 
         viewModel.bindToVC = { [weak self] in

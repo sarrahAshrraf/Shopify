@@ -16,6 +16,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var currencyRate: Double = 1.0
     var currencySymbol: String = "USD"
     @IBOutlet weak var checkOutBtn: UIButton!
+    let navigationBar = UINavigationBar()
+
     func updateEmptyCartImageVisibility() {
         //        if ((viewModel.result?.line_items?.isEmpty) != nil) {
         
@@ -35,16 +37,28 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func setupNavigationBar() {
-        self.title = "Cart"
-        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
-            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-            
-            self.navigationItem.leftBarButtonItem = backButton
-        }
-    }
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+               
+               let navigationItem = UINavigationItem(title: "Cart")
+               
+               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+                   navigationItem.leftBarButtonItem = backButton
+               }
+               
+               navigationBar.items = [navigationItem]
+               
+               view.addSubview(navigationBar)
+               
+               NSLayoutConstraint.activate([
+                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+               ])
+           }
     
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+       dismiss(animated: true)
     }
     
     
@@ -52,8 +66,13 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let summaryVC = self.storyboard?.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
             
             summaryVC.total = cartPrice
-            
-            self.navigationController?.pushViewController(summaryVC, animated: true)
+            summaryVC.modalPresentationStyle = .fullScreen
+           
+            let navController = UINavigationController(rootViewController: summaryVC)
+                    navController.modalPresentationStyle = .fullScreen
+//                   present(navController, animated: true, completion: nil)
+            present(navController, animated: true)
+//            self.navigationController?.pushViewController(summaryVC, animated: true)
         } else {
             print("Could not find CartViewController in ShoppingCartStoryboard")
         }
