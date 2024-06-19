@@ -72,6 +72,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    @IBAction func navigateToSearch(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
+        
+        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.modalTransitionStyle = .crossDissolve
+        present(searchVC, animated: true , completion: nil)
+    }
     func fetchBrands(){
         homeViewModel = HomeViewModel()
         homeViewModel?.bindResultToViewController = { [weak self] in
