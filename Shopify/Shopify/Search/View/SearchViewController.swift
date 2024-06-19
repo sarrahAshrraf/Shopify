@@ -11,8 +11,6 @@ import RxCocoa
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
 
     
     @IBOutlet weak var searchBar: RoundedTextfield!
@@ -38,6 +36,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchViewModel = SearchViewModel()
         registerCell()
         bindData()
+        setSliderValues()
         setupUI()
         
     }
@@ -56,7 +55,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self?.products = self?.searchViewModel.result ?? []
             self?.productList = self?.searchViewModel.result ?? []
             self?.search()
-            
         }
         searchViewModel.getItems()
     }
@@ -65,6 +63,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         desPriceBtn.configureButton(selected: false)
         assPriiceBtn.configureButton(selected: false)
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        products.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell") as! ProductCell
+                
+        cell.setProductToTableCell(product: products[indexPath.row])
+                
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        145.0
+    }
+    
+    @IBAction func navigateBack(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
     
     func search() {
         searchBar.rx.text
@@ -92,22 +113,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     
-    @IBAction func navigateBack(_ sender: UIButton) {
-        self.dismiss(animated: true)
-    }
-    
-    
-    
-    
-    
-    
 
     @IBAction func sortPriceAscBtn(_ sender: Any) {
         desPriceBtn.configureButton(selected: false)
         assPriiceBtn.configureButton(selected: true)
         products = products.sorted(by:  {Float($0.variants?[0].price ?? "") ?? 0 < Float($1.variants?[0].price ?? "") ?? 0})
         searchTableView.reloadData()
-        
     }
     
     
@@ -120,6 +131,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func showFilterView(_ sender: Any) {
+        
         if filterFlag {
             priceSlider.isHidden = true
             filterView.isHidden = true
@@ -135,8 +147,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         filterFlag = !filterFlag
-        
-        
+    }
+    func filterBySlider(){
+        products = productList.filter{Float($0.variants?[0].price ?? "") ?? 0 <= priceSlider.value}
+        searchTableView.reloadData()
     }
     
     func setSliderValues() {
@@ -169,25 +183,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("No prices available.")
         }
     }
-    
 
     
     @IBAction func sliderFilterBtn(_ sender: Any) {
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        products.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell") as! ProductCell
-        cell.setProductToTableCell(product: products[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        145.0
+        filteredPrice.text = "price: \(Int(priceSlider.value))"
+        filterBySlider()
     }
     
 }
@@ -208,7 +208,6 @@ extension UIButton {
         }
     }
 }
-
 
 
 
