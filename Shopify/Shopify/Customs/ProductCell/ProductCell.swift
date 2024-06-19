@@ -36,4 +36,11 @@ class ProductCell: UITableViewCell {
         productPriceLabel.text = localProduct.price 
     }
     
+    func setProductToTableCell(product: Product) {
+        self.product = product
+        productImageView.kf.setImage(with: URL(string: product.image?.src ?? ""))
+        productNameLabel.text = product.title ?? ""
+        productPriceLabel.text = product.variants?[0].price ?? ""
+    }
+    
 }
