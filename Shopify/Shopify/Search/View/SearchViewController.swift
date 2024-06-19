@@ -103,6 +103,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 
     @IBAction func sortPriceAscBtn(_ sender: Any) {
+        desPriceBtn.configureButton(selected: false)
+        assPriiceBtn.configureButton(selected: true)
+        products = products.sorted(by:  {Float($0.variants?[0].price ?? "") ?? 0 < Float($1.variants?[0].price ?? "") ?? 0})
+        searchTableView.reloadData()
         
     }
     
