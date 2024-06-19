@@ -31,6 +31,8 @@
 		8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95A6242C11B97300D5A592 /* ProductDetails.swift */; };
 		8B95A62D2C11EBCB00D5A592 /* BrandProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95A62C2C11EBCB00D5A592 /* BrandProductCollectionViewCell.swift */; };
 		8BA4A5872C23654E005BDF67 /* SearchStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BA4A5862C23654E005BDF67 /* SearchStoryboard.storyboard */; };
+		8BA4A5892C2365BD005BDF67 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA4A5882C2365BD005BDF67 /* SearchViewModel.swift */; };
+		8BA4A58B2C23661E005BDF67 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA4A58A2C23661E005BDF67 /* SearchViewController.swift */; };
 		8BB686302C1B43090051A015 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB6862F2C1B43090051A015 /* Authentication.storyboard */; };
 		8BB686392C1B43E70051A015 /* RoundedTextfield.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB686382C1B43E70051A015 /* RoundedTextfield.xib */; };
 		8BB6863A2C1B43E70051A015 /* RoundedTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686372C1B43E70051A015 /* RoundedTextfield.swift */; };
@@ -163,6 +165,8 @@
 		8B95A6242C11B97300D5A592 /* ProductDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetails.swift; sourceTree = "<group>"; };
 		8B95A62C2C11EBCB00D5A592 /* BrandProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BA4A5862C23654E005BDF67 /* SearchStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchStoryboard.storyboard; sourceTree = "<group>"; };
+		8BA4A5882C2365BD005BDF67 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		8BA4A58A2C23661E005BDF67 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8BB6862F2C1B43090051A015 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		8BB686372C1B43E70051A015 /* RoundedTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextfield.swift; sourceTree = "<group>"; };
 		8BB686382C1B43E70051A015 /* RoundedTextfield.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoundedTextfield.xib; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA4A5862C23654E005BDF67 /* SearchStoryboard.storyboard */,
+				8BA4A58A2C23661E005BDF67 /* SearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -387,6 +392,7 @@
 		8BA4A5852C236539005BDF67 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				8BA4A5882C2365BD005BDF67 /* SearchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1122,6 +1128,7 @@
 				E761D8E92C2206E900C93F36 /* Utilities.swift in Sources */,
 				E7FB2C8D2C10E851003A8D9D /* ProfileViewController.swift in Sources */,
 				E6C97E042C0B937800B2CA81 /* BrandsCollectionViewCell.swift in Sources */,
+				8BA4A58B2C23661E005BDF67 /* SearchViewController.swift in Sources */,
 				E60896802C1CE42000FB9AFA /* OrdersDetailsTableViewCell.swift in Sources */,
 				E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */,
 				8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */,
@@ -1178,6 +1185,7 @@
 				8BFB447A2C2201C400FF98B0 /* VariantCollectionViewCell.swift in Sources */,
 				E7FB2C7F2C10D309003A8D9D /* Constants.swift in Sources */,
 				8B95A62D2C11EBCB00D5A592 /* BrandProductCollectionViewCell.swift in Sources */,
+				8BA4A5892C2365BD005BDF67 /* SearchViewModel.swift in Sources */,
 				8BB686402C1B47300051A015 /* SignUpViewController.swift in Sources */,
 				8BF591412C1C7DB600EF3344 /* FavouriteViewModel.swift in Sources */,
 				E60896792C1CE31B00FB9AFA /* ProfileViewModel.swift in Sources */,
