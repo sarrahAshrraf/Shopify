@@ -220,6 +220,47 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     @IBAction func cashBtn(_ sender: Any) {
     }
     @IBAction func applePAyBtn(_ sender: Any) {
+        let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
+        
+          paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+        
+        
+        let isPaymentSuccessful = paymentcontext.makePayment(amount: self.total, vc: self)
+        
+        if isPaymentSuccessful.0 {
+          if isPaymentSuccessful.1 == "Purchased successfully"{
+              print("Pay succeeeeed")
+
+          }
+          print(isPaymentSuccessful.1)
+        } else {
+          print("not succeeeeed")
+          print(isPaymentSuccessful.1)
+        }
         
     }
+}
+
+
+
+extension CheckOutViewController: PKPaymentAuthorizationViewControllerDelegate{
+  func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+    controller.dismiss(animated: true)
+  }
+
+  func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+
+    let paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .success, errors: nil)
+    completion(paymentAuthorizationResult)
+    if paymentAuthorizationResult.status == .failure{
+      print("failed")
+    }
+
+    if paymentAuthorizationResult.status == .success{
+      print("success")
+      controller.dismiss(animated: true)
+      // TODO: make the cart empty and send server req for payment
+    }
+  }
+
 }

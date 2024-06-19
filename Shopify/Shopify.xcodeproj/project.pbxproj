@@ -92,6 +92,10 @@
 		E7BC1B1F2C145E2B0015C552 /* AddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */; };
 		E7BC1B212C145F780015C552 /* AddNewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */; };
 		E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B242C1467110015C552 /* SettingsVC.swift */; };
+		E7BEB9372C236A08000DEC01 /* PaymentStratgy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */; };
+		E7BEB9392C236A30000DEC01 /* applePaymentStratgy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */; };
+		E7BEB93B2C236A6F000DEC01 /* cashPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */; };
+		E7BEB93D2C236A97000DEC01 /* PaymentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */; };
 		E7D50B012C1A16B600F6FD41 /* CheckOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */; };
 		E7F5B9BA2C18AEC7008CE46A /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */; };
 		E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF482C0B35800096F476 /* AppDelegate.swift */; };
@@ -225,6 +229,11 @@
 		E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCoordinator.swift; sourceTree = "<group>"; };
 		E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAddressViewModel.swift; sourceTree = "<group>"; };
 		E7BC1B242C1467110015C552 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		E7BEB9342C2368B6000DEC01 /* Shopify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shopify.entitlements; sourceTree = "<group>"; };
+		E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStratgy.swift; sourceTree = "<group>"; };
+		E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = applePaymentStratgy.swift; sourceTree = "<group>"; };
+		E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cashPayment.swift; sourceTree = "<group>"; };
+		E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContext.swift; sourceTree = "<group>"; };
 		E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewModel.swift; sourceTree = "<group>"; };
 		E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E7F5EF452C0B35800096F476 /* Shopify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +605,7 @@
 		E735FA1B2C1A025C001FCD9A /* payment */ = {
 			isa = PBXGroup;
 			children = (
+				E7BEB9352C2369F1000DEC01 /* applePayment */,
 				E7D50AFF2C1A166C00F6FD41 /* viewModel */,
 				E735FA1C2C1A0283001FCD9A /* view */,
 			);
@@ -628,6 +638,17 @@
 				E7BC1B242C1467110015C552 /* SettingsVC.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		E7BEB9352C2369F1000DEC01 /* applePayment */ = {
+			isa = PBXGroup;
+			children = (
+				E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */,
+				E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */,
+				E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */,
+				E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */,
+			);
+			path = applePayment;
 			sourceTree = "<group>";
 		};
 		E7D50AFF2C1A166C00F6FD41 /* viewModel */ = {
@@ -663,6 +684,7 @@
 		E7F5EF472C0B35800096F476 /* Shopify */ = {
 			isa = PBXGroup;
 			children = (
+				E7BEB9342C2368B6000DEC01 /* Shopify.entitlements */,
 				8BF591322C1C732600EF3344 /* Favourite */,
 				8BB6862C2C1B429A0051A015 /* Authentication */,
 				E735FA1B2C1A025C001FCD9A /* payment */,
@@ -933,11 +955,8 @@
 				E6174BD82C0BA57F004CE96E /* Order.storyboard in Resources */,
 				8BB686392C1B43E70051A015 /* RoundedTextfield.xib in Resources */,
 				E7FB2C782C10D190003A8D9D /* CartCell.xib in Resources */,
-
 				8B267BD62C21BEC300830585 /* ProductImageCell.xib in Resources */,
-
 				E68E0F432C20A73E00343519 /* HomeViewCell.xib in Resources */,
-
 				E608967F2C1CE42000FB9AFA /* OrdersDetailsTableViewCell.xib in Resources */,
 				E7F5EF582C0B35830096F476 /* LaunchScreen.storyboard in Resources */,
 				E735FA1E2C1A02C3001FCD9A /* Payment_SB.storyboard in Resources */,
@@ -1089,6 +1108,7 @@
 			files = (
 				E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */,
 				E759B37B2C201A8100C33B14 /* SummaryCollectionViewCell.swift in Sources */,
+				E7BEB9392C236A30000DEC01 /* applePaymentStratgy.swift in Sources */,
 				E71445FA2C1EC37100633624 /* SettingsViewmodel.swift in Sources */,
 				8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */,
 				8B267BD52C21BEC300830585 /* ProductImageCell.swift in Sources */,
@@ -1110,6 +1130,7 @@
 				E608967C2C1CE3E000FB9AFA /* OrdersDetailsViewController.swift in Sources */,
 				E6C97E002C0B934100B2CA81 /* HomeViewController.swift in Sources */,
 				8B95A6232C11B31100D5A592 /* ProductDetailsViewController.swift in Sources */,
+				E7BEB93D2C236A97000DEC01 /* PaymentContext.swift in Sources */,
 				E759B3792C2017C700C33B14 /* SummaryViewController.swift in Sources */,
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
 				E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */,
@@ -1133,9 +1154,11 @@
 				E6BC3D392C14E0CC00DA604B /* CategoryViewController.swift in Sources */,
 				8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */,
 				8B95A6182C11AC5300D5A592 /* Options.swift in Sources */,
+				E7BEB9372C236A08000DEC01 /* PaymentStratgy.swift in Sources */,
 				E6C97E022C0B936900B2CA81 /* AddsCollectionViewCell.swift in Sources */,
 				E68E0F422C20A73E00343519 /* HomeViewCell.swift in Sources */,
 				E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */,
+				E7BEB93B2C236A6F000DEC01 /* cashPayment.swift in Sources */,
 				E7F5EF4B2C0B35800096F476 /* SceneDelegate.swift in Sources */,
 				E735FA222C1A048B001FCD9A /* PaymentVC.swift in Sources */,
 				8BF591432C1C831E00EF3344 /* FavouriteViewController.swift in Sources */,
@@ -1345,9 +1368,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shopify/Shopify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Shopify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1375,9 +1399,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shopify/Shopify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Shopify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1407,7 +1432,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -1428,7 +1453,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -1448,7 +1473,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ITI.ShopifyUITests;
@@ -1467,7 +1492,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ITI.ShopifyUITests;

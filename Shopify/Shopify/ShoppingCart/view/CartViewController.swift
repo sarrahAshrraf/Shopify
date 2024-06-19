@@ -126,7 +126,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
     }
-    
+//    func tableView(_ tableView: UITableView, widthForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 500
+//    }
     func showData(){
         viewModel.bindResultToViewController = { [weak self] in
             
