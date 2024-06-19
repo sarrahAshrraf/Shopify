@@ -120,8 +120,54 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func showFilterView(_ sender: Any) {
+        if filterFlag {
+            priceSlider.isHidden = true
+            filterView.isHidden = true
+            if let heightConstraint = filterView.constraints.first(where: { $0.firstAttribute == .height }) {
+                heightConstraint.constant = 0
+            }
+            
+        }else {
+            priceSlider.isHidden = false
+            filterView.isHidden = false
+            if let heightConstraint = filterView.constraints.first(where: { $0.firstAttribute == .height }) {
+                heightConstraint.constant = UIScreen.main.bounds.height * 0.03
+            }
+        }
+        filterFlag = !filterFlag
         
         
+    }
+    
+    func setSliderValues() {
+        // Array to store all variant prices
+        var prices: [Double] = []
+
+        // Loop through each product
+        for product in products {
+            // Loop through each variant of the product
+            print("Insite Looop")
+            for variant in product.variants ?? [] {
+                print("Inside Loppppp2")
+                if let price = Double(variant.price) {
+                    prices.append(price)
+                    print(price)
+                }
+            }
+        }
+
+        // Set the maximum and minimum values for the slider
+        if let maxPrice = prices.max(), let minPrice = prices.min() {
+            priceSlider.maximumValue = Float(maxPrice)
+            priceSlider.minimumValue = Float(minPrice)
+            print("Maximum price: \(maxPrice)")
+            print("Minimum price: \(minPrice)")
+        } else {
+            // Handle case where prices array is empty
+            priceSlider.maximumValue = 1000
+            priceSlider.minimumValue = 0
+            print("No prices available.")
+        }
     }
     
 
