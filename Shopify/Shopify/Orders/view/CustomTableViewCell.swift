@@ -33,6 +33,11 @@ class CustomTableViewCell: UITableViewCell {
     func setOrderValues(order: Orders){
         self.orderName.text = order.name
         self.numOfItems.text = order.customer?.createdAt
+        
+        if (order.currency == "EUR"){
+            
+            self.orderPrice.text = order.totalPrice
+        }
         self.orderPrice.text = order.totalPrice
         
         self.orderStatus.text = order.financialStatus
