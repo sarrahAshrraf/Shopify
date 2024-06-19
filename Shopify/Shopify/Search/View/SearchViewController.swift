@@ -55,6 +55,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchViewModel.bindResultToViewController = { [weak self] in
             self?.products = self?.searchViewModel.result ?? []
             self?.productList = self?.searchViewModel.result ?? []
+            self?.search()
             
         }
         searchViewModel.getItems()
@@ -65,7 +66,29 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         assPriiceBtn.configureButton(selected: false)
     }
     
+    func search() {
+        searchBar.rx.text
+            .orEmpty
+            .subscribe(onNext: { [weak self] text in
+                guard let self = self else { return }
+                self.filter(searchText: text)
+            })
+            .disposed(by: disposeBag)
+    }
     
+    
+    func filter(searchText:String) {
+        if(!searchText.isEmpty){
+            products = searchViewModel.result.filter{(Splitter().splitName(text: $0.title!, delimiter: "| ").lowercased().contains(searchText.lowercased()))}
+            if products.isEmpty{
+                products = []
+            }
+        }else {
+            products = searchViewModel.result
+        }
+        self.searchTableView.reloadData()
+        
+    }
     
     
     
