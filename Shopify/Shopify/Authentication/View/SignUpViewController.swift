@@ -71,7 +71,7 @@ class SignUpViewController: UIViewController {
             defaults.setValue(signUpViewModel.user?.firstName, forKey:Constants.USER_FirstName )
             let alert = Alert().showAlertWithPositiveButtons(title: Constants.congratulations, msg: Constants.registeredSuccessfully, positiveButtonTitle: Constants.ok){_ in
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                let home = storyboard.instantiateViewController(identifier: "home") as! UINavigationController
+                let home = storyboard.instantiateViewController(identifier: "home") 
                 home.modalPresentationStyle = .fullScreen
                 home.modalTransitionStyle = .crossDissolve
                 self.present(home, animated: true)

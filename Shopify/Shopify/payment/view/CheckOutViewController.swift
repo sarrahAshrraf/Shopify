@@ -49,7 +49,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
 //            self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "no address was added"
 //            
 //        }
-        getDeafultAddress()
+//        getDeafultAddress()
         bindResultToVC()
         updatePriceLabels()
         
@@ -91,7 +91,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         cartViewModel = ShoppingCartViewModel()
         addressVM = AddressViewModel()
         checkOutVM = CheckOutViewModel()
-        coordinator = AddressCoordinator(navigationController: self.navigationController!)
+        coordinator = AddressCoordinator(viewController: self)
         getDeafultAddress()
         cartViewModel.getCartItems()
         cartViewModel.editCart()
@@ -145,13 +145,16 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     func navigateToHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let nextViewController = storyboard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
-        nextViewController.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(nextViewController, animated: true)
+        let home = storyboard.instantiateViewController(identifier: "home")
+//        let nextViewController = storyboard.instantiateViewController(withIdentifier: "homeVC") as! HomeViewController
+        home.modalPresentationStyle = .fullScreen
+        present(home, animated: true)
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
 //    func getTotalPrice() {

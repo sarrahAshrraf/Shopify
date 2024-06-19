@@ -55,11 +55,11 @@ class LoginViewController: UIViewController {
 
     private func navigateToHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let home = storyboard.instantiateViewController(identifier: "home") as? UINavigationController {
+        let home = storyboard.instantiateViewController(identifier: "home")
             home.modalPresentationStyle = .fullScreen
             home.modalTransitionStyle = .crossDissolve
             present(home, animated: true)
-        }
+        
     }
     
     @IBAction func navigateBack(_ sender: UIButton) {

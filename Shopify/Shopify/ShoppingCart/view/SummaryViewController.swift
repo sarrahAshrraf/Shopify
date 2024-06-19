@@ -46,7 +46,8 @@ class SummaryViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
     func bindResultToVC() {
         viewModel.bindResultToViewController = { [weak self] in
@@ -90,8 +91,8 @@ class SummaryViewController: UIViewController {
         let navController = UINavigationController(rootViewController: checkOutVC)
         checkOutVC.total = self.total
                    navController.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(checkOutVC, animated: true)
-//        self.present(navController, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(checkOutVC, animated: true)
+        self.present(navController, animated: true, completion: nil)
     }
 
     }

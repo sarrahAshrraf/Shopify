@@ -18,6 +18,7 @@ class SummaryCollectionViewCell: UICollectionViewCell {
     var currencySymbol: String = "USD"
     override func awakeFromNib() {
         super.awakeFromNib()
+        quantityLabel.layer.cornerRadius = 13
         layer.cornerRadius = 8
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.lightGray.cgColor
