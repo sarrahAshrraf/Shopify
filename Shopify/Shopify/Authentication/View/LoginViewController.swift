@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
         loginViewModel.bindUsersListToSignUpController = { [weak self] in
             self?.handleUsersList()
         }
+        print(customerId)
+
     }
     
     private func handleUsersList() {
@@ -32,6 +34,13 @@ class LoginViewController: UIViewController {
             if user.email == emailTextField.text && user.tags == passwordTextField.text {
                 exists = true
                 customerId = user.id
+                defaults.setValue(user.id, forKey: Constants.customerId)
+                defaults.setValue(945806409901, forKey: Constants.cartId)
+
+                defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
+                defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
+              print("NAAAAME")
+                print(UserDefaults.standard.string(forKey:Constants.USER_FirstName ))
                 break
             }
         }
@@ -46,11 +55,11 @@ class LoginViewController: UIViewController {
 
     private func navigateToHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let home = storyboard.instantiateViewController(identifier: "home") as? UINavigationController {
+        let home = storyboard.instantiateViewController(identifier: "home")
             home.modalPresentationStyle = .fullScreen
             home.modalTransitionStyle = .crossDissolve
             present(home, animated: true)
-        }
+        
     }
     
     @IBAction func navigateBack(_ sender: UIButton) {

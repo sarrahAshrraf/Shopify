@@ -11,6 +11,7 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     @IBOutlet weak var productsCollectionView: UICollectionView!
     var viewModel: BrandProductsViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     var productDetailsViewModel: ProductDetailsViewModel!
 
     override func viewDidLoad() {
@@ -19,6 +20,7 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         //viewModel = BrandProductsViewModel()
         productDetailsViewModel = ProductDetailsViewModel()
+        favoritesViewModel = FavoritesViewModel()
         fetchData()
         showData()
 
@@ -45,7 +47,7 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandProductCollectionViewCell" , for: indexPath) as! BrandProductCollectionViewCell
-        cell.setValues(product: self.viewModel.result[indexPath.row])
+        cell.setValues(product: self.viewModel.result[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.viewModel.result[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
 
         
         return cell
@@ -67,6 +69,8 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
         productDetailsViewModel?.productId = viewModel?.result[indexPath.row].id ?? 0
+        products.product = viewModel?.result[indexPath.row]
+        //print(viewModel?.result[indexPath.row])
         
         products.viewModel = productDetailsViewModel
         products.modalPresentationStyle = .fullScreen

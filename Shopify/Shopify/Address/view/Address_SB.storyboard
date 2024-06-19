@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,7 @@
         <!--AddressVC-->
         <scene sceneID="eGG-nQ-MVh">
             <objects>
-                <viewController storyboardIdentifier="addressVC" id="jhz-cq-Jo0" customClass="AddressVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addressVC" modalPresentationStyle="fullScreen" id="jhz-cq-Jo0" customClass="AddressVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yel-ms-bhN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,6 +57,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addAddressBtn" destination="aNd-ig-Qha" id="J3X-zY-9U6"/>
                         <outlet property="addressTableView" destination="trP-qX-Uec" id="Vf7-F4-gfj"/>
                         <outlet property="navBar" destination="19f-7d-GEi" id="3PA-CB-eYB"/>
                     </connections>
@@ -168,6 +170,22 @@
                                 <color key="textColor" red="0.1113000157" green="0.1112454878" blue="0.12406960490000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahF-p3-aBc">
+                                <rect key="frame" x="108" y="509" width="193" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.39984882449999998" blue="0.76999286769999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select from map" imagePadding="11">
+                                    <imageReference key="image" image="mappin.and.ellipse.circle.fill" catalog="system" symbolScale="large"/>
+                                    <backgroundConfiguration key="background" cornerRadius="16">
+                                        <color key="strokeColor" red="0.0" green="0.39984882453517262" blue="0.76999286769591657" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="openMapBtn:" destination="c8F-8Z-bCP" eventType="touchUpInside" id="aBD-kC-823"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zqG-9I-mot"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -189,6 +207,7 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="mappin.and.ellipse.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

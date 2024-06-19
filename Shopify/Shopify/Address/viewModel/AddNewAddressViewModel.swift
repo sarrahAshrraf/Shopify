@@ -15,6 +15,8 @@ class AddNewAddressViewModel{
     var province: String?
     var country: String?
     var phone : String?
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
     
     required init(address: Address?) {
         self.fullName = address?.name ?? ""
@@ -68,7 +70,8 @@ class AddNewAddressViewModel{
     
     
     func editAddress(customerID: Int, addressID: Int, address: Address, completion: @escaping (Bool) -> ()) {
-            let url = URLs.shared.getAddressURLForModification(customerID: String(7309504250029), addressID: String(addressID))
+        
+            let url = URLs.shared.getAddressURLForModification(customerID: String(customerId), addressID: String(addressID))
             let addressDict: [String: Any] = [
                 "address1": address.address1 ?? "",
                 "address2": address.address2 ?? "",

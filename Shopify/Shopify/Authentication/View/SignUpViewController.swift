@@ -18,21 +18,26 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: RoundedTextfield!
     @IBOutlet weak var confirmPasswordTextField: RoundedTextfield!
     var signUpViewModel: AuthenticationViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     var registered = false
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpViewModel = AuthenticationViewModel()
+        favoritesViewModel = FavoritesViewModel()
         setupRegisterButton()
         signUpViewModel.bindUserToSignUpController = { [weak self] in
             self?.handleUserSignUp()
         }
         
+        favoritesViewModel.bindGetFavoriteDraftOrderToController = {[weak self] in
+            self?.getFavouriteDraftOrder()
+        }
     
         signUpViewModel.bindUsersListToSignUpController = { [weak self] in
             self?.checkUserRegistration()
-       }
+        }
         
         signUpViewModel.bindDraftOrderToSignUpController = {[weak self] in
             self?.handleDraftOrder()
@@ -51,7 +56,7 @@ class SignUpViewController: UIViewController {
                 showAlertWithNegativeAndPositiveButtons(title: Constants.warning, message: Constants.emailUsedBefore)
             } else {
                 let user = User(id: nil, firstName: firstNameTextField.text, lastName: lastNameTextField.text, email: emailTextField.text, phone: phoneTextField.text, tags: passwordTextField.text)
-                let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil)
+                let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
                 let params = encodeToJson(objectClass: response)
                 signUpViewModel.postUser(parameters: params ?? [:])
             }
@@ -62,9 +67,11 @@ class SignUpViewController: UIViewController {
             defaults.setValue(self.signUpViewModel.user?.id, forKey: Constants.customerId)
             createDraftOrder(note: "favorite")
             createDraftOrder(note: "cart")
+            defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
+            defaults.setValue(signUpViewModel.user?.firstName, forKey:Constants.USER_FirstName )
             let alert = Alert().showAlertWithPositiveButtons(title: Constants.congratulations, msg: Constants.registeredSuccessfully, positiveButtonTitle: Constants.ok){_ in
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                let home = storyboard.instantiateViewController(identifier: "home") as! UINavigationController
+                let home = storyboard.instantiateViewController(identifier: "home") 
                 home.modalPresentationStyle = .fullScreen
                 home.modalTransitionStyle = .crossDissolve
                 self.present(home, animated: true)
@@ -75,6 +82,16 @@ class SignUpViewController: UIViewController {
         }
     }
     
+    func getFavouriteDraftOrder(){
+        guard let lineItemsList = favoritesViewModel.getFavoriteDraftOrder?.line_items else {return}
+        let list = lineItemsList.filter{$0.title != "dummy"}
+        for item in list {
+                let localProduct = LocalProduct(id: item.productId ?? 0, customer_id: (defaults.integer(forKey: Constants.customerId)), variant_id: item.variantId!, title: item.title!, price: item.price!, image: item.properties![0].value!)
+                favoritesViewModel.addProduct(product: localProduct)
+        }
+        
+    }
+    
     func handleDraftOrder(){
         if(signUpViewModel.cartDraftOrder?.id != nil && signUpViewModel.favoritesDraftOrder?.id != nil){
             guard let cartId = signUpViewModel.cartDraftOrder?.id else {return}
@@ -83,7 +100,7 @@ class SignUpViewController: UIViewController {
             defaults.set(favoritesId, forKey: Constants.favoritesId)
             var user = User()
             user.note = "\(favoritesId),\(cartId)"
-            let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil)
+            let response = Response(smart_collections: nil, customer: user, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
             print("response: \(response)")
             let params = encodeToJson(objectClass: response)
             signUpViewModel.putUser(parameters: params ?? [:])
@@ -188,8 +205,9 @@ class SignUpViewController: UIViewController {
 
         let user = User(id: defaults.integer(forKey: Constants.customerId), firstName: self.firstNameTextField.text, lastName: self.lastNameTextField.text, email: self.emailTextField.text, phone: self.phoneTextField.text, addresses: nil, tags: self.passwordTextField.text)
 
-        let draft = DraftOrder(id: nil, note: note, lineItems: lineItems, user: user)
-        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft)
+        let draft = DraftOrder(id: nil, note: note, line_items: lineItems, customer: user)
+        
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft ,  orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
         let params = self.encodeToJson(objectClass: response)
     
         self.signUpViewModel.postDraftOrder(parameters: params ?? [:])

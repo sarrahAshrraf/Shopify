@@ -17,8 +17,11 @@ struct Response : Codable{
     let products: [Product]?
     let product: Product?
     let draft_order: DraftOrder?
-    var orders: [Order]?
-    var order: OrderPost?
+    let orders: [Orders]?
+    let order: Orders?
+    let currencies: [Currency]?
+    let base: String?
+    let rates: Rates?
 
 //    let variants: [Variant]
 

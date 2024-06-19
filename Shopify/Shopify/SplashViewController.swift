@@ -9,6 +9,7 @@ import UIKit
 import Lottie
 
 class SplashViewController: UIViewController {
+    let defaults = UserDefaults.standard
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var splashView: LottieAnimationView!
@@ -55,8 +56,9 @@ class SplashViewController: UIViewController {
     }
     
     private func guestButtonTapped() {
+        defaults.setValue(Constants.USER_STATE_GUEST, forKey:Constants.KEY_USER_STATE )
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let home = storyboard.instantiateViewController(identifier: "home") as! UINavigationController
+        let home = storyboard.instantiateViewController(identifier: "home") 
         home.modalPresentationStyle = .fullScreen
         home.modalTransitionStyle = .crossDissolve
        present(home, animated: true)

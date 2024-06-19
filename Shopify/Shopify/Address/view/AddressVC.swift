@@ -7,11 +7,19 @@
 
 import UIKit
 
+
 class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate , AddressProtocol{
     var coordinator: AddressCoordinatorP?
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+    var isGuestUser: Bool = false
+    @IBOutlet weak var addAddressBtn: UIBarButtonItem!
+    var shipmentAdress : Bool = false
+    var delegate : AddressSelectionDelegate!
+    var editAdressVM = AddNewAddressViewModel()
 
     @IBAction func backBtn(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
 
     }
     @IBAction func addNewAddressBtn(_ sender: Any) {
@@ -26,10 +34,24 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        viewModel.fetchCustomerAddress(customerID: 7309504250029)
+        
+        guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
+        isGuestUser = (state == Constants.USER_STATE_GUEST)
+        
+        if isGuestUser {
+            updateBackgroundViewForGuestUser()
+            addAddressBtn.isEnabled = false
+
+        }
+    
+        
+        
+        viewModel.fetchCustomerAddress(customerID: customerId)
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
 
@@ -40,18 +62,21 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        coordinator = AddressCoordinator(navigationController: self.navigationController!)
+        coordinator = AddressCoordinator(viewController: self)
         addressTableView.register(UINib(nibName: "AddressCell", bundle: nil), forCellReuseIdentifier: "AddressCell")
 
         viewModel.bindToVC = { [weak self] in
                   DispatchQueue.main.async {
                       self?.addressTableView.reloadData()
+                      self?.updateBackgroundView()
+
                   }
               }
         addressTableView.separatorStyle = .none
+        print(customerId)
 
               
-              viewModel.fetchCustomerAddress(customerID: 7309504250029)
+              viewModel.fetchCustomerAddress(customerID: customerId)
         // Do any additional setup after loading the view.
     }
     
@@ -70,8 +95,33 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
        }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-          coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
-        print("inside select row")
+          if(shipmentAdress == false){
+              coordinator?.showAddNewAddress(with: viewModel.addresses[indexPath.row])
+            print("inside select row")
+          }else {
+              var selected_address = viewModel.addresses[indexPath.row]
+              selected_address.default = true
+              editAdressVM.editAddress(customerID: customerId, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: selected_address) { success in
+                  print("selectedAddress")
+                  DispatchQueue.main.async {
+                      if success {
+                          print("Address updated successfully")
+                          self.delegate?.didSelectAddress(selected_address)
+                      } else {
+                          print("Error in updating address")
+                      }
+                  }
+              }
+//                     delegate?.didSelectAddress(selected_address)
+//              print(viewModel.addresses[indexPath.row])
+              self.navigationController?.popViewController(animated: true)
+//              let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
+//              if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
+//                  let navController = UINavigationController(rootViewController: checkOutVC)
+//                 navController.modalPresentationStyle = .fullScreen
+//                 self.present(navController, animated: true, completion: nil)
+//              }
+          }
       }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -82,13 +132,12 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
             let okAction = UIAlertAction(title: "OK", style: .destructive) { [weak self] _ in
                 guard let self = self else { return }
                 
-                viewModel.deleteAddress(customerID: 7309504250029, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: viewModel.addresses[indexPath.row]) { success in
+                viewModel.deleteAddress(customerID: customerId, addressID: viewModel.addresses[indexPath.row].id ?? 0, address: viewModel.addresses[indexPath.row]) { success in
                     DispatchQueue.main.async {
                         if success {
                             print("Address deleted successfully")
-                            //                            self.viewModel.addresses.remove(at: indexPath.row)
-                            //                            self.addressTableView.deleteRows(at: [indexPath], with: .automatic)
-                            self.viewModel.fetchCustomerAddress(customerID: 7309504250029)
+                        
+                            self.viewModel.fetchCustomerAddress(customerID: self.customerId)
                             self.addressTableView.reloadData()
                         } else {
                             print("Error in deleting address")
@@ -108,9 +157,41 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     }
     
     func didUpdateAddress() {
-          viewModel.fetchCustomerAddress(customerID: 7309504250029)
+          viewModel.fetchCustomerAddress(customerID: customerId)
       }
+    private func updateBackgroundViewForGuestUser() {
+        let signUpLabel = UILabel()
+        signUpLabel.text = "Please, sign up first."
+        signUpLabel.textColor = .gray
+        signUpLabel.numberOfLines = 0
+        signUpLabel.textAlignment = .center
+        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+        signUpLabel.sizeToFit()
+        addressTableView.backgroundView = signUpLabel
     }
+    
+    private func updateBackgroundView() {
+        if viewModel.addresses.isEmpty {
+            let backgroundImageView = UIImageView(image: UIImage(named: "noData"))
+            backgroundImageView.contentMode = .center
+            addressTableView.backgroundView = backgroundImageView
+        } else {
+            addressTableView.backgroundView = nil
+        }
+    }
+    
+//    private func updateBackgroundView() {
+//        let signUpLabel = UILabel()
+//        signUpLabel.text = "Please, sign up first."
+//        signUpLabel.textColor = .gray
+//        signUpLabel.numberOfLines = 0
+//        signUpLabel.textAlignment = .center
+//        signUpLabel.font = UIFont.systemFont(ofSize: 16)
+//        signUpLabel.sizeToFit()
+//       addressTableView.backgroundView = signUpLabel
+//       
+//    }
+}
 
   
 

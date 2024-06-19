@@ -13,7 +13,16 @@ import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var couponsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var brandsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var pageController: UIPageControl!
+    
+    var timer:Timer?
+    var currentCellIndex=0
+    
+    var staticCoupons : [String] = ["coupon1.png","coupon2.png", "coupon3.jpeg"]
     
     var homeViewModel: HomeViewModel?
     var brandProductViewModel: BrandProductsViewModel?
@@ -22,180 +31,233 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(CustomHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, environment in
-            switch sectionIndex {
-            case 0:
-                return self.drawTheTopSection()
-            default:
-                return self.drawTheBottomSection()
-            }
-        }
-        collectionView.setCollectionViewLayout(layout, animated: true)
+        self.brandsCollectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "homeCell")
+        self.couponsCollectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "homeCell")
         fetchBrands()
         homeViewModel?.getItems()
         brandProductViewModel = BrandProductsViewModel()
+        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+        self.pageController.numberOfPages = staticCoupons.count
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            self.navigationController?.setNavigationBarHidden(false, animated: animated)
+            
+        }
     
+    @objc func moveToNextIndex(){
+        if currentCellIndex < staticCoupons.count - 1 {
+            currentCellIndex += 1
+        }else {
+            currentCellIndex = 0
+        }
+        self.couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        self.pageController.currentPage = currentCellIndex
+    }
+    
+    @IBAction func navigateToFavorite(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "FavouriteStoryboard", bundle: nil)
+        let favoriteVC = storyboard.instantiateViewController(identifier: "FavouriteViewController") as! FavouriteViewController
+        
+        favoriteVC.modalPresentationStyle = .fullScreen
+        favoriteVC.modalTransitionStyle = .crossDissolve
+        present(favoriteVC, animated: true , completion: nil)
+        
+    }
+    
+    @IBAction func navigateToSearch(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
+        
+        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.modalTransitionStyle = .crossDissolve
+        present(searchVC, animated: true , completion: nil)
+    }
     func fetchBrands(){
         homeViewModel = HomeViewModel()
         homeViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+                self?.brandsCollectionView.reloadData()
             }
         }
     }
-
-    func drawTheTopSection() -> NSCollectionLayoutSection {
-
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .absolute(150))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 15)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-        section.orthogonalScrollingBehavior = .continuous
-        
-        
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            section.boundarySupplementaryItems = [header]
-        
-        
-        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-            let centerX = offset.x + environment.container.contentSize.width / 2.0
-            items.forEach { item in
-                let distanceFromCenter = abs(item.frame.midX - centerX)
-                let scale: CGFloat = distanceFromCenter < 50 ? 1.2 : 1.0
-                item.transform = CGAffineTransform(scaleX: scale, y: scale)
-                
-            }
-        }
-        
-        return section
-    }
-
-    func drawTheBottomSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(180))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15)
-        section.orthogonalScrollingBehavior = .none
-
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        section.boundarySupplementaryItems = [header]
-
-       return section
-
-    }
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return homeViewModel?.result?.count ?? 0
+        if collectionView == couponsCollectionView {
+            return staticCoupons.count
+        }else {
+            
+            return homeViewModel?.result?.count ?? 0
+        }
     }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cellIdentifier = ""
-        
-        switch indexPath.section {
-        case 0:
-            cellIdentifier = "adds"
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-            // Configure the cell for the "adds" section
+        if collectionView == couponsCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath)as! HomeViewCell
+            cell.homeImage.image = UIImage(named: staticCoupons[indexPath.row])
+       
             return cell
-        case 1:
-            cellIdentifier = "brands"
-            print("cell brand")
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! BrandsCollectionViewCell
+        }else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as! HomeViewCell
             let results = homeViewModel?.result
             let result = results?[indexPath.row]
             //print(result?.title)
-            cell.brandImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
-            //cell.brandName.text = result.title
+            cell.homeImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
             return cell
-        default:
-            fatalError("Unexpected section \(indexPath.section)")
+        }
+        
+        
+      
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == collectionView {
+            return CGSize(width: (collectionView.bounds.width*1.0), height: (collectionView.bounds.height*1.0))
+        }else {
+            return CGSize(width: (collectionView.bounds.width*0.5), height: (collectionView.bounds.height*1.0))
+        }
+  
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return  20
+    
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return  0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    
+        if collectionView == couponsCollectionView {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        }else {
+            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
     }
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
-            brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
-            
-            products.viewModel = brandProductViewModel
-            products.modalPresentationStyle = .fullScreen
-            present(products, animated: true, completion: nil)
-            
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      
+        
+            if collectionView == couponsCollectionView {
+             
+            }else {
+                let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
+                brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
+                
+                products.viewModel = brandProductViewModel
+                products.modalPresentationStyle = .fullScreen
+                present(products, animated: true, completion: nil)
+            }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-       if kind == UICollectionView.elementKindSectionHeader {
-           let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! CustomHeaderView
-           
-           switch indexPath.section {
-           case 0:
-               header.titleLabel.text = "Adds"
-           case 1:
-               header.titleLabel.text = "Brands"
-           default:
-               header.titleLabel.text = "Section"
-           }
-           
-           return header
-       }
-       return UICollectionReusableView()
-   }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (collectionView == brandsCollectionView){
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0
+            
+            UIView.animate(withDuration: 0.5) {
+                cell.layer.transform = CATransform3DIdentity
+                cell.alpha = 1.0
+            }
+        }
+    }
     
 }
 
-class CustomHeaderView: UICollectionReusableView {
-    let titleLabel = UILabel()
+    
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupViews()
-    }
-
-    private func setupViews() {
-        addSubview(titleLabel)
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
-
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
-    }
-}
-
-
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return homeViewModel?.result?.count ?? 0
+//    }
+//
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 2
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        var cellIdentifier = ""
+//        
+//        switch indexPath.section {
+//        case 0:
+//            cellIdentifier = "adds"
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+//            // Configure the cell for the "adds" section
+//            return cell
+//        case 1:
+//            cellIdentifier = "brands"
+//            print("cell brand")
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! BrandsCollectionViewCell
+//            let results = homeViewModel?.result
+//            let result = results?[indexPath.row]
+//            //print(result?.title)
+//            cell.brandImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
+//            //cell.brandName.text = result.title
+//            return cell
+//        default:
+//            fatalError("Unexpected section \(indexPath.section)")
+//        }
+//    }
+//        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//            let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
+//            brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
+//            
+//            products.viewModel = brandProductViewModel
+//            products.modalPresentationStyle = .fullScreen
+//            present(products, animated: true, completion: nil)
+//            
+//        }
+//    
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//       if kind == UICollectionView.elementKindSectionHeader {
+//           let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath) as! CustomHeaderView
+//           
+//           switch indexPath.section {
+//           case 0:
+//               header.titleLabel.text = "Adds"
+//           case 1:
+//               header.titleLabel.text = "Brands"
+//           default:
+//               header.titleLabel.text = "Section"
+//           }
+//           
+//           return header
+//       }
+//       return UICollectionReusableView()
+//   }
+//    
+//}
+//
+//class CustomHeaderView: UICollectionReusableView {
+//    let titleLabel = UILabel()
+//
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setupViews()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//        setupViews()
+//    }
+//
+//    private func setupViews() {
+//        addSubview(titleLabel)
+//        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+//
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            
+//            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+//            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+//            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+//            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+//        ])
+//    }
+//    
+//}
+//
+//

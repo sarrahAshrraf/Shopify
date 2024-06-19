@@ -19,12 +19,12 @@ class AddressViewModel{
             bindToVC()
         }
     }
-    var address = OrderAddress()
+//    var address = OrderAddress()
 
     var defautltAdress : Address? {
         didSet{
           print(defautltAdress)
-          transferAddress()
+//          transferAddress()
           bindDefaultAddress()
 //          fetchDeafultCustomerAddress(customerID: 7309504250029)
 
@@ -43,6 +43,7 @@ class AddressViewModel{
             }
             
         }
+
     }
     func fetchDeafultCustomerAddress(customerID: Int) {
         let url = URLs.shared.getAddressURL()
@@ -57,23 +58,13 @@ class AddressViewModel{
             
         }
     }
-    
-    func transferAddress(){
-      self.address.firstName = self.defautltAdress?.first_name
-      self.address.lastName = self.defautltAdress?.last_name
-      self.address.address1 = self.defautltAdress?.address1
-      self.address.address2 = self.defautltAdress?.address2
-      self.address.city = self.defautltAdress?.city
-      self.address.country = self.defautltAdress?.country
-      self.address.province = self.defautltAdress?.province
-      self.address.id = self.defautltAdress?.id
-      self.address.customerID = self.defautltAdress?.customer_id
-      self.address.phone = self.defautltAdress?.phone
-    }
+
 
     
     func deleteAddress(customerID: Int, addressID: Int, address: Address, completion: @escaping (Bool) -> Void) {
-        let path = URLs.shared.getAddressURLForModification(customerID: String(7309504250029), addressID: String(addressID))
+        let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
+
+        let path = URLs.shared.getAddressURLForModification(customerID: String(customerId), addressID: String(addressID))
            NetworkManger.shared.deleteData(path: path) { success, statusCode in
                if success {
                    if let index = self.addresses.firstIndex(where: { $0.id == address.id }) {

@@ -6,78 +6,75 @@
 //
 
 import Foundation
-//class CheckOutViewModel{
+class CheckOutViewModel{
+//bind failure + loocation id?
+    var bindOrderToViewController: (()->()) = {}
+//    var bindFailureToViewController: (()->()) = {} TODDDDDOOOO
 
-//        var bindResultToViewController : (()->()) = {}
-//        var bindDefaultAddress : (()->()) = {}
-//        var orderResult : OrderPost!{
-//            didSet{
-//                bindResultToViewController()
-//            }
-//        }
-//      var orderRequest: OrderResponsePost = OrderResponsePost()
-//      var lineItems: [LineItems] = []
-//      var defaultAddress: Address_? {
-//        didSet{
-//          print("ksrhbvrjt")
-//          print(defaultAddress)
-//          transferAddress()
-//          bindDefaultAddress()
-//
-//        }
-//      }
-//      var address = OrderAddress()
-//       
-//      func transferObject(items: [LineItems]){
-//        print("lrnbljgnblr")
-//        print(items.count)
-//
-//        for item in items {
-//          var lineItem = LineItems()
-//            lineItem.variantId = item.variant_id
-//          lineItem.quantity = item.quantity
-//          self.lineItems.append(lineItem)
-//        }
-//      }
-//
-//      func transferAddress(){
-//        self.address.firstName = self.defaultAddress?.firstName
-//        self.address.lastName = self.defaultAddress?.lastName
-//        self.address.address1 = self.defaultAddress?.address1
-//        self.address.address2 = self.defaultAddress?.address2
-//        self.address.city = self.defaultAddress?.city
-//        self.address.country = self.defaultAddress?.country
-//        self.address.province = self.defaultAddress?.province
-//        self.address.id = self.defaultAddress?.id
-//        self.address.customerID = self.defaultAddress?.customerID
-//        self.address.phone = self.defaultAddress?.phone
-//      }
-//
-//      func getDefaultAddress(){
-////          NetworkManger.shared.get
-////        print(URLCreator().getAddressURL())
-//        NetworkManger.fetchData{[weak self] (result: Addresses?) in
-//          print("oueungejn")
-//          print(result)
-//          self?.defaultAddress = result?.addresses?.filter{ $0.addressDefault == true}.first
-//          print("oueungejn")
-//          print(self?.defaultAddress)
-//        }
-//      }
-//        //https://mad43-sv-ios3.myshopify.com/admin/api/2023-04/customers/6948853350692/orders.json
-//        
-////        func createOrder(orderItem:OrderResponsePost){
-//////            networkManager.setURL(URLCreator().getCreateOrder())
-////            print("increateorder")
-////            print(orderItem)
-////            NetworkManger.uploadData(object: orderItem, method: .post){ [weak self] (result: OrderResponsePost?) in
-////                
-////                self?.orderResult = result?.order
-////            }
-////
-////        }
-//
-//    }
+    var code: Int?
+    var generalViewModel = ShoppingCartViewModel()
+    
+    var order: Orders?{
+        didSet{
+            self.bindOrderToViewController()
+            
+        }
+    }
+    func postOrder(order: Orders) {
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil, base: nil, rates: nil)
+        
+        guard let params = JSONCoding().encodeToJson(objectClass: response) else {
+            print("Failed to encode JSON")
+            return
+        }
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("JSON Payload: \(jsonString)")
+        }
+
+        NetworkManger.shared.postData(path: URLs.shared.postOrderURL(), parameters: params) { [weak self] (response, code) in
+            self?.order = response?.order
+            self?.code = code
+            print("INSEIIIID ORDER POSTINGGGG")
+            print(response?.order)
+            
+            if let code = code, code != 200 {
+                            print("HTTP Status Code: \(code)")
+//                self?.bindFailureToViewController()
+                        } else {
+                            self?.bindOrderToViewController()
+                        }
+        }
+    }
+    
+    
+    func updateVariantAfterPostOrder(){
+        let shoppingItems = CartList.cartItems
+        for item in shoppingItems {
+            var itemId = (item.properties?[0].value?.split(separator: "$")[1])!
+            var itemCountInStock = Int(item.properties?[0].name ?? "1") ?? 1
+            let inventoryLevel = InventoryLevel(inventoryItemId: Int(itemId), locationId: 72172896429, available: (itemCountInStock - (item.quantity ?? 0)))
+            NetworkManger.shared.postData(path: URLs.shared.postInventoryURL(), parameters: JSONCoding().encodeToJsonFromInvLevel(objectClass: inventoryLevel)!) {[weak self] response, code in
+                if let code = code {
+                                    if code == 200 {
+                                        print("Inventory updated successfully for item ID: \(itemId)")
+                                    } else {
+                                        print("Failed to update inventory for item ID: \(itemId). HTTP Status Code: \(code)")
+                                    }
+                                }
+                            }
+                        }
+                    }
+    
+    
+    func emptyCart(){
+        CartList.cartItems = []
+        
+    }
+}
+
+
     
     
     

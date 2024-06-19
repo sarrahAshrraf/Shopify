@@ -36,7 +36,7 @@
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="heart.fill" catalog="system" renderingMode="hierarchical">
+                                    <imageReference key="image" image="heart" catalog="system" renderingMode="hierarchical">
                                         <hierarchicalColors>
                                             <color systemColor="systemRedColor"/>
                                             <color systemColor="secondaryLabelColor"/>
@@ -45,6 +45,9 @@
                                     </imageReference>
                                     <color key="baseForegroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="checkFavouriteProduct:" destination="sxs-gG-Liu" eventType="touchUpInside" id="sc0-ZG-8Dh"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label Label " lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="beh-eG-72m">
                                 <rect key="frame" x="8" y="188" width="360" height="30"/>
@@ -133,6 +136,7 @@
             </constraints>
             <size key="customSize" width="392" height="366"/>
             <connections>
+                <outlet property="favouriteButton" destination="fat-A9-yoQ" id="31x-vm-Xs2"/>
                 <outlet property="productImage" destination="c9a-Qa-rQo" id="aeq-9u-bJ1"/>
                 <outlet property="productLabel" destination="beh-eG-72m" id="pBo-61-J4k"/>
                 <outlet property="productPrice" destination="Fxd-GF-XMY" id="woP-iJ-32M"/>
@@ -141,21 +145,22 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

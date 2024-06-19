@@ -7,11 +7,13 @@
 
 import UIKit
 
-class AddNewAddressVC: UIViewController {
+class AddNewAddressVC: UIViewController, MapSelectionDelegate {
       var isEditingAddress = true
        var addressID: Int?
     weak var delegate: AddressProtocol?
+    weak var checkOutDelegte : AddressSelectionDelegate!
     var isDefaultAddress = false
+    let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
     @IBOutlet weak var switchDeafultBtn: UISwitch!
     @objc private func saveButtonTapped() {
 
@@ -41,7 +43,7 @@ class AddNewAddressVC: UIViewController {
 
         let address = Address(
                     id: addressID,
-                    customer_id: 7309504250029,
+                    customer_id: customerId,
                     name: "\(firstName)\(" ")\(lastName)",
                     first_name: firstName,
                     last_name: lastName,
@@ -67,30 +69,32 @@ class AddNewAddressVC: UIViewController {
 //                    print("error in posting")
 //                }
 //            }
-//        }
+//        } 
         
         
         
         if isEditingAddress, let addressID = addressID {
-                   viewModell.editAddress(customerID: 7309504250029, addressID: addressID, address: address) { success in
-                      print(address)
+                   viewModell.editAddress(customerID: customerId, addressID: addressID, address: address) { success in
+                      print("addressssdghjk")
+                       print(address)
                        DispatchQueue.main.async {
                            if success {
+                               print(address)
                                print("Address updated successfully")
                                self.delegate?.didUpdateAddress()
-
+                               self.checkOutDelegte?.didSelectAddress(address)
                            } else {
                                print("Error in updating address")
                            }
                        }
                    }
                } else {
-                   viewModell.postCustomerAddress(customerID: 7309504250029, address: address) { success in
+                   viewModell.postCustomerAddress(customerID: customerId, address: address) { success in
                        DispatchQueue.main.async {
                            if success {
                                print("Address posted successfully")
                                self.delegate?.didUpdateAddress()
-
+                               self.checkOutDelegte?.didSelectAddress(address)
                            } else {
                                print("Error in posting address")
                            }
@@ -98,28 +102,41 @@ class AddNewAddressVC: UIViewController {
                    }
                }
         
-        
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//        self.navigationController?.popViewController(animated: true)
     }
         
     
     @IBOutlet weak var phoneTF: UITextField!
     @IBOutlet weak var countryTF: UITextField!
     @IBOutlet weak var cityTF: UITextField!
-//    @IBOutlet weak var provinceTF: UITextField!
-//    @IBOutlet weak var addressTwoTF: UITextField!
+
     @IBOutlet weak var addressOneTF: UITextField!
     @IBOutlet weak var fullNameTF: UITextField!
     var viewModell: AddNewAddressViewModel!
+    var addVM : AddressViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        viewModel = AddNewAddressViewModel()
+        addVM = AddressViewModel()
+        getAddressArrayCount()
         populateTextFields()
+
         print(isEditingAddress)
-//        self.cityTF.delegate = self
+        print(customerId)
     }
     
-
+    private func getAddressArrayCount() {
+           addVM.bindToVC = { [weak self] in
+               DispatchQueue.main.async {
+                   if self?.addVM.addresses.count == 0 {
+                       self?.isDefaultAddress = true
+                       self?.switchDeafultBtn.isOn = true
+                   } 
+               }
+           }
+           addVM.fetchCustomerAddress(customerID: customerId)
+       }
+    
     
     private func populateTextFields() {
       
@@ -136,6 +153,7 @@ class AddNewAddressVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
+        getAddressArrayCount()
         switchDeafultBtn.isOn = isDefaultAddress
 
     }
@@ -150,10 +168,29 @@ class AddNewAddressVC: UIViewController {
     
     
     @objc private func backButtonTapped() {
-         self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
+//         self.navigationController?.popViewController(animated: true)
      }
      
-
+    @IBAction func openMapBtn(_ sender: Any) {
+        let mapVC = MapViewController()
+                mapVC.delegate = self
+        let navController = UINavigationController(rootViewController: mapVC)
+                navController.modalPresentationStyle = .fullScreen
+                present(navController, animated: true, completion: nil)
+//        present(mapVC, animated: true)
+//                navigationController?.pushViewController(mapVC, animated: true)
+        
+        
+    }
+    func didSelectLocation(address: String, city: String, country: String, latitude: Double, longitude: Double) {
+           addressOneTF.text = address
+           cityTF.text = city
+           countryTF.text = country
+        print("Selected Address: \(address)")
+        print("Coordinates: (\(latitude), \(longitude))")
+    }
+    
 }
 
 extension  AddNewAddressVC:  UITextFieldDelegate{

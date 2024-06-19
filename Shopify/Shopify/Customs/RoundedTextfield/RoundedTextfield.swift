@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 @IBDesignable
 class RoundedTextfield: UIView {
     
     @IBOutlet private var contentView: UIView!
-    @IBOutlet private weak var uiTextfield: UITextField!
+    @IBOutlet  weak var uiTextfield: UITextField!
     @IBOutlet private weak var uiPrefixImage: UIImageView!
     @IBOutlet private weak var uiActionButton: UIButton!
     
@@ -270,4 +272,11 @@ extension RoundedTextfieldDelegate {
     func textFieldDidBeginEditing(textfield: RoundedTextfield) {}
     func textFieldDidEndEditing(textfield: RoundedTextfield) {}
     func textFieldDidClearText(textfield: RoundedTextfield) {}
+}
+
+
+extension Reactive where Base: RoundedTextfield {
+    var text: ControlProperty<String?> {
+        return base.uiTextfield.rx.text
+    }
 }
