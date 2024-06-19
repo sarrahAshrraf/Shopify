@@ -69,6 +69,8 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
         productDetailsViewModel?.productId = viewModel?.result[indexPath.row].id ?? 0
+        products.product = viewModel?.result[indexPath.row]
+        //print(viewModel?.result[indexPath.row])
         
         products.viewModel = productDetailsViewModel
         products.modalPresentationStyle = .fullScreen
