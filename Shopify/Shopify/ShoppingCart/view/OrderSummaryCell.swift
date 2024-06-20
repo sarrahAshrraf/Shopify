@@ -1,13 +1,13 @@
 //
-//  SummaryCollectionViewCell.swift
+//  OrderSummaryCell.swift
 //  Shopify
 //
-//  Created by sarrah ashraf on 17/06/2024.
+//  Created by sarrah ashraf on 19/06/2024.
 //
 
 import UIKit
-import Kingfisher
-class SummaryCollectionViewCell: UICollectionViewCell {
+
+class OrderSummaryCell: UICollectionViewCell {
     
     @IBOutlet weak var itemTitle: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -18,16 +18,11 @@ class SummaryCollectionViewCell: UICollectionViewCell {
     var currencySymbol: String = "USD"
     override func awakeFromNib() {
         super.awakeFromNib()
-        quantityLabel.layer.cornerRadius = 15
-        layer.cornerRadius = 10
-//        layer.cornerRadius = frame.size.width / 2.5
-        layer.borderWidth = 0.5
-        layer.borderColor = UIColor.black.cgColor
-//        itemImg.clipsToBounds = true
-//        layer.borderWidth = 1.0
-//        layer.borderColor = UIColor.lightGray.cgColor
-        layer.masksToBounds = true
-        clipsToBounds = true
+        quantityLabel.layer.cornerRadius = 13
+        layer.cornerRadius = 8
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.masksToBounds = false
 //        layer.shadowRadius = 2.0
 //        layer.shadowOpacity = 0.5
 //        layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -43,7 +38,6 @@ class SummaryCollectionViewCell: UICollectionViewCell {
         
     }
 
-    
     
     func configure(cartItem: LineItems) {
         self.itemTitle.text = cartItem.name

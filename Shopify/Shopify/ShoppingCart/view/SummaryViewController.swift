@@ -110,15 +110,33 @@ extension SummaryViewController: UICollectionViewDelegate ,UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width/2.5 - 10, height: UIScreen.main.bounds.height/4 - 12)
+        let totalWidth = UIScreen.main.bounds.width
+        let totalHeight = UIScreen.main.bounds.height
         
+        // Calculating available width for cells
+        let horizontalInsets: CGFloat = 8 * 2
+        let interItemSpacing: CGFloat = 0.0
+        let numberOfCellsPerRow: CGFloat = 2
+        let availableWidth = totalWidth - horizontalInsets - interItemSpacing * (numberOfCellsPerRow - 1)
+        let cellWidth = availableWidth / numberOfCellsPerRow
+        
+        // Calculating height based on new width for a better aspect ratio
+        let verticalInsets: CGFloat = 0
+        let lineSpacing: CGFloat = 10
+        let availableHeight = totalHeight - verticalInsets - lineSpacing
+        let cellHeight = availableHeight
+        
+        return CGSize(width: cellWidth, height: 167)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.3
+        return 0.0
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }

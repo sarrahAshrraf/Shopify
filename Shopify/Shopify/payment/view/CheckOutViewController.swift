@@ -170,9 +170,9 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
     }
     
-    @IBAction func PurcasheVtn(_ sender: Any) {
-        createOrder()
-        }
+//    @IBAction func PurcasheVtn(_ sender: Any) {
+//        createOrder()
+//        }
     func bindResultToVC() {
         cartViewModel.bindResultToViewController = { [weak self] in
             self?.setCurrencyValues()
@@ -216,10 +216,65 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         print("adddddressssss")
     }
     
-
-    @IBAction func cashBtn(_ sender: Any) {
+    func isCardMethodSelected() -> Bool {
+      if let cardLabel = self.view.viewWithTag(3) as? UILabel{
+        if !cardLabel.isHidden{
+          return true
+        }else {
+          return false
+        }
+      }
+      return false
     }
-    @IBAction func applePAyBtn(_ sender: Any) {
+//    @IBAction func cashBtn(_ sender: Any) {
+//    }
+//    @IBAction func applePAyBtn(_ sender: Any) {
+    @IBAction func PurcasheVtn(_ sender: Any) {
+        let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
+        
+        if isCardMethodSelected(){
+          paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+        } else {
+            createOrder()
+        }
+        
+        let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
+        
+        if isPaymentSuccessful.0 {
+          if isPaymentSuccessful.1 == "Purchased successfully"{
+              print("Pay succeeeeed")
+
+          }
+          print(isPaymentSuccessful.1)
+        } else {
+          print("not succeeeeed")
+          print(isPaymentSuccessful.1)
+        }
         
     }
+}
+
+
+
+extension CheckOutViewController: PKPaymentAuthorizationViewControllerDelegate{
+  func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+    controller.dismiss(animated: true)
+  }
+
+  func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+
+    let paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .success, errors: nil)
+    completion(paymentAuthorizationResult)
+    if paymentAuthorizationResult.status == .failure{
+      print("failed")
+    }
+
+    if paymentAuthorizationResult.status == .success{
+      print("success")
+      controller.dismiss(animated: true)
+        createOrder()
+        showOrderSuccessAlert()
+    }
+  }
+
 }

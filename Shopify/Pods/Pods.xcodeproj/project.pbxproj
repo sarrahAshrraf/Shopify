@@ -4190,7 +4190,7 @@
 			baseConfigurationReference = 8CE3232A690BDD1B9D95411FD8262526 /* ReachabilitySwift.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ReachabilitySwift";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Reachability;
 				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ResourceBundle-ReachabilitySwift-ReachabilitySwift-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -4244,7 +4244,7 @@
 			baseConfigurationReference = 2C4D82FD446E33CE071ECDC66974DF28 /* lottie-ios.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/lottie-ios";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Lottie;
 				INFOPLIST_FILE = "Target Support Files/lottie-ios/ResourceBundle-LottiePrivacyInfo-lottie-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -4261,7 +4261,7 @@
 			baseConfigurationReference = 8CE3232A690BDD1B9D95411FD8262526 /* ReachabilitySwift.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/ReachabilitySwift";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Reachability;
 				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ResourceBundle-ReachabilitySwift-ReachabilitySwift-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -4278,7 +4278,7 @@
 			baseConfigurationReference = 2C4D82FD446E33CE071ECDC66974DF28 /* lottie-ios.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/lottie-ios";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Lottie;
 				INFOPLIST_FILE = "Target Support Files/lottie-ios/ResourceBundle-LottiePrivacyInfo-lottie-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -4683,7 +4683,7 @@
 			baseConfigurationReference = 8DCCC4AD51C98C6201A81CA19CD48226 /* Kingfisher.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Kingfisher";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Kingfisher;
 				INFOPLIST_FILE = "Target Support Files/Kingfisher/ResourceBundle-Kingfisher-Kingfisher-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -4805,7 +4805,7 @@
 			baseConfigurationReference = 8DCCC4AD51C98C6201A81CA19CD48226 /* Kingfisher.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Kingfisher";
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				IBSC_MODULE = Kingfisher;
 				INFOPLIST_FILE = "Target Support Files/Kingfisher/ResourceBundle-Kingfisher-Kingfisher-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
