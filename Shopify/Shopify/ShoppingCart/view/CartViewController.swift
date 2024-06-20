@@ -9,8 +9,6 @@ import UIKit
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , CartCellDelegate{
 
-    
-    
     @IBOutlet weak var emptyTableImg: UIImageView!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0

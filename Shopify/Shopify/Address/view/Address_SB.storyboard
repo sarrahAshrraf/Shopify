@@ -22,12 +22,13 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                                 <items>
                                     <navigationItem title="Your Address" id="1rE-BF-IWz">
-                                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="czP-HQ-iQP">
+                                        <barButtonItem key="leftBarButtonItem" image="arrow" id="czP-HQ-iQP">
                                             <connections>
                                                 <action selector="backBtn:" destination="jhz-cq-Jo0" id="hLN-zu-6Fd"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" image="plus.circle.fill" catalog="system" id="aNd-ig-Qha">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="addNewAddressBtn:" destination="jhz-cq-Jo0" id="WjB-tH-zKh"/>
                                             </connections>
@@ -84,7 +85,7 @@
                                     <outlet property="delegate" destination="c8F-8Z-bCP" id="pPc-vv-Hg2"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcB-Xd-l1o">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcB-Xd-l1o" customClass="Rounded">
                                 <rect key="frame" x="124" y="178" width="253" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95021631299834886" green="0.95021631299834886" blue="0.95021631299834886" alpha="0.66447355309311229" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,7 +148,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.95021631299834886" green="0.95021631299834886" blue="0.95021631299834886" alpha="0.66447355309311229" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="c8F-8Z-bCP" id="rS1-fM-iTR"/>
                                 </connections>
@@ -173,12 +174,12 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahF-p3-aBc">
                                 <rect key="frame" x="108" y="509" width="193" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.0" green="0.39984882449999998" blue="0.76999286769999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Select from map" imagePadding="11">
                                     <imageReference key="image" image="mappin.and.ellipse.circle.fill" catalog="system" symbolScale="large"/>
                                     <backgroundConfiguration key="background" cornerRadius="16">
-                                        <color key="strokeColor" red="0.0" green="0.39984882453517262" blue="0.76999286769591657" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="strokeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </backgroundConfiguration>
                                     <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
                                 </buttonConfiguration>
@@ -206,7 +207,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="arrow" width="35" height="35"/>
         <image name="mappin.and.ellipse.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">

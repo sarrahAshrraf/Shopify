@@ -170,9 +170,9 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
     }
     
-    @IBAction func PurcasheVtn(_ sender: Any) {
-        createOrder()
-        }
+//    @IBAction func PurcasheVtn(_ sender: Any) {
+//        createOrder()
+//        }
     func bindResultToVC() {
         cartViewModel.bindResultToViewController = { [weak self] in
             self?.setCurrencyValues()
@@ -218,7 +218,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     
     func isCardMethodSelected() -> Bool {
       if let cardImage = self.view.viewWithTag(2) as? UIImageView{
-        if !cardImage.isHidden{
+        if !cardImage.isHighlighted{
           return true
         }else {
           return false
@@ -226,13 +226,16 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
       }
       return false
     }
-    @IBAction func cashBtn(_ sender: Any) {
-    }
-    @IBAction func applePAyBtn(_ sender: Any) {
+//    @IBAction func cashBtn(_ sender: Any) {
+//    }
+//    @IBAction func applePAyBtn(_ sender: Any) {
+    @IBAction func PurcasheVtn(_ sender: Any) {
         let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
         
         if isCardMethodSelected(){
           paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+        } else {
+            createOrder()
         }
         
         let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)

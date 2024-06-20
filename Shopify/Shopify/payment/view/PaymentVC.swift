@@ -12,15 +12,14 @@ class PaymentVC: UITableViewController {
     @IBOutlet weak var cardImg: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.layer.cornerRadius = 16
-        self.tableView.layer.borderWidth = 0.5
+        cashImg.isHighlighted = true
         }
         // MARK: - Table view data source
 
       override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        selectMethod(indexPath.row)
+         
+        selectPaymentOption(indexPath.row)
 
       }
 
@@ -28,16 +27,17 @@ class PaymentVC: UITableViewController {
         60
       }
 
-      func selectMethod(_ index: Int){
+      func selectPaymentOption(_ index: Int){
         switch index {
         case 0:
             print("card")
-          cardImg.isHidden = false
-          cardImg.isHidden = true
+            cashImg.isHighlighted = false
+            cardImg.isHighlighted = true
         default:
             print("cash")
-          cashImg.isHidden = true
-          cashImg.isHidden = false
+            cashImg.isHighlighted = true
+              cardImg.isHighlighted = false
+
         }
       }
 

@@ -206,9 +206,9 @@
             filePath = "Shopify/payment/view/CheckOutViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "applePAyBtn(_:)"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "PurcasheVtn(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
