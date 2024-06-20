@@ -18,11 +18,16 @@ class SummaryCollectionViewCell: UICollectionViewCell {
     var currencySymbol: String = "USD"
     override func awakeFromNib() {
         super.awakeFromNib()
-        quantityLabel.layer.cornerRadius = 13
-        layer.cornerRadius = 8
-        layer.borderWidth = 1.0
-        layer.borderColor = UIColor.lightGray.cgColor
-        layer.masksToBounds = false
+        quantityLabel.layer.cornerRadius = 15
+        layer.cornerRadius = 10
+//        layer.cornerRadius = frame.size.width / 2.5
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor.black.cgColor
+//        itemImg.clipsToBounds = true
+//        layer.borderWidth = 1.0
+//        layer.borderColor = UIColor.lightGray.cgColor
+        layer.masksToBounds = true
+        clipsToBounds = true
 //        layer.shadowRadius = 2.0
 //        layer.shadowOpacity = 0.5
 //        layer.shadowOffset = CGSize(width: 0, height: 1)

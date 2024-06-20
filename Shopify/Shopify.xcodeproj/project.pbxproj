@@ -86,6 +86,7 @@
 		E6C97E042C0B937800B2CA81 /* BrandsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C97E032C0B937800B2CA81 /* BrandsCollectionViewCell.swift */; };
 		E71445FA2C1EC37100633624 /* SettingsViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71445F92C1EC37100633624 /* SettingsViewmodel.swift */; };
 		E71445FC2C1EC45D00633624 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71445FB2C1EC45D00633624 /* Currency.swift */; };
+		E71910412C249B9D000BC768 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71910402C249B9D000BC768 /* ConnectivityManager.swift */; };
 		E71FCF232C1612D6008E2252 /* AddressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FCF222C1612D6008E2252 /* AddressProtocol.swift */; };
 		E735FA1E2C1A02C3001FCD9A /* Payment_SB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E735FA1D2C1A02C3001FCD9A /* Payment_SB.storyboard */; };
 		E735FA202C1A040D001FCD9A /* CheckOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E735FA1F2C1A040D001FCD9A /* CheckOutViewController.swift */; };
@@ -100,9 +101,12 @@
 		E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76517282C22343C001BD2F3 /* MapViewController.swift */; };
 		E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */; };
 		E79D10542C1A2389002DB483 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D10532C1A2389002DB483 /* Order.swift */; };
+		E7B134242C239D76009F165E /* OrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B134222C239D75009F165E /* OrderSummaryCell.swift */; };
+		E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B134232C239D75009F165E /* OrderSummaryCell.xib */; };
 		E7BC1B1F2C145E2B0015C552 /* AddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */; };
 		E7BC1B212C145F780015C552 /* AddNewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */; };
 		E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B242C1467110015C552 /* SettingsVC.swift */; };
+		E7BEB9392C236A30000DEC01 /* applePaymentStratgy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */; };
 		E7D50B012C1A16B600F6FD41 /* CheckOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */; };
 		E7F5B9BA2C18AEC7008CE46A /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */; };
 		E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF482C0B35800096F476 /* AppDelegate.swift */; };
@@ -230,6 +234,7 @@
 		E6C97E032C0B937800B2CA81 /* BrandsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E71445F92C1EC37100633624 /* SettingsViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewmodel.swift; sourceTree = "<group>"; };
 		E71445FB2C1EC45D00633624 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		E71910402C249B9D000BC768 /* ConnectivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityManager.swift; sourceTree = "<group>"; };
 		E71FCF222C1612D6008E2252 /* AddressProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressProtocol.swift; sourceTree = "<group>"; };
 		E735FA1D2C1A02C3001FCD9A /* Payment_SB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Payment_SB.storyboard; sourceTree = "<group>"; };
 		E735FA1F2C1A040D001FCD9A /* CheckOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewController.swift; sourceTree = "<group>"; };
@@ -244,9 +249,13 @@
 		E76517282C22343C001BD2F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shippingAddressVC.swift; sourceTree = "<group>"; };
 		E79D10532C1A2389002DB483 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		E7B134222C239D75009F165E /* OrderSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryCell.swift; sourceTree = "<group>"; };
+		E7B134232C239D75009F165E /* OrderSummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderSummaryCell.xib; sourceTree = "<group>"; };
 		E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCoordinator.swift; sourceTree = "<group>"; };
 		E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAddressViewModel.swift; sourceTree = "<group>"; };
 		E7BC1B242C1467110015C552 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		E7BEB9342C2368B6000DEC01 /* Shopify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shopify.entitlements; sourceTree = "<group>"; };
+		E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = applePaymentStratgy.swift; sourceTree = "<group>"; };
 		E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewModel.swift; sourceTree = "<group>"; };
 		E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E7F5EF452C0B35800096F476 /* Shopify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -471,6 +480,8 @@
 				8B2FCFB32C13888E00C613E3 /* URLs.swift */,
 				8BF591302C1C684200EF3344 /* DatabaseManager.swift */,
 				8BF665932C2436B400408AC4 /* UserDefault.swift */,
+				E71910402C249B9D000BC768 /* ConnectivityManager.swift */,
+
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -649,6 +660,7 @@
 		E735FA1B2C1A025C001FCD9A /* payment */ = {
 			isa = PBXGroup;
 			children = (
+				E7BEB9352C2369F1000DEC01 /* applePayment */,
 				E7D50AFF2C1A166C00F6FD41 /* viewModel */,
 				E735FA1C2C1A0283001FCD9A /* view */,
 			);
@@ -681,6 +693,14 @@
 				E7BC1B242C1467110015C552 /* SettingsVC.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		E7BEB9352C2369F1000DEC01 /* applePayment */ = {
+			isa = PBXGroup;
+			children = (
+				E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */,
+			);
+			path = applePayment;
 			sourceTree = "<group>";
 		};
 		E7D50AFF2C1A166C00F6FD41 /* viewModel */ = {
@@ -716,7 +736,11 @@
 		E7F5EF472C0B35800096F476 /* Shopify */ = {
 			isa = PBXGroup;
 			children = (
+
+				E7BEB9342C2368B6000DEC01 /* Shopify.entitlements */,
+
 				8BA4A5832C23651E005BDF67 /* Search */,
+
 				8BF591322C1C732600EF3344 /* Favourite */,
 				8BB6862C2C1B429A0051A015 /* Authentication */,
 				E735FA1B2C1A025C001FCD9A /* payment */,
@@ -786,6 +810,8 @@
 				E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */,
 				E759B3782C2017C700C33B14 /* SummaryViewController.swift */,
 				E759B37A2C201A8100C33B14 /* SummaryCollectionViewCell.swift */,
+				E7B134222C239D75009F165E /* OrderSummaryCell.swift */,
+				E7B134232C239D75009F165E /* OrderSummaryCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1007,6 +1033,7 @@
 				8B073EC12C14929A00629214 /* ProductDetails.storyboard in Resources */,
 				E7FB2CA32C10F918003A8D9D /* AddressCell.xib in Resources */,
 				8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */,
+				E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */,
 				8B2FCFBB2C139F6800C613E3 /* BrandProductCollectionViewCell.xib in Resources */,
 				8BF5913E2C1C799D00EF3344 /* ProductCell.xib in Resources */,
 				8BA4A5872C23654E005BDF67 /* SearchStoryboard.storyboard in Resources */,
@@ -1146,6 +1173,8 @@
 				E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */,
 				E759B37B2C201A8100C33B14 /* SummaryCollectionViewCell.swift in Sources */,
 				8BF665942C2436B400408AC4 /* UserDefault.swift in Sources */,
+				E7BEB9392C236A30000DEC01 /* applePaymentStratgy.swift in Sources */,
+
 				E71445FA2C1EC37100633624 /* SettingsViewmodel.swift in Sources */,
 				8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */,
 				8B267BD52C21BEC300830585 /* ProductImageCell.swift in Sources */,
@@ -1173,9 +1202,11 @@
 				E759B3792C2017C700C33B14 /* SummaryViewController.swift in Sources */,
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
 				E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */,
+				E71910412C249B9D000BC768 /* ConnectivityManager.swift in Sources */,
 				E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */,
 				E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */,
 				E735FA202C1A040D001FCD9A /* CheckOutViewController.swift in Sources */,
+				E7B134242C239D76009F165E /* OrderSummaryCell.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
 				8BF665962C244B0900408AC4 /* GuestViewController.swift in Sources */,
 				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
@@ -1410,9 +1441,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shopify/Shopify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Shopify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1440,9 +1472,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Shopify/Shopify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Shopify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1472,7 +1505,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -1493,7 +1526,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -1513,7 +1546,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ITI.ShopifyUITests;
@@ -1532,7 +1565,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W8Y5UUN6C9;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ITI.ShopifyUITests;
