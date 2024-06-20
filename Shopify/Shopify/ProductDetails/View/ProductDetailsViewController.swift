@@ -197,7 +197,9 @@ class ProductDetailsViewController: UIViewController {
     @IBAction func addToCart(_ sender: Any) {
        //MARK: TODO: get user id from userDeafulttttt
         
-        if customerID != -1{
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
             orderCount = Int(steperCount.text!)!
             let variantName = "\(selectedSize!) / \(selectedColor!)"
             var variantId = 0
@@ -216,10 +218,6 @@ class ProductDetailsViewController: UIViewController {
             }else{
                 addVariantToOrders(variantName: variantName)
             }
-        }else {
-            let alert = UIAlertController(title: "Warning", message: "You must login first!", preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-               self.present(alert, animated: true, completion: nil)
         }
     }
     

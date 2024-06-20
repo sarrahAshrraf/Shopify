@@ -43,6 +43,7 @@
 		8BB686422C1B48F70051A015 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686412C1B48F70051A015 /* Alert.swift */; };
 		8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB686432C1B54490051A015 /* LoginViewController.swift */; };
 		8BCBF98C2C20CC4300C67D40 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBF98B2C20CC4300C67D40 /* Review.swift */; };
+		8BCE2D8C2C24560800DF6733 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCE2D8B2C24560800DF6733 /* SuccessViewController.swift */; };
 		8BE8849B2C10A8DF00BB28C6 /* NetworkManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */; };
 		8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */; };
 		8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE8849F2C10C1DD00BB28C6 /* Response.swift */; };
@@ -180,6 +181,7 @@
 		8BB686412C1B48F70051A015 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8BB686432C1B54490051A015 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8BCBF98B2C20CC4300C67D40 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		8BCE2D8B2C24560800DF6733 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		8BE8849A2C10A8DF00BB28C6 /* NetworkManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManger.swift; sourceTree = "<group>"; };
 		8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMangerProtocol.swift; sourceTree = "<group>"; };
 		8BE8849F2C10C1DD00BB28C6 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 				8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */,
 				8B073EC22C14AD2B00629214 /* SplashViewController.swift */,
 				8BF665952C244B0900408AC4 /* GuestViewController.swift */,
+				8BCE2D8B2C24560800DF6733 /* SuccessViewController.swift */,
 			);
 			path = Shopify;
 			sourceTree = "<group>";
@@ -1149,6 +1152,7 @@
 				8B95A6212C11B18900D5A592 /* ProductDetailsViewModel.swift in Sources */,
 				8BB6863C2C1B44250051A015 /* NibLoadableView.swift in Sources */,
 				E7FB2C7A2C10D1AA003A8D9D /* ShoppingCartViewModel.swift in Sources */,
+				8BCE2D8C2C24560800DF6733 /* SuccessViewController.swift in Sources */,
 				E7FB2C9F2C10F03E003A8D9D /* CustomerModel.swift in Sources */,
 				E608967C2C1CE3E000FB9AFA /* OrdersDetailsViewController.swift in Sources */,
 				E6C97E002C0B934100B2CA81 /* HomeViewController.swift in Sources */,
