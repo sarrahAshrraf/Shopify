@@ -40,19 +40,19 @@ class ApplePaymentStrategy: PaymentStrategy{
   }()
 
   
-  func pay(moenyAmount: Double, viwController: UIViewController) -> (Bool, String) {
-    let formattedAmount = Double(String(format: "%.1f", amount)) ?? 0.0
+  func pay(moneyAmount: Double, viwController: UIViewController) -> (Bool, String) {
+    let formattedAmount = Double(String(format: "%.1f", moneyAmount)) ?? 0.0
     paymentRequest.paymentSummaryItems = [PKPaymentSummaryItem(label: "Shopify Shopping Cart", amount: NSDecimalNumber(value: formattedAmount))]
     let controller = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest)
-    controller?.delegate = (vc as! any PKPaymentAuthorizationViewControllerDelegate)
-    vc.present(controller!, animated: true)
+    controller?.delegate = (viwController as! any PKPaymentAuthorizationViewControllerDelegate)
+      viwController.present(controller!, animated: true)
     return (true, "payment in process...")
   }
 }
 class CashPaymentStrategy: PaymentStrategy{
 
   func pay(moneyAmount: Double, viwController: UIViewController) -> (Bool, String) {
-    if amount < 500 * currencyValue {
+    if moneyAmount < 500 * currencyValue {
       return (true, "Done the payment successfully")
     } else {
       return (false, "The total amount is so big, please choose another payment method!")
@@ -72,6 +72,6 @@ class PaymentContext{
   }
 
   func makePayment(moenyAmount: Double, viwController: UIViewController) -> (Bool, String){
-    return paymentStrategy.pay(moenyAmount: moenyAmount, viwController: viwController)
+    return paymentStrategy.pay(moneyAmount: moenyAmount, viwController: viwController)
   }
 }
