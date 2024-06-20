@@ -149,7 +149,7 @@
                                 </constraints>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ffz-PE-zpa">
-                                <rect key="frame" x="0.0" y="242" width="393" height="576"/>
+                                <rect key="frame" x="0.0" y="242" width="385" height="576"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Dpc-Ek-vLt" id="DDA-yy-aL4"/>
@@ -176,7 +176,7 @@
                             <constraint firstItem="ffz-PE-zpa" firstAttribute="top" secondItem="lcc-2R-kHa" secondAttribute="bottom" constant="8" id="p8X-OD-1Jn"/>
                             <constraint firstItem="lcc-2R-kHa" firstAttribute="leading" secondItem="m2q-UV-bX8" secondAttribute="leading" constant="16" id="rcb-29-rFq"/>
                             <constraint firstItem="gjK-sG-hrL" firstAttribute="top" secondItem="GXq-3M-cZ2" secondAttribute="bottom" constant="8" id="sOj-Lf-XOc"/>
-                            <constraint firstItem="m2q-UV-bX8" firstAttribute="trailing" secondItem="ffz-PE-zpa" secondAttribute="trailing" id="yZg-6e-hqy"/>
+                            <constraint firstItem="m2q-UV-bX8" firstAttribute="trailing" secondItem="ffz-PE-zpa" secondAttribute="trailing" constant="8" id="yZg-6e-hqy"/>
                             <constraint firstItem="GXq-3M-cZ2" firstAttribute="top" secondItem="aPO-55-Cw6" secondAttribute="top" id="zjP-xS-aUZ"/>
                         </constraints>
                     </view>

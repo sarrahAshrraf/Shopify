@@ -67,8 +67,7 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == .delete){
             let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) {[weak self] action in
-                var id  = self?.favouriteProducts[indexPath.row].id
-                print(id)
+                let id  = self?.favouriteProducts[indexPath.row].id
                 self?.favouriteViewModel.removeProduct(id: id!)
                 self?.favouriteProducts.remove(at: indexPath.row)
                 self?.favouriteProductsTable.reloadData()

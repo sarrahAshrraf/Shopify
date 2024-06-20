@@ -38,43 +38,22 @@ class ColorCollectionDelegatesHandling: NSObject , UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        return CGSize(width: collectionView.frame.width/4-16, height: collectionView.frame.width/4-16)
+        return CGSize(width: 80, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if viewController.selectedSize != nil {
             viewController.selectedColor = colorArr[indexPath.row]
-            let cell = collectionView.cellForItem(at: indexPath)
-            cell?.addBorderAndRemoveShadow()
+            let cell = collectionView.cellForItem(at: indexPath) as! VariantCollectionViewCell
+            cell.updateSelectionAppearance(isSelected: true)
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.elevateCellAndRemoveBorder()
+        let cell = collectionView.cellForItem(at: indexPath) as? VariantCollectionViewCell
+        cell?.updateSelectionAppearance(isSelected: false)
     }
 }
 
-
-
-
-extension UICollectionViewCell {
-    func elevateCellAndRemoveBorder (){
-        layer.shadowRadius = 5.0
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 3.3, height: 5.7)
-        layer.shadowOpacity = 0.7
-        contentView.layer.borderWidth = 0
-        contentView.layer.borderColor = UIColor.white.cgColor
-    }
     
-    func addBorderAndRemoveShadow (){
-        layer.shadowRadius = 0.0
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        layer.shadowOpacity = 0.0
-        contentView.layer.borderWidth = 4
-        contentView.layer.borderColor = UIColor(named: "pink")?.cgColor
-    }
-    
-}
+

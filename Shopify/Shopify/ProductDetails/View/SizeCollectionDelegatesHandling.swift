@@ -21,9 +21,9 @@ class SizeCollectionDelegatesHandling: NSObject, UICollectionViewDelegate, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VariantCollectionViewCell", for: indexPath) as! VariantCollectionViewCell
         cell.setSizeData(size: sizeArr[indexPath.row])
         if viewController.selectedSize == sizeArr[indexPath.row]{
-            cell.addBorderAndRemoveShadow()
+            cell.updateSelectionAppearance(isSelected: true)
         } else {
-            cell.elevateCellAndRemoveBorder()
+            cell.updateSelectionAppearance(isSelected: false)
         }
         return cell
     }
@@ -34,13 +34,13 @@ class SizeCollectionDelegatesHandling: NSObject, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewController.selectedSize = sizeArr[indexPath.row]
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.addBorderAndRemoveShadow()
+        let cell = collectionView.cellForItem(at: indexPath) as! VariantCollectionViewCell
+        cell.updateSelectionAppearance(isSelected: true)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.elevateCellAndRemoveBorder()
+        let cell = collectionView.cellForItem(at: indexPath) as? VariantCollectionViewCell
+        cell?.updateSelectionAppearance(isSelected: false)
     }
 }
 

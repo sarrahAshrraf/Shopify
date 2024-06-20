@@ -30,11 +30,12 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
         if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
             currencySymbol = symbol
         }
+        showFavoriteBtn()
     
     }
     
     func setValues(product: Product, isFav: Bool) {
-        print("Success2")
+        
         self.product = product
         self.productLabel.text = product.title ?? ""
         self.productImage.kf.setImage(with: URL(string: product.image?.src ?? ""),
@@ -54,16 +55,25 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
     }
     
     
+    func showFavoriteBtn(){
+        if UserDefault().getCustomerId() == -1 {
+            favouriteButton.isHidden = true
+        }else {
+            favouriteButton.isHidden = false
+        }
+    }
+    
+    
     @IBAction func checkFavouriteProduct(_ sender: Any) {
         
         if favouriteButton.currentImage == UIImage(systemName: Constants.heart) {
             let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
+            print(localProduct)
             favoritesViewModel.addProduct(product: localProduct)
             favoritesViewModel.getAllProducts()
             favouriteButton.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
             
         } else {
-            let retrievedProduct = favoritesViewModel.getProduct(productId: self.product.id )
             favoritesViewModel.removeProduct(id: product.id)
             favoritesViewModel.getAllProducts()
             favouriteButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
