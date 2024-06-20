@@ -114,6 +114,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             let result = results?[indexPath.row]
             //print(result?.title)
             cell.homeImage.kf.setImage(with: URL(string: result?.image?.src ?? ""))
+            cell.contentView.layer.borderWidth = 1.5
+            cell.contentView.layer.borderColor = UIColor.black.cgColor
+            cell.contentView.layer.cornerRadius = 12
             return cell
         }
         
