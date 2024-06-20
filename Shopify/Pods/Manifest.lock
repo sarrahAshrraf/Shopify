@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.8.1)
+  - Cosmos (25.0.1)
   - Kingfisher (7.11.0)
   - lottie-ios (4.4.3)
   - ReachabilitySwift (5.2.2)
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.8.0)
+  - Cosmos (~> 25.0)
   - Kingfisher
   - lottie-ios
   - ReachabilitySwift
@@ -21,6 +23,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cosmos
     - Kingfisher
     - lottie-ios
     - ReachabilitySwift
@@ -30,6 +33,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  Cosmos: 02db0a1c953107049bfd2d7af19ceef55ecb7e98
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   lottie-ios: fcb5e73e17ba4c983140b7d21095c834b3087418
   ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
@@ -37,6 +41,6 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 386782dc1b30363db086292e5b1a323dcb4f0d4c
+PODFILE CHECKSUM: 47921651c3406cf192d94d2630e7d8c9a828dc54
 
 COCOAPODS: 1.8.4
