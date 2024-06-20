@@ -18,6 +18,7 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var productBrand: UILabel!
     @IBOutlet weak var productSizeCollectionView: UICollectionView!
     @IBOutlet weak var productColorCollectionView: UICollectionView!
+    @IBOutlet weak var productReviewTableView: UITableView!
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var productStockCount: UILabel!
     @IBOutlet weak var steperCount: UILabel!
@@ -29,13 +30,14 @@ class ProductDetailsViewController: UIViewController {
         
     var sizeCollectionHandler = SizeCollectionDelegatesHandling()
     var colorCollectionHandler = ColorCollectionDelegatesHandling()
+    var reviewTableHandler = ReviewsDelegatesHandling()
     
     var viewModel: ProductDetailsViewModel!
     var customerID = 7309504250029
     var shoppingCartViewModel: ShoppingCartViewModel!
     var favoritesViewModel: FavoritesViewModel!
     var orderCount = 1
-    var defaults: UserDefaults!
+    var defaults: UserDefaults = UserDefaults.standard
     var productInCart = false
     var product:Product!
     var imagesArray : [String] = []
@@ -84,6 +86,7 @@ class ProductDetailsViewController: UIViewController {
         setUpProductImagesArr()
         setUpSizeCollectionCell()
         setUpColorCollectionCell()
+        setUpReviewTableCell()
         setUpCollectionCells()
         playTimer()
     }
@@ -96,12 +99,14 @@ class ProductDetailsViewController: UIViewController {
         selectedColor = nil
         colorCollectionHandler.colorArr = product.options?[1].values ?? []
         resetUI()
+        setupUI()
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         productColorCollectionView.reloadData()
         productSizeCollectionView.reloadData()
+        productReviewTableView.reloadData()
         ImagesCollectionView.reloadData()
     }
     
@@ -112,6 +117,13 @@ class ProductDetailsViewController: UIViewController {
         productSizeCollectionView.register(UINib(nibName: "VariantCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "VariantCollectionViewCell")
         
         productColorCollectionView.register(UINib(nibName: "VariantCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "VariantCollectionViewCell")
+        
+        productReviewTableView.register(UINib(nibName:"ProductReviewCell" , bundle: nil), forCellReuseIdentifier: "ProductReviewCell")
+        
+    }
+    func setupUI(){
+        checkFavorite()
+        showFavoriteBtn()
     }
     
     func fetchData(){
@@ -128,8 +140,28 @@ class ProductDetailsViewController: UIViewController {
             
         }
       }
+        print("customerID")
+        print(defaults.integer(forKey: Constants.customerId))
     }
     
+    func showFavoriteBtn(){
+        if UserDefault().getCustomerId() == -1 {
+            favoriteBtnOutlet.isHidden = true
+        }else {
+            favoriteBtnOutlet.isHidden = false
+        }
+    }
+    
+    
+    
+    func checkFavorite(){
+        let isFav = favoritesViewModel.checkIfProductIsFavorite(productId: product.id, customerId: defaults.integer(forKey: Constants.customerId))
+        if isFav {
+            self.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+        } else {
+            self.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
+        }
+    }
     func setUpProductImagesArr(){
         for image in product.images!{
             imagesArray.append(image.src!)
@@ -150,6 +182,18 @@ class ProductDetailsViewController: UIViewController {
         productColorCollectionView.delegate = colorCollectionHandler
         colorCollectionHandler.colorArr = product.options?[1].values ?? []
     }
+    
+    
+    func setUpReviewTableCell(){
+        reviewTableHandler.viewController = self
+        productReviewTableView.dataSource = reviewTableHandler
+        productReviewTableView.delegate = reviewTableHandler
+        for i in 0 ..< 3{
+            reviewTableHandler.productReviews.append(ProductDetailsViewModel.Reviews[i])
+        }
+    }
+    
+    
     func checkPriceAndAvailability(){
         if selectedSize == nil || selectedColor == nil {}
         else{
@@ -170,9 +214,9 @@ class ProductDetailsViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func addToCart(_ sender: Any) {
-       //MARK: TODO: get user id from userDeafulttttt
-        
-        if customerID != -1{
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
             orderCount = Int(steperCount.text!)!
             let variantName = "\(selectedSize!) / \(selectedColor!)"
             var variantId = 0
@@ -191,10 +235,6 @@ class ProductDetailsViewController: UIViewController {
             }else{
                 addVariantToOrders(variantName: variantName)
             }
-        }else {
-            let alert = UIAlertController(title: "Warning", message: "You must login first!", preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-               self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -302,6 +342,14 @@ class ProductDetailsViewController: UIViewController {
             }
             present(alert, animated: true, completion: nil)
         }
+    }
+    
+    
+    @IBAction func navigateToAllReviews(_ sender: UIButton) {
+        let reviewsVC = self.storyboard?.instantiateViewController(identifier: "ReviewViewController") as! ReviewViewController
+        reviewsVC.modalPresentationStyle = .fullScreen
+        reviewsVC.reviewsList = ProductDetailsViewModel.Reviews
+        self.present(reviewsVC, animated: true)
     }
     @objc func getCurrentIndex(){
         if currentIndex != imagesArray.count-1 {

@@ -10,38 +10,38 @@ import Alamofire
 
 class AuthenticationViewModel {
     
-    var bindUserToSignUpController:(()->Void) = {}
-    var bindUsersListToSignUpController:(()->Void) = {}
-    var bindDraftOrderToSignUpController:(()->Void) = {}
-    var bindUserWithDraftOrderToSignUpController:(()->Void) = {}
+    var bindUserToController:(()->Void) = {}
+    var bindUsersListToController:(()->Void) = {}
+    var bindDraftOrderToController:(()->Void) = {}
+    var bindUserWithDraftOrderToController:(()->Void) = {}
     
     
     var user: User?{
         didSet{
-            bindUserToSignUpController()
+            bindUserToController()
         }
     }
     var code: Int?
     var usersList: [User]! = []{
         didSet{
-            bindUsersListToSignUpController()
+            bindUsersListToController()
         }
     }
     
     var favoritesDraftOrder: DraftOrder? {
         didSet {
-            bindDraftOrderToSignUpController()
+            bindDraftOrderToController()
         }
     }
     var cartDraftOrder: DraftOrder? {
         didSet {
-            bindDraftOrderToSignUpController()
+            bindDraftOrderToController()
         }
     }
     
     var userWithDraftOrder: User?{
         didSet{
-            bindUserWithDraftOrderToSignUpController()
+            bindUserWithDraftOrderToController()
         }
     }
     

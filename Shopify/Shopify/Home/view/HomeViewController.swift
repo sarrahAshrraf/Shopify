@@ -62,17 +62,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @IBAction func navigateToFavorite(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "FavouriteStoryboard", bundle: nil)
-        let favoriteVC = storyboard.instantiateViewController(identifier: "FavouriteViewController") as! FavouriteViewController
-        
-        favoriteVC.modalPresentationStyle = .fullScreen
-        favoriteVC.modalTransitionStyle = .crossDissolve
-        present(favoriteVC, animated: true , completion: nil)
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            let storyboard = UIStoryboard(name: "FavouriteStoryboard", bundle: nil)
+            let favoriteVC = storyboard.instantiateViewController(identifier: "FavouriteViewController") as! FavouriteViewController
+            
+            favoriteVC.modalPresentationStyle = .fullScreen
+            favoriteVC.modalTransitionStyle = .crossDissolve
+            present(favoriteVC, animated: true , completion: nil)
+        }
         
     }
     
     @IBAction func navigateToSearch(_ sender: UIButton) {
+        
+        
         let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
         let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
         

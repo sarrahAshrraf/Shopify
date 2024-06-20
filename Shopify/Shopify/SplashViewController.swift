@@ -57,6 +57,7 @@ class SplashViewController: UIViewController {
     
     private func guestButtonTapped() {
         defaults.setValue(Constants.USER_STATE_GUEST, forKey:Constants.KEY_USER_STATE )
+        defaults.setValue(-1, forKey: Constants.customerId)
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let home = storyboard.instantiateViewController(identifier: "home") 
         home.modalPresentationStyle = .fullScreen
