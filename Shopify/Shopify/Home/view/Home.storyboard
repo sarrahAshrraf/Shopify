@@ -353,8 +353,27 @@
                                     <constraint firstItem="chd-2C-Vnt" firstAttribute="width" secondItem="fvd-ui-U02" secondAttribute="width" id="zbv-Yc-1tg"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjD-B1-oUp">
+                                <rect key="frame" x="30" y="443" width="333" height="42"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" cornerRadius="100">
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </backgroundConfiguration>
+                                    <attributedString key="attributedSubtitle">
+                                        <fragment content="Brands">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="22" name="Chalkduster"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vUi-pH-E9D">
-                                <rect key="frame" x="0.0" y="499" width="393" height="270"/>
+                                <rect key="frame" x="16" y="499" width="361" height="270"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CbV-ku-K3a">
                                     <size key="itemSize" width="128" height="128"/>
@@ -377,25 +396,6 @@
                                     <outlet property="delegate" destination="iE8-Yz-Gc4" id="uRq-8x-jxI"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjD-B1-oUp">
-                                <rect key="frame" x="30" y="443" width="333" height="42"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <backgroundConfiguration key="background" cornerRadius="100">
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </backgroundConfiguration>
-                                    <attributedString key="attributedSubtitle">
-                                        <fragment content="Brands">
-                                            <attributes>
-                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <font key="NSFont" size="22" name="Chalkduster"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cTY-H2-c00"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -410,8 +410,8 @@
                             <constraint firstItem="fvd-ui-U02" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" id="kz5-rr-miM"/>
                             <constraint firstItem="cTY-H2-c00" firstAttribute="trailing" secondItem="ZjD-B1-oUp" secondAttribute="trailing" constant="30" id="lMN-3w-6jk"/>
                             <constraint firstItem="ZjD-B1-oUp" firstAttribute="centerX" secondItem="OlM-Yo-JXd" secondAttribute="centerX" id="mtk-db-k3s"/>
-                            <constraint firstItem="vUi-pH-E9D" firstAttribute="trailing" secondItem="cTY-H2-c00" secondAttribute="trailing" id="oV5-MI-QB0"/>
-                            <constraint firstItem="vUi-pH-E9D" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" id="p19-01-nRn"/>
+                            <constraint firstItem="vUi-pH-E9D" firstAttribute="trailing" secondItem="fvd-ui-U02" secondAttribute="trailing" constant="-16" id="oV5-MI-QB0"/>
+                            <constraint firstItem="vUi-pH-E9D" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" constant="16" id="p19-01-nRn"/>
                             <constraint firstItem="vUi-pH-E9D" firstAttribute="top" secondItem="ZjD-B1-oUp" secondAttribute="bottom" constant="14" id="tEq-Ra-uAN"/>
                             <constraint firstItem="fvd-ui-U02" firstAttribute="top" secondItem="OlM-Yo-JXd" secondAttribute="top" id="tGZ-RW-qdP"/>
                         </constraints>
@@ -442,16 +442,16 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
