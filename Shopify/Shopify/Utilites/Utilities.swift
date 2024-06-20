@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Utilities{
     static func formatDateString(_ dateString: String) -> String {
@@ -17,5 +18,13 @@ class Utilities{
         }
         
         return dateString
+    }
+    
+    static func navigateToGuestScreen(viewController: UIViewController){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let guestVC = storyboard.instantiateViewController(identifier: "GuestViewController") as! GuestViewController
+        guestVC.modalPresentationStyle = .fullScreen
+        guestVC.modalTransitionStyle = .crossDissolve
+        viewController.present(guestVC, animated: true)
     }
 }

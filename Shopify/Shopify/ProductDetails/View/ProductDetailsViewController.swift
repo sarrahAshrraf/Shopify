@@ -35,7 +35,7 @@ class ProductDetailsViewController: UIViewController {
     var shoppingCartViewModel: ShoppingCartViewModel!
     var favoritesViewModel: FavoritesViewModel!
     var orderCount = 1
-    var defaults: UserDefaults!
+    var defaults: UserDefaults = UserDefaults.standard
     var productInCart = false
     var product:Product!
     var imagesArray : [String] = []
@@ -96,6 +96,7 @@ class ProductDetailsViewController: UIViewController {
         selectedColor = nil
         colorCollectionHandler.colorArr = product.options?[1].values ?? []
         resetUI()
+        setupUI()
     }
     
     
@@ -113,6 +114,10 @@ class ProductDetailsViewController: UIViewController {
         
         productColorCollectionView.register(UINib(nibName: "VariantCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "VariantCollectionViewCell")
     }
+    func setupUI(){
+        checkFavorite()
+        showFavoriteBtn()
+    }
     
     func fetchData(){
         viewModel.getItems()
@@ -128,8 +133,28 @@ class ProductDetailsViewController: UIViewController {
             
         }
       }
+        print("customerID")
+        print(defaults.integer(forKey: Constants.customerId))
     }
     
+    func showFavoriteBtn(){
+        if UserDefault().getCustomerId() == -1 {
+            favoriteBtnOutlet.isHidden = true
+        }else {
+            favoriteBtnOutlet.isHidden = false
+        }
+    }
+    
+    
+    
+    func checkFavorite(){
+        let isFav = favoritesViewModel.checkIfProductIsFavorite(productId: product.id, customerId: defaults.integer(forKey: Constants.customerId))
+        if isFav {
+            self.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+        } else {
+            self.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
+        }
+    }
     func setUpProductImagesArr(){
         for image in product.images!{
             imagesArray.append(image.src!)

@@ -52,6 +52,8 @@
 		8BF5913F2C1C799D00EF3344 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5913C2C1C799D00EF3344 /* ProductCell.swift */; };
 		8BF591412C1C7DB600EF3344 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF591402C1C7DB600EF3344 /* FavouriteViewModel.swift */; };
 		8BF591432C1C831E00EF3344 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF591422C1C831E00EF3344 /* FavouriteViewController.swift */; };
+		8BF665942C2436B400408AC4 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF665932C2436B400408AC4 /* UserDefault.swift */; };
+		8BF665962C244B0900408AC4 /* GuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF665952C244B0900408AC4 /* GuestViewController.swift */; };
 		8BFB447A2C2201C400FF98B0 /* VariantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB44782C2201C400FF98B0 /* VariantCollectionViewCell.swift */; };
 		8BFB447B2C2201C400FF98B0 /* VariantCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB44792C2201C400FF98B0 /* VariantCollectionViewCell.xib */; };
 		93A552BB7BABFCA0665F05A7 /* Pods_ShopifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265B32CF562A1F8B76337625 /* Pods_ShopifyTests.framework */; };
@@ -187,6 +189,8 @@
 		8BF5913D2C1C799D00EF3344 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		8BF591402C1C7DB600EF3344 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		8BF591422C1C831E00EF3344 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
+		8BF665932C2436B400408AC4 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		8BF665952C244B0900408AC4 /* GuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestViewController.swift; sourceTree = "<group>"; };
 		8BFB44782C2201C400FF98B0 /* VariantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantCollectionViewCell.swift; sourceTree = "<group>"; };
 		8BFB44792C2201C400FF98B0 /* VariantCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VariantCollectionViewCell.xib; sourceTree = "<group>"; };
 		8E8846A44B1348DFC3F949E2 /* Pods_Shopify_ShopifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shopify_ShopifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,6 +456,7 @@
 				8BE8849C2C10A90200BB28C6 /* NetworkMangerProtocol.swift */,
 				8B2FCFB32C13888E00C613E3 /* URLs.swift */,
 				8BF591302C1C684200EF3344 /* DatabaseManager.swift */,
+				8BF665932C2436B400408AC4 /* UserDefault.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -725,6 +730,7 @@
 				8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */,
 				8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */,
 				8B073EC22C14AD2B00629214 /* SplashViewController.swift */,
+				8BF665952C244B0900408AC4 /* GuestViewController.swift */,
 			);
 			path = Shopify;
 			sourceTree = "<group>";
@@ -1123,6 +1129,7 @@
 			files = (
 				E63EAC852C1331DC000845AA /* HomeViewModel.swift in Sources */,
 				E759B37B2C201A8100C33B14 /* SummaryCollectionViewCell.swift in Sources */,
+				8BF665942C2436B400408AC4 /* UserDefault.swift in Sources */,
 				E71445FA2C1EC37100633624 /* SettingsViewmodel.swift in Sources */,
 				8B95A6252C11B97300D5A592 /* ProductDetails.swift in Sources */,
 				8B267BD52C21BEC300830585 /* ProductImageCell.swift in Sources */,
@@ -1153,6 +1160,7 @@
 				E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */,
 				E735FA202C1A040D001FCD9A /* CheckOutViewController.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
+				8BF665962C244B0900408AC4 /* GuestViewController.swift in Sources */,
 				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
 				E7FB2CA22C10F918003A8D9D /* AddressCell.swift in Sources */,
 				E7D50B012C1A16B600F6FD41 /* CheckOutViewModel.swift in Sources */,
