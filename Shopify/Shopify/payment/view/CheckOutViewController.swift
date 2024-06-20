@@ -216,14 +216,24 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         print("adddddressssss")
     }
     
-
+    func isCardMethodSelected() -> Bool {
+      if let cardImage = self.view.viewWithTag(2) as? UIImageView{
+        if !cardImage.isHidden{
+          return true
+        }else {
+          return false
+        }
+      }
+      return false
+    }
     @IBAction func cashBtn(_ sender: Any) {
     }
     @IBAction func applePAyBtn(_ sender: Any) {
         let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
         
+        if isCardMethodSelected(){
           paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
-        
+        }
         
         let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
         

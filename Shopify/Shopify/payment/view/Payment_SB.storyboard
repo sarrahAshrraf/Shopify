@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="-19" y="-721"/>
         </scene>
-        <!--Table View Controller-->
+        <!--PaymentVC-->
         <scene sceneID="6gX-yf-MOF">
             <objects>
-                <tableViewController id="Kwk-fW-LOh" sceneMemberID="viewController">
+                <tableViewController id="Kwk-fW-LOh" customClass="PaymentVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ah8-Nl-Qs9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="157"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,7 +199,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C23-WM-AtC">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C23-WM-AtC">
                                                     <rect key="frame" x="19.5" y="10.000000000000002" width="25" height="23.666666666666668"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <imageReference key="image" image="dollarsign.square.fill" catalog="system" symbolScale="large"/>
@@ -222,7 +222,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="srg-46-hMg">
+                                                <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="srg-46-hMg">
                                                     <rect key="frame" x="16.833333333333336" y="10.333333333333334" width="30.333333333333332" height="22.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <imageReference key="image" image="creditcard.fill" catalog="system" symbolScale="large"/>
@@ -239,15 +239,19 @@
                             <outlet property="delegate" destination="Kwk-fW-LOh" id="1PS-BJ-8yD"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="cardImg" destination="srg-46-hMg" id="igM-4W-OhD"/>
+                        <outlet property="cashImg" destination="C23-WM-AtC" id="H5F-zc-uch"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MaY-Ht-joq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="880" y="-256"/>
         </scene>
-        <!--PaymentVC-->
+        <!--Table View Controller-->
         <scene sceneID="ULZ-vv-qPI">
             <objects>
-                <tableViewController id="cuq-aS-7rt" customClass="PaymentVC" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cuq-aS-7rt" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="top" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b49-6e-QJP">
                         <rect key="frame" x="0.0" y="0.0" width="361" height="204"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
