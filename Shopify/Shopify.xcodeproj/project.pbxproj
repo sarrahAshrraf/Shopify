@@ -89,13 +89,12 @@
 		E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76517282C22343C001BD2F3 /* MapViewController.swift */; };
 		E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */; };
 		E79D10542C1A2389002DB483 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D10532C1A2389002DB483 /* Order.swift */; };
+		E7B134242C239D76009F165E /* OrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B134222C239D75009F165E /* OrderSummaryCell.swift */; };
+		E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B134232C239D75009F165E /* OrderSummaryCell.xib */; };
 		E7BC1B1F2C145E2B0015C552 /* AddressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */; };
 		E7BC1B212C145F780015C552 /* AddNewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */; };
 		E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BC1B242C1467110015C552 /* SettingsVC.swift */; };
-		E7BEB9372C236A08000DEC01 /* PaymentStratgy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */; };
 		E7BEB9392C236A30000DEC01 /* applePaymentStratgy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */; };
-		E7BEB93B2C236A6F000DEC01 /* cashPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */; };
-		E7BEB93D2C236A97000DEC01 /* PaymentContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */; };
 		E7D50B012C1A16B600F6FD41 /* CheckOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */; };
 		E7F5B9BA2C18AEC7008CE46A /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */; };
 		E7F5EF492C0B35800096F476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5EF482C0B35800096F476 /* AppDelegate.swift */; };
@@ -226,14 +225,13 @@
 		E76517282C22343C001BD2F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shippingAddressVC.swift; sourceTree = "<group>"; };
 		E79D10532C1A2389002DB483 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		E7B134222C239D75009F165E /* OrderSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryCell.swift; sourceTree = "<group>"; };
+		E7B134232C239D75009F165E /* OrderSummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderSummaryCell.xib; sourceTree = "<group>"; };
 		E7BC1B1E2C145E2B0015C552 /* AddressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCoordinator.swift; sourceTree = "<group>"; };
 		E7BC1B202C145F780015C552 /* AddNewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAddressViewModel.swift; sourceTree = "<group>"; };
 		E7BC1B242C1467110015C552 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		E7BEB9342C2368B6000DEC01 /* Shopify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shopify.entitlements; sourceTree = "<group>"; };
-		E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStratgy.swift; sourceTree = "<group>"; };
 		E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = applePaymentStratgy.swift; sourceTree = "<group>"; };
-		E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cashPayment.swift; sourceTree = "<group>"; };
-		E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentContext.swift; sourceTree = "<group>"; };
 		E7D50B002C1A16B600F6FD41 /* CheckOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutViewModel.swift; sourceTree = "<group>"; };
 		E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		E7F5EF452C0B35800096F476 /* Shopify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopify.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -643,10 +641,7 @@
 		E7BEB9352C2369F1000DEC01 /* applePayment */ = {
 			isa = PBXGroup;
 			children = (
-				E7BEB9362C236A08000DEC01 /* PaymentStratgy.swift */,
 				E7BEB9382C236A30000DEC01 /* applePaymentStratgy.swift */,
-				E7BEB93A2C236A6F000DEC01 /* cashPayment.swift */,
-				E7BEB93C2C236A97000DEC01 /* PaymentContext.swift */,
 			);
 			path = applePayment;
 			sourceTree = "<group>";
@@ -752,6 +747,8 @@
 				E7F5B9B92C18AEC7008CE46A /* CartViewController.swift */,
 				E759B3782C2017C700C33B14 /* SummaryViewController.swift */,
 				E759B37A2C201A8100C33B14 /* SummaryCollectionViewCell.swift */,
+				E7B134222C239D75009F165E /* OrderSummaryCell.swift */,
+				E7B134232C239D75009F165E /* OrderSummaryCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -971,6 +968,7 @@
 				8B073EC12C14929A00629214 /* ProductDetails.storyboard in Resources */,
 				E7FB2CA32C10F918003A8D9D /* AddressCell.xib in Resources */,
 				8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */,
+				E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */,
 				8B2FCFBB2C139F6800C613E3 /* BrandProductCollectionViewCell.xib in Resources */,
 				8BF5913E2C1C799D00EF3344 /* ProductCell.xib in Resources */,
 				E7FB2C742C10D177003A8D9D /* ShoppingCartStoryboard.storyboard in Resources */,
@@ -1130,13 +1128,13 @@
 				E608967C2C1CE3E000FB9AFA /* OrdersDetailsViewController.swift in Sources */,
 				E6C97E002C0B934100B2CA81 /* HomeViewController.swift in Sources */,
 				8B95A6232C11B31100D5A592 /* ProductDetailsViewController.swift in Sources */,
-				E7BEB93D2C236A97000DEC01 /* PaymentContext.swift in Sources */,
 				E759B3792C2017C700C33B14 /* SummaryViewController.swift in Sources */,
 				E6174BDD2C0BA850004CE96E /* CustomTableViewCell.swift in Sources */,
 				E764E00B2C139BEC00740DFA /* AddNewAddressVC.swift in Sources */,
 				E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */,
 				E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */,
 				E735FA202C1A040D001FCD9A /* CheckOutViewController.swift in Sources */,
+				E7B134242C239D76009F165E /* OrderSummaryCell.swift in Sources */,
 				E7F5EF4D2C0B35800096F476 /* ViewController.swift in Sources */,
 				8BE884A02C10C1DD00BB28C6 /* Response.swift in Sources */,
 				E7FB2CA22C10F918003A8D9D /* AddressCell.swift in Sources */,
@@ -1154,11 +1152,9 @@
 				E6BC3D392C14E0CC00DA604B /* CategoryViewController.swift in Sources */,
 				8BB686442C1B54490051A015 /* LoginViewController.swift in Sources */,
 				8B95A6182C11AC5300D5A592 /* Options.swift in Sources */,
-				E7BEB9372C236A08000DEC01 /* PaymentStratgy.swift in Sources */,
 				E6C97E022C0B936900B2CA81 /* AddsCollectionViewCell.swift in Sources */,
 				E68E0F422C20A73E00343519 /* HomeViewCell.swift in Sources */,
 				E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */,
-				E7BEB93B2C236A6F000DEC01 /* cashPayment.swift in Sources */,
 				E7F5EF4B2C0B35800096F476 /* SceneDelegate.swift in Sources */,
 				E735FA222C1A048B001FCD9A /* PaymentVC.swift in Sources */,
 				8BF591432C1C831E00EF3344 /* FavouriteViewController.swift in Sources */,

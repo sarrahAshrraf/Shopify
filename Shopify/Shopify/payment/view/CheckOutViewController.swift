@@ -225,7 +225,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
           paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
         
         
-        let isPaymentSuccessful = paymentcontext.makePayment(amount: self.total, vc: self)
+        let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
         
         if isPaymentSuccessful.0 {
           if isPaymentSuccessful.1 == "Purchased successfully"{
@@ -259,7 +259,8 @@ extension CheckOutViewController: PKPaymentAuthorizationViewControllerDelegate{
     if paymentAuthorizationResult.status == .success{
       print("success")
       controller.dismiss(animated: true)
-      // TODO: make the cart empty and send server req for payment
+        createOrder()
+        showOrderSuccessAlert()
     }
   }
 
