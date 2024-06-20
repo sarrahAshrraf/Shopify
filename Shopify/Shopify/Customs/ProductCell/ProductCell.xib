@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="HOt-HC-mQP">
-                        <rect key="frame" x="10" y="10" width="344" height="126"/>
+                        <rect key="frame" x="10" y="10" width="324" height="126"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="doB-W9-aPa">
                                 <rect key="frame" x="0.0" y="20.666666666666671" width="230" height="85"/>
@@ -72,7 +72,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="kmm-FU-yJG">
-                                <rect key="frame" x="264" y="48" width="80" height="30"/>
+                                <rect key="frame" x="244" y="48" width="80" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpw-Vj-rUr">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="30"/>
@@ -89,7 +89,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="HOt-HC-mQP" secondAttribute="trailing" constant="-10" id="8Vm-kd-xYs"/>
+                    <constraint firstAttribute="trailing" secondItem="HOt-HC-mQP" secondAttribute="trailing" constant="10" id="8Vm-kd-xYs"/>
                     <constraint firstItem="HOt-HC-mQP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="PN9-5R-AAX"/>
                     <constraint firstItem="HOt-HC-mQP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="R19-Bt-JAG"/>
                     <constraint firstAttribute="bottom" secondItem="HOt-HC-mQP" secondAttribute="bottom" constant="10" id="oCD-0r-jux"/>
@@ -97,6 +97,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="containerView" destination="HOt-HC-mQP" id="jyG-Em-NAL"/>
                 <outlet property="curencyLabel" destination="ibO-kR-ygS" id="FAJ-f1-LZS"/>
                 <outlet property="productBrandLabel" destination="RN3-mO-zmr" id="mAu-oW-JJX"/>
                 <outlet property="productImageView" destination="3CU-V1-HvN" id="15M-Of-dpJ"/>

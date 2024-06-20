@@ -15,12 +15,13 @@ class ProductCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
 
     @IBOutlet weak var curencyLabel: UILabel!
+    @IBOutlet weak var containerView: UIStackView!
     
     var localProduct: LocalProduct!
     var product: Product!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configureContainerView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,6 +42,19 @@ class ProductCell: UITableViewCell {
         productImageView.kf.setImage(with: URL(string: product.image?.src ?? ""))
         productNameLabel.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
         productPriceLabel.text = product.variants?[0].price ?? ""
+    }
+    
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
     }
     
 }
