@@ -27,19 +27,19 @@ class SignUpViewController: UIViewController {
         signUpViewModel = AuthenticationViewModel()
         favoritesViewModel = FavoritesViewModel()
         setupRegisterButton()
-        signUpViewModel.bindUserToSignUpController = { [weak self] in
+        signUpViewModel.bindUserToController = { [weak self] in
             self?.handleUserSignUp()
         }
         
         favoritesViewModel.bindGetFavoriteDraftOrderToController = {[weak self] in
             self?.getFavouriteDraftOrder()
         }
-    
-        signUpViewModel.bindUsersListToSignUpController = { [weak self] in
+//    Rnsab1234?
+        signUpViewModel.bindUsersListToController = { [weak self] in
             self?.checkUserRegistration()
         }
         
-        signUpViewModel.bindDraftOrderToSignUpController = {[weak self] in
+        signUpViewModel.bindDraftOrderToController = {[weak self] in
             self?.handleDraftOrder()
         }
     }
