@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         }
         DispatchQueue.main.async {
             if self.exists {
-                self.navigateToHome()
+                Utilities.navigateToSuccesstScreen(viewController: self)
             } else {
                 self.showAlert(title: Constants.warning, message: Constants.checkEmailAndPassword)
             }

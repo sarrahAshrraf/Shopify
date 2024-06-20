@@ -27,4 +27,13 @@ class Utilities{
         guestVC.modalTransitionStyle = .crossDissolve
         viewController.present(guestVC, animated: true)
     }
+    
+    
+    static func navigateToSuccesstScreen(viewController: UIViewController){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let successVC = storyboard.instantiateViewController(identifier: "SuccessViewController") as! SuccessViewController
+        successVC.modalPresentationStyle = .fullScreen
+        successVC.modalTransitionStyle = .crossDissolve
+        viewController.present(successVC, animated: true)
+    }
 }

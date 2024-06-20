@@ -69,14 +69,7 @@ class SignUpViewController: UIViewController {
             createDraftOrder(note: "cart")
             defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
             defaults.setValue(signUpViewModel.user?.firstName, forKey:Constants.USER_FirstName )
-            let alert = Alert().showAlertWithPositiveButtons(title: Constants.congratulations, msg: Constants.registeredSuccessfully, positiveButtonTitle: Constants.ok){_ in
-                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                let home = storyboard.instantiateViewController(identifier: "home") 
-                home.modalPresentationStyle = .fullScreen
-                home.modalTransitionStyle = .crossDissolve
-                self.present(home, animated: true)
-            }
-            self.present(alert, animated: true)
+            Utilities.navigateToSuccesstScreen(viewController: self)
         } else if signUpViewModel.code == 422 {
             showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
         }
