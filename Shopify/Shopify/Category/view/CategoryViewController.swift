@@ -24,6 +24,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     var isFiltered: Bool = false
     var allProducts: [Product] = []
     var categoryViewModel: CategoryViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         categoryViewModel = CategoryViewModel()
         productDetailsViewModel = ProductDetailsViewModel()
+        favoritesViewModel = FavoritesViewModel()
         collectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
         
         categorySegmented.selectedSegmentIndex = 0
@@ -215,7 +217,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         
         if isFiltered {
-            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
+            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.categoryViewModel.filteredProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
             if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
@@ -223,7 +225,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                 }
             }
         } else {
-            cell.setValues(product: self.allProducts[indexPath.row])
+            cell.setValues(product: self.allProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.allProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
             if let variant = self.allProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
