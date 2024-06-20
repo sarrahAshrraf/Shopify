@@ -217,8 +217,8 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     
     func isCardMethodSelected() -> Bool {
-      if let cardImage = self.view.viewWithTag(2) as? UIImageView{
-        if !cardImage.isHighlighted{
+      if let cardLabel = self.view.viewWithTag(3) as? UILabel{
+        if !cardLabel.isHidden{
           return true
         }else {
           return false

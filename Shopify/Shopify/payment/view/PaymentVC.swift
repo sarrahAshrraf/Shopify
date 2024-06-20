@@ -8,11 +8,15 @@
 import UIKit
 
 class PaymentVC: UITableViewController {
+    
+    
+    @IBOutlet weak var cardCheck: UILabel!
+    @IBOutlet weak var cashCheck: UILabel!
     @IBOutlet weak var cashImg: UIImageView!
     @IBOutlet weak var cardImg: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        cashImg.isHighlighted = true
+//        cashImg.isHighlighted = true
         }
         // MARK: - Table view data source
 
@@ -30,13 +34,11 @@ class PaymentVC: UITableViewController {
       func selectPaymentOption(_ index: Int){
         switch index {
         case 0:
-            print("card")
-            cashImg.isHighlighted = false
-            cardImg.isHighlighted = true
+            cashCheck.isHidden = false
+            cardCheck.isHidden = true
         default:
-            print("cash")
-            cashImg.isHighlighted = true
-              cardImg.isHighlighted = false
+            cashCheck.isHidden = true
+            cardCheck.isHidden = false
 
         }
       }
