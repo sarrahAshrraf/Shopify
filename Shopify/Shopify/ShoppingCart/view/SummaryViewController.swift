@@ -9,6 +9,7 @@ import UIKit
 
 class SummaryViewController: UIViewController {
 
+    @IBOutlet weak var copounsTF: RoundedTextfield!
     @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var orderCollectionView: UICollectionView!
     @IBOutlet weak var copounTF: UITextField!
@@ -80,7 +81,7 @@ class SummaryViewController: UIViewController {
             taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
         }
     }
-
+//    copounsTF.ac
     @IBAction func applyCopounBtn(_ sender: Any) {
     }
     
