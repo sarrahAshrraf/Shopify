@@ -143,6 +143,53 @@ struct Orders: Codable {
         self.currentTotalTaxSet = nil
         
     }
+    
+    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: Shipping_address, financialStatus : String) {
+        self.currency = currency
+        self.lineItems = lineItems
+        self.totalPrice = totalPrice
+        self.number = number
+        self.id = nil
+        self.customer = customer
+        self.shippingAddress = shippingAddress
+        self.updatedAt = nil
+        self.totalWeight = nil
+        self.totalTax = nil
+        self.totalTaxSet = nil
+        self.totalTipReceived = nil
+        self.presentmentCurrency = nil
+        self.processedAt = nil
+        self.sourceName = nil
+        self.subtotalPrice = nil
+        self.subtotalPriceSet = nil
+        self.tags = nil
+        self.taxesIncluded = nil
+        self.test = nil
+        self.token = nil
+        self.totalDiscounts = nil
+        self.totalDiscountsSet = nil
+        self.totalLineItemsPrice = nil
+        self.totalLineItemsPriceSet = nil
+        self.totalOutstanding = nil
+        self.email = nil
+        self.estimatedTaxes = nil
+        self.financialStatus = financialStatus
+        self.name = nil
+        self.orderNumber = nil
+        self.orderStatusUrl = nil
+        self.contactEmail = nil
+        self.createdAt = nil
+        self.currentSubtotalPrice = nil
+        self.currentSubtotalPriceSet = nil
+        self.currentTotalDiscounts = nil
+        self.currentTotalDiscountsSet = nil
+        self.currentTotalPrice = nil
+        self.currentTotalPriceSet = nil
+        self.currentTotalTax = nil
+        self.currentTotalTaxSet = nil
+        
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case contactEmail = "contact_email"

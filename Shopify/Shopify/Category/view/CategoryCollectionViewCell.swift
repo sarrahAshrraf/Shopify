@@ -15,16 +15,20 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var productPrice: UILabel!
     
+    @IBOutlet weak var favBtn: UIButton!
+    
+    var favoritesViewModel: FavoritesViewModel!
+    
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
     var currencySymbol: String = "USD"
-    
-   
-    
+
     var product:Product!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        favoritesViewModel = FavoritesViewModel()
+        showFavoriteBtn()
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
@@ -32,26 +36,42 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             currencySymbol = symbol
         }
     }
-    func setValues(product:Product) {
-//        print("Success2")
+    func setValues(product:Product, isFav: Bool) {
         self.product = product
         self.productName.text = product.title ?? ""
         self.productImage.kf.setImage(with: URL(string: product.image?.src ?? ""),
                                       placeholder: UIImage(named: Constants.noImage))
-//        if let variant = product.variants?.first {
-//            if let price = Double(variant.price) {
-//                let convertedPrice = price * currencyRate
-//                self.productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
-//            }
-//        }
+        if isFav {
+            self.favBtn.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+        } else {
+            self.favBtn.setImage(UIImage(systemName: Constants.heart), for: .normal)
+        }
+    }
+    
+    
+    func showFavoriteBtn(){
+        if UserDefault().getCustomerId() == -1 {
+            favBtn.isHidden = true
+        }else {
+            favBtn.isHidden = false
+        }
+    }
+    
+    
+    @IBAction func favBtn(_ sender: Any) {
+        if favBtn.currentImage == UIImage(systemName: Constants.heart) {
+            let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
+            favoritesViewModel.addProduct(product: localProduct)
+            favoritesViewModel.getAllProducts()
+            favBtn.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            
+        } else {
+            let retrievedProduct = favoritesViewModel.getProduct(productId: self.product.id )
+            favoritesViewModel.removeProduct(id: product.id)
+            favoritesViewModel.getAllProducts()
+            favBtn.setImage(UIImage(systemName: Constants.heart), for: .normal)
+            
+        }
+        
     }
 }
-//        if product.variants?.count ?? 0 > 0{
-//            print(product.variants![0].price)
-//            self.productPrice.text = product.variants![0].price
-//        }
-//        if product.variants?.count ?? 0 > 0{
-////            String(format: "%.1f", Double(product.variants![0].price)! *  Constants)
-//
-//            self.productPrice.text = String(format: "%.1f", Double(product.variants![0].price)! )
-//        }

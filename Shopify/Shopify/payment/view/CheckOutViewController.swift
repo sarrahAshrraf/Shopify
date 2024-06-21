@@ -9,9 +9,8 @@ import UIKit
 import PassKit
 
 
-/* MARK:  navigation to home byzhar mn 8eer TAP BAR
+/* MARK:
 - discount
- - apple pay
  */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     func didSelectAddress(_ address: Address) {
@@ -83,6 +82,55 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             print(order)
             
         
+    }
+    func createCashOrder() {
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        guard addressVM.defautltAdress != nil else {
+            print("No results found, navigating to addressVC")
+            coordinator?.showAddNewAddressWithEmptyFields()
+            return
+        }
+        
+        let customer = Customer(id: customerId)
+        guard let addresses = addressVM.defautltAdress else {
+            print("No default address found")
+            return
+        }
+        
+        let shippingAddress = Shipping_address(from: addresses)
+        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
+        
+        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
+        let totalPrice = cartViewModel.result?.total_price ?? "0.00"
+        let totalPriceValue = Double(totalPrice) ?? 0.00
+        updatedTotalPrice = String(totalPriceValue * currencyRate)
+        
+        let cashPaymentStrategy = CashPaymentStrategy()
+        let (isPaymentValid, paymentMessage) = cashPaymentStrategy.pay(moneyAmount: totalPriceValue * currencyRate, viwController: self)
+        
+        guard isPaymentValid else {
+            print(paymentMessage)
+            let alert = UIAlertController(title: "Payment", message: paymentMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        let order = Orders(
+            currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD",
+            lineItems: CartList.cartItems,
+            number: CartList.cartItems.count,
+            customer: customer,
+            totalPrice: updatedTotalPrice,
+            shippingAddress: shippingAddress,
+            financialStatus: "pending"
+        )
+        
+        checkOutVM.postOrder(order: order)
+        print("Order currency:", UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD")
+        print(order)
     }
 
     
@@ -215,6 +263,19 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         
         print("adddddressssss")
     }
+    func showAlertNoNetworkWithAction() {
+        let alert = UIAlertController(title: "No Network", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Enable in settings", style: .default) { _ in
+            if let url = URL(string: "App-Prefs:root=WIFI") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .destructive))
+
+        present(alert, animated: true, completion: nil)
+    }
     
     func isCardMethodSelected() -> Bool {
       if let cardLabel = self.view.viewWithTag(3) as? UILabel{
@@ -232,25 +293,28 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     @IBAction func PurcasheVtn(_ sender: Any) {
         let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
         
-        if isCardMethodSelected(){
-          paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+        if checkOutVM.checkInternetConnectivity() {
+            if isCardMethodSelected() {
+                paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+            } else {
+                createCashOrder()
+            }
         } else {
-            createOrder()
+            showAlertNoNetworkWithAction()
+            return
         }
         
         let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
         
         if isPaymentSuccessful.0 {
-          if isPaymentSuccessful.1 == "Purchased successfully"{
-              print("Pay succeeeeed")
-
-          }
-          print(isPaymentSuccessful.1)
+            if isPaymentSuccessful.1 == "Purchased successfully" {
+                print("Pay succeeded")
+            }
+            print(isPaymentSuccessful.1)
         } else {
-          print("not succeeeeed")
-          print(isPaymentSuccessful.1)
+            print("Payment not succeeded")
+            print(isPaymentSuccessful.1)
         }
-        
     }
 }
 

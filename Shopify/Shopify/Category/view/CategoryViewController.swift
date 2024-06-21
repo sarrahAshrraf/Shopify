@@ -18,10 +18,13 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var currencySymbol: String = "USD"
     
+    var productDetailsViewModel: ProductDetailsViewModel!
+    
     var currencyRate: Double = 1.0
     var isFiltered: Bool = false
     var allProducts: [Product] = []
     var categoryViewModel: CategoryViewModel!
+    var favoritesViewModel: FavoritesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +33,8 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         categoryViewModel = CategoryViewModel()
-        
+        productDetailsViewModel = ProductDetailsViewModel()
+        favoritesViewModel = FavoritesViewModel()
         collectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
         
         categorySegmented.selectedSegmentIndex = 0
@@ -213,7 +217,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         
         if isFiltered {
-            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row])
+            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.categoryViewModel.filteredProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
             if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
@@ -221,8 +225,8 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                 }
             }
         } else {
-            cell.setValues(product: self.allProducts[indexPath.row])
-            if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
+            cell.setValues(product: self.allProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.allProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
+            if let variant = self.allProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
                     cell.productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
@@ -231,6 +235,22 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+        if isFiltered{
+            productDetailsViewModel?.productId = self.categoryViewModel.filteredProducts[indexPath.row].id
+            products.product = self.categoryViewModel.filteredProducts[indexPath.row]
+        } else {
+            productDetailsViewModel?.productId = self.allProducts[indexPath.row].id
+            products.product = self.allProducts[indexPath.row]
+        }
+        //print(viewModel?.result[indexPath.row])
+        
+        products.viewModel = productDetailsViewModel
+        products.modalPresentationStyle = .fullScreen
+        present(products, animated: true, completion: nil)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -27,9 +27,9 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
-        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
             currencySymbol = symbol
-        }
+        
         showFavoriteBtn()
     
     }

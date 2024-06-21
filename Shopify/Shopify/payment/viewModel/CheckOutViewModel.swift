@@ -72,6 +72,10 @@ class CheckOutViewModel{
         CartList.cartItems = []
         
     }
+    //check netwoooork
+    func checkInternetConnectivity()->Bool{
+        return ConnectivityManager.connectivityInstance.isConnectedToInternet()
+    }
 }
 
 
