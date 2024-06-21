@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
 
@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
         favoritesViewModel.bindGetFavoriteDraftOrderToController = {[weak self] in
             self?.getFavouriteDraftOrder()
         }
-//    Rnsab1234?
+        
         signUpViewModel.bindUsersListToController = { [weak self] in
             self?.checkUserRegistration()
         }
@@ -69,6 +69,7 @@ class SignUpViewController: UIViewController {
             createDraftOrder(note: "cart")
             defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
             defaults.setValue(signUpViewModel.user?.firstName, forKey:Constants.USER_FirstName )
+            //createFirebaseAccount()
             Utilities.navigateToSuccesstScreen(viewController: self)
         } else if signUpViewModel.code == 422 {
             showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
@@ -207,6 +208,43 @@ class SignUpViewController: UIViewController {
     }
 
 }
+
+
+extension SignUpViewController{
+    func createFirebaseAccount(){
+        Auth.auth().createUser(withEmail: emailTextField.text ?? "" , password: passwordTextField.text ?? "", completion: {[weak self] result, error in
+            
+            guard let strongSelf = self else{
+                return
+            }
+            guard error == nil else{
+                return
+            }
+            strongSelf.sendVerificationLink()
+            strongSelf.navigateToLoginFirebase()
+        })
+    }
+    
+    func navigateToLoginFirebase(){
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(loginViewController, animated: true)
+    }
+    
+    func sendVerificationLink(){
+        if let user = Auth.auth().currentUser {
+            user.sendEmailVerification { error in
+                if let error = error {
+                    // Handle the error
+                    print("Error sending verification email: \(error.localizedDescription)")
+                } else {
+                    print("Verification email sent successfully")
+                }
+            }
+        }
+    }
+    
+}
+
 
 
 

@@ -12,7 +12,7 @@
         <!--Splash View Controller-->
         <scene sceneID="ISM-ms-0Bd">
             <objects>
-                <viewController id="3h8-rV-aFf" customClass="SplashViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SplashViewController" id="3h8-rV-aFf" customClass="SplashViewController" customModule="Shopify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XFJ-Kr-OdH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,9 +297,6 @@
             <point key="canvasLocation" x="1787" y="8"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="OPY-Lt-aTy"/>
-    </designables>
     <resources>
         <image name="icon-success" width="50" height="50"/>
         <image name="warning" width="42.666667938232422" height="42.666667938232422"/>
