@@ -13,6 +13,11 @@ pod 'lottie-ios'
 pod 'RxSwift', '6.5.0'
 pod 'RxCocoa', '6.5.0'
 pod 'Cosmos', '~> 25.0'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'FirebaseFirestore'
 
 post_install do |installer|
     installer.generated_projects.each do |project|

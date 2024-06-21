@@ -421,6 +421,7 @@
                         <outlet property="brandsCollectionView" destination="vUi-pH-E9D" id="eNf-EH-za8"/>
                         <outlet property="couponsCollectionView" destination="BXX-k2-Uzz" id="uR6-wb-6IJ"/>
                         <outlet property="pageController" destination="BEt-l5-Sfk" id="4fz-6W-aLj"/>
+                        <outlet property="searchBar" destination="deq-uL-fdE" id="dym-Pj-qpf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFj-qU-6km" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

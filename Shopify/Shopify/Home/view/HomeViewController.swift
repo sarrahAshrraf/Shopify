@@ -19,6 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var pageController: UIPageControl!
     
+    @IBOutlet weak var searchBar: RoundedTextfield!
     var timer:Timer?
     var currentCellIndex=0
     
@@ -38,6 +39,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         brandProductViewModel = BrandProductsViewModel()
         timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
         self.pageController.numberOfPages = staticCoupons.count
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToSearch(_:)))
+                searchBar.addGestureRecognizer(tapGestureRecognizer)
+                searchBar.isUserInteractionEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +55,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
             
         }
-    
+    @objc func navigateToSearch() {
+            let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
+            let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
+            
+            searchVC.modalPresentationStyle = .fullScreen
+            searchVC.modalTransitionStyle = .crossDissolve
+            present(searchVC, animated: true, completion: nil)
+        }
     @objc func moveToNextIndex(){
         if currentCellIndex < staticCoupons.count - 1 {
             currentCellIndex += 1
@@ -75,7 +87,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    @IBAction func navigateToSearch(_ sender: UIButton) {
+    @IBAction func navigateToSearch(_ sender: Any) {
         
         
         let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)

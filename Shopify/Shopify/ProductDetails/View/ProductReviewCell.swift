@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Cosmos
 
 class ProductReviewCell: UITableViewCell {
     
     
     @IBOutlet weak var containerView: UIStackView!
     @IBOutlet weak var reviewMessage: UILabel!
-    //@IBOutlet weak var rating: CosmosView!
+    @IBOutlet weak var rating: CosmosView!
     @IBOutlet weak var personName: UILabel!
     @IBOutlet weak var photo: UIImageView!
 
@@ -38,8 +39,8 @@ class ProductReviewCell: UITableViewCell {
     func setData(review: Review){
         photo.kf.setImage(with: URL(string: review.photo))
         personName.text = review.personName
-//        rating.rating = review.rate
-//        rating.settings.updateOnTouch = false
+        rating.rating = review.rate
+        rating.settings.updateOnTouch = false
         reviewMessage.text = review.reviewMessage
     }
 }
