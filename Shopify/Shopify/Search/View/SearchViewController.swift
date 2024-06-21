@@ -85,12 +85,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
-        productDetailsViewModel?.productId = searchViewModel?.result[indexPath.row].id ?? 0
-        products.product = searchViewModel?.result[indexPath.row]        
-        products.viewModel = productDetailsViewModel
-        products.modalPresentationStyle = .fullScreen
-        present(products, animated: true, completion: nil)
+        let productDetailsVC = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+        productDetailsViewModel?.productId = products[indexPath.row].id
+        productDetailsVC.product = products[indexPath.row]
+        productDetailsVC.viewModel = productDetailsViewModel
+        productDetailsVC.viewModel = productDetailsViewModel
+        productDetailsVC.modalPresentationStyle = .fullScreen
+        present(productDetailsVC, animated: true, completion: nil)
     }
     
     @IBAction func navigateBack(_ sender: UIButton) {

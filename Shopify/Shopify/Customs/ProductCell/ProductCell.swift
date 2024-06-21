@@ -39,8 +39,11 @@ class ProductCell: UITableViewCell {
     
     func setProductToTableCell(product: Product) {
         self.product = product
+        
+        productBrandLabel.text = Splitter().splitBrand(text: product.title ?? "", delimiter: "| ")
         productImageView.kf.setImage(with: URL(string: product.image?.src ?? ""))
         productNameLabel.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
+        print(product.title)
         productPriceLabel.text = product.variants?[0].price ?? ""
     }
     
