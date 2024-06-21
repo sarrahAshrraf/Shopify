@@ -11,6 +11,7 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
 
     @IBOutlet weak var favouriteProductsTable: UITableView!
     var favouriteViewModel = FavoritesViewModel()
+    var productDetailsViewModel = ProductDetailsViewModel()
     var favouriteProducts: [LocalProduct] = []
     var defaults: UserDefaults = UserDefaults.standard
     var index: Int = 0
@@ -27,6 +28,7 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
                 }
             }
         }
+        showFavouriteDetails()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +40,30 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
    
     func checkIfThereAreFavoriteProducts(allProductsList:[LocalProduct]){
         favouriteProductsTable.isHidden = allProductsList.isEmpty
+    }
+    
+    
+    func showFavouriteDetails(){
+        favouriteViewModel.bindResultToViewController = {[weak self] in
+            guard let list = self?.favouriteViewModel.result else {return}
+            guard let index = self?.index else {return}
+            for product in list {
+                if(product.id == self?.favouriteProducts[index].id ?? 0){
+                    self?.navigateToProductDetails(product: product)
+                    break
+                }
+            }
+        }
+    }
+    
+    func navigateToProductDetails(product : Product){
+        let products = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+    
+        self.productDetailsViewModel.productId = product.id
+        products.viewModel = self.productDetailsViewModel
+        products.product = product
+        products.modalPresentationStyle = .fullScreen
+        self.present(products, animated: true)
     }
     
     @IBAction func backBtn(_ sender: UIButton) {
@@ -71,7 +97,6 @@ class FavouriteViewController: UIViewController , UITableViewDelegate, UITableVi
                 self?.favouriteViewModel.removeProduct(id: id!)
                 self?.favouriteProducts.remove(at: indexPath.row)
                 self?.favouriteProductsTable.reloadData()
-                //self?.favouriteViewModel.getAllProducts()
                 self?.checkIfThereAreFavoriteProducts(allProductsList: (self?.favouriteProducts)!)
             }
             self.present(alert, animated: true)
