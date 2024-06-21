@@ -84,7 +84,34 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             
         
     }
-
+    func createCashOrder(){
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        guard addressVM.defautltAdress != nil else {
+             print("No results found, navigating to addressVC")
+            coordinator?.showAddNewAddressWithEmptyFields()
+             return
+         }
+            let customer = Customer(id:customerId)
+        guard let addresses = addressVM.defautltAdress else {
+                 print("No default address found")
+                 return
+             }
+            let shippingAddress = Shipping_address(from: addresses)
+        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
+        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var totalPrice = cartViewModel.result?.total_price ?? "0.00"
+           let totalPriceValue = Double(totalPrice)
+        updatedTotalPrice = String((totalPriceValue ?? 0.00) * currencyRate)
+        let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress , financialStatus : "pending")
+            //TODO: shiiping addressssssssssss
+            checkOutVM.postOrder(order: order)
+            print("order cuurencyyyyyyyyyyyyyyy")
+            print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
+//            checkOutVM.updateVariantAfterPostOrder()
+            print(order)
+            
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -235,7 +262,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         if isCardMethodSelected(){
           paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
         } else {
-            createOrder()
+            createCashOrder()
         }
         
         let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)

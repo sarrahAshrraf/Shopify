@@ -91,8 +91,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         setupNavigationBar()
         updateEmptyCartImageVisibility()
-        viewModel.showCartItems()
-        viewModel.getCartItems()
+//        viewModel.showCartItems()
+//        viewModel.getCartItems()
         updateCartData()
 //        showData()
 //        prepareCartPrice()
