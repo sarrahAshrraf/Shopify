@@ -28,6 +28,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         favoritesViewModel = FavoritesViewModel()
+        showFavoriteBtn()
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
@@ -44,6 +45,15 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             self.favBtn.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
         } else {
             self.favBtn.setImage(UIImage(systemName: Constants.heart), for: .normal)
+        }
+    }
+    
+    
+    func showFavoriteBtn(){
+        if UserDefault().getCustomerId() == -1 {
+            favBtn.isHidden = true
+        }else {
+            favBtn.isHidden = false
         }
     }
     
