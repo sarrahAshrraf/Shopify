@@ -25,8 +25,9 @@ class SettingsTableViewController: UITableViewController {
                isGuestUser = (state == Constants.USER_STATE_GUEST)
                
                if isGuestUser {
-                   hideAllStaticRows()
-                   updateBackgroundView()
+                   
+//                   hideAllStaticRows()
+//                   updateBackgroundView()
 //                   setTableBackgroundImage()
                }
            }
@@ -35,12 +36,21 @@ class SettingsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return isGuestUser ? 0 : 3
+        return isGuestUser ? 1 : 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if isGuestUser {
-             return 0
+             switch section {
+             case 0:
+                 return 1 // currency cell
+             case 1:
+                 return 0 // addresses and about us cells
+             case 2:
+                 return 0 // logout cell
+             default:
+                 return 0
+             }
          }
          
          switch section {
