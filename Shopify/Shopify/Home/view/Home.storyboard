@@ -226,7 +226,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="413"/>
                                 <subviews>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="BEt-l5-Sfk">
-                                        <rect key="frame" x="138.66666666666666" y="415.66666666666669" width="115.66666666666666" height="26"/>
+                                        <rect key="frame" x="138.66666666666666" y="415.66666666666669" width="116" height="26"/>
                                         <color key="pageIndicatorTintColor" systemColor="secondaryLabelColor"/>
                                         <color key="currentPageIndicatorTintColor" systemColor="tintColor"/>
                                     </pageControl>
@@ -319,7 +319,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our Shopify App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfO-Ng-mpS">
-                                                <rect key="frame" x="14.000000000000007" y="88.333333333333329" width="125.66666666666669" height="21.666666666666671"/>
+                                                <rect key="frame" x="14" y="88.333333333333329" width="126" height="21.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
