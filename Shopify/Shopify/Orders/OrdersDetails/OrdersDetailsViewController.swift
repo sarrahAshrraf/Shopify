@@ -19,6 +19,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBOutlet weak var orderAddress: UILabel!
+    let navigationBar = UINavigationBar()
     
     @IBAction func back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -26,6 +27,34 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     
     @IBOutlet weak var tableView: UITableView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
+    }
+    func setupNavigationBar() {
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+               
+               let navigationItem = UINavigationItem(title: "Orders Details")
+               
+               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+                   navigationItem.leftBarButtonItem = backButton
+               }
+               
+               navigationBar.items = [navigationItem]
+               
+               view.addSubview(navigationBar)
+               
+               NSLayoutConstraint.activate([
+                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+               ])
+           }
+    
+    @objc func backButtonTapped() {
+       dismiss(animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +67,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         }
         self.orderAddress.text = order?.shippingAddress?.address1
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return order?.lineItems?.count ?? 0
