@@ -69,8 +69,8 @@ class SignUpViewController: UIViewController {
             createDraftOrder(note: "cart")
             defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
             defaults.setValue(signUpViewModel.user?.firstName, forKey:Constants.USER_FirstName )
-            //createFirebaseAccount()
-            Utilities.navigateToSuccesstScreen(viewController: self)
+            createFirebaseAccount()
+            //Utilities.navigateToSuccesstScreen(viewController: self)
         } else if signUpViewModel.code == 422 {
             showAlert(title: Constants.warning, message: Constants.phoneUsedbefore)
         }
@@ -127,7 +127,8 @@ class SignUpViewController: UIViewController {
         return anyResult as? [String : Any]
     }
     
-    @IBAction func navigateToLogin(_ sender: UIButton) {let login = storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+    @IBAction func navigateToLogin(_ sender: UIButton) {
+        let login = storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
         login.modalPresentationStyle = .fullScreen
         present(login, animated: true)
         
@@ -226,8 +227,12 @@ extension SignUpViewController{
     }
     
     func navigateToLoginFirebase(){
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(loginViewController, animated: true)
+//        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        self.navigationController?.pushViewController(loginViewController, animated: true)
+        
+        let login = storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        login.modalPresentationStyle = .fullScreen
+        present(login, animated: true)
     }
     
     func sendVerificationLink(){
@@ -239,6 +244,18 @@ extension SignUpViewController{
                 } else {
                     print("Verification email sent successfully")
                 }
+            }
+        }
+    }
+    
+    
+    func checkVerification(){
+        if let user = Auth.auth().currentUser {
+            if user.isEmailVerified {
+                // User's email is verified, allow them to enter the app
+                
+            } else {
+                // User's email is not verified, show an error message
             }
         }
     }
