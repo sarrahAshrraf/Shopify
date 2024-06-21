@@ -15,6 +15,7 @@ class SettingsTableViewController: UITableViewController {
     var cartVM = ShoppingCartViewModel()
     var isGuestUser: Bool = false
     var lineItems:[LineItems]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = SettingsViewmodel()
@@ -25,8 +26,9 @@ class SettingsTableViewController: UITableViewController {
                isGuestUser = (state == Constants.USER_STATE_GUEST)
                
                if isGuestUser {
-                   hideAllStaticRows()
-                   updateBackgroundView()
+                   
+//                   hideAllStaticRows()
+//                   updateBackgroundView()
 //                   setTableBackgroundImage()
                }
            }
@@ -35,12 +37,21 @@ class SettingsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return isGuestUser ? 0 : 3
+        return isGuestUser ? 1 : 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if isGuestUser {
-             return 0
+             switch section {
+             case 0:
+                 return 1 // currency cell
+             case 1:
+                 return 0 // addresses and about us cells
+             case 2:
+                 return 0 // logout cell
+             default:
+                 return 0
+             }
          }
          
          switch section {
@@ -54,7 +65,9 @@ class SettingsTableViewController: UITableViewController {
              return 0
          }
      }
-
+    override func viewWillAppear(_ animated: Bool) {
+        setPopUpButton()
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            tableView.deselectRow(at: indexPath, animated: true)
         if isGuestUser {
@@ -84,25 +97,25 @@ class SettingsTableViewController: UITableViewController {
         
             let alert : UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Logout", style: .destructive,handler: { [weak self] action in
-                guard let my_Customer_id = UserDefaults.standard.string(forKey: Constants.customerId) else {return}
-                self?.defaults.set(Constants.USER_STATE_GUEST, forKey: Constants.KEY_USER_STATE)
-                //MARK: user cart id TODOOOOOOOOO
-
-                
-                CartList.cartItems = []
-                self?.cartVM.editCart()
-                self?.defaults.set("", forKey: Constants.cartId)
-                self?.defaults.set("", forKey: Constants.customerId)
-                self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
-                self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)    
-                
-                let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-//                TODO: NAVIGTAE TO SPLASH SCREEN
-                let nextViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive,handler: { [weak self] action in
+            guard let my_Customer_id = UserDefaults.standard.string(forKey: Constants.customerId) else {return}
+            self?.defaults.set(Constants.USER_STATE_GUEST, forKey: Constants.KEY_USER_STATE)
+            //MARK: user cart id TODOOOOOOOOO
+            
+            
+            CartList.cartItems = []
+            self?.cartVM.editCart()
+            self?.defaults.set("", forKey: Constants.cartId)
+            self?.defaults.set("", forKey: Constants.customerId)
+            self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
+            self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)    
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let nextViewController = storyboard.instantiateInitialViewController() {
                 nextViewController.modalPresentationStyle = .fullScreen
                 self?.present(nextViewController, animated: true, completion: nil)
-                }
+            }
+        }
             ))
             alert.addAction(UIAlertAction(title: "NO", style: .cancel,handler:nil))
             present(alert, animated: true, completion: nil)

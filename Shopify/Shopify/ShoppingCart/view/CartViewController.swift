@@ -8,17 +8,15 @@
 import UIKit
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , CartCellDelegate{
-
     @IBOutlet weak var emptyTableImg: UIImageView!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
     var currencySymbol: String = "USD"
     @IBOutlet weak var checkOutBtn: UIButton!
     let navigationBar = UINavigationBar()
+//    var activityIndicator = UIActivityIndicatorView(style: .large)
 
     func updateEmptyCartImageVisibility() {
-        //        if ((viewModel.result?.line_items?.isEmpty) != nil) {
-        
         if CartList.cartItems.isEmpty {
             emptyTableImg.isHidden = false
             itemsTableView.isHidden = true
@@ -36,106 +34,105 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func setupNavigationBar() {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
-               
-               let navigationItem = UINavigationItem(title: "Cart")
-               
-               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
-                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-                   navigationItem.leftBarButtonItem = backButton
-               }
-               
-               navigationBar.items = [navigationItem]
-               
-               view.addSubview(navigationBar)
-               
-               NSLayoutConstraint.activate([
-                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-               ])
-           }
-    
-    @objc func backButtonTapped() {
-       dismiss(animated: true)
+        let navigationItem = UINavigationItem(title: "Cart")
+        
+        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            navigationItem.leftBarButtonItem = backButton
+        }
+        
+        navigationBar.items = [navigationItem]
+        view.addSubview(navigationBar)
+        
+        NSLayoutConstraint.activate([
+            navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
     
+    @objc func backButtonTapped() {
+        dismiss(animated: true)
+    }
     
     @IBAction func checkOutBtn(_ sender: Any) {
         if let summaryVC = self.storyboard?.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
-            
             summaryVC.total = cartPrice
             summaryVC.modalPresentationStyle = .fullScreen
-           
             let navController = UINavigationController(rootViewController: summaryVC)
-                    navController.modalPresentationStyle = .fullScreen
-//                   present(navController, animated: true, completion: nil)
+            navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
-//            self.navigationController?.pushViewController(summaryVC, animated: true)
         } else {
-            print("Could not find CartViewController in ShoppingCartStoryboard")
+            print("Could not find SummaryViewController in storyboard")
         }
     }
-    
     
     @IBOutlet weak var priceLavel: UILabel!
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var itemsTableView: UITableView!
-    var cartPrice  = 0.0{
-        didSet{
+    var cartPrice = 0.0 {
+        didSet {
             priceLavel.text = String(format: "\(currencySymbol) %.2f", cartPrice)
         }
-    }   
-    var viewModel : ShoppingCartViewModel!
+    }
+    var viewModel: ShoppingCartViewModel!
     var totalPrice = 0.0
+    
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
         setupNavigationBar()
         updateEmptyCartImageVisibility()
-        viewModel.showCartItems()
-        viewModel.getCartItems()
+        viewModel.getCartItems() // Ensure fetching of cart items
         updateCartData()
-//        showData()
-//        prepareCartPrice()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(activityIndicator)
+//        NSLayoutConstraint.activate([
+//            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//        ])
+        
         itemsTableView.dataSource = self
         itemsTableView.delegate = self
-//        setupNavigationBar()
         itemsTableView.register(UINib(nibName: "CartCell", bundle: nil), forCellReuseIdentifier: "CartCell")
         viewModel = ShoppingCartViewModel()
         viewModel.bindResultToViewController = { [weak self] in
-                  self?.updateCartData()
-              }
-              updateCartData()
-//        viewModel.showCartItems()
-//        viewModel.getCartItems()
-//        showData()
-//        prepareCartPrice()
-        
+            self?.updateCartData()
+        }
+        viewModel.getCartItems() // Fetch items as soon as the view loads
+//        showLoadingIndicator()
     }
+    
+//    func showLoadingIndicator() {
+//        activityIndicator.startAnimating()
+//        itemsTableView.isHidden = true
+//        checkOutBtn.isHidden = true
+//        totalPriceLabel.isHidden = true
+//        priceLavel.isHidden = true
+//    }
+//    
+//    func hideLoadingIndicator() {
+//        activityIndicator.stopAnimating()
+//        itemsTableView.isHidden = false
+//        checkOutBtn.isHidden = false
+//        totalPriceLabel.isHidden = false
+//        priceLavel.isHidden = false
+//    }
+    
     func updateCartData() {
         DispatchQueue.main.async {
             self.prepareCartPrice()
             self.itemsTableView.reloadData()
             self.updateEmptyCartImageVisibility()
+//            self.hideLoadingIndicator()
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 175
-    }
-//    func tableView(_ tableView: UITableView, widthForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 500
-//    }
-    func showData(){
-        viewModel.bindResultToViewController = { [weak self] in
-            
-            DispatchQueue.main.async {
-                //            self?.noItemsView.isHidden = true
-                self?.itemsTableView.reloadData()
-                
-            }
-        }
     }
     
     func prepareCartPrice() {
@@ -157,25 +154,21 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = viewModel.result?.line_items?.count ?? 0
+        let count = CartList.cartItems.count
         print("Number of rows: \(count)")
-        return viewModel.result?.line_items?.count ?? 0
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as? CartCell else {
             return UITableViewCell()
         }
-        if let lineItems = viewModel.result?.line_items {
-            cell.delegate = self
-            cell.setCartItemValues(lineItem: lineItems[indexPath.row], viewController: self)
-            
-            //        if let lineItems = viewModel.result?.lineItems {
-            //                cell.configure(with: lineItems, index: indexPath.row)
-            //            print("inside celllllllllll")
-        }
+        let item = CartList.cartItems[indexPath.row]
+        cell.delegate = self
+        cell.setCartItemValues(lineItem: item, viewController: self)
         return cell
     }
+    
     func deleteItem(_ cell: CartCell) {
         guard let indexPath = itemsTableView.indexPath(for: cell) else { return }
         let alert = UIAlertController(title: "Delete Item", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
@@ -194,22 +187,4 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         present(alert, animated: true, completion: nil)
     }
-
-    
-//    func updateCartPrice() {
-//        prepareCartPrice()
-//    }
-//    func deleteItem(_ cell: CartCell) {
-//        if let indexPath = itemsTableView.indexPath(for: cell) {
-//            let deletedItem = CartList.cartItems.remove(at: indexPath.row)
-//            viewModel.result?.line_items?.remove(at: indexPath.row)
-//            viewModel.editCart()
-//            itemsTableView.deleteRows(at: [indexPath], with: .fade)
-//            prepareCartPrice()
-//            updateEmptyCartImageVisibility()
-//            print("Deleted item: \(deletedItem)")
-//        }
-//    }
-    
-
 }

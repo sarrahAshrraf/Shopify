@@ -34,7 +34,7 @@ class AddressCoordinator: AddressCoordinatorP {
         addNewAddressVC.isEditingAddress = true
         addNewAddressVC.addressID = address?.id
         addNewAddressVC.isDefaultAddress = address?.default ?? false
-        addNewAddressVC.delegate =  viewController as! any AddressProtocol
+        addNewAddressVC.delegate =  viewController as? any AddressProtocol
         let navController = UINavigationController(rootViewController: addNewAddressVC)
                 navController.modalPresentationStyle = .fullScreen
                 viewController?.present(navController, animated: true, completion: nil)
@@ -54,7 +54,7 @@ class AddressCoordinator: AddressCoordinatorP {
         
         addNewAddressVC.isDefaultAddress = false
         addNewAddressVC.checkOutDelegte = viewController as? AddressSelectionDelegate
-        addNewAddressVC.delegate =  viewController as! any AddressProtocol
+        addNewAddressVC.delegate =  viewController as? any AddressProtocol
         let navController = UINavigationController(rootViewController: addNewAddressVC)
                 navController.modalPresentationStyle = .fullScreen
                 viewController?.present(navController, animated: true, completion: nil)
