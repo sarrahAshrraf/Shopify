@@ -19,6 +19,9 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBOutlet weak var orderAddress: UILabel!
+   
+    var currencyRate: Double = 1.0
+    var currencySymbol: String = "USD"
     let navigationBar = UINavigationBar()
     
     @IBAction func back(_ sender: Any) {
@@ -30,6 +33,13 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
+        let defaults = UserDefaults.standard
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        if let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) {
+            currencySymbol = symbol
+        }
     }
     func setupNavigationBar() {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +88,32 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrdersDetailsTableViewCell", for: indexPath) as! OrdersDetailsTableViewCell
         print("count: \(order?.lineItems?.count ?? 0)")
         cell.orderProductName.text = order?.lineItems?[indexPath.row].title
-        cell.orderProductPrice.text = order?.lineItems?[indexPath.row].price
+        
+        if let priceString = order?.lineItems?[indexPath.row].price, let price = Double(priceString), let orderCurrency = order?.currency {
+                   let currencyRate: Double
+                   let currencySymbol: String
+
+                   switch orderCurrency {
+                   case "EGP":
+                       currencyRate = 47.707102
+                       currencySymbol = "EGP"
+                   case "USD":
+                       currencyRate = 1.0
+                       currencySymbol = "USD"
+                   case "EUR":
+                       currencyRate =  0.934102
+                       currencySymbol = "EUR"
+                   default:
+                       currencyRate = 1.0
+                       currencySymbol = orderCurrency
+                   }
+                   
+                   let convertedPrice = price * currencyRate
+            cell.orderProductPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
+               } else {
+                   cell.orderProductPrice.text = order?.lineItems?[indexPath.row].price
+               }
+//        cell.orderProductPrice.text = order?.lineItems?[indexPath.row].price
         cell.orderProductQuntity.text = "\(order?.lineItems?[indexPath.row].quantity ?? 0)"
         print(order?.lineItems?[indexPath.row].title)
         print(order?.lineItems?[indexPath.row].price)
