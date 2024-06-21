@@ -73,33 +73,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovC-RD-Jts" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="8" y="245.33333333333334" width="300.66666666666669" height="94.666666666666657"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="3.2999999999999998"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
@@ -107,7 +80,6 @@
                             <constraint firstItem="XSi-eH-vhQ" firstAttribute="top" secondItem="gyh-Hi-VKu" secondAttribute="bottom" constant="5" id="6So-Lb-Cit"/>
                             <constraint firstItem="o1T-p6-pvA" firstAttribute="height" secondItem="MbA-gf-TGj" secondAttribute="height" multiplier="0.1" id="7aY-HU-G1y"/>
                             <constraint firstAttribute="trailing" secondItem="XSi-eH-vhQ" secondAttribute="trailing" constant="8" id="8cf-dT-Mos"/>
-                            <constraint firstItem="ovC-RD-Jts" firstAttribute="leading" secondItem="MbA-gf-TGj" secondAttribute="leading" constant="8" id="Fkx-ND-kzY"/>
                             <constraint firstItem="AqR-O3-Y3u" firstAttribute="top" secondItem="XSi-eH-vhQ" secondAttribute="bottom" constant="5" id="L6Z-1y-eDf"/>
                             <constraint firstItem="osT-Sx-YX0" firstAttribute="leading" secondItem="MbA-gf-TGj" secondAttribute="leading" constant="8" id="Mpz-ru-4Ta"/>
                             <constraint firstItem="gyh-Hi-VKu" firstAttribute="top" secondItem="MbA-gf-TGj" secondAttribute="top" constant="8" id="S0u-PX-onj"/>
@@ -117,11 +89,8 @@
                             <constraint firstItem="osT-Sx-YX0" firstAttribute="top" secondItem="XSi-eH-vhQ" secondAttribute="bottom" constant="5" id="dgd-fq-oP5"/>
                             <constraint firstItem="gyh-Hi-VKu" firstAttribute="leading" secondItem="MbA-gf-TGj" secondAttribute="leading" constant="8" id="hV1-Rh-WDk"/>
                             <constraint firstItem="AqR-O3-Y3u" firstAttribute="width" secondItem="MbA-gf-TGj" secondAttribute="width" multiplier="0.8" id="hlP-cS-cUU"/>
-                            <constraint firstAttribute="bottom" secondItem="ovC-RD-Jts" secondAttribute="bottom" constant="10" id="jxT-Jf-GDz"/>
                             <constraint firstItem="gyh-Hi-VKu" firstAttribute="height" secondItem="MbA-gf-TGj" secondAttribute="height" multiplier="0.5" id="oEO-Vl-1P8"/>
                             <constraint firstItem="osT-Sx-YX0" firstAttribute="centerY" secondItem="AqR-O3-Y3u" secondAttribute="centerY" id="pZU-75-GQe"/>
-                            <constraint firstItem="ovC-RD-Jts" firstAttribute="width" secondItem="MbA-gf-TGj" secondAttribute="width" multiplier="0.8" id="t2A-Mh-SOC"/>
-                            <constraint firstItem="ovC-RD-Jts" firstAttribute="top" secondItem="osT-Sx-YX0" secondAttribute="bottom" constant="2" id="xmV-KD-oto"/>
                             <constraint firstItem="o1T-p6-pvA" firstAttribute="top" secondItem="MbA-gf-TGj" secondAttribute="top" constant="8" id="yNA-wo-FAv"/>
                         </constraints>
                     </view>
@@ -151,16 +120,16 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

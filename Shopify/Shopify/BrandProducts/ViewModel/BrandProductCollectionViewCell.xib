@@ -73,40 +73,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hT0-6h-G2Z" customClass="CosmosView" customModule="Cosmos">
-                                <rect key="frame" x="8" y="245.33333333333334" width="300.66666666666669" height="94.666666666666657"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="3.2999999999999998"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
-                                        <color key="value" red="1" green="0.49417192700000001" blue="0.28248075379999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8bc-ue-jGU" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="1gs-ar-PAV"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="top" secondItem="FcL-pd-orA" secondAttribute="top" constant="8" id="5BR-vl-yZO"/>
                             <constraint firstItem="Fxd-GF-XMY" firstAttribute="width" secondItem="FcL-pd-orA" secondAttribute="width" multiplier="0.8" id="5JL-FV-fD9"/>
-                            <constraint firstAttribute="bottom" secondItem="hT0-6h-G2Z" secondAttribute="bottom" constant="10" id="BDa-Un-Qk9"/>
                             <constraint firstItem="fat-A9-yoQ" firstAttribute="top" secondItem="FcL-pd-orA" secondAttribute="top" constant="8" id="EVs-qV-E7V"/>
                             <constraint firstItem="8bc-ue-jGU" firstAttribute="top" secondItem="beh-eG-72m" secondAttribute="bottom" constant="5" id="GAt-rM-bvD"/>
                             <constraint firstItem="Fxd-GF-XMY" firstAttribute="top" secondItem="beh-eG-72m" secondAttribute="bottom" constant="5" id="IeC-x6-h7e"/>
@@ -116,10 +88,7 @@
                             <constraint firstItem="beh-eG-72m" firstAttribute="top" secondItem="c9a-Qa-rQo" secondAttribute="bottom" constant="5" id="Opq-WW-Wxd"/>
                             <constraint firstAttribute="trailing" secondItem="c9a-Qa-rQo" secondAttribute="trailing" constant="8" id="QNR-Qg-OgE"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="fh2-qO-XUj"/>
-                            <constraint firstItem="hT0-6h-G2Z" firstAttribute="width" secondItem="FcL-pd-orA" secondAttribute="width" multiplier="0.8" id="gwK-wg-hfj"/>
-                            <constraint firstItem="hT0-6h-G2Z" firstAttribute="top" secondItem="8bc-ue-jGU" secondAttribute="bottom" constant="2" id="hkd-uI-alD"/>
                             <constraint firstItem="8bc-ue-jGU" firstAttribute="centerY" secondItem="Fxd-GF-XMY" secondAttribute="centerY" id="jT3-fp-EHq"/>
-                            <constraint firstItem="hT0-6h-G2Z" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="kdM-Go-VsD"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="height" secondItem="FcL-pd-orA" secondAttribute="height" multiplier="0.5" id="mcN-5c-NM0"/>
                             <constraint firstAttribute="trailing" secondItem="fat-A9-yoQ" secondAttribute="trailing" constant="8" id="q5E-om-W92"/>
                             <constraint firstItem="beh-eG-72m" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="ro6-C2-cik"/>
