@@ -9,9 +9,8 @@ import UIKit
 import PassKit
 
 
-/* MARK:  navigation to home byzhar mn 8eer TAP BAR
+/* MARK:
 - discount
- - apple pay
  */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     func didSelectAddress(_ address: Address) {

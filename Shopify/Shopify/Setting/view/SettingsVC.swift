@@ -15,6 +15,7 @@ class SettingsTableViewController: UITableViewController {
     var cartVM = ShoppingCartViewModel()
     var isGuestUser: Bool = false
     var lineItems:[LineItems]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = SettingsViewmodel()
@@ -64,7 +65,9 @@ class SettingsTableViewController: UITableViewController {
              return 0
          }
      }
-
+    override func viewWillAppear(_ animated: Bool) {
+        setPopUpButton()
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
            tableView.deselectRow(at: indexPath, animated: true)
         if isGuestUser {

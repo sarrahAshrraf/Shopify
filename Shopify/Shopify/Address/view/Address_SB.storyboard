@@ -20,9 +20,12 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19f-7d-GEi">
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <navigationItem title="Your Address" id="1rE-BF-IWz">
-                                        <barButtonItem key="leftBarButtonItem" image="arrow" id="czP-HQ-iQP">
+                                    <navigationItem title="Your Addresses" id="1rE-BF-IWz">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="czP-HQ-iQP">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="backBtn:" destination="jhz-cq-Jo0" id="hLN-zu-6Fd"/>
                                             </connections>
@@ -207,7 +210,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow" width="35" height="35"/>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="mappin.and.ellipse.circle.fill" catalog="system" width="128" height="123"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
