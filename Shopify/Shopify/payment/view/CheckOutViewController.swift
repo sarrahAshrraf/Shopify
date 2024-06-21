@@ -263,6 +263,19 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         
         print("adddddressssss")
     }
+    func showAlertNoNetworkWithAction() {
+        let alert = UIAlertController(title: "No Network", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Enable in settings", style: .default) { _ in
+            if let url = URL(string: "App-Prefs:root=WIFI") {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .destructive))
+
+        present(alert, animated: true, completion: nil)
+    }
     
     func isCardMethodSelected() -> Bool {
       if let cardLabel = self.view.viewWithTag(3) as? UILabel{
@@ -280,25 +293,28 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     @IBAction func PurcasheVtn(_ sender: Any) {
         let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
         
-        if isCardMethodSelected(){
-          paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+        if checkOutVM.checkInternetConnectivity() {
+            if isCardMethodSelected() {
+                paymentcontext.setPaymentStrategy(paymentStrategy: ApplePaymentStrategy())
+            } else {
+                createCashOrder()
+            }
         } else {
-            createCashOrder()
+            showAlertNoNetworkWithAction()
+            return
         }
         
         let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
         
         if isPaymentSuccessful.0 {
-          if isPaymentSuccessful.1 == "Purchased successfully"{
-              print("Pay succeeeeed")
-
-          }
-          print(isPaymentSuccessful.1)
+            if isPaymentSuccessful.1 == "Purchased successfully" {
+                print("Pay succeeded")
+            }
+            print(isPaymentSuccessful.1)
         } else {
-          print("not succeeeeed")
-          print(isPaymentSuccessful.1)
+            print("Payment not succeeded")
+            print(isPaymentSuccessful.1)
         }
-        
     }
 }
 
