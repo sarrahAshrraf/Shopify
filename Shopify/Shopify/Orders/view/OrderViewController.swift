@@ -19,19 +19,47 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     var profileViewModel: ProfileViewModel!
     var orders: [Orders] = []
+    let navigationBar = UINavigationBar()
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
+        setupNavigationBar()
         getOrdersFromApi()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view.
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         self.tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
     }
+    func setupNavigationBar() {
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+               
+               let navigationItem = UINavigationItem(title: "Orders")
+               
+               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+                   navigationItem.leftBarButtonItem = backButton
+               }
+               
+               navigationBar.items = [navigationItem]
+               
+               view.addSubview(navigationBar)
+               
+               NSLayoutConstraint.activate([
+                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+               ])
+           }
+    
+    @objc func backButtonTapped() {
+       dismiss(animated: true)
+    }
+    
     func getOrdersFromApi() {
         profileViewModel = ProfileViewModel()
         profileViewModel.bindOrdersToViewController = { [weak self] in
