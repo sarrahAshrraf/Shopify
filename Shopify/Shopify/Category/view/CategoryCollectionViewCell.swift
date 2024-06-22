@@ -12,6 +12,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productImage: UIImageView!
     
     @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var BrandName: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var productPrice: UILabel!
     
@@ -29,6 +31,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         // Initialization code
         favoritesViewModel = FavoritesViewModel()
         showFavoriteBtn()
+        configureContainerView()
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
@@ -36,9 +39,23 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             currencySymbol = symbol
         }
     }
+    
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
     func setValues(product:Product, isFav: Bool) {
         self.product = product
-        self.productName.text = product.title ?? ""
+        BrandName.text = Splitter().splitBrand(text: product.title ?? "", delimiter: "| ")
+        productName.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
+        
         self.productImage.kf.setImage(with: URL(string: product.image?.src ?? ""),
                                       placeholder: UIImage(named: Constants.noImage))
         if isFav {

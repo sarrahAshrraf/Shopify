@@ -43,6 +43,8 @@ class ProductDetailsViewController: UIViewController {
     var imagesArray : [String] = []
     var currentIndex = 0
     var timer:Timer?
+    var currencyRate: Double = 1.0
+    var currencySymbol: String = "USD"
     
     
     var selectedSize: String!{
@@ -89,6 +91,7 @@ class ProductDetailsViewController: UIViewController {
         setUpReviewTableCell()
         setUpCollectionCells()
         playTimer()
+        setCurrency()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +111,16 @@ class ProductDetailsViewController: UIViewController {
         productSizeCollectionView.reloadData()
         productReviewTableView.reloadData()
         ImagesCollectionView.reloadData()
+    }
+    
+    
+    
+    func setCurrency(){
+        if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
+            currencyRate = rate
+        }
+        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+            currencySymbol = symbol
     }
     
     
@@ -200,9 +213,12 @@ class ProductDetailsViewController: UIViewController {
             for variant in product.variants!{
                 let variantName = "\(selectedSize!) / \(selectedColor!)"
                 if variant.title! == variantName{
-                    productPriceLabel.text = String(variant.price)
+                    if let price = Double(variant.price) {
+                        let convertedPrice = price * currencyRate
+                        productPriceLabel.text = String(format: "%.0f %@", convertedPrice, currencySymbol)
+                    }
                     if variant.inventoryQuantity == nil || variant.inventoryQuantity == 0 {
-                        productStockCount.text = "Not Available"
+                        productStockCount.text = "Out of Stock"
                     }else{
                         productStockCount.text = "\(variant.inventoryQuantity!) In Stock"
                     }
