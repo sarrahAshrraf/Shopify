@@ -4,16 +4,17 @@ import Dispatch
 
 class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
-    let defaultColor = UIColor.gray
-    let selectedColor = UIColor.black
+    let defaultColor = UIColor.black
+    let selectedColor = UIColor.white
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categorySegmented: UISegmentedControl!
     @IBOutlet weak var subCategoryToolbar: UIToolbar!
-    @IBOutlet weak var allProduct: UIBarButtonItem!
-    @IBOutlet weak var shoes: UIBarButtonItem!
-    @IBOutlet weak var t_shirt: UIBarButtonItem!
-    @IBOutlet weak var accesories: UIBarButtonItem!
+    @IBOutlet weak var allProduct: UIButton!
+    @IBOutlet weak var shoes: UIButton!
+    @IBOutlet weak var t_shirt: UIButton!
+    @IBOutlet weak var accesories: UIButton!
+    
     
     
     var currencySymbol: String = "USD"
@@ -41,6 +42,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         categorySegmented.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         updateSegmentedControlColors()
         fetchCategoryData()
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,29 +126,29 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
-    @IBAction func allProduct(_ sender: UIBarButtonItem) {
-        updateButtonColors(selectedButton: sender)
+    @IBAction func allProductSectionBtn(_ sender: Any) {
+        updateButtonColors(selectedButton: allProduct)
         isFiltered = false
         collectionView.reloadData()
     }
     
-    @IBAction func shoes(_ sender: UIBarButtonItem) {
-        updateButtonColors(selectedButton: sender)
+    @IBAction func shoesSectionBtn(_ sender: Any) {
+        updateButtonColors(selectedButton: shoes)
         isFiltered = true
         categoryViewModel.filteredProducts = allProducts.filter { $0.productType == "SHOES" }
         collectionView.reloadData()
     }
     
-    @IBAction func t_shirt(_ sender: UIBarButtonItem) {
-        updateButtonColors(selectedButton: sender)
+    @IBAction func t_shirtSectionBtn(_ sender: Any) {
+        updateButtonColors(selectedButton: t_shirt)
         isFiltered = true
         categoryViewModel.filteredProducts = allProducts.filter { $0.productType == "T-SHIRTS" }
         
         collectionView.reloadData()
     }
     
-    @IBAction func accesories(_ sender: UIBarButtonItem) {
-        updateButtonColors(selectedButton: sender)
+    @IBAction func accesoriesSectionBtn(_ sender: Any) {
+        updateButtonColors(selectedButton: accesories)
         isFiltered = true
         categoryViewModel.filteredProducts = allProducts.filter { $0.productType == "ACCESSORIES" }
         print("Filtered products count: \(categoryViewModel.filteredProducts.count)")
@@ -184,16 +186,16 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             }
     }
 
+    func setupUI(){
+        allProduct.configureButton(selected: false)
+        shoes.configureButton(selected: false)
+        t_shirt.configureButton(selected: false)
+        accesories.configureButton(selected: false)
+    }
     
-    func updateButtonColors(selectedButton: UIBarButtonItem) {
-    
-        allProduct.tintColor = defaultColor
-        shoes.tintColor = defaultColor
-        t_shirt.tintColor = defaultColor
-        accesories.tintColor = defaultColor
-        
-    
-        selectedButton.tintColor = selectedColor
+    func updateButtonColors(selectedButton: UIButton) {
+        setupUI()
+        selectedButton.configureButton(selected: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
