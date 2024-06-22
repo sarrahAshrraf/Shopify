@@ -12,7 +12,7 @@ import UIKit
 import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     
     @IBOutlet weak var brandsCollectionView: UICollectionView!
@@ -30,10 +30,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var brandProductViewModel: BrandProductsViewModel?
     var defaults = UserDefaults.standard
     var lineItems:[LineItems] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.brandsCollectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "homeCell")
         self.couponsCollectionView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellWithReuseIdentifier: "homeCell")
@@ -44,32 +44,32 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.pageController.numberOfPages = staticCoupons.count
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToSearch(_:)))
-                searchBar.addGestureRecognizer(tapGestureRecognizer)
-                searchBar.isUserInteractionEnabled = true
+        searchBar.addGestureRecognizer(tapGestureRecognizer)
+        searchBar.isUserInteractionEnabled = true
         
         favoritesViewModel = FavoritesViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         putFavouriteListToAPI()
         
-        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            self.navigationController?.setNavigationBarHidden(false, animated: animated)
-            
-        }
+    }
     @objc func navigateToSearch() {
-            let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
-            let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
-            
-            searchVC.modalPresentationStyle = .fullScreen
-            searchVC.modalTransitionStyle = .crossDissolve
-            present(searchVC, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "SearchStoryboard", bundle: nil)
+        let searchVC = storyboard.instantiateViewController(identifier: "SearchViewController") as! SearchViewController
+        
+        searchVC.modalPresentationStyle = .fullScreen
+        searchVC.modalTransitionStyle = .crossDissolve
+        present(searchVC, animated: true, completion: nil)
+    }
     @objc func moveToNextIndex(){
         if currentCellIndex < staticCoupons.count - 1 {
             currentCellIndex += 1
@@ -100,7 +100,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }else {
             let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
             let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
-                
+            
             cartVC.modalPresentationStyle = .fullScreen
             cartVC.modalTransitionStyle = .crossDissolve
             present(cartVC , animated: true , completion: nil)
@@ -139,7 +139,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == couponsCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath)as! HomeViewCell
             cell.homeImage.image = UIImage(named: staticCoupons[indexPath.row])
-       
+            
             return cell
         }else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as! HomeViewCell
@@ -154,7 +154,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         
-      
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collectionView {
@@ -162,17 +162,17 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }else {
             return CGSize(width: (collectionView.bounds.width*0.5), height: (collectionView.bounds.height*1.0))
         }
-  
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return  20
-    
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return  0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    
+        
         if collectionView == couponsCollectionView {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }else {
@@ -180,18 +180,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
         
-            if collectionView == couponsCollectionView {
-             
-            }else {
-                let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
-                brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
-                
-                products.viewModel = brandProductViewModel
-                products.modalPresentationStyle = .fullScreen
-                present(products, animated: true, completion: nil)
-            }
+        
+        if collectionView == couponsCollectionView {
+            
+        }else {
+            let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
+            brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
+            
+            products.viewModel = brandProductViewModel
+            products.modalPresentationStyle = .fullScreen
+            present(products, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -209,44 +209,63 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     
     
-    func putFavouriteListToAPI(){
-        
-        print("start insert favourite")
+
+    
+    
+    func putFavouriteListToAPI() {
+      
         self.favoritesViewModel.getAllProducts()
         favoritesViewModel.bindallProductsListToController = {[weak self] in
-            print("customerId: \(self?.defaults.integer(forKey: Constants.customerId) ?? 000)")
-            print("favId: \(self?.defaults.integer(forKey: Constants.favoritesId) ?? 000)")
-            print("cartId: \(self?.defaults.integer(forKey: Constants.cartId) ?? 000)")
-            print("static: \(FavouriteViewController.staticFavoriteList)")
+            guard let self = self else { return }
+            
+            
+            // Clear lineItems to avoid duplicate entries from previous calls
+            self.lineItems.removeAll()
+            
             for product in FavouriteViewController.staticFavoriteList {
-                if(self?.defaults.integer(forKey: Constants.customerId) == product.customer_id){
-                    print("(product.price): \(product.price)")
-                    print("product.id: \(product.id)")
-                    print("product.title: \(product.title)")
-                    print("product.variant_id: \(product.variant_id)")
-                    print("static: \([Properties(name: "image_url", value: product.image)])")
-                    
-                    
-                    self?.lineItems.append(LineItems(price: product.price, productId: product.id, quantity: 1 , title: product.title,variantId: product.variant_id, properties: [Properties(name: "image_url", value: product.image)]))
+                if self.defaults.integer(forKey: Constants.customerId) == product.customer_id {
+                    // Check if the product already exists in lineItems
+                    if !self.lineItems.contains(where: { $0.productId == product.id }) {
+                        self.lineItems.append(LineItems(price: product.price, productId: product.id, quantity: 1, title: product.title, variantId: product.variant_id, properties: [Properties(name: "image_url", value: product.image)]))
+                    }
                 }
             }
-            print("static: \(self?.lineItems)")
-            if(self?.lineItems.isEmpty == false){
+            
+            
+            if !self.lineItems.isEmpty {
                 var user = User()
-                user.id = self?.defaults.integer(forKey: Constants.customerId)
+                user.id = self.defaults.integer(forKey: Constants.customerId)
                 
-                let draft = DraftOrder(id: nil, note: nil, line_items: self?.lineItems, customer: user)
-                let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft ,  orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
+                let draft = DraftOrder(id: nil, note: nil, line_items: self.lineItems, customer: user)
+                let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
                 
                 let params = JSONCoding().encodeToJson(objectClass: response)!
                 
-                print("params: \(params)")
-                self?.favoritesViewModel.putFavoriteDraftOrderFromAPI(parameters: params )
+                self.favoritesViewModel.putFavoriteDraftOrderFromAPI(parameters: params)
+            }else {
+                let properties = [Properties(name: "image_url", value: "")]
+                
+                let lineItems = [LineItems(price: "100.0", quantity: 1, title: "dummy", properties: properties)]
+                
+                var user = User()
+                user.id = self.defaults.integer(forKey: Constants.customerId)
+                let draft = DraftOrder(id: nil, note: nil, line_items: self.lineItems, customer: user)
+                let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
+                
+                let params = JSONCoding().encodeToJson(objectClass: response)!
+                self.favoritesViewModel.putFavoriteDraftOrderFromAPI(parameters: params)
+                
             }
+            
         }
+        
     }
     
+    
 }
+
+    
+
 
     
 

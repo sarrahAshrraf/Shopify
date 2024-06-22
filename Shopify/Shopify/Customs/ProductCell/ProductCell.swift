@@ -37,8 +37,11 @@ class ProductCell: UITableViewCell {
     func setDataToTableCell(product: LocalProduct) {
         self.localProduct = product
         productImageView.kf.setImage(with: URL(string: localProduct.image))
-        productNameLabel.text = localProduct.title
-        productPriceLabel.text = localProduct.price 
+        productNameLabel.text = Splitter().splitName(text: localProduct.title, delimiter: "| ")
+        productBrandLabel.text = Splitter().splitBrand(text: localProduct.title, delimiter: "| ")
+        let price = Int((Double(localProduct.price ) ?? 0.0)*currencyRate)
+        productPriceLabel.text = String(price)
+        curencyLabel.text = currencySymbol
     }
     
     func setProductToTableCell(product: Product) {
