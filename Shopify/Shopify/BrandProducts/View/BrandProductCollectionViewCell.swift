@@ -10,9 +10,11 @@ import Kingfisher
 
 class BrandProductCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var BrandName: UILabel!
     @IBOutlet weak var favouriteButton: UIButton!
     var product:Product!
     var favoritesViewModel: FavoritesViewModel!
@@ -24,6 +26,7 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         favoritesViewModel = FavoritesViewModel()
+        configureContainerView()
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
@@ -34,23 +37,36 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
     
     }
     
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
+    
     func setValues(product: Product, isFav: Bool) {
         
         self.product = product
-        self.productLabel.text = product.title ?? ""
-        self.productImage.kf.setImage(with: URL(string: product.image?.src ?? ""),
+        BrandName.text = Splitter().splitBrand(text: product.title ?? "", delimiter: "| ")
+        productLabel.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
+        productImage.kf.setImage(with: URL(string: product.image?.src ?? ""),
                                       placeholder: UIImage(named: Constants.noImage))
         if let variant = product.variants?.first {
             if let price = Double(variant.price) {
                 let convertedPrice = price * currencyRate
-                self.productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
+                productPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
             }
         }
         
         if isFav {
-            self.favouriteButton.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            favouriteButton.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
         } else {
-            self.favouriteButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
+            favouriteButton.setImage(UIImage(systemName: Constants.heart), for: .normal)
         }
     }
     

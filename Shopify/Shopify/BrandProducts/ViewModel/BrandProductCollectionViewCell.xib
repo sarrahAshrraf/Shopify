@@ -49,8 +49,14 @@
                                     <action selector="checkFavouriteProduct:" destination="sxs-gG-Liu" eventType="touchUpInside" id="sc0-ZG-8Dh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label Label " lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="beh-eG-72m">
-                                <rect key="frame" x="8" y="188" width="360" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnK-ot-SuH">
+                                <rect key="frame" x="8" y="188" width="360" height="23"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label Label " textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="beh-eG-72m">
+                                <rect key="frame" x="8" y="211" width="360" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FzI-Rs-lUh"/>
                                 </constraints>
@@ -58,39 +64,33 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8bc-ue-jGU">
-                                <rect key="frame" x="8" y="223" width="14" height="20.333333333333343"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="303.77" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fxd-GF-XMY">
-                                <rect key="frame" x="26" y="223" width="300.66666666666669" height="20.333333333333343"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="303.77" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fxd-GF-XMY">
+                                <rect key="frame" x="8" y="246.00000000000003" width="360" height="20.333333333333343"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.329999999999998" id="pTc-x3-HWu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8bc-ue-jGU" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="1gs-ar-PAV"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="top" secondItem="FcL-pd-orA" secondAttribute="top" constant="8" id="5BR-vl-yZO"/>
-                            <constraint firstItem="Fxd-GF-XMY" firstAttribute="width" secondItem="FcL-pd-orA" secondAttribute="width" multiplier="0.8" id="5JL-FV-fD9"/>
+                            <constraint firstItem="beh-eG-72m" firstAttribute="top" secondItem="JnK-ot-SuH" secondAttribute="bottom" id="6p4-ai-c0E"/>
+                            <constraint firstAttribute="trailing" secondItem="JnK-ot-SuH" secondAttribute="trailing" constant="8" id="EN1-pe-beY"/>
                             <constraint firstItem="fat-A9-yoQ" firstAttribute="top" secondItem="FcL-pd-orA" secondAttribute="top" constant="8" id="EVs-qV-E7V"/>
-                            <constraint firstItem="8bc-ue-jGU" firstAttribute="top" secondItem="beh-eG-72m" secondAttribute="bottom" constant="5" id="GAt-rM-bvD"/>
                             <constraint firstItem="Fxd-GF-XMY" firstAttribute="top" secondItem="beh-eG-72m" secondAttribute="bottom" constant="5" id="IeC-x6-h7e"/>
                             <constraint firstAttribute="trailing" secondItem="beh-eG-72m" secondAttribute="trailing" constant="8" id="Ifq-ps-xRS"/>
                             <constraint firstItem="fat-A9-yoQ" firstAttribute="height" secondItem="FcL-pd-orA" secondAttribute="height" multiplier="0.1" id="LgF-jH-vke"/>
-                            <constraint firstItem="Fxd-GF-XMY" firstAttribute="leading" secondItem="8bc-ue-jGU" secondAttribute="trailing" constant="4" id="O2H-23-H9t"/>
-                            <constraint firstItem="beh-eG-72m" firstAttribute="top" secondItem="c9a-Qa-rQo" secondAttribute="bottom" constant="5" id="Opq-WW-Wxd"/>
+                            <constraint firstItem="JnK-ot-SuH" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="MxK-UX-2ul"/>
+                            <constraint firstItem="Fxd-GF-XMY" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="OSQ-IV-Ncx"/>
+                            <constraint firstItem="JnK-ot-SuH" firstAttribute="top" secondItem="c9a-Qa-rQo" secondAttribute="bottom" constant="5" id="Opq-WW-Wxd"/>
                             <constraint firstAttribute="trailing" secondItem="c9a-Qa-rQo" secondAttribute="trailing" constant="8" id="QNR-Qg-OgE"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="fh2-qO-XUj"/>
-                            <constraint firstItem="8bc-ue-jGU" firstAttribute="centerY" secondItem="Fxd-GF-XMY" secondAttribute="centerY" id="jT3-fp-EHq"/>
                             <constraint firstItem="c9a-Qa-rQo" firstAttribute="height" secondItem="FcL-pd-orA" secondAttribute="height" multiplier="0.5" id="mcN-5c-NM0"/>
                             <constraint firstAttribute="trailing" secondItem="fat-A9-yoQ" secondAttribute="trailing" constant="8" id="q5E-om-W92"/>
+                            <constraint firstAttribute="trailing" secondItem="Fxd-GF-XMY" secondAttribute="trailing" constant="8" id="qrD-TD-2DW"/>
                             <constraint firstItem="beh-eG-72m" firstAttribute="leading" secondItem="FcL-pd-orA" secondAttribute="leading" constant="8" id="ro6-C2-cik"/>
                         </constraints>
                     </view>
@@ -105,6 +105,8 @@
             </constraints>
             <size key="customSize" width="392" height="366"/>
             <connections>
+                <outlet property="BrandName" destination="JnK-ot-SuH" id="0HG-BZ-aKs"/>
+                <outlet property="containerView" destination="FcL-pd-orA" id="t8d-83-ko9"/>
                 <outlet property="favouriteButton" destination="fat-A9-yoQ" id="31x-vm-Xs2"/>
                 <outlet property="productImage" destination="c9a-Qa-rQo" id="aeq-9u-bJ1"/>
                 <outlet property="productLabel" destination="beh-eG-72m" id="pBo-61-J4k"/>
@@ -120,16 +122,16 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

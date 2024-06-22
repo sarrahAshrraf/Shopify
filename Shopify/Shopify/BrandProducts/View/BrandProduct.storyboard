@@ -34,26 +34,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvf-nw-2rf">
-                                <rect key="frame" x="98.333333333333329" y="59" width="196.33333333333337" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <rect key="frame" x="98.333333333333329" y="59.000000000000007" width="196.33333333333337" height="26.333333333333336"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lvq-9g-QIp">
-                                <rect key="frame" x="0.0" y="94.666666666666671" width="393" height="44.000000000000014"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <barButtonItem style="plain" id="wxg-Ze-m2R">
-                                        <searchBar key="customView" contentMode="redraw" id="gXB-WV-BAr">
-                                            <rect key="frame" x="16" y="0.0" width="361" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </searchBar>
-                                    </barButtonItem>
-                                </items>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORr-Yk-fHC">
                                 <rect key="frame" x="16" y="58.999999999999993" width="27.666666666666671" height="27.666666666666664"/>
                                 <constraints>
@@ -69,7 +54,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iUF-f8-PqV">
-                                <rect key="frame" x="0.0" y="138.66666666666669" width="393" height="679.33333333333326"/>
+                                <rect key="frame" x="0.0" y="102.66666666666669" width="393" height="749.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OnA-Jm-Kgq">
                                     <size key="itemSize" width="128" height="128"/>
@@ -87,21 +72,16 @@
                         <viewLayoutGuide key="safeArea" id="s1A-2v-N8M"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="s1A-2v-N8M" firstAttribute="trailing" secondItem="iUF-f8-PqV" secondAttribute="trailing" id="BE1-8F-doU"/>
-                            <constraint firstItem="iUF-f8-PqV" firstAttribute="trailing" secondItem="s1A-2v-N8M" secondAttribute="trailing" id="Dyy-9j-wYh"/>
-                            <constraint firstItem="Lvq-9g-QIp" firstAttribute="leading" secondItem="s1A-2v-N8M" secondAttribute="leading" id="FI6-sV-DCW"/>
-                            <constraint firstItem="iUF-f8-PqV" firstAttribute="top" secondItem="Lvq-9g-QIp" secondAttribute="bottom" id="GG5-Ci-6hv"/>
                             <constraint firstItem="ORr-Yk-fHC" firstAttribute="width" secondItem="Dvf-nw-2rf" secondAttribute="width" multiplier="0.09" constant="10" id="MAG-eI-l81"/>
+                            <constraint firstItem="iUF-f8-PqV" firstAttribute="leading" secondItem="IXb-zE-ffR" secondAttribute="leading" id="P1I-95-s9G"/>
                             <constraint firstItem="Dvf-nw-2rf" firstAttribute="centerX" secondItem="IXb-zE-ffR" secondAttribute="centerX" id="TxJ-a8-whg"/>
-                            <constraint firstItem="Lvq-9g-QIp" firstAttribute="trailing" secondItem="s1A-2v-N8M" secondAttribute="trailing" id="V5H-4P-gup"/>
-                            <constraint firstItem="iUF-f8-PqV" firstAttribute="leading" secondItem="s1A-2v-N8M" secondAttribute="leading" id="Zbz-t8-0ZS"/>
+                            <constraint firstItem="s1A-2v-N8M" firstAttribute="trailing" secondItem="iUF-f8-PqV" secondAttribute="trailing" id="bAr-Z5-9Z4"/>
                             <constraint firstItem="ORr-Yk-fHC" firstAttribute="leading" secondItem="s1A-2v-N8M" secondAttribute="leading" constant="16" id="dOJ-PT-59A"/>
+                            <constraint firstItem="iUF-f8-PqV" firstAttribute="top" secondItem="ORr-Yk-fHC" secondAttribute="bottom" constant="16" id="fRp-0r-fvy"/>
                             <constraint firstItem="ORr-Yk-fHC" firstAttribute="top" secondItem="s1A-2v-N8M" secondAttribute="top" id="hC7-sM-b1M"/>
+                            <constraint firstAttribute="bottom" secondItem="iUF-f8-PqV" secondAttribute="bottom" id="hFV-X2-jAh"/>
                             <constraint firstItem="Dvf-nw-2rf" firstAttribute="width" secondItem="IXb-zE-ffR" secondAttribute="width" multiplier="0.5" id="ivr-tu-1Ll"/>
                             <constraint firstItem="Dvf-nw-2rf" firstAttribute="top" secondItem="s1A-2v-N8M" secondAttribute="top" id="lye-WY-lf3"/>
-                            <constraint firstItem="s1A-2v-N8M" firstAttribute="bottom" secondItem="iUF-f8-PqV" secondAttribute="bottom" id="vvd-oE-jjf"/>
-                            <constraint firstItem="Lvq-9g-QIp" firstAttribute="width" secondItem="IXb-zE-ffR" secondAttribute="width" id="waZ-HO-Q3u"/>
-                            <constraint firstItem="Lvq-9g-QIp" firstAttribute="top" secondItem="ORr-Yk-fHC" secondAttribute="bottom" constant="8" id="zcP-6W-UOy"/>
                         </constraints>
                     </view>
                     <connections>
