@@ -26,7 +26,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var staticCoupons : [String] = ["coupon1.png","coupon2.png", "coupon3.jpeg"]
     
     var homeViewModel: HomeViewModel?
+    var favoritesViewModel: FavoritesViewModel!
     var brandProductViewModel: BrandProductsViewModel?
+    var defaults = UserDefaults.standard
+    var lineItems:[LineItems] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +46,15 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToSearch(_:)))
                 searchBar.addGestureRecognizer(tapGestureRecognizer)
                 searchBar.isUserInteractionEnabled = true
+        
+        favoritesViewModel = FavoritesViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        putFavouriteListToAPI()
+        
         }
         
         override func viewWillDisappear(_ animated: Bool) {
@@ -196,6 +203,45 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             UIView.animate(withDuration: 0.5) {
                 cell.layer.transform = CATransform3DIdentity
                 cell.alpha = 1.0
+            }
+        }
+    }
+    
+    
+    
+    func putFavouriteListToAPI(){
+        
+        print("start insert favourite")
+        self.favoritesViewModel.getAllProducts()
+        favoritesViewModel.bindallProductsListToController = {[weak self] in
+            print("customerId: \(self?.defaults.integer(forKey: Constants.customerId) ?? 000)")
+            print("favId: \(self?.defaults.integer(forKey: Constants.favoritesId) ?? 000)")
+            print("cartId: \(self?.defaults.integer(forKey: Constants.cartId) ?? 000)")
+            print("static: \(FavouriteViewController.staticFavoriteList)")
+            for product in FavouriteViewController.staticFavoriteList {
+                if(self?.defaults.integer(forKey: Constants.customerId) == product.customer_id){
+                    print("(product.price): \(product.price)")
+                    print("product.id: \(product.id)")
+                    print("product.title: \(product.title)")
+                    print("product.variant_id: \(product.variant_id)")
+                    print("static: \([Properties(name: "image_url", value: product.image)])")
+                    
+                    
+                    self?.lineItems.append(LineItems(price: product.price, productId: product.id, quantity: 1 , title: product.title,variantId: product.variant_id, properties: [Properties(name: "image_url", value: product.image)]))
+                }
+            }
+            print("static: \(self?.lineItems)")
+            if(self?.lineItems.isEmpty == false){
+                var user = User()
+                user.id = self?.defaults.integer(forKey: Constants.customerId)
+                
+                let draft = DraftOrder(id: nil, note: nil, line_items: self?.lineItems, customer: user)
+                let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft ,  orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
+                
+                let params = JSONCoding().encodeToJson(objectClass: response)!
+                
+                print("params: \(params)")
+                self?.favoritesViewModel.putFavoriteDraftOrderFromAPI(parameters: params )
             }
         }
     }

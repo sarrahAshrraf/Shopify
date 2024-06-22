@@ -85,7 +85,10 @@ class LoginViewController: UIViewController {
                 exists = true
                 customerId = user.id
                 defaults.setValue(user.id, forKey: Constants.customerId)
-                defaults.setValue(945806409901, forKey: Constants.cartId)
+                let noteSpliter = user.note?.components(separatedBy: ",")
+                defaults.set(Int((noteSpliter?[1])!), forKey: Constants.cartId)
+                defaults.set(Int((noteSpliter?[0])!), forKey: Constants.favoritesId)
+                getFavoritesfromAPI()
 
                 defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
                 defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
@@ -145,6 +148,11 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = loginButton.frame.height / 2
         loginButton.clipsToBounds = true
         loginButton.setTitle("LogIn", for: .normal)
+    }
+    
+    func getFavoritesfromAPI(){
+        self.favoriteViewModel.removeAllProduct()
+        self.favoriteViewModel.getFavoriteDraftOrderFromAPI()
     }
     
     

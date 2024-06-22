@@ -12,6 +12,7 @@ class FavoritesViewModel{
     
     var bindallProductsListToController:(()->Void) = {}
     var bindGetFavoriteDraftOrderToController:(()->Void) = {}
+    var bindPutFavoriteDraftOrderToController:(()->Void) = {}
     var bindResultToViewController: (()->()) = {}
     let defaults = UserDefaults.standard
     
@@ -27,6 +28,13 @@ class FavoritesViewModel{
             bindGetFavoriteDraftOrderToController()
         }
     }
+    
+    var putFavoriteDraftOrder: DraftOrder?{
+        didSet{
+            bindPutFavoriteDraftOrderToController()
+        }
+    }
+    
     var allProductsList = [LocalProduct](){
         didSet{
             bindallProductsListToController()
@@ -46,7 +54,7 @@ class FavoritesViewModel{
     
     func getAllProducts() {
         allProductsList = DatabaseManager.sharedProductDB.fetchAllProducts()!
-        print(allProductsList)
+        //print(allProductsList)
         FavouriteViewController.staticFavoriteList = allProductsList
     }
     
@@ -77,5 +85,14 @@ class FavoritesViewModel{
             self?.getFavoriteDraftOrder = response?.draft_order
             
         }
+    }
+    
+    
+    func putFavoriteDraftOrderFromAPI(parameters: Parameters){
+        let url = URLs.shared.favouriteDraftOrder()
+        NetworkManger.shared.putData(path: url , parameters: parameters, handler: { [weak self] response,code  in
+            self?.putFavoriteDraftOrder = response?.draft_order
+            print("finish insert favourite")
+        })
     }
 }
