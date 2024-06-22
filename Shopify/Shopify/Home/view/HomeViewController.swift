@@ -87,6 +87,20 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    @IBAction func navigateToCart(_ sender: Any) {
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
+            let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+                
+            cartVC.modalPresentationStyle = .fullScreen
+            cartVC.modalTransitionStyle = .crossDissolve
+            present(cartVC , animated: true , completion: nil)
+        }
+        
+    }
+    
     @IBAction func navigateToSearch(_ sender: Any) {
         
         

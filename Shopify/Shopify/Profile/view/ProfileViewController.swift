@@ -136,11 +136,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.present(nextViewController, animated: true, completion: nil)
     }
     @IBAction func shoppingCartBtn(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
-        if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
-            self.navigationController?.pushViewController(cartVC, animated: true)
-        } else {
-            print("Could not find CartViewController in ShoppingCartStoryboard")
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
+            if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
+                self.navigationController?.pushViewController(cartVC, animated: true)
+            } else {
+                print("Could not find CartViewController in ShoppingCartStoryboard")
+            }
         }
     }
     private func setupNavigationBar() {

@@ -270,4 +270,33 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
+    
+    
+    @IBAction func navigateToFavorite(_ sender: UIButton) {
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            let storyboard = UIStoryboard(name: "FavouriteStoryboard", bundle: nil)
+            let favoriteVC = storyboard.instantiateViewController(identifier: "FavouriteViewController") as! FavouriteViewController
+            
+            favoriteVC.modalPresentationStyle = .fullScreen
+            favoriteVC.modalTransitionStyle = .crossDissolve
+            present(favoriteVC, animated: true , completion: nil)
+        }
+        
+    }
+    
+    @IBAction func navigateToCart(_ sender: Any) {
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
+            let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+                
+            cartVC.modalPresentationStyle = .fullScreen
+            cartVC.modalTransitionStyle = .crossDissolve
+            present(cartVC , animated: true , completion: nil)
+        }
+        
+    }
 }

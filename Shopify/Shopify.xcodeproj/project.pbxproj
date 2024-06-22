@@ -18,8 +18,6 @@
 		8B2FCFB22C13846C00C613E3 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2FCFB12C13846C00C613E3 /* Image.swift */; };
 		8B2FCFB42C13888E00C613E3 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2FCFB32C13888E00C613E3 /* URLs.swift */; };
 		8B2FCFBB2C139F6800C613E3 /* BrandProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2FCFBA2C139F6800C613E3 /* BrandProductCollectionViewCell.xib */; };
-		8B48D4EB2C0DEA80005E5C37 /* Auhentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */; };
-		8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */; };
 		8B95A60D2C11A18900D5A592 /* BrandProduct.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B95A60C2C11A18900D5A592 /* BrandProduct.storyboard */; };
 		8B95A6122C11A2E400D5A592 /* BrandProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95A6112C11A2E400D5A592 /* BrandProductsViewModel.swift */; };
 		8B95A6142C11A3C200D5A592 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B95A6132C11A3C200D5A592 /* Product.swift */; };
@@ -165,8 +163,6 @@
 		8B2FCFB12C13846C00C613E3 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		8B2FCFB32C13888E00C613E3 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		8B2FCFBA2C139F6800C613E3 /* BrandProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = BrandProductCollectionViewCell.xib; path = Shopify/BrandProducts/ViewModel/BrandProductCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
-		8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auhentication.storyboard; sourceTree = "<group>"; };
-		8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SecondStoryboard.storyboard; sourceTree = "<group>"; };
 		8B95A60C2C11A18900D5A592 /* BrandProduct.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BrandProduct.storyboard; sourceTree = "<group>"; };
 		8B95A6112C11A2E400D5A592 /* BrandProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandProductsViewModel.swift; sourceTree = "<group>"; };
 		8B95A6132C11A3C200D5A592 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -764,8 +760,6 @@
 				E7F5EF562C0B35830096F476 /* LaunchScreen.storyboard */,
 				E7F5EF592C0B35830096F476 /* Info.plist */,
 				E7F5EF512C0B35800096F476 /* Shopify.xcdatamodeld */,
-				8B48D4EA2C0DEA80005E5C37 /* Auhentication.storyboard */,
-				8B48D4EC2C0DFD20005E5C37 /* SecondStoryboard.storyboard */,
 				8B073EC22C14AD2B00629214 /* SplashViewController.swift */,
 				8BF665952C244B0900408AC4 /* GuestViewController.swift */,
 				8BCE2D8B2C24560800DF6733 /* SuccessViewController.swift */,
@@ -1032,14 +1026,12 @@
 				E7F5EF552C0B35830096F476 /* Assets.xcassets in Resources */,
 				8B073EC12C14929A00629214 /* ProductDetails.storyboard in Resources */,
 				E7FB2CA32C10F918003A8D9D /* AddressCell.xib in Resources */,
-				8B48D4ED2C0DFD20005E5C37 /* SecondStoryboard.storyboard in Resources */,
 				E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */,
 				8B2FCFBB2C139F6800C613E3 /* BrandProductCollectionViewCell.xib in Resources */,
 				8BF5913E2C1C799D00EF3344 /* ProductCell.xib in Resources */,
 				8BA4A5872C23654E005BDF67 /* SearchStoryboard.storyboard in Resources */,
 				E7FB2C742C10D177003A8D9D /* ShoppingCartStoryboard.storyboard in Resources */,
 				E7F5EF502C0B35800096F476 /* Main.storyboard in Resources */,
-				8B48D4EB2C0DEA80005E5C37 /* Auhentication.storyboard in Resources */,
 				E6C97DFC2C0B8C9000B2CA81 /* Home.storyboard in Resources */,
 				8B073EC62C14B33300629214 /* EcoMarket.json in Resources */,
 				8B95A60D2C11A18900D5A592 /* BrandProduct.storyboard in Resources */,

@@ -169,6 +169,7 @@ extension SettingsTableViewController  {
         var action :[UIAction] = []
         let optionSelected = {(action : UIAction) in
             print(action.title)
+            print("tesssssttttt")
           self.viewModel.loadLatestCurrency(currency:  action.title)
 
         }
