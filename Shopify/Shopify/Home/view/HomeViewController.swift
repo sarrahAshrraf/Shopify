@@ -249,7 +249,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 
                 var user = User()
                 user.id = self.defaults.integer(forKey: Constants.customerId)
-                let draft = DraftOrder(id: nil, note: nil, line_items: self.lineItems, customer: user)
+                let draft = DraftOrder(id: nil, note: nil, line_items: lineItems, customer: user)
                 let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draft, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)
                 
                 let params = JSONCoding().encodeToJson(objectClass: response)!
