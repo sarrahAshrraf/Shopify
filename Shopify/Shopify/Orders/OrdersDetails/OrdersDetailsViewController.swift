@@ -114,7 +114,8 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
                    cell.orderProductPrice.text = order?.lineItems?[indexPath.row].price
                }
 //        cell.orderProductPrice.text = order?.lineItems?[indexPath.row].price
-        cell.orderProductQuntity.text = "\(order?.lineItems?[indexPath.row].quantity ?? 0)"
+        cell.orderProductQuntity.text = "Quantity : \(order?.lineItems?[indexPath.row].quantity ?? 0)"
+        cell.orderProductImageView.kf.setImage(with: URL(string: String(order?.lineItems?[indexPath.row].properties?[0].value?.split(separator: "$")[0] ?? "No Image")))
         print(order?.lineItems?[indexPath.row].title)
         print(order?.lineItems?[indexPath.row].price)
         print("\(order?.lineItems?[indexPath.row].quantity ?? 0)")
