@@ -74,6 +74,7 @@
 		E63EAC872C13321C000845AA /* SmartCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC862C13321C000845AA /* SmartCollection.swift */; };
 		E63EAC892C13324A000845AA /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63EAC882C13324A000845AA /* Rules.swift */; };
 		E6782E032C282D6F0081AA8E /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6782E022C282D6F0081AA8E /* MockNetworkService.swift */; };
+		E6782E052C282DF60081AA8E /* MockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6782E042C282DF60081AA8E /* MockTest.swift */; };
 		E67C25E42C1477CA000E5F5E /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */; };
 		E68E0F422C20A73E00343519 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E0F402C20A73E00343519 /* HomeViewCell.swift */; };
 		E68E0F432C20A73E00343519 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68E0F412C20A73E00343519 /* HomeViewCell.xib */; };
@@ -222,6 +223,7 @@
 		E63EAC862C13321C000845AA /* SmartCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCollection.swift; sourceTree = "<group>"; };
 		E63EAC882C13324A000845AA /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		E6782E022C282D6F0081AA8E /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		E6782E042C282DF60081AA8E /* MockTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTest.swift; sourceTree = "<group>"; };
 		E67C25E32C1477CA000E5F5E /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		E68E0F402C20A73E00343519 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		E68E0F412C20A73E00343519 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
@@ -603,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				E6782E022C282D6F0081AA8E /* MockNetworkService.swift */,
+				E6782E042C282DF60081AA8E /* MockTest.swift */,
 			);
 			path = "Mock Test";
 			sourceTree = "<group>";
@@ -1272,6 +1275,7 @@
 			files = (
 				E6782E032C282D6F0081AA8E /* MockNetworkService.swift in Sources */,
 				E7F5EF632C0B35830096F476 /* ShopifyTests.swift in Sources */,
+				E6782E052C282DF60081AA8E /* MockTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
