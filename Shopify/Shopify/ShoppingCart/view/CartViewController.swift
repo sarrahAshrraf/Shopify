@@ -82,7 +82,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewWillAppear(animated)
         setupNavigationBar()
         updateEmptyCartImageVisibility()
-        viewModel.getCartItems() // Ensure fetching of cart items
+        viewModel.showCartItems() // Ensure fetching of cart items
         updateCartData()
     }
     
@@ -102,7 +102,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         viewModel.bindResultToViewController = { [weak self] in
             self?.updateCartData()
         }
-        viewModel.getCartItems() // Fetch items as soon as the view loads
+        viewModel.showCartItems() // Fetch items as soon as the view loads
 //        showLoadingIndicator()
     }
     
@@ -154,7 +154,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = CartList.cartItems.count
+        let count = viewModel.result?.line_items?.count ?? 0
         print("Number of rows: \(count)")
         return count
     }
@@ -163,7 +163,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartCell", for: indexPath) as? CartCell else {
             return UITableViewCell()
         }
-        let item = CartList.cartItems[indexPath.row]
+        let properties = [Properties(name: "image_url", value: "")]
+        let dummy = LineItems(price: "20.0", quantity: 1, title: "dummy", properties:properties)
+
+        let item = viewModel.result?.line_items?[indexPath.row] ?? dummy
+        
+//        CartList.cartItems[indexPath.row]
         cell.delegate = self
         cell.setCartItemValues(lineItem: item, viewController: self)
         return cell
