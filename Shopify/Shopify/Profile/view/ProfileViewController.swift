@@ -14,6 +14,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var welcomeUser: UILabel!
     @IBOutlet weak var favTableView: UITableView!
     @IBOutlet weak var ordersTableView: UITableView!
+    @IBOutlet weak var userStackView: UIStackView!
+    
+    @IBOutlet weak var orderStackView: UIStackView!
+    
+    @IBOutlet weak var favouriteStackView: UIStackView!
     
     var profileViewModel: ProfileViewModel!
     var favouriteViewModel: FavoritesViewModel!
@@ -35,6 +40,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         favouriteViewModel.getAllProducts()
         showFavouriteDetails()
+        configureContainerView()
+        configureContainerView2(stackView: orderStackView)
+        configureContainerView2(stackView: favouriteStackView)
     }
     
 
@@ -226,5 +234,32 @@ print("cart")
         print("settin gs")
 
 
+    }
+    
+    private func configureContainerView() {
+        userStackView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        userStackView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        userStackView.backgroundColor = UIColor(named: "CardColor")
+        userStackView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        userStackView.layer.shadowOffset = .zero
+        userStackView.layer.shadowOpacity = 0.2
+        userStackView.layer.shadowRadius = 4
+        userStackView.layer.cornerRadius = 15
+    }
+    
+    
+    private func configureContainerView2(stackView : UIStackView) {
+        stackView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        stackView.backgroundColor = UIColor(named: "CardColor")
+        stackView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        stackView.layer.shadowOffset = .zero
+        stackView.layer.shadowOpacity = 0.2
+        stackView.layer.shadowRadius = 3
+        stackView.layer.cornerRadius = 15
     }
 }
