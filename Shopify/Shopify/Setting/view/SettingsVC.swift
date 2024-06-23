@@ -104,11 +104,11 @@ class SettingsTableViewController: UITableViewController {
             
             
             CartList.cartItems = []
-            self?.cartVM.editCart()
-            self?.defaults.set("", forKey: Constants.cartId)
-            self?.defaults.set("", forKey: Constants.customerId)
-            self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
-            self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)    
+//            self?.cartVM.editCart()
+            self?.defaults.set(-1, forKey: Constants.cartId)
+            self?.defaults.set(-1, forKey: Constants.customerId)
+            self?.defaults.set(nil, forKey: Constants.CURRENCY_KEY)
+            self?.defaults.set(nil, forKey: Constants.CURRENCY_VALUE)    
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let nextViewController = storyboard.instantiateInitialViewController() {
