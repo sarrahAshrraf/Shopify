@@ -16,37 +16,19 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var orderName: UILabel!
     
-    @IBOutlet weak var numOfItems: UILabel!
+    @IBOutlet weak var orderDate: UILabel!
     
     @IBOutlet weak var orderPrice: UILabel!
     
     @IBOutlet weak var orderStatus: UILabel!
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupCell()
-        }
-        
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            setupCell()
-        }
-        
-        private func setupCell() {
-            self.contentView.layer.cornerRadius = 10
-            self.contentView.layer.borderWidth = 1
-            self.contentView.layer.borderColor = UIColor.lightGray.cgColor
-            self.contentView.layer.masksToBounds = true
-        }
-        
-        override func layoutSubviews() {
-            super.layoutSubviews()
-            // Adjust the frame of the contentView
-            self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10))
-        }
+    @IBOutlet weak var containerView: UIStackView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        configureContainerView()
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
@@ -61,11 +43,24 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
+    
     func setOrderValues(order: Orders) {
         self.orderName.text = order.name
         
         if let createdAtString = order.customer?.createdAt {
-            self.numOfItems.text = Utilities.formatDateString(createdAtString)
+            self.orderDate.text = Utilities.formatDateString(createdAtString)
         }
         
         if let priceString = order.totalPrice, let price = Double(priceString), let orderCurrency = order.currency {
