@@ -101,6 +101,7 @@
 		E764E0122C13AD7500740DFA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E764E0112C13AD7500740DFA /* User.swift */; };
 		E76517292C22343C001BD2F3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76517282C22343C001BD2F3 /* MapViewController.swift */; };
 		E76865B32C1CB4F3007A62D3 /* shippingAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */; };
+		E76A43F92C29D22800B9D0A5 /* CopounsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A43F82C29D22800B9D0A5 /* CopounsModel.swift */; };
 		E79D10542C1A2389002DB483 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79D10532C1A2389002DB483 /* Order.swift */; };
 		E7B134242C239D76009F165E /* OrderSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B134222C239D75009F165E /* OrderSummaryCell.swift */; };
 		E7B134252C239D76009F165E /* OrderSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B134232C239D75009F165E /* OrderSummaryCell.xib */; };
@@ -250,6 +251,7 @@
 		E764E0112C13AD7500740DFA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E76517282C22343C001BD2F3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E76865B22C1CB4F3007A62D3 /* shippingAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shippingAddressVC.swift; sourceTree = "<group>"; };
+		E76A43F82C29D22800B9D0A5 /* CopounsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopounsModel.swift; sourceTree = "<group>"; };
 		E79D10532C1A2389002DB483 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		E7B134222C239D75009F165E /* OrderSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummaryCell.swift; sourceTree = "<group>"; };
 		E7B134232C239D75009F165E /* OrderSummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderSummaryCell.xib; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				E79D10532C1A2389002DB483 /* Order.swift */,
 				E71445FB2C1EC45D00633624 /* Currency.swift */,
 				8BCBF98B2C20CC4300C67D40 /* Review.swift */,
+				E76A43F82C29D22800B9D0A5 /* CopounsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				8BA4A58B2C23661E005BDF67 /* SearchViewController.swift in Sources */,
 				E60896802C1CE42000FB9AFA /* OrdersDetailsTableViewCell.swift in Sources */,
 				E7BC1B252C1467110015C552 /* SettingsVC.swift in Sources */,
+				E76A43F92C29D22800B9D0A5 /* CopounsModel.swift in Sources */,
 				8BE8849D2C10A90200BB28C6 /* NetworkMangerProtocol.swift in Sources */,
 				E7FF07D02C198F5E004ACAE7 /* InventoryLevel.swift in Sources */,
 				E63EAC892C13324A000845AA /* Rules.swift in Sources */,
