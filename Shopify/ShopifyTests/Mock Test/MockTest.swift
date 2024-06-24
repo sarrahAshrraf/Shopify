@@ -29,4 +29,32 @@ final class MockTest: XCTestCase {
             
         }
     }
+    
+    
+    func testMockPustData(){
+        mockObj.postData{ result, error in
+            
+            if let error = error {
+                XCTFail()
+            } else {
+                XCTAssertNotNil(result)
+            }
+            
+        }
+    }
+    
+    
+    func testMockPutData(){
+        mockObj.putData{ result, error in
+            
+            if let error = error {
+                XCTFail()
+            } else {
+                XCTAssertNotNil(result)
+            }
+            
+        }
+    }
+    
+    
 }
