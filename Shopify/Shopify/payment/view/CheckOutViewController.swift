@@ -13,13 +13,6 @@ import PassKit
 - discount
  */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
-    func didSelectAddress(_ address: Address) {
-        addressVM.defautltAdress = address
-        addressdetails.text = address.address1
-        print("inside Checout")
-        print(address.address1)
-    }
-    
 
 //    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var applePayBtn: UIButton!
@@ -44,7 +37,6 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     var discountCodeArray : [Discount_Codes] = []
     var total: Double = 9.0
     var addressVM : AddressViewModel!
-
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
 //        addressVM.bindToVC = { [weak self] in
@@ -56,122 +48,6 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         updatePriceLabels()
         
     }
-    
-    
-    func createOrder(){
-        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
-        guard addressVM.defautltAdress != nil else {
-             print("No results found, navigating to addressVC")
-            coordinator?.showAddNewAddressWithEmptyFields()
-             return
-         }
-            let customer = Customer(id:customerId)
-        guard let addresses = addressVM.defautltAdress else {
-                 print("No default address found")
-                 return
-             }
-            let shippingAddress = Shipping_address(from: addresses)
-        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
-        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
-        var totalPrice = cartViewModel.result?.total_price ?? "0.00"
-           let totalPriceValue = Double(totalPrice)
-        updatedTotalPrice = String((totalPriceValue ?? 0.00) * currencyRate)
-            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress)
-            //TODO: shiiping addressssssssssss
-            checkOutVM.postOrder(order: order)
-            print("order cuurencyyyyyyyyyyyyyyy")
-            print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
-//            checkOutVM.updateVariantAfterPostOrder()
-            print(order)
-            
-        
-    }
-    func createCashOrder() {
-        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
-        guard addressVM.defautltAdress != nil else {
-            print("No results found, navigating to addressVC")
-            coordinator?.showAddNewAddressWithEmptyFields()
-            return
-        }
-        
-        let customer = Customer(id: customerId)
-        guard let addresses = addressVM.defautltAdress else {
-            print("No default address found")
-            return
-        }
-        
-        let shippingAddress = Shipping_address(from: addresses)
-        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
-        
-        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
-        let totalPrice = cartViewModel.result?.total_price ?? "0.00"
-        let totalPriceValue = Double(totalPrice) ?? 0.00
-        updatedTotalPrice = String(totalPriceValue * currencyRate)
-        
-        let cashPaymentStrategy = CashPaymentStrategy()
-        let (isPaymentValid, paymentMessage) = cashPaymentStrategy.pay(moneyAmount: totalPriceValue * currencyRate, viwController: self)
-        
-        guard isPaymentValid else {
-            print(paymentMessage)
-            let alert = UIAlertController(title: "Payment", message: paymentMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
-                
-            }))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? String,
-               let copounPercent = Int(copounPercentValue) {
-                   let positiveCopounPercent = abs(copounPercent)
-            print("copoun amount converted\(positiveCopounPercent)")
-               }
-        
-        if usingCopoun{
-            if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
-                if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? String,
-                   let copounPercent = Int(copounPercentValue) {
-                    let positiveCopounPercent = abs(copounPercent)
-                    print("copoun amount converted\(positiveCopounPercent)")
-                    
-                    let discounts = Discount_Codes(code: copounValue, amount: "\(positiveCopounPercent)", type: "percentage")
-                    discountCodeArray.append(discounts)
-                }
-            }
-        }else {
-            if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
-                let discounts = Discount_Codes(code: copounValue, amount: "", type: "percentage")
-                discountCodeArray.append(discounts)
-            }
-        }
-//        if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
-//            if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? String,
-//               let copounPercent = Int(copounPercentValue) {
-//                let positiveCopounPercent = abs(copounPercent)
-//                let discounts = Discount_Codes(code: copounValue, amount: "\(positiveCopounPercent)", type: "percentage")
-//
-//            }
-//        }
-
-        let order = Orders(
-            currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD",
-            lineItems: CartList.cartItems,
-            number: CartList.cartItems.count,
-            customer: customer,
-            totalPrice: updatedTotalPrice,
-            shippingAddress: shippingAddress,
-            financialStatus: "pending",
-            discount_codes: discountCodeArray
-        )
-        
-        checkOutVM.postOrder(order: order)
-        print("Order currency:", UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD")
-        print(order)
-        print("-----------------------")
-        print(order.discount_codes)
-        print(order.totalPrice)
-    }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,7 +64,8 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
 //        orderPrice.text = String(total)
         
     }
-    
+
+
     private func setupBindings() {
         addressVM.bindDefaultAddress = { [weak self] in
             DispatchQueue.main.async {
@@ -244,9 +121,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
 //        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
-//    func getTotalPrice() {
-//        cartViewModel.bindResultToViewController()
-//    }
+
     func getDeafultAddress(){
         
         addressVM.bindDefaultAddress = { [weak self] in
@@ -257,9 +132,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
     }
     
-//    @IBAction func PurcasheVtn(_ sender: Any) {
-//        createOrder()
-//        }
+
     func bindResultToVC() {
         cartViewModel.bindResultToViewController = { [weak self] in
             self?.setCurrencyValues()
@@ -276,11 +149,6 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     }
     func updatePriceLabels() {
         orderPrice.text = String(format: "\(currencySymbol) %.2f", total)
-//        if let totalTax = cartViewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
-//            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
-//        } else {
-//            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
-//        }
         
         if !usingCopoun{
             
@@ -294,6 +162,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             let discountedTotal = total * (copounPercent / 100)
             if let totalCartPrice = cartViewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
                 self.totalPrice.text = String(format: "\(currencySymbol) %.2f", (totalPrice * currencyRate) - abs(discountedTotal) )
+                
             } else {
                 totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
             }
@@ -304,18 +173,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         }
     }
 
-    @IBAction func changeAddress(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
-        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
-            addressVC.delegate = self
-            addressVC.shipmentAdress = true
-            let navController = UINavigationController(rootViewController: addressVC)
-            navController.modalPresentationStyle = .formSheet
-            self.navigationController?.pushViewController(addressVC, animated: true)
-        }
-        
-        print("adddddressssss")
-    }
+
     func showAlertNoNetworkWithAction() {
         let alert = UIAlertController(title: "No Network", message: "Please check your internet connection and try again.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Enable in settings", style: .default) { _ in
@@ -340,9 +198,30 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
       }
       return false
     }
-//    @IBAction func cashBtn(_ sender: Any) {
-//    }
-//    @IBAction func applePAyBtn(_ sender: Any) {
+    
+    
+    @IBAction func changeAddress(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Address_SB", bundle: nil)
+        if let addressVC = storyboard.instantiateViewController(withIdentifier: "addressVC") as? AddressVC {
+            addressVC.delegate = self
+            addressVC.shipmentAdress = true
+            let navController = UINavigationController(rootViewController: addressVC)
+            navController.modalPresentationStyle = .formSheet
+            self.navigationController?.pushViewController(addressVC, animated: true)
+        }
+        
+        print("adddddressssss")
+    }
+    
+    
+    func didSelectAddress(_ address: Address) {
+        addressVM.defautltAdress = address
+        addressdetails.text = address.address1
+        print("inside Checout")
+        print(address.address1)
+    }
+    
+
     @IBAction func PurcasheVtn(_ sender: Any) {
         let paymentcontext = PaymentContext(pyamentStrategy: CashPaymentStrategy())
         
@@ -357,11 +236,22 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             return
         }
         
-        let isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
+        var isPaymentSuccessful: (Bool, String) = (false, "")
+        
+        if usingCopoun {
+            let discountedTotal = total * (copounPercent / 100)
+            if let totalCartPrice = cartViewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
+                let updatedPrice = (totalPrice * currencyRate) - abs(discountedTotal)
+                self.totalPrice.text = String(format: "\(currencySymbol) %.2f", updatedPrice)
+                isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: updatedPrice, viwController: self)
+            }
+        } else {
+            isPaymentSuccessful = paymentcontext.makePayment(moenyAmount: self.total, viwController: self)
+        }
         
         if isPaymentSuccessful.0 {
             if isPaymentSuccessful.1 == "Purchased successfully" {
-                print("Pay succeeded")
+                print("Payment succeeded")
             }
             print(isPaymentSuccessful.1)
         } else {
@@ -369,6 +259,128 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             print(isPaymentSuccessful.1)
         }
     }
+    
+    func createOrder(){
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        guard addressVM.defautltAdress != nil else {
+             print("No results found, navigating to addressVC")
+            coordinator?.showAddNewAddressWithEmptyFields()
+             return
+         }
+            let customer = Customer(id:customerId)
+        guard let addresses = addressVM.defautltAdress else {
+                 print("No default address found")
+                 return
+             }
+            let shippingAddress = Shipping_address(from: addresses)
+        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
+        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var totalPrice = cartViewModel.result?.total_price ?? "0.00"
+           let totalPriceValue = Double(totalPrice)
+        updatedTotalPrice = String((totalPriceValue ?? 0.00) * currencyRate)
+        if usingCopoun{
+            if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
+                if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? Double{
+                    let positiveCopounPercent = abs(copounPercentValue)
+                    let discounts = Discount_Codes(code: copounValue, amount: "\(positiveCopounPercent)", type: "percentage")
+                    discountCodeArray.append(discounts)
+                    print("in using copouns \(discountCodeArray)")
+                }
+            }
+        
+        } else {
+            print("in remove all")
+            discountCodeArray.removeAll()
+        }
+        let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress, financialStatus: "paid", discount_codes: discountCodeArray)
+            //TODO: shiiping addressssssssssss
+            checkOutVM.postOrder(order: order)
+            print("order cuurencyyyyyyyyyyyyyyy")
+            print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
+//            checkOutVM.updateVariantAfterPostOrder()
+            print(order)
+            
+        
+    }
+    func createCashOrder() {
+        addressVM.fetchDeafultCustomerAddress(customerID: customerId)
+        guard addressVM.defautltAdress != nil else {
+            print("No results found, navigating to addressVC")
+            coordinator?.showAddNewAddressWithEmptyFields()
+            return
+        }
+        
+        let customer = Customer(id: customerId)
+        guard let addresses = addressVM.defautltAdress else {
+            print("No default address found")
+            return
+        }
+        
+        let shippingAddress = Shipping_address(from: addresses)
+        cartViewModel.updateShippingAddress(newAddress: shippingAddress)
+        
+        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
+        let totalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var totalPriceValue = Double(totalPrice) ?? 0.00
+        updatedTotalPrice = String(totalPriceValue * currencyRate)
+        
+        if usingCopoun{
+            
+            let discountedTotal = total * (copounPercent / 100)
+            if let totalCartPrice = cartViewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
+                self.totalPrice.text = String(format: "\(currencySymbol) %.2f", (totalPrice * currencyRate) - abs(discountedTotal) )
+                totalPriceValue = (totalPrice * currencyRate) - abs(discountedTotal)
+                
+            }
+        }
+
+        let cashPaymentStrategy = CashPaymentStrategy()
+        let (isPaymentValid, paymentMessage) = cashPaymentStrategy.pay(moneyAmount: totalPriceValue * currencyRate, viwController: self)
+        
+        guard isPaymentValid else {
+            print(paymentMessage)
+            let alert = UIAlertController(title: "Payment", message: paymentMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        if usingCopoun{
+            if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
+                if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? Double{
+                    let positiveCopounPercent = abs(copounPercentValue)
+                    let discounts = Discount_Codes(code: copounValue, amount: "\(positiveCopounPercent)", type: "percentage")
+                    discountCodeArray.append(discounts)
+                    print("in using copouns \(discountCodeArray)")
+                }
+            }
+        
+        } else {
+            print("in remove all")
+            discountCodeArray.removeAll()
+        }
+        
+
+        let order = Orders(
+            currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD",
+            lineItems: CartList.cartItems,
+            number: CartList.cartItems.count,
+            customer: customer,
+            totalPrice: updatedTotalPrice,
+            shippingAddress: shippingAddress,
+            financialStatus: "pending",
+            discount_codes: discountCodeArray
+        )
+        
+        checkOutVM.postOrder(order: order)
+        print("Order currency:", UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD")
+        print(order)
+        print("-----------------------")
+        print(order.discount_codes)
+        print(order.totalPrice)
+    }
+
 }
 
 
