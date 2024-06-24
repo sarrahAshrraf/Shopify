@@ -21,6 +21,7 @@ struct Orders: Codable {
     let currentTotalPriceSet: TotalPriceSet?
     let currentTotalTax: String?
     let currentTotalTaxSet: TotalPriceSet?
+    let discount_codes : [Discount_Codes]?
     let email: String?
     let estimatedTaxes: Bool?
     let financialStatus: String?
@@ -51,7 +52,6 @@ struct Orders: Codable {
     let customer: Customer?
     let lineItems: [LineItems]?
     let shippingAddress: Shipping_address?
-    
     init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String) {
         self.currency = currency
         self.lineItems = lineItems
@@ -79,6 +79,7 @@ struct Orders: Codable {
         self.totalLineItemsPrice = nil
         self.totalLineItemsPriceSet = nil
         self.totalOutstanding = nil
+        self.discount_codes = nil
         self.email = nil
         self.estimatedTaxes = nil
         self.financialStatus = nil
@@ -125,6 +126,7 @@ struct Orders: Codable {
         self.totalLineItemsPrice = nil
         self.totalLineItemsPriceSet = nil
         self.totalOutstanding = nil
+        self.discount_codes = nil
         self.email = nil
         self.estimatedTaxes = nil
         self.financialStatus = nil
@@ -141,7 +143,6 @@ struct Orders: Codable {
         self.currentTotalPriceSet = nil
         self.currentTotalTax = nil
         self.currentTotalTaxSet = nil
-        
     }
     
     init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: Shipping_address, financialStatus : String) {
@@ -171,6 +172,7 @@ struct Orders: Codable {
         self.totalLineItemsPrice = nil
         self.totalLineItemsPriceSet = nil
         self.totalOutstanding = nil
+        self.discount_codes = nil
         self.email = nil
         self.estimatedTaxes = nil
         self.financialStatus = financialStatus
@@ -187,9 +189,52 @@ struct Orders: Codable {
         self.currentTotalPriceSet = nil
         self.currentTotalTax = nil
         self.currentTotalTaxSet = nil
-        
     }
-    
+    init(currency: String, lineItems: [LineItems], number: Int, customer: Customer, totalPrice: String, shippingAddress: Shipping_address, financialStatus : String, discount_codes : [Discount_Codes]) {
+        self.currency = currency
+        self.lineItems = lineItems
+        self.totalPrice = totalPrice
+        self.number = number
+        self.id = nil
+        self.customer = customer
+        self.shippingAddress = shippingAddress
+        self.updatedAt = nil
+        self.totalWeight = nil
+        self.totalTax = nil
+        self.totalTaxSet = nil
+        self.totalTipReceived = nil
+        self.presentmentCurrency = nil
+        self.processedAt = nil
+        self.sourceName = nil
+        self.subtotalPrice = nil
+        self.subtotalPriceSet = nil
+        self.tags = nil
+        self.taxesIncluded = nil
+        self.test = nil
+        self.token = nil
+        self.totalDiscounts = nil
+        self.totalDiscountsSet = nil
+        self.totalLineItemsPrice = nil
+        self.totalLineItemsPriceSet = nil
+        self.totalOutstanding = nil
+        self.discount_codes = discount_codes
+        self.email = nil
+        self.estimatedTaxes = nil
+        self.financialStatus = financialStatus
+        self.name = nil
+        self.orderNumber = nil
+        self.orderStatusUrl = nil
+        self.contactEmail = nil
+        self.createdAt = nil
+        self.currentSubtotalPrice = nil
+        self.currentSubtotalPriceSet = nil
+        self.currentTotalDiscounts = nil
+        self.currentTotalDiscountsSet = nil
+        self.currentTotalPrice = nil
+        self.currentTotalPriceSet = nil
+        self.currentTotalTax = nil
+        self.currentTotalTaxSet = nil
+    }
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case contactEmail = "contact_email"
@@ -203,6 +248,7 @@ struct Orders: Codable {
         case currentTotalPriceSet = "current_total_price_set"
         case currentTotalTax = "current_total_tax"
         case currentTotalTaxSet = "current_total_tax_set"
+        case discount_codes
         case email = "email"
         case estimatedTaxes = "estimated_taxes"
         case financialStatus = "financial_status"
@@ -233,7 +279,7 @@ struct Orders: Codable {
         case customer = "customer"
         case lineItems = "line_items"
         case shippingAddress = "shipping_address"
-        
+       
     }
     
 }
