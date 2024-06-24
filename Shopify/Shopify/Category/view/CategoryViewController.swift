@@ -27,14 +27,39 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     var categoryViewModel: CategoryViewModel!
     var favoritesViewModel: FavoritesViewModel!
     var activityIndicator: UIActivityIndicatorView!
-
+    
+    
+        func setTableBackgroundImage() {
+            let backgroundImage = UIImage(named: Constants.noImage)
+            let imageView = UIImageView(image: backgroundImage)
+            imageView.contentMode = .scaleAspectFit
+    
+            let containerView = UIView(frame: collectionView.bounds)
+            imageView.frame = containerView.bounds
+            let label = UILabel()
+            label.text = "Turn on your network"
+            label.textAlignment = .center
+            label.textColor = .black
+            label.font = UIFont.boldSystemFont(ofSize: 24)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            containerView.addSubview(imageView)
+            containerView.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: 100)
+            ])
+    
+            collectionView.backgroundView = containerView
+        }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ////////
+        //////
         activityIndicator = UIActivityIndicatorView(style: .large)
                activityIndicator.center = self.view.center
                self.view.addSubview(activityIndicator)
-        /////////
+        ///////
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -74,7 +99,9 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                     
                     self?.collectionView.reloadData()
                 } else {
+                    self?.setTableBackgroundImage()
                     self?.activityIndicator.startAnimating()
+                    
                     self?.showNoInternetAlert()
                     self?.collectionView.reloadData()
                     
@@ -92,6 +119,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             } else {
                 self.showNoInternetAlert()
                 self.collectionView.reloadData()
+                self.setTableBackgroundImage()
                 self.activityIndicator.startAnimating()
             }
         }
@@ -106,6 +134,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         } else {
             self.showNoInternetAlert()
             self.collectionView.reloadData()
+            setTableBackgroundImage()
             self.activityIndicator.startAnimating()
         }
     }
@@ -157,6 +186,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             } else {
                 self.showNoInternetAlert()
                 self.collectionView.reloadData()
+                self.setTableBackgroundImage()
                 self.activityIndicator.startAnimating()
             }
             print("Collection view reloaded")
