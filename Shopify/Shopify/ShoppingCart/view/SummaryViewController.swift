@@ -27,7 +27,8 @@ class SummaryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
         copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
-
+//        updatePriceLabels()
+//        setupCopounObserver()
     }
     func updatePriceLabels(){
         
@@ -121,7 +122,22 @@ class SummaryViewController: UIViewController {
         let couponCode = copounTF.text ?? ""
         if (couponCode == defaults.value(forKey: Constants.copounValue) as? String){
             copounUsed = true
-
+//            let discountPercentage = validateCoupon(couponCode)
+            updatePriceAfterCopoun()
+            
+            
+        }
+        else {
+            copounUsed = false
+            updatePriceLabels()
+            dicountAMountLabel.text = "\(currencySymbol) -0.0"
+            let alert = UIAlertController(title: "Wrong discount code", message: "You entered a not valid discount code", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                
+            }))
+            present(alert, animated: true, completion: nil)
+            
+        }
 
     }
 
