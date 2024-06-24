@@ -26,6 +26,10 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     @IBOutlet weak var paymentMethod: UILabel!
     @IBOutlet weak var addressdetails: UILabel!
     @IBOutlet weak var addressType: UILabel!
+    @IBOutlet weak var priceContainerView: UIStackView!
+    @IBOutlet weak var addressContainerView: UIStackView!
+    
+    @IBOutlet weak var paymentContainerView: UIView!
     var cartViewModel : ShoppingCartViewModel!
     var checkOutVM : CheckOutViewModel!
     let defaults = UserDefaults.standard
@@ -61,6 +65,9 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         cartViewModel.editCart()
         bindResultToVC()
         setupBindings()
+        configureContainerView(containerView: priceContainerView)
+        configureContainerView(containerView: addressContainerView)
+        configurePaymentView()
 //        getTotalPrice()
 //        orderPrice.text = String(total)
         
@@ -121,6 +128,32 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         }))
         present(alert, animated: true, completion: nil)
     }
+    
+    private func configureContainerView(containerView : UIStackView) {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
+    
+    
+    private func configurePaymentView() {
+        paymentContainerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        // Adding a custom view to the container with shadow
+        paymentContainerView.backgroundColor = UIColor(named: "CardColor")
+        paymentContainerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        paymentContainerView.layer.shadowOffset = .zero
+        paymentContainerView.layer.shadowOpacity = 0.2
+        paymentContainerView.layer.shadowRadius = 5
+        paymentContainerView.layer.cornerRadius = 20
+    }
+
     
     func bindResultToVC() {
         cartViewModel.bindResultToViewController = { [weak self] in

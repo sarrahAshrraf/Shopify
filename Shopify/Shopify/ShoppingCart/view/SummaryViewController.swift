@@ -13,7 +13,8 @@ class SummaryViewController: UIViewController {
 //    @IBOutlet weak var copounsTF: RoundedTextfield!
 //    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var orderCollectionView: UICollectionView!
-    @IBOutlet weak var copounTF: UITextField!
+    @IBOutlet weak var copounTF: RoundedTextfield!
+    @IBOutlet weak var containerView: UIStackView!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
     var copounUsed = false
@@ -27,7 +28,8 @@ class SummaryViewController: UIViewController {
     var total: Double = 9.0
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
-        copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
+        copounTF.setText("\(defaults.value(forKey: Constants.copounValue) ?? " ")")
+//        copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
 //        updatePriceLabels()
 //        setupCopounObserver()
     }
@@ -51,6 +53,7 @@ class SummaryViewController: UIViewController {
         bindResultToVC()
         updatePriceLabels()
         getDiscount()
+        configureContainerView()
 
     }
 
@@ -94,6 +97,18 @@ class SummaryViewController: UIViewController {
         return 0.0
     }
     
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
     
     func updatePriceAfterCopoun() {
             let discount = getDiscount()
