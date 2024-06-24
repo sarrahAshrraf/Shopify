@@ -152,7 +152,6 @@
                         <outlet property="deliveryPrice" destination="Faf-aZ-T8r" id="iIA-Mo-nvu"/>
                         <outlet property="discountValue" destination="Eqf-eP-kbu" id="pz5-YW-QDi"/>
                         <outlet property="orderPrice" destination="cGk-R9-JrG" id="Cko-5v-RGN"/>
-                        <outlet property="taxesLabel" destination="LGP-jQ-Kvn" id="VDz-7s-rM3"/>
                         <outlet property="totalPrice" destination="cvZ-zu-tFp" id="CXp-wM-V0k"/>
                     </connections>
                 </viewController>

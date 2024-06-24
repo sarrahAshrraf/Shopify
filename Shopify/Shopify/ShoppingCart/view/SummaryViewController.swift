@@ -6,26 +6,43 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 class SummaryViewController: UIViewController {
-
-    @IBOutlet weak var copounsTF: RoundedTextfield!
-    @IBOutlet weak var taxesLabel: UILabel!
+///done
+//    @IBOutlet weak var copounsTF: RoundedTextfield!
+//    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var orderCollectionView: UICollectionView!
     @IBOutlet weak var copounTF: UITextField!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
+    var copounUsed = false
     var currencySymbol: String = "USD"
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var dicountAMountLabel: UILabel!
     @IBOutlet weak var orderPriceLabel: UILabel!
+    let disposeBag = DisposeBag()
+    var viewModel = ShoppingCartViewModel()
+
     var total: Double = 9.0
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
-        updatePriceLabels()
-      
+        copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
+//        updatePriceLabels()
+//        setupCopounObserver()
     }
-    var viewModel = ShoppingCartViewModel()
+    func updatePriceLabels(){
+        
+        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+               
+               if let totalCartPrice = viewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
+                   totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
+               } else {
+                   totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+               }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -33,7 +50,7 @@ class SummaryViewController: UIViewController {
         viewModel.showCartItems()
         bindResultToVC()
         updatePriceLabels()
-//        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+        getDiscount()
 
     }
 
@@ -67,29 +84,72 @@ class SummaryViewController: UIViewController {
         }
     }
     
-    func updatePriceLabels() {
-        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
-        
-        if let totalCartPrice = viewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
-            totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
-        } else {
-            totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+    
+    func getDiscount() -> Double {
+        if let discount = defaults.value(forKey: Constants.copounPercent) as? Double {
+            print("copoun getter \(discount)")
+            return discount
         }
-        if let totalTax = viewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
-            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
-        } else {
-            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
-        }
-    }
-//    copounsTF.ac
-    @IBAction func applyCopounBtn(_ sender: Any) {
+        print("no copoun percent ")
+        return 0.0
     }
     
+    
+    func updatePriceAfterCopoun() {
+            let discount = getDiscount()
+        print(discount)
+            let discountedTotal = total * (discount / 100)
+            print("value \(1 - discount / 100)")
+        print("total value \(discountedTotal)")
+            // Update order price label
+//            orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", discountedTotal)
+        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+            // Update total price label
+            if let totalCartPrice = viewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
+                totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", (totalPrice * currencyRate) - abs(discountedTotal) )
+                print("total privce of vm \(totalPrice)")
+                print("discountedTotal \(discountedTotal)")
+                print("total  \(total)")
+                print("totalPrice * currencyRatet \(totalPrice * currencyRate)")
+                print("")
+            } else {
+                totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+            }
+            
+        dicountAMountLabel.text = String(format: "\(currencySymbol) %.2f", discountedTotal)
+       
+        }
+
+    @IBAction func applyCopounBtn(_ sender: Any) {
+        let couponCode = copounTF.text ?? ""
+        if (couponCode == defaults.value(forKey: Constants.copounValue) as? String){
+            copounUsed = true
+//            let discountPercentage = validateCoupon(couponCode)
+            updatePriceAfterCopoun()
+            
+            
+        }
+        else {
+            copounUsed = false
+            updatePriceLabels()
+            dicountAMountLabel.text = "\(currencySymbol) -0.0"
+            let alert = UIAlertController(title: "Wrong discount code", message: "You entered a not valid discount code", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                
+            }))
+            present(alert, animated: true, completion: nil)
+            
+        }
+
+    }
+
     @IBAction func continueToPaymentBtn(_ sender: Any) {
 
     let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
     if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
         let navController = UINavigationController(rootViewController: checkOutVC)
+        checkOutVC.usingCopoun = self.copounUsed
+        checkOutVC.copounPercent = self.getDiscount()
         checkOutVC.total = self.total
                    navController.modalPresentationStyle = .fullScreen
 //        self.navigationController?.pushViewController(checkOutVC, animated: true)
@@ -146,3 +206,4 @@ extension SummaryViewController: UICollectionViewDelegate ,UICollectionViewDataS
         view.endEditing(true)
     }
 }
+
