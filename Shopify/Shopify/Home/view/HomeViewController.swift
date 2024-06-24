@@ -23,7 +23,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var timer:Timer?
     var currentCellIndex=0
     
-    var staticCoupons : [String] = ["coupon1.png","coupon2.png", "coupon3.jpeg"]
+    var staticCoupons : [String] = ["coupon1.png","coupon2.png"]
     
     var homeViewModel: HomeViewModel?
     var favoritesViewModel: FavoritesViewModel!
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         fetchBrands()
         homeViewModel?.getItems()
         brandProductViewModel = BrandProductsViewModel()
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+//        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
         self.pageController.numberOfPages = staticCoupons.count
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigateToSearch(_:)))
@@ -48,11 +48,28 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         searchBar.isUserInteractionEnabled = true
         
         favoritesViewModel = FavoritesViewModel()
-    }
+        
+        homeViewModel?.bindPriceRulesToViewController = { [weak self] in
+                  DispatchQueue.main.async {
+                      self?.couponsCollectionView.reloadData()
+                      self?.startTimer()
+                  }
+              }
+
+
+              fetchPriceRule()
+          }
+
+          func startTimer() {
+              timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+          }
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        fetchPriceRule()
         putFavouriteListToAPI()
         
     }
@@ -79,6 +96,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
         self.pageController.currentPage = currentCellIndex
     }
+    
+    
+    @objc func moveToNextIndex() {
+           guard let itemCount = homeViewModel?.priceRules?.count, itemCount > 0 else { return }
+           
+           if currentCellIndex < itemCount - 1 {
+               currentCellIndex += 1
+           } else {
+               currentCellIndex = 0
+           }
+           self.couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+           self.pageController.currentPage = currentCellIndex
+       }
     
     @IBAction func navigateToFavorite(_ sender: UIButton) {
         if UserDefault().getCustomerId() == -1 {
@@ -126,14 +156,24 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
     }
+    
+    func fetchPriceRule(){
+        homeViewModel?.bindPriceRulesToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.couponsCollectionView.reloadData()
+                self?.startTimer()
+            }
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == couponsCollectionView {
-            return staticCoupons.count
-        }else {
-            
+            print("copouns count \(homeViewModel?.priceRules?.count ?? 0)")
+            return homeViewModel?.priceRules?.count ?? 0
+        } else {
             return homeViewModel?.result?.count ?? 0
         }
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == couponsCollectionView {
@@ -180,10 +220,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
         if collectionView == couponsCollectionView {
-            
+                  print("in collection click \(indexPath.row)")
+                  guard let priceRule = homeViewModel?.priceRules?[indexPath.row] else { return }
+                  
+                  homeViewModel?.getAllDiscountCoupons(priceRule: priceRule)
+                  homeViewModel?.bindDiscountToViewController = { [weak self] in
+                      DispatchQueue.main.async {
+                          if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
+                              let alert = UIAlertController(title: "Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
+                              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                              self?.present(alert, animated: true, completion: nil)
+                              let defaults = UserDefaults.standard
+                              defaults.set(discountCode.code, forKey: Constants.copounValue)
+                              defaults.set(discountCode.id, forKey: Constants.copounID)
+                              defaults.set(Double(priceRule.value), forKey: Constants.copounPercent)
+                              defaults.set(priceRule.valueType.rawValue, forKey: Constants.copounType)
+                              UIPasteboard.general.string = discountCode.code
+      //                        print("in cell click \(indexPath.row)")
+                              print(discountCode.code)
+                              print(discountCode.id)
+                              print(priceRule.value)
+                              print(defaults.value(forKey: Constants.copounPercent))
+                              print(discountCode.priceRuleID)
+                              print(priceRule.id)
+                              
+                          }
+                      }
+                  }
         }else {
             let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
             brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
