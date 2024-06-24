@@ -92,7 +92,30 @@ class SummaryViewController: UIViewController {
             currencySymbol = symbol
         }
     }
-
+    func updatePriceAfterCopoun() {
+            let discount = getDiscount()
+        print(discount)
+            let discountedTotal = total * (discount / 100)
+            print("value \(1 - discount / 100)")
+        print("total value \(discountedTotal)")
+            // Update order price label
+//            orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", discountedTotal)
+        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+            // Update total price label
+            if let totalCartPrice = viewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
+                totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", (totalPrice * currencyRate) - abs(discountedTotal) )
+                print("total privce of vm \(totalPrice)")
+                print("discountedTotal \(discountedTotal)")
+                print("total  \(total)")
+                print("totalPrice * currencyRatet \(totalPrice * currencyRate)")
+                print("")
+            } else {
+                totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+            }
+            
+        dicountAMountLabel.text = String(format: "\(currencySymbol) %.2f", discountedTotal)
+       
+        }
 
     @IBAction func applyCopounBtn(_ sender: Any) {
         let couponCode = copounTF.text ?? ""
