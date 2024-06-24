@@ -23,7 +23,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var timer:Timer?
     var currentCellIndex=0
     
-    var staticCoupons : [String] = ["coupon1.png","coupon2.png"]
+    var staticCoupons : [String] = ["Coupon30.png","coupon3.png"]
     
     var homeViewModel: HomeViewModel?
     var favoritesViewModel: FavoritesViewModel!
@@ -40,6 +40,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         fetchBrands()
         homeViewModel?.getItems()
         brandProductViewModel = BrandProductsViewModel()
+        setupCopounsCollectioView()
 //        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
         self.pageController.numberOfPages = staticCoupons.count
         
@@ -59,6 +60,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
               fetchPriceRule()
           }
+    
+    func setupCopounsCollectioView(){
+        let newWidth: CGFloat = 250 // Set your desired width
+            let newHeight: CGFloat = 300 // Set your desired height
+        
+        if let layout = couponsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: newWidth, height: newHeight)
+        }
+
+            
+            // Optionally, you can force a layout update
+            self.view.layoutIfNeeded()
+    }
 
           func startTimer() {
               timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
@@ -191,7 +205,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == collectionView {
+        if collectionView == couponsCollectionView {
             return CGSize(width: (collectionView.bounds.width*1.0), height: (collectionView.bounds.height*1.0))
         }else {
             return CGSize(width: (collectionView.bounds.width*0.5), height: (collectionView.bounds.height*1.0))
