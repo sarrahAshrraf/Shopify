@@ -26,9 +26,15 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     var allProducts: [Product] = []
     var categoryViewModel: CategoryViewModel!
     var favoritesViewModel: FavoritesViewModel!
-    
+    var activityIndicator: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        ////////
+        activityIndicator = UIActivityIndicatorView(style: .large)
+               activityIndicator.center = self.view.center
+               self.view.addSubview(activityIndicator)
+        /////////
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -44,7 +50,12 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         fetchCategoryData()
         setupUI()
     }
-    
+    func showNoInternetAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check your internet connection and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        self.activityIndicator.stopAnimating()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let defaults = UserDefaults.standard
@@ -57,15 +68,24 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         print(currencySymbol)
         categoryViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
+                ////////
+                self?.activityIndicator.stopAnimating()
+                
                 self?.collectionView.reloadData()
+                
             }
         }
         
         self.categoryViewModel.getAllProducts()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            self.fetchCategoryData()
-            self.collectionView.reloadData()
+            if self.categoryViewModel.checkInternetConnectivity() {
+                self.fetchCategoryData()
+                self.activityIndicator.stopAnimating()
+                self.collectionView.reloadData()
+            } else {
+                self.showNoInternetAlert()
+                self.activityIndicator.startAnimating()
+            }
         }
     }
     
@@ -116,6 +136,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
             print("Collection view reloaded")
         }
     }

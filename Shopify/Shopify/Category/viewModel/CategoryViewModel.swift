@@ -58,6 +58,9 @@ class CategoryViewModel{
         }
     }
     
-    
+    //check netwoooork
+    func checkInternetConnectivity()->Bool{
+        return ConnectivityManager.connectivityInstance.isConnectedToInternet()
+    }
     
 }
