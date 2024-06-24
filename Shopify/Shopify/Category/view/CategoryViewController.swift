@@ -91,7 +91,12 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         updateSegmentedControlColors()
-        fetchCategoryData()
+        if self.categoryViewModel.checkInternetConnectivity() {
+            fetchCategoryData()
+        } else {
+            self.showNoInternetAlert()
+            self.activityIndicator.startAnimating()
+        }
     }
     
     func updateSegmentedControlColors() {
