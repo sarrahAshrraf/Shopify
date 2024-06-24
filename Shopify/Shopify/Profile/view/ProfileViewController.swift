@@ -202,9 +202,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Implement more orders action
         
         let ordersStoryBoard = UIStoryboard(name: "Order", bundle: nil).instantiateViewController(withIdentifier: "OrderViewController") as! OrderViewController
-        let navController = UINavigationController(rootViewController: ordersStoryBoard)
-        navController.modalPresentationStyle = .fullScreen
-        present(navController, animated: true, completion: nil)
+        ordersStoryBoard.modalPresentationStyle = .fullScreen
+        ordersStoryBoard.modalTransitionStyle = .crossDissolve
+        present(ordersStoryBoard , animated: true , completion: nil)
+//        let navController = UINavigationController(rootViewController: ordersStoryBoard)
+//        navController.modalPresentationStyle = .fullScreen
+//        present(navController, animated: true, completion: nil)
     }
     
     @IBAction func moreFavBtn(_ sender: Any) {
