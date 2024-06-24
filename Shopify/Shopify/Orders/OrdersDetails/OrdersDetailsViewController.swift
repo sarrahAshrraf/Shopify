@@ -13,6 +13,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var orderCreatedAt: UILabel!
     
     @IBOutlet weak var shopingTo: UILabel!
+    @IBOutlet weak var containerView: UIStackView!
     
     var order: Orders?
     
@@ -76,7 +77,23 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
             self.orderCreatedAt.text = Utilities.formatDateString(createdAtString)
         }
         self.orderAddress.text = order?.shippingAddress?.address1
+        configureContainerView()
     }
+    
+    
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
+    }
+    
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

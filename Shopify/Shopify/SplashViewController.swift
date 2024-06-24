@@ -18,7 +18,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         showLottieAnimation()
         setup()
-        //openAppState()
+        openAppState()
 
         // Do any additional setup after loading the view.
     }
@@ -83,11 +83,7 @@ class SplashViewController: UIViewController {
             home.modalTransitionStyle = .crossDissolve
            present(home, animated: true)
         }else {
-            
-//            let splashVc  = self.storyboard?.instantiateViewController(identifier: "SplashViewController")
-//            splashVc?.modalPresentationStyle = .fullScreen
-//            splashVc?.modalTransitionStyle = .crossDissolve
-//            present(splashVc!, animated: true)
+            print("Guest")
             
         }
     }

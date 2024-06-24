@@ -189,11 +189,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             Utilities.navigateToGuestScreen(viewController: self)
         }else {
             let storyboard = UIStoryboard(name: "ShoppingCartStoryboard", bundle: nil)
-            if let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as? CartViewController {
-                self.navigationController?.pushViewController(cartVC, animated: true)
-            } else {
-                print("Could not find CartViewController in ShoppingCartStoryboard")
-            }
+            let cartVC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+            
+            cartVC.modalPresentationStyle = .fullScreen
+            cartVC.modalTransitionStyle = .crossDissolve
+            present(cartVC , animated: true , completion: nil)
         }
     }
     
