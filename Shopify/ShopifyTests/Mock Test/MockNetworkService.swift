@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import Alamofire
 @testable import Shopify
 class MockNetworkService {
     
     var result = SmartCollections(id: 0, handle: "", title: "", updatedAt: "", bodyHtml: "", publishedAt: "", sortOrder: "", disjunctive: false, rules: [Rules(column: "", relation: "", condition: "")], publishedScope: "", adminGraphqlApiId: "", image: Image(id: 0, productId: 0, position: 0, createdAt: "", updatedAt: "", width: 0, height: 0, src: "", adminGraphqlApiId: ""))
+    
+    
+    var myAdress = Address(id: 0, customer_id: 0, name: "", first_name: "", last_name: "", phone: "", company: "", address1: "", address2: "", city: "", province: "", country: "", zip: "", province_code: "", country_code: "", country_name: "")
     // true = error, false = no error
     var flag: Bool
     
@@ -48,6 +52,51 @@ class MockNetworkService {
             ]
         ]
     ]
+    
+    
+    let fakeJSONObjAddress: [String: Any] = [
+        "addresses": [
+            [
+                "id": 9279432491293,
+                "customer_id": 7023980937501,
+                "first_name": "testUser",
+                "last_name": NSNull(),
+                "company": NSNull(),
+                "address1": "13 louran",
+                "address2": NSNull(),
+                "city": "alex",
+                "province": NSNull(),
+                "country": "Egypt",
+                "zip": NSNull(),
+                "phone": "01256854138",
+                "name": "testUser",
+                "province_code": NSNull(),
+                "country_code": "EG",
+                "country_name": "Egypt",
+                "default": false
+            ],
+            [
+                "id": 9279433310493,
+                "customer_id": 7023980937501,
+                "first_name": "testUser",
+                "last_name": NSNull(),
+                "company": NSNull(),
+                "address1": "13",
+                "address2": NSNull(),
+                "city": "Dubai",
+                "province": NSNull(),
+                "country": "United Arab Emirates",
+                "zip": NSNull(),
+                "phone": "01875421828",
+                "name": "testUser",
+                "province_code": NSNull(),
+                "country_code": "AE",
+                "country_name": "United Arab Emirates",
+                "default": true
+            ]
+        ]
+    ]
+
 
 }
 
@@ -60,7 +109,7 @@ extension MockNetworkService {
     func fetchData(completionHandler: @escaping (SmartCollections?, Error?) -> Void) {
         do {
             let data = try JSONSerialization.data(withJSONObject: fakeJSONObj)
-             result = try JSONDecoder().decode(SmartCollections.self, from: data)
+            result = try JSONDecoder().decode(SmartCollections.self, from: data)
             
             if flag {
                 completionHandler(nil, ResponseWithError.responseError)
@@ -71,4 +120,140 @@ extension MockNetworkService {
             completionHandler(nil, error)
         }
     }
+    
+    
+
+    func postData(completionHandler: @escaping (Addresses?, Error?) -> Void) {
+        // Define the URL to which data will be posted
+        let path = URLs.shared.getAddressURL(customerId: "7309504250029")
+        guard let url = URL(string: path) else {
+            completionHandler(nil, URLError(.badURL))
+            return
+        }
+        
+        // Define the fake JSON object
+        let fakeJSONObj: [String: Any] = [
+            "addresses": [
+                [
+                    "id": 9279432491293,
+                    "customer_id": 7023980937501,
+                    "first_name": "testUser",
+                    "last_name": NSNull(),
+                    "company": NSNull(),
+                    "address1": "13 louran",
+                    "address2": NSNull(),
+                    "city": "alex",
+                    "province": NSNull(),
+                    "country": "Egypt",
+                    "zip": NSNull(),
+                    "phone": "01256854138",
+                    "name": "testUser",
+                    "province_code": NSNull(),
+                    "country_code": "EG",
+                    "country_name": "Egypt",
+                    "default": false
+                ],
+                [
+                    "id": 9279433310493,
+                    "customer_id": 7023980937501,
+                    "first_name": "testUser",
+                    "last_name": NSNull(),
+                    "company": NSNull(),
+                    "address1": "13",
+                    "address2": NSNull(),
+                    "city": "Dubai",
+                    "province": NSNull(),
+                    "country": "United Arab Emirates",
+                    "zip": NSNull(),
+                    "phone": "01875421828",
+                    "name": "testUser",
+                    "province_code": NSNull(),
+                    "country_code": "AE",
+                    "country_name": "United Arab Emirates",
+                    "default": true
+                ]
+            ]
+        ]
+        
+        // Make the Alamofire request
+        AF.request(url, method: .post, parameters: fakeJSONObj, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+            .responseDecodable(of: Addresses.self) { response in
+                switch response.result {
+                case .success(let addresses):
+                    completionHandler(addresses, nil)
+                case .failure(let error):
+                    completionHandler(nil, error)
+                }
+            }
+    }
+    
+
+    func putData(completionHandler: @escaping (Addresses?, Error?) -> Void) {
+        // Define the URL to which data will be posted
+        let path = URLs.shared.getAddressURL(customerId: "7309504250029")
+        guard let url = URL(string: path) else {
+            completionHandler(nil, URLError(.badURL))
+            return
+        }
+        
+        // Define the fake JSON object
+        let fakeJSONObj: [String: Any] = [
+            "addresses": [
+                [
+                    "id": 9279432491293,
+                    "customer_id": 7023980937501,
+                    "first_name": "testUser",
+                    "last_name": NSNull(),
+                    "company": NSNull(),
+                    "address1": "13 louran",
+                    "address2": NSNull(),
+                    "city": "alex",
+                    "province": NSNull(),
+                    "country": "Egypt",
+                    "zip": NSNull(),
+                    "phone": "01256854138",
+                    "name": "testUser",
+                    "province_code": NSNull(),
+                    "country_code": "EG",
+                    "country_name": "Egypt",
+                    "default": false
+                ],
+                [
+                    "id": 9279433310493,
+                    "customer_id": 7023980937501,
+                    "first_name": "testUser",
+                    "last_name": NSNull(),
+                    "company": NSNull(),
+                    "address1": "13",
+                    "address2": NSNull(),
+                    "city": "Dubai",
+                    "province": NSNull(),
+                    "country": "United Arab Emirates",
+                    "zip": NSNull(),
+                    "phone": "01875421828",
+                    "name": "testUser",
+                    "province_code": NSNull(),
+                    "country_code": "AE",
+                    "country_name": "United Arab Emirates",
+                    "default": true
+                ]
+            ]
+        ]
+        
+        // Make the Alamofire request
+        AF.request(url, method: .put, parameters: fakeJSONObj, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+            .responseDecodable(of: Addresses.self) { response in
+                switch response.result {
+                case .success(let addresses):
+                    completionHandler(addresses, nil)
+                case .failure(let error):
+                    completionHandler(nil, error)
+                }
+            }
+    }
+
+
 }
+    struct Addresses: Codable {
+        let addresses: [Address]
+    }
