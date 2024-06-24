@@ -6,25 +6,51 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
 class SummaryViewController: UIViewController {
 
-    @IBOutlet weak var copounsTF: RoundedTextfield!
-    @IBOutlet weak var taxesLabel: UILabel!
+//    @IBOutlet weak var copounsTF: RoundedTextfield!
+//    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var orderCollectionView: UICollectionView!
     @IBOutlet weak var copounTF: UITextField!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
+    var copounUsed = false
     var currencySymbol: String = "USD"
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var dicountAMountLabel: UILabel!
     @IBOutlet weak var orderPriceLabel: UILabel!
+    let disposeBag = DisposeBag()
+
     var total: Double = 9.0
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationBar()
-        updatePriceLabels()
-      
+        copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
+
     }
+    func updatePriceLabels(){
+        
+        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+               
+               if let totalCartPrice = viewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
+                   totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
+               } else {
+                   totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
+               }
+        
+    }
+    
+    func getDiscount() -> Double {
+        if let discount = defaults.value(forKey: Constants.copounPercent) as? Double {
+            print("copoun getter \(discount)")
+            return discount
+        }
+        print("no copoun percent ")
+        return 0.0
+    }
+
+
     var viewModel = ShoppingCartViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +59,7 @@ class SummaryViewController: UIViewController {
         viewModel.showCartItems()
         bindResultToVC()
         updatePriceLabels()
-//        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
+        getDiscount()
 
     }
 
@@ -66,30 +92,28 @@ class SummaryViewController: UIViewController {
             currencySymbol = symbol
         }
     }
-    
-    func updatePriceLabels() {
-        orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
-        
-        if let totalCartPrice = viewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
-            totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
-        } else {
-            totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
-        }
-        if let totalTax = viewModel.result?.total_tax, let totalTaxes = Double(totalTax) {
-            self.taxesLabel.text = String(format: "\(currencySymbol) %.2f", totalTaxes * currencyRate)
-        } else {
-            taxesLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
-        }
-    }
-//    copounsTF.ac
+
+
     @IBAction func applyCopounBtn(_ sender: Any) {
+        let couponCode = copounTF.text ?? ""
+        if (couponCode == defaults.value(forKey: Constants.copounValue) as? String){
+            copounUsed = true
+
+
     }
+
+
+
+
+  
     
     @IBAction func continueToPaymentBtn(_ sender: Any) {
 
     let storyboard = UIStoryboard(name: "Payment_SB", bundle: nil)
     if let checkOutVC = storyboard.instantiateViewController(withIdentifier: "checkOutVC") as? CheckOutViewController {
         let navController = UINavigationController(rootViewController: checkOutVC)
+        checkOutVC.usingCopoun = self.copounUsed
+        checkOutVC.copounPercent = self.getDiscount()
         checkOutVC.total = self.total
                    navController.modalPresentationStyle = .fullScreen
 //        self.navigationController?.pushViewController(checkOutVC, animated: true)
@@ -146,3 +170,4 @@ extension SummaryViewController: UICollectionViewDelegate ,UICollectionViewDataS
         view.endEditing(true)
     }
 }
+
