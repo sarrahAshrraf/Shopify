@@ -15,14 +15,16 @@ import UIKit
 class AddressCell: UITableViewCell {
     
     @IBOutlet weak var locationImg: UIImageView!
-    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var deafultLabel: UILabel!
+    @IBOutlet weak var containerView: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        configureShadow()
+        configureContainerView()
+        //configureShadow()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,13 +35,13 @@ class AddressCell: UITableViewCell {
     
     func configure(with addresses: Address, indexPath: Int) {
         addressLabel.text = addresses.address1
-        countryLabel.text = addresses.country
-        fullNameLabel.text = addresses.first_name
+        phoneLabel.text = "Phone: \(String(addresses.phone ?? ""))"
+        fullNameLabel.text = "Name: \(String(addresses.first_name ?? ""))"
         if addresses.default == true {
-            locationImg.image = UIImage(systemName: "pin.circle.fill")
+            //locationImg.image = UIImage(systemName: "pin.circle.fill")
             deafultLabel.isHidden = false
             } else {
-                locationImg.image = UIImage(systemName: "pin.circle")
+                //locationImg.image = UIImage(systemName: "pin.circle")
                 deafultLabel.isHidden = true
             }
     }
@@ -53,5 +55,18 @@ class AddressCell: UITableViewCell {
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
         layer.masksToBounds = false
+    }
+    
+    private func configureContainerView() {
+        containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        containerView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        containerView.backgroundColor = UIColor(named: "CardColor")
+        containerView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        containerView.layer.shadowOffset = .zero
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 5
+        containerView.layer.cornerRadius = 20
     }
 }
