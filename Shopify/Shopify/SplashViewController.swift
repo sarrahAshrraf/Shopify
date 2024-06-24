@@ -18,6 +18,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         showLottieAnimation()
         setup()
+        openAppState()
 
         // Do any additional setup after loading the view.
     }
@@ -74,6 +75,18 @@ class SplashViewController: UIViewController {
         present(home, animated: true)
     }
 
-    
+    func openAppState(){
+        if UserDefault().getAppState() == "Login" {
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let home = storyboard.instantiateViewController(identifier: "home")
+            home.modalPresentationStyle = .fullScreen
+            home.modalTransitionStyle = .crossDissolve
+           present(home, animated: true)
+        }else {
+            print("Guest")
+            
+        }
+    }
 
 }
+

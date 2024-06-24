@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var filterView: UIView!
     var disposeBag: DisposeBag!
     var searchViewModel: SearchViewModel!
+    var productDetailsViewModel: ProductDetailsViewModel!
     var products: [Product] = []
     var productList: [Product] = []
     var defaults: UserDefaults!
@@ -34,6 +35,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         defaults = UserDefaults.standard
         disposeBag = DisposeBag()
         searchViewModel = SearchViewModel()
+        productDetailsViewModel = ProductDetailsViewModel()
         registerCell()
         bindData()
         setSliderValues()
@@ -80,6 +82,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         145.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let productDetailsVC = UIStoryboard(name: "ProductDetails", bundle: nil).instantiateViewController(withIdentifier: "ProductDetails") as! ProductDetailsViewController
+        productDetailsViewModel?.productId = products[indexPath.row].id
+        productDetailsVC.product = products[indexPath.row]
+        productDetailsVC.viewModel = productDetailsViewModel
+        productDetailsVC.viewModel = productDetailsViewModel
+        productDetailsVC.modalPresentationStyle = .fullScreen
+        present(productDetailsVC, animated: true, completion: nil)
     }
     
     @IBAction func navigateBack(_ sender: UIButton) {

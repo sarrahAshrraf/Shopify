@@ -18,4 +18,10 @@ class UserDefault{
         return userDefaults.integer(forKey: Constants.customerId)
     }
     
+    
+    func getAppState() -> String {
+        return userDefaults.string(forKey: Constants.KEY_USER_STATE) ?? "Guest"
+    }
+    
+    
 }

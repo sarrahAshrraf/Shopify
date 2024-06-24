@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -84,7 +85,10 @@ class LoginViewController: UIViewController {
                 exists = true
                 customerId = user.id
                 defaults.setValue(user.id, forKey: Constants.customerId)
-                defaults.setValue(945806409901, forKey: Constants.cartId)
+                let noteSpliter = user.note?.components(separatedBy: ",")
+                defaults.set(Int((noteSpliter?[1])!), forKey: Constants.cartId)
+                defaults.set(Int((noteSpliter?[0])!), forKey: Constants.favoritesId)
+                getFavoritesfromAPI()
 
                 defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
                 defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
@@ -93,7 +97,9 @@ class LoginViewController: UIViewController {
         }
         DispatchQueue.main.async {
             if self.exists {
-                Utilities.navigateToSuccesstScreen(viewController: self)
+                
+                self.loginToFireBase(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
+                //Utilities.navigateToSuccesstScreen(viewController: self)
             } else {
                 self.showAlert(title: Constants.warning, message: Constants.checkEmailAndPassword)
             }
@@ -144,6 +150,11 @@ class LoginViewController: UIViewController {
         loginButton.setTitle("LogIn", for: .normal)
     }
     
+    func getFavoritesfromAPI(){
+        self.favoriteViewModel.removeAllProduct()
+        self.favoriteViewModel.getFavoriteDraftOrderFromAPI()
+    }
+    
     
     func createDraftOrder(note: String){
         let properties = [Properties(name: "image_url", value: "")]
@@ -162,6 +173,37 @@ class LoginViewController: UIViewController {
     }
 }
 
+extension LoginViewController{
+    func loginToFireBase(email: String, password: String){
+        Auth.auth().signIn(withEmail: email, password: password, completion:{[weak self] result, error in
+            guard let strongSelf = self else{
+                return
+            }
+            guard error == nil else{
+                
+                
+                return
+            }
+            strongSelf.checkVerification()
+
+        })
+    }
+    
+    func checkVerification(){
+        if let user = Auth.auth().currentUser {
+            if user.isEmailVerified {
+                // User's email is verified, allow them to enter the app
+                Utilities.navigateToSuccesstScreen(viewController: self)
+                print("User's email is verified")
+            } else {
+                // User's email is not verified, show an error message
+                print("User's email is not verified")
+            }
+        }
+    }
+    
+
+}
 
 
 

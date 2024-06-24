@@ -9,6 +9,9 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var popUpBtn: UIButton!
+    @IBOutlet weak var currencyStackView: UIStackView!
+    @IBOutlet weak var addressStackView: UIStackView!
+    @IBOutlet weak var aboutUSStackView: UIStackView!
     let defaults = UserDefaults.standard
     var currencies: [String]? = ["EGP", "USD", "EUR"]
     var viewModel: SettingsViewmodel!
@@ -21,6 +24,7 @@ class SettingsTableViewController: UITableViewController {
         viewModel = SettingsViewmodel()
         lineItems = []
         setPopUpButton()
+        setupUI()
         // Check user state and set guest mode
                guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
                isGuestUser = (state == Constants.USER_STATE_GUEST)
@@ -104,11 +108,11 @@ class SettingsTableViewController: UITableViewController {
             
             
             CartList.cartItems = []
-            self?.cartVM.editCart()
-            self?.defaults.set("", forKey: Constants.cartId)
-            self?.defaults.set("", forKey: Constants.customerId)
-            self?.defaults.set("", forKey: Constants.CURRENCY_KEY)
-            self?.defaults.set("", forKey: Constants.CURRENCY_VALUE)    
+//            self?.cartVM.editCart()
+            self?.defaults.set(-1, forKey: Constants.cartId)
+            self?.defaults.set(-1, forKey: Constants.customerId)
+            self?.defaults.set(nil, forKey: Constants.CURRENCY_KEY)
+            self?.defaults.set(nil, forKey: Constants.CURRENCY_VALUE)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let nextViewController = storyboard.instantiateInitialViewController() {
@@ -149,6 +153,27 @@ class SettingsTableViewController: UITableViewController {
 //
 //        tableView.backgroundView = containerView
 //    }
+    
+    func setupUI(){
+        configureContainerView(stackView: currencyStackView)
+        configureContainerView(stackView: addressStackView)
+        configureContainerView(stackView: aboutUSStackView)
+        
+    }
+    
+    private func configureContainerView(stackView : UIStackView) {
+        stackView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        
+        // Adding a custom view to the container with shadow
+        stackView.backgroundColor = UIColor(named: "CardColor")
+        stackView.layer.shadowColor = UIColor(named: "ShadowColor")?.cgColor
+        stackView.layer.shadowOffset = .zero
+        stackView.layer.shadowOpacity = 0.2
+        stackView.layer.shadowRadius = 3
+        stackView.layer.cornerRadius = 15
+    }
+
     private func updateBackgroundView() {
        
             let signUpLabel = UILabel()
@@ -169,6 +194,7 @@ extension SettingsTableViewController  {
         var action :[UIAction] = []
         let optionSelected = {(action : UIAction) in
             print(action.title)
+            print("tesssssttttt")
           self.viewModel.loadLatestCurrency(currency:  action.title)
 
         }
@@ -192,4 +218,3 @@ extension SettingsTableViewController  {
         popUpBtn.changesSelectionAsPrimaryAction = true
     }
 }
-
