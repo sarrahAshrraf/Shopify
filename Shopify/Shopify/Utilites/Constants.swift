@@ -52,6 +52,10 @@ class Constants{
     static let USER_STATE_LOGIN = "Login"
     static let USER_STATE_GUEST = "Guest"
     static let USER_FirstName = "name"
+    static let copounID = "copoun"
+    static let copounValue = "copoun_Value"
+    static let copounType = "copounType"
+    static let copounPercent = "copounPercent"
 
     
     var currencySymbol: String {
