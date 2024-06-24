@@ -42,4 +42,19 @@ final class MockTest: XCTestCase {
             
         }
     }
+    
+    
+    func testMockPutData(){
+        mockObj.putData{ result, error in
+            
+            if let error = error {
+                XCTFail()
+            } else {
+                XCTAssertNotNil(result)
+            }
+            
+        }
+    }
+    
+    
 }
