@@ -93,4 +93,11 @@ class URLs{
         let url = "https://api.apilayer.com/exchangerates_data/latest?base=USD&apikey=m2W72KxlI675De2w8mzxt1E2JlQZeWXD"
       return url
     }
+    
+    func getPriceRule() -> String {
+        endPoint = "price_rules"
+        return baseURL + endPoint + ".json"
+    }
+    
+ 
 }

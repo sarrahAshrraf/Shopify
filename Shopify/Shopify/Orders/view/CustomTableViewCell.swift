@@ -59,7 +59,7 @@ class CustomTableViewCell: UITableViewCell {
     func setOrderValues(order: Orders) {
         self.orderName.text = order.name
         
-        if let createdAtString = order.customer?.createdAt {
+        if let createdAtString = order.createdAt {
             self.orderDate.text = Utilities.formatDateString(createdAtString)
         }
         

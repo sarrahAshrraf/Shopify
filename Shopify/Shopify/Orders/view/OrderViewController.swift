@@ -12,17 +12,20 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var back: UIBarButtonItem!
     
+    @IBAction func navigateBack(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func back(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true)
     }
     
     @IBOutlet weak var tableView: UITableView!
     var profileViewModel: ProfileViewModel!
     var orders: [Orders] = []
-    let navigationBar = UINavigationBar()
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
-        setupNavigationBar()
+        //setupNavigationBar()
         getOrdersFromApi()
     }
     override func viewDidLoad() {
@@ -35,27 +38,35 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         self.tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
     }
-    func setupNavigationBar() {
-        navigationBar.translatesAutoresizingMaskIntoConstraints = false
-               
-               let navigationItem = UINavigationItem(title: "Orders")
-               
-               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
-                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-                   navigationItem.leftBarButtonItem = backButton
-               }
-               
-               navigationBar.items = [navigationItem]
-               
-               view.addSubview(navigationBar)
-               
-               NSLayoutConstraint.activate([
-                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-               ])
-           }
-    
+////    func setupNavigationBar() {
+////        navigationBar.translatesAutoresizingMaskIntoConstraints = false
+////               
+////               let navigationItem = UINavigationItem(title: "Orders")
+////               
+////               if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+////                   let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+////                   navigationItem.leftBarButtonItem = backButton
+////               }
+////               
+////               navigationBar.items = [navigationItem]
+////               
+////               view.addSubview(navigationBar)
+////               
+////               NSLayoutConstraint.activate([
+////                   navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+////                   navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+////                   navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+////               ])
+////           }
+//    
+//    func setupNavigationBar() {
+//        self.title = "Orders"
+//        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+//            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+//            
+//            self.navigationItem.leftBarButtonItem = backButton
+//        }
+//    }
     @objc func backButtonTapped() {
        dismiss(animated: true)
     }
