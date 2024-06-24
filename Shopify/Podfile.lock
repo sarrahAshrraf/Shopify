@@ -1169,9 +1169,11 @@ PODS:
   - gRPC-Core/Interface (1.62.5)
   - gRPC-Core/Privacy (1.62.5)
   - GTMSessionFetcher/Core (3.4.1)
+  - JGProgressHUD (2.2)
   - Kingfisher (7.11.0)
   - leveldb-library (1.22.5)
   - lottie-ios (4.4.3)
+  - MarqueeLabel (4.5.0)
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -1195,8 +1197,10 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseFirestore
+  - JGProgressHUD
   - Kingfisher
   - lottie-ios
+  - MarqueeLabel
   - ReachabilitySwift
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
@@ -1226,9 +1230,11 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - JGProgressHUD
     - Kingfisher
     - leveldb-library
     - lottie-ios
+    - MarqueeLabel
     - nanopb
     - PromisesObjC
     - ReachabilitySwift
@@ -1261,9 +1267,11 @@ SPEC CHECKSUMS:
   "gRPC-C++": e725ef63c4475d7cdb7e2cf16eb0fde84bd9ee51
   gRPC-Core: eee4be35df218649fe66d721a05a7f27a28f069b
   GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
   lottie-ios: fcb5e73e17ba4c983140b7d21095c834b3087418
+  MarqueeLabel: 4b46d196abd253448e830cbd976f9eacc3af0849
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
@@ -1272,6 +1280,6 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: 0310ea9148747763d262119444320fe0dabd45cf
+PODFILE CHECKSUM: d83a81629baee1e88671dca4888cfeaef5af72a4
 
 COCOAPODS: 1.15.2
