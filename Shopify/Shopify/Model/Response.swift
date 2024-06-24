@@ -22,15 +22,8 @@ struct Response : Codable{
     let currencies: [Currency]?
     let base: String?
     let rates: Rates?
-
+    var price_rules: [PriceRule]?
+    var price_rule: PriceRule?
+    var discount_codes: [DiscountCode]?
+    var discount_code: DiscountCode?
 //    let variants: [Variant]
-
-//    private enum CodingKeys: String, CodingKey {
-//        case smartCollections = "smart_collections"
-//        case customer,customers, addresses, customer_address
-//        case products = "products"
-//        case product = "product"
-//        
-//    }
-//    Address_SB
-}
