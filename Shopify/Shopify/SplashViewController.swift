@@ -18,12 +18,14 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         showLottieAnimation()
         setup()
-        openAppState()
+        
 
         // Do any additional setup after loading the view.
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        openAppState()
+    }
     private func showLottieAnimation() {
         splashView.animation = .named("EcoMarket")
         splashView.loopMode = .loop

@@ -70,7 +70,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         fetchPriceRule()
+        homeViewModel?.getAllPriceRules()
         putFavouriteListToAPI()
+        
         
     }
     
@@ -87,15 +89,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         searchVC.modalTransitionStyle = .crossDissolve
         present(searchVC, animated: true, completion: nil)
     }
-    @objc func moveToNextIndex(){
-        if currentCellIndex < staticCoupons.count - 1 {
-            currentCellIndex += 1
-        }else {
-            currentCellIndex = 0
-        }
-        self.couponsCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
-        self.pageController.currentPage = currentCellIndex
-    }
+   
     
     
     @objc func moveToNextIndex() {
