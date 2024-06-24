@@ -69,9 +69,16 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         categoryViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
                 ////////
-                self?.activityIndicator.stopAnimating()
-                
-                self?.collectionView.reloadData()
+                if ((self?.categoryViewModel.checkInternetConnectivity()) != nil){
+                    self?.activityIndicator.stopAnimating()
+                    
+                    self?.collectionView.reloadData()
+                } else {
+                    self?.activityIndicator.startAnimating()
+                    self?.showNoInternetAlert()
+                    self?.collectionView.reloadData()
+                    
+                }
                 
             }
         }
@@ -84,6 +91,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                 self.collectionView.reloadData()
             } else {
                 self.showNoInternetAlert()
+                self.collectionView.reloadData()
                 self.activityIndicator.startAnimating()
             }
         }
@@ -93,8 +101,11 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         updateSegmentedControlColors()
         if self.categoryViewModel.checkInternetConnectivity() {
             fetchCategoryData()
+            self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
         } else {
             self.showNoInternetAlert()
+            self.collectionView.reloadData()
             self.activityIndicator.startAnimating()
         }
     }
@@ -140,8 +151,14 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         print("Filtered products count: \(allProducts.count)")
         
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            self.activityIndicator.stopAnimating()
+            if self.categoryViewModel.checkInternetConnectivity(){
+                self.collectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.showNoInternetAlert()
+                self.collectionView.reloadData()
+                self.activityIndicator.startAnimating()
+            }
             print("Collection view reloaded")
         }
     }
