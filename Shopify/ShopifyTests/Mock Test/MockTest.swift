@@ -56,5 +56,17 @@ final class MockTest: XCTestCase {
         }
     }
     
+    func testMockDeleteData(){
+        mockObj.putData{ result, error in
+            
+            if let error = error {
+                XCTFail()
+            } else {
+                XCTAssertNotNil(result)
+            }
+            
+        }
+    }
+    
     
 }

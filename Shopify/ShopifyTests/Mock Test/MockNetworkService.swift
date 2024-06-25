@@ -124,14 +124,14 @@ extension MockNetworkService {
     
 
     func postData(completionHandler: @escaping (Addresses?, Error?) -> Void) {
-        // Define the URL to which data will be posted
+        
         let path = URLs.shared.getAddressURL(customerId: "7309504250029")
         guard let url = URL(string: path) else {
             completionHandler(nil, URLError(.badURL))
             return
         }
         
-        // Define the fake JSON object
+        
         let fakeJSONObj: [String: Any] = [
             "addresses": [
                 [
@@ -175,7 +175,7 @@ extension MockNetworkService {
             ]
         ]
         
-        // Make the Alamofire request
+        
         AF.request(url, method: .post, parameters: fakeJSONObj, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
             .responseDecodable(of: Addresses.self) { response in
                 switch response.result {
@@ -189,14 +189,14 @@ extension MockNetworkService {
     
 
     func putData(completionHandler: @escaping (Addresses?, Error?) -> Void) {
-        // Define the URL to which data will be posted
+        
         let path = URLs.shared.getAddressURL(customerId: "7309504250029")
         guard let url = URL(string: path) else {
             completionHandler(nil, URLError(.badURL))
             return
         }
         
-        // Define the fake JSON object
+        
         let fakeJSONObj: [String: Any] = [
             "addresses": [
                 [
@@ -240,7 +240,6 @@ extension MockNetworkService {
             ]
         ]
         
-        // Make the Alamofire request
         AF.request(url, method: .put, parameters: fakeJSONObj, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
             .responseDecodable(of: Addresses.self) { response in
                 switch response.result {
@@ -251,6 +250,36 @@ extension MockNetworkService {
                 }
             }
     }
+
+    func deleteData(completionHandler: @escaping (Error?) -> Void) {
+        let path = URLs.shared.getAddressURL(customerId: "7309504250029")
+        guard let url = URL(string: path) else {
+            completionHandler(URLError(.badURL))
+            return
+        }
+        
+        let fakeJSONObj: [String: Any] = [
+            "addresses": [
+                [
+                    "id": 9279432491293
+                ],
+                [
+                    "id": 9279433310493
+                ]
+            ]
+        ]
+        
+        AF.request(url, method: .delete, parameters: fakeJSONObj, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+            .response { response in
+                switch response.result {
+                case .success:
+                    completionHandler(nil)
+                case .failure(let error):
+                    completionHandler(error)
+                }
+            }
+    }
+
 
 
 }

@@ -131,7 +131,6 @@ final class ShopifyTests: XCTestCase {
                 let finalDict: [String: Any] = ["address": addressDict]
 
                 NetworkManger.shared.putData(path: url , parameters: finalDict) { response, statusCode in
-                    // Verify the response and status code
                     if let statusCode = statusCode, (200...299).contains(statusCode) {
                         XCTAssert(true)
                     } else {
@@ -141,8 +140,27 @@ final class ShopifyTests: XCTestCase {
                     expectation.fulfill()
                 }
 
-                // Wait for the expectation to be fulfilled
                 wait(for: [expectation], timeout: 20)
             }
+    
+    func testDeleteData() {
+        let customerId = 123
+        let addressId = 456
+        let url = URLs.shared.getAddressURLForModification(customerID: String(customerId), addressID: String(addressId))
+        let expectation = XCTestExpectation(description: "deleteData completion handler called")
+
+        NetworkManger.shared.deleteData(path: url) { response, statusCode in
+            if let statusCode = statusCode, (200...299).contains(statusCode) {
+                XCTAssert(true)
+            } else {
+                print("failed")
+            }
+
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 20)
+    }
+
 
 }
