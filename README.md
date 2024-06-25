@@ -24,7 +24,7 @@ Welcome to **Brandat**, your ultimate online fashion destination, designed to br
 
 ### Checkout and Payment
 13. **Address Management**: Add, edit, or remove shipping addresses.
-14. **Currency Support**: Change the currency between EGP and USD.
+14. **Currency Support**: Change the currency between EGP , EUR and USD
 15. **Payment Options**: Pay by cash or by credit card.
 
 ### Order Management
@@ -44,5 +44,4 @@ Welcome to **Brandat**, your ultimate online fashion destination, designed to br
 - **GitHub**: For version control and collaboration.
 - **CocoaPods**: Dependency manager for integrating third-party libraries.
 - **Firebase**: For backend services including authentication and database.
-- **JJFloatingActionButton**: For floating action buttons.
 - **BadgeSwift**: For displaying badges in the app.
