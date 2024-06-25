@@ -19,9 +19,11 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var pageController: UIPageControl!
     
+    @IBOutlet weak var noInternetView: UIView!
     @IBOutlet weak var searchBar: RoundedTextfield!
     var timer:Timer?
     var currentCellIndex=0
+    var internetConnectivity: ConnectivityManager?
     
     var staticCoupons : [String] = ["Coupon30.png","coupon3.png"]
     
@@ -30,6 +32,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var brandProductViewModel: BrandProductsViewModel?
     var defaults = UserDefaults.standard
     var lineItems:[LineItems] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,12 +87,22 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         fetchPriceRule()
+        print("view will appear")
         homeViewModel?.getAllPriceRules()
         putFavouriteListToAPI()
-        
+        showNoIntenetView()
         
     }
     
+    
+    func showNoIntenetView(){
+        internetConnectivity = ConnectivityManager.connectivityInstance
+        if internetConnectivity?.isConnectedToInternet() == true {
+            noInternetView.isHidden = true
+        }else {
+            noInternetView.isHidden = false
+        }
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)

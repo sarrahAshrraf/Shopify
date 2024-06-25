@@ -140,6 +140,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UyO-mQ-95n">
+                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no wifi" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-Tw-CoA">
+                                        <rect key="frame" x="76.666666666666686" y="216.66666666666669" width="240" height="360.00000000000006"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="NZf-Tw-CoA" firstAttribute="centerY" secondItem="UyO-mQ-95n" secondAttribute="centerY" id="68M-R6-ZAZ"/>
+                                    <constraint firstItem="NZf-Tw-CoA" firstAttribute="width" secondItem="UyO-mQ-95n" secondAttribute="width" multiplier="0.610687" id="Wku-Qn-vxQ"/>
+                                    <constraint firstItem="NZf-Tw-CoA" firstAttribute="centerX" secondItem="UyO-mQ-95n" secondAttribute="centerX" id="rwl-a8-ufv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o7y-Ni-5IQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -150,12 +164,16 @@
                             <constraint firstItem="7nM-5p-S2P" firstAttribute="top" secondItem="qyY-Xc-F4L" secondAttribute="bottom" constant="8" id="Icr-LP-dcA"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="qyY-Xc-F4L" secondAttribute="trailing" constant="8" id="O3r-TE-WKT"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="7nM-5p-S2P" secondAttribute="trailing" id="Oi7-yh-HWM"/>
+                            <constraint firstItem="UyO-mQ-95n" firstAttribute="trailing" secondItem="o7y-Ni-5IQ" secondAttribute="trailing" id="Sqc-Mr-xCN"/>
                             <constraint firstItem="c5g-GG-cjl" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" constant="8" id="ZqJ-G7-lRO"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="c5g-GG-cjl" secondAttribute="trailing" constant="8" id="dZM-KL-hmz"/>
+                            <constraint firstItem="UyO-mQ-95n" firstAttribute="top" secondItem="o7y-Ni-5IQ" secondAttribute="top" id="dwk-mE-MU6"/>
                             <constraint firstAttribute="bottom" secondItem="7nM-5p-S2P" secondAttribute="bottom" id="fYP-ad-hXu"/>
                             <constraint firstItem="c5g-GG-cjl" firstAttribute="top" secondItem="O1L-jk-DaN" secondAttribute="bottom" constant="8" id="gct-jz-1yN"/>
                             <constraint firstItem="ge9-MM-UZv" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="hzb-zb-cua"/>
                             <constraint firstItem="ge9-MM-UZv" firstAttribute="trailing" secondItem="o7y-Ni-5IQ" secondAttribute="trailing" id="i1i-E9-fWS"/>
+                            <constraint firstAttribute="bottom" secondItem="UyO-mQ-95n" secondAttribute="bottom" id="nBC-qQ-D5b"/>
+                            <constraint firstItem="UyO-mQ-95n" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" id="tDD-yd-dyv"/>
                             <constraint firstItem="qyY-Xc-F4L" firstAttribute="leading" secondItem="o7y-Ni-5IQ" secondAttribute="leading" constant="8" id="ug4-PC-10h"/>
                             <constraint firstItem="o7y-Ni-5IQ" firstAttribute="trailing" secondItem="O1L-jk-DaN" secondAttribute="trailing" id="wfj-Ha-L4c"/>
                             <constraint firstItem="ge9-MM-UZv" firstAttribute="top" secondItem="uCD-eM-nM5" secondAttribute="top" id="xcF-Xt-rBz"/>
@@ -168,6 +186,7 @@
                         <outlet property="allProduct" destination="Xvk-0H-Hkd" id="dBn-6a-2Lh"/>
                         <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
+                        <outlet property="noInternetView" destination="UyO-mQ-95n" id="0up-cV-UgT"/>
                         <outlet property="shoes" destination="MS3-Lg-Qwc" id="Pte-CS-5Gx"/>
                         <outlet property="t_shirt" destination="l10-k0-mcm" id="i4P-Ma-DDz"/>
                     </connections>
@@ -399,12 +418,27 @@
                                     <outlet property="delegate" destination="iE8-Yz-Gc4" id="uRq-8x-jxI"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZK6-gv-rd3">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no wifi" translatesAutoresizingMaskIntoConstraints="NO" id="XAR-YK-tpY">
+                                        <rect key="frame" x="76.666666666666686" y="175" width="240" height="360"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="XAR-YK-tpY" firstAttribute="centerX" secondItem="ZK6-gv-rd3" secondAttribute="centerX" id="2qf-wG-EPV"/>
+                                    <constraint firstItem="XAR-YK-tpY" firstAttribute="centerY" secondItem="ZK6-gv-rd3" secondAttribute="centerY" id="jYw-uS-Wwq"/>
+                                    <constraint firstItem="XAR-YK-tpY" firstAttribute="width" secondItem="ZK6-gv-rd3" secondAttribute="width" multiplier="0.610687" id="wwa-u4-trm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cTY-H2-c00"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="fvd-ui-U02" secondAttribute="bottom" constant="439" id="9oD-OS-fPr"/>
                             <constraint firstItem="ZjD-B1-oUp" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" constant="30" id="GNJ-oG-SB7"/>
+                            <constraint firstItem="ZK6-gv-rd3" firstAttribute="top" secondItem="cTY-H2-c00" secondAttribute="top" id="OPj-LA-Kgo"/>
                             <constraint firstItem="cTY-H2-c00" firstAttribute="bottom" secondItem="vUi-pH-E9D" secondAttribute="bottom" id="Zyd-cf-6MZ"/>
                             <constraint firstItem="fvd-ui-U02" firstAttribute="trailing" secondItem="cTY-H2-c00" secondAttribute="trailing" id="aB4-VC-O4S"/>
                             <constraint firstItem="BXX-k2-Uzz" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" constant="40" id="c5D-2b-DsU"/>
@@ -417,12 +451,16 @@
                             <constraint firstItem="vUi-pH-E9D" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" constant="16" id="p19-01-nRn"/>
                             <constraint firstItem="vUi-pH-E9D" firstAttribute="top" secondItem="ZjD-B1-oUp" secondAttribute="bottom" constant="14" id="tEq-Ra-uAN"/>
                             <constraint firstItem="fvd-ui-U02" firstAttribute="top" secondItem="OlM-Yo-JXd" secondAttribute="top" id="tGZ-RW-qdP"/>
+                            <constraint firstItem="ZK6-gv-rd3" firstAttribute="leading" secondItem="cTY-H2-c00" secondAttribute="leading" id="tVU-sU-AAj"/>
+                            <constraint firstItem="cTY-H2-c00" firstAttribute="bottom" secondItem="ZK6-gv-rd3" secondAttribute="bottom" id="xU7-4o-NnR"/>
+                            <constraint firstItem="cTY-H2-c00" firstAttribute="trailing" secondItem="ZK6-gv-rd3" secondAttribute="trailing" id="yH8-wR-6We"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="Home-2" selectedImage="Home-2" id="z1l-cl-MIw"/>
                     <connections>
                         <outlet property="brandsCollectionView" destination="vUi-pH-E9D" id="eNf-EH-za8"/>
                         <outlet property="couponsCollectionView" destination="BXX-k2-Uzz" id="uR6-wb-6IJ"/>
+                        <outlet property="noInternetView" destination="ZK6-gv-rd3" id="ByX-xu-1np"/>
                         <outlet property="pageController" destination="BEt-l5-Sfk" id="4fz-6W-aLj"/>
                         <outlet property="searchBar" destination="deq-uL-fdE" id="dym-Pj-qpf"/>
                     </connections>
@@ -437,6 +475,7 @@
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="no wifi" width="360" height="360"/>
         <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
         <image name="square.grid.2x2.fill" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
