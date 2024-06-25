@@ -13,6 +13,7 @@ import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var cartBtn: UIButton!
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     
     @IBOutlet weak var brandsCollectionView: UICollectionView!
@@ -28,6 +29,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     var staticCoupons : [String] = ["Coupon30.png","coupon3.png"]
     
     var homeViewModel: HomeViewModel?
+    var cartVm : ShoppingCartViewModel?
     var favoritesViewModel: FavoritesViewModel!
     var brandProductViewModel: BrandProductsViewModel?
     var defaults = UserDefaults.standard
@@ -43,6 +45,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         fetchBrands()
         homeViewModel?.getItems()
         brandProductViewModel = BrandProductsViewModel()
+        cartVm = ShoppingCartViewModel()
         setupCopounsCollectioView()
 //        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
         self.pageController.numberOfPages = staticCoupons.count
@@ -78,7 +81,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
           func startTimer() {
-              timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+              timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
           }
 
     
@@ -91,9 +94,61 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         homeViewModel?.getAllPriceRules()
         putFavouriteListToAPI()
         showNoIntenetView()
+        showCartQuantity()
         
     }
+
     
+    func showBadge(count: Int) {
+        
+        
+//        lazy var badgeLabel: UILabel = {
+//          let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+//          label.translatesAutoresizingMaskIntoConstraints = false
+//          label.layer.cornerRadius = label.bounds.size.height / 2
+//          label.textAlignment = .center
+//          label.layer.masksToBounds = true
+//          label.textColor = .white
+//          label.font = label.font.withSize(16)
+//          label.backgroundColor = .red
+//          return label
+//        }()
+        lazy var badgeLabel: UILabel = {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.layer.cornerRadius = label.bounds.size.height / 2
+            label.textAlignment = .center
+            label.layer.masksToBounds = true
+            label.textColor = .white
+            label.font = UIFont.boldSystemFont(ofSize: 16) // Set bold font
+            label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+            
+            return label
+        }()
+        
+        
+      badgeLabel.text = "\(count)"
+        cartBtn.addSubview(badgeLabel)
+      let constraints = [
+        badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
+        badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
+        badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+        badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+      ]
+      NSLayoutConstraint.activate(constraints)
+    }
+    func showCartQuantity() {
+        cartVm?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                guard let cartBtn = self.cartBtn else { return }
+                let count = self.cartVm?.result?.line_items?.count ?? 0
+                self.showBadge(count: count)
+            }
+        }
+        cartVm?.showCartItems()
+    }
+
     
     func showNoIntenetView(){
         internetConnectivity = ConnectivityManager.connectivityInstance
