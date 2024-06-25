@@ -1,5 +1,7 @@
-# Brandat - m-Commerce iOS App
+# Brandat E-Commerce iOS App
 Welcome to **Brandat**, your ultimate online fashion destination, designed to bring you the best of men, women, and kids clothing, shoes, accessories, bags, and other fashion items. With Brandat, you can easily browse, buy, and get your favorite items delivered right to your doorstep.
+
+
 ![3](https://github.com/sarrahAshrraf/Shopify/assets/154979941/6abeda53-d473-495e-8e08-cab6c9dbf1dd)
 
 ## Features
@@ -45,10 +47,13 @@ Welcome to **Brandat**, your ultimate online fashion destination, designed to br
 - **CocoaPods**: Dependency manager for integrating third-party libraries.
 - **Firebase**: For backend services including authentication and database.
 - **BadgeSwift**: For displaying badges in the app.
+- **Lottife**: For displaying animations in the app.
+- **RX-Swift** 
+
 
 ## Team members: 
-**Ahmed Refat Abo elsode**
-**Sarah Ashraf Gaber**
-**Mohamed Kotb Saied**
+- **Ahmed Refat Abo elsode**
+- **Sarah Ashraf Gaber** 
+- **Mohamed Kotb Saied**
 
 Trello link: https://trello.com/b/Z8eMtn2r/shopify-project
