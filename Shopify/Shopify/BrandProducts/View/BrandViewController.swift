@@ -46,11 +46,16 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandProductCollectionViewCell" , for: indexPath) as! BrandProductCollectionViewCell
-        cell.setValues(product: self.viewModel.result[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.viewModel.result[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
-
-        
-        return cell
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandProductCollectionViewCell" , for: indexPath) as! BrandProductCollectionViewCell
+//        cell.setValues(product: self.viewModel.result[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.viewModel.result[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)), viewcontroller: self)
+//
+//        
+//        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BrandProductCollectionViewCell", for: indexPath) as! BrandProductCollectionViewCell
+            let product = self.viewModel.result[indexPath.row]
+            let isFav = favoritesViewModel.checkIfProductIsFavorite(productId: product.id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId))
+            cell.setValues(product: product, isFav: isFav, viewController: self)
+            return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width/2 - 10, height: UIScreen.main.bounds.height/4)
