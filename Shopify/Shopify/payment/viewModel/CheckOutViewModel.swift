@@ -7,7 +7,6 @@
 
 import Foundation
 class CheckOutViewModel{
-//bind failure + loocation id?
     var bindOrderToViewController: (()->()) = {}
 //    var bindFailureToViewController: (()->()) = {} TODDDDDOOOO
 

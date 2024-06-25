@@ -14,6 +14,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var shoes: UIButton!
     @IBOutlet weak var t_shirt: UIButton!
     @IBOutlet weak var accesories: UIButton!
+    @IBOutlet weak var noInternetView: UIView!
     
     
     
@@ -26,6 +27,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     var allProducts: [Product] = []
     var categoryViewModel: CategoryViewModel!
     var favoritesViewModel: FavoritesViewModel!
+    var internetConnectivity: ConnectivityManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +68,16 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             
             self.fetchCategoryData()
             self.collectionView.reloadData()
+        }
+        showNoIntenetView()
+    }
+    
+    func showNoIntenetView(){
+        internetConnectivity = ConnectivityManager.connectivityInstance
+        if internetConnectivity?.isConnectedToInternet() == true {
+            noInternetView.isHidden = true
+        }else {
+            noInternetView.isHidden = false
         }
     }
     

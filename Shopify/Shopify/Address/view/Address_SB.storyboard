@@ -18,26 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19f-7d-GEi">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <navigationItem title="Your Addresses" id="1rE-BF-IWz">
-                                        <barButtonItem key="leftBarButtonItem" image="back" style="plain" id="czP-HQ-iQP">
-                                            <connections>
-                                                <action selector="backBtn:" destination="jhz-cq-Jo0" id="hLN-zu-6Fd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" style="plain" id="aNd-ig-Qha">
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="addNewAddressBtn:" destination="jhz-cq-Jo0" id="WjB-tH-zKh"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="trP-qX-Uec">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -51,18 +31,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="trP-qX-Uec" firstAttribute="leading" secondItem="jTJ-lT-cDD" secondAttribute="leading" id="4Nb-0r-UHH"/>
-                            <constraint firstItem="19f-7d-GEi" firstAttribute="leading" secondItem="jTJ-lT-cDD" secondAttribute="leading" id="6h6-Tc-oIV"/>
-                            <constraint firstItem="trP-qX-Uec" firstAttribute="top" secondItem="19f-7d-GEi" secondAttribute="bottom" id="aOc-oI-XNX"/>
-                            <constraint firstItem="19f-7d-GEi" firstAttribute="top" secondItem="jTJ-lT-cDD" secondAttribute="top" id="fYi-Zb-Enn"/>
-                            <constraint firstItem="19f-7d-GEi" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="hmg-Zz-O4t"/>
                             <constraint firstAttribute="bottom" secondItem="trP-qX-Uec" secondAttribute="bottom" id="ibV-tf-0iG"/>
+                            <constraint firstItem="trP-qX-Uec" firstAttribute="top" secondItem="jTJ-lT-cDD" secondAttribute="top" constant="44" id="jt2-tP-bPL"/>
                             <constraint firstItem="trP-qX-Uec" firstAttribute="trailing" secondItem="jTJ-lT-cDD" secondAttribute="trailing" id="s0j-ja-H7u"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addAddressBtn" destination="aNd-ig-Qha" id="J3X-zY-9U6"/>
                         <outlet property="addressTableView" destination="trP-qX-Uec" id="Vf7-F4-gfj"/>
-                        <outlet property="navBar" destination="19f-7d-GEi" id="3PA-CB-eYB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7rL-Dv-c9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -148,7 +123,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PI-cy-VeB">
                                 <rect key="frame" x="124" y="123" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="onTintColor" systemColor="systemGreenColor"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PxN-Y2-LWb">
                                 <rect key="frame" x="16" y="239" width="68" height="21"/>
@@ -365,7 +340,7 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcg-DA-6WH">
                                         <rect key="frame" x="328" y="0.0" width="51" height="31"/>
-                                        <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="onTintColor" systemColor="systemGreenColor"/>
                                     </switch>
                                 </subviews>
                             </stackView>
@@ -402,11 +377,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back" width="35" height="35"/>
         <image name="mappin.and.ellipse.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

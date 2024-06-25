@@ -92,6 +92,7 @@ class LoginViewController: UIViewController {
 
                 defaults.setValue(Constants.USER_STATE_LOGIN, forKey:Constants.KEY_USER_STATE )
                 defaults.setValue(user.firstName, forKey:Constants.USER_FirstName )
+                defaults.setValue(user.email, forKey:Constants.USER_Email)
                 break
             }
         }

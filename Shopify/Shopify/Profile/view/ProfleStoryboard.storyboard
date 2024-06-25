@@ -706,20 +706,38 @@
                                     <constraint firstItem="x9t-g1-HBs" firstAttribute="leading" secondItem="cBP-16-3o8" secondAttribute="leading" constant="90" id="l9o-Nj-hyg"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRE-5y-ayi">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no wifi" translatesAutoresizingMaskIntoConstraints="NO" id="uZI-IV-1v3">
+                                        <rect key="frame" x="76.666666666666686" y="246" width="240" height="360"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="uZI-IV-1v3" firstAttribute="width" secondItem="uRE-5y-ayi" secondAttribute="width" multiplier="0.610687" id="JCA-tk-GUx"/>
+                                    <constraint firstItem="uZI-IV-1v3" firstAttribute="centerY" secondItem="uRE-5y-ayi" secondAttribute="centerY" id="Z50-1f-1B8"/>
+                                    <constraint firstItem="uZI-IV-1v3" firstAttribute="centerX" secondItem="uRE-5y-ayi" secondAttribute="centerX" id="tKv-AX-yw0"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6wF-hr-0fo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="n3U-8S-lzp" firstAttribute="top" secondItem="6wF-hr-0fo" secondAttribute="top" id="0eg-SX-sKA"/>
+                            <constraint firstAttribute="bottom" secondItem="uRE-5y-ayi" secondAttribute="bottom" id="ESF-sa-dw5"/>
                             <constraint firstItem="n3U-8S-lzp" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" id="Ll5-jp-ba5"/>
                             <constraint firstItem="cBP-16-3o8" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" id="OmF-za-cfc"/>
                             <constraint firstItem="zxc-2L-qGd" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" constant="8" id="RZh-zG-lvP"/>
                             <constraint firstItem="VIk-xp-Kfc" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" constant="8" id="T5e-ZE-Aaq"/>
+                            <constraint firstItem="uRE-5y-ayi" firstAttribute="top" secondItem="e8B-UY-gOC" secondAttribute="top" id="Y1u-XV-deU"/>
                             <constraint firstItem="D5f-17-7j9" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" constant="8" id="aMf-DD-IJO"/>
+                            <constraint firstItem="uRE-5y-ayi" firstAttribute="leading" secondItem="6wF-hr-0fo" secondAttribute="leading" id="dn2-gQ-WeQ"/>
                             <constraint firstItem="6wF-hr-0fo" firstAttribute="trailing" secondItem="zxc-2L-qGd" secondAttribute="trailing" constant="8" id="eAz-7s-pZS"/>
                             <constraint firstItem="n3U-8S-lzp" firstAttribute="trailing" secondItem="6wF-hr-0fo" secondAttribute="trailing" id="exR-SB-HNl"/>
                             <constraint firstItem="cBP-16-3o8" firstAttribute="trailing" secondItem="6wF-hr-0fo" secondAttribute="trailing" id="h8D-c7-YM0"/>
                             <constraint firstItem="VIk-xp-Kfc" firstAttribute="top" secondItem="zxc-2L-qGd" secondAttribute="bottom" constant="16" id="jml-1X-W3x"/>
+                            <constraint firstItem="uRE-5y-ayi" firstAttribute="trailing" secondItem="6wF-hr-0fo" secondAttribute="trailing" id="mUf-xk-YV7"/>
                             <constraint firstItem="D5f-17-7j9" firstAttribute="top" secondItem="n3U-8S-lzp" secondAttribute="bottom" constant="8" id="mWu-W7-kbo"/>
                             <constraint firstItem="zxc-2L-qGd" firstAttribute="top" secondItem="D5f-17-7j9" secondAttribute="bottom" constant="20" id="qbY-9d-a5b"/>
                             <constraint firstItem="6wF-hr-0fo" firstAttribute="bottom" secondItem="cBP-16-3o8" secondAttribute="bottom" id="u2c-N3-HC7"/>
@@ -735,8 +753,10 @@
                         <outlet property="favTableView" destination="Tbe-Xd-3kq" id="NyE-YG-hBY"/>
                         <outlet property="favouriteStackView" destination="VIk-xp-Kfc" id="WsC-ZB-R71"/>
                         <outlet property="guestModeView" destination="cBP-16-3o8" id="O3S-0I-E96"/>
+                        <outlet property="noInternetView" destination="uRE-5y-ayi" id="qum-cc-nG7"/>
                         <outlet property="orderStackView" destination="zxc-2L-qGd" id="bG6-lJ-oly"/>
                         <outlet property="ordersTableView" destination="BKu-gu-R0d" id="hOC-Uz-5eP"/>
+                        <outlet property="userEmail" destination="vZm-Mx-LbY" id="c8a-SS-r2q"/>
                         <outlet property="userStackView" destination="D5f-17-7j9" id="IcM-bB-GH7"/>
                         <outlet property="welcomeUser" destination="Vj5-5T-psY" id="Kfd-ah-n44"/>
                     </connections>
@@ -755,6 +775,7 @@
         <image name="icon-3" width="40" height="40"/>
         <image name="icon-9" width="40" height="40"/>
         <image name="location-2" width="512" height="512"/>
+        <image name="no wifi" width="360" height="360"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <image name="profile-arrow" width="7" height="10"/>
         <image name="warning" width="42.666667938232422" height="42.666667938232422"/>
