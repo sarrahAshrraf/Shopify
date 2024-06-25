@@ -22,6 +22,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var favouriteStackView: UIStackView!
     @IBOutlet weak var noInternetView: UIView!
     
+    @IBOutlet weak var noOrdersLabel: UILabel!
+    @IBOutlet weak var noFavoriteLabel: UILabel!
     var profileViewModel: ProfileViewModel!
     var favouriteViewModel: FavoritesViewModel!
     var productDetailsViewModel = ProductDetailsViewModel()
@@ -114,12 +116,23 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     // UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ordersTableView {
-            return min(orders.count, 2)
+            //return min(orders.count, 2)
+            if orders.count > 1 {
+                noOrdersLabel.isHidden = true
+                return 2
+            }else if orders.count == 1 {
+                noOrdersLabel.isHidden = true
+                return 1
+            }
         }else if tableView == favTableView {
             if favouriteViewModel.allProductsList.count > 1 {
+                noFavoriteLabel.isHidden = true
                 return 2
             }else if favouriteViewModel.allProductsList.count == 1 {
+                noFavoriteLabel.isHidden = true
                 return 1
+            }else {
+                noFavoriteLabel.isHidden = false
             }
         }
         return 0

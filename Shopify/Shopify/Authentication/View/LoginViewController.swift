@@ -125,6 +125,14 @@ class LoginViewController: UIViewController {
         loginViewModel.getUsers()
     }
     
+    @IBAction func navigateToSignup(_ sender: UIButton) {
+        let signVC = storyboard?.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
+        signVC.modalPresentationStyle = .fullScreen
+        present(signVC, animated: true)
+        
+        
+    }
+    
     private func areFieldsValid() -> Bool {
         let fields = [emailTextField, passwordTextField]
         let messages = [Constants.emailIsEmpty, Constants.passwordIsEmpty]

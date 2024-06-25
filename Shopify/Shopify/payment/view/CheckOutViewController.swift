@@ -336,7 +336,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
             checkOutVM.postOrder(order: order)
             print("order cuurencyyyyyyyyyyyyyyy")
             print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
-//            checkOutVM.updateVariantAfterPostOrder()
+            checkOutVM.updateVariantAfterPostOrder()
             print(order)
             
         
