@@ -184,6 +184,7 @@
                     <connections>
                         <outlet property="accesories" destination="Q2l-Kp-xPw" id="OT4-QL-UJU"/>
                         <outlet property="allProduct" destination="Xvk-0H-Hkd" id="dBn-6a-2Lh"/>
+                        <outlet property="cartBtn" destination="f4j-ph-ZdR" id="7Nd-n5-Pwy"/>
                         <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
                         <outlet property="noInternetView" destination="UyO-mQ-95n" id="0up-cV-UgT"/>

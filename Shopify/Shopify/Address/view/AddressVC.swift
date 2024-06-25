@@ -76,7 +76,7 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         setupNavigationBar()
         guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
         isGuestUser = (state == Constants.USER_STATE_GUEST)
