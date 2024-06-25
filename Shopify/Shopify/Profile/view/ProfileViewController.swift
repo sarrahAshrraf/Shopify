@@ -18,11 +18,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var orderStackView: UIStackView!
     
+    @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var favouriteStackView: UIStackView!
+    @IBOutlet weak var noInternetView: UIView!
     
     var profileViewModel: ProfileViewModel!
     var favouriteViewModel: FavoritesViewModel!
     var productDetailsViewModel = ProductDetailsViewModel()
+    var internetConnectivity: ConnectivityManager?
     var orders: [Orders] = []
     var isGuestUser: Bool = false
     var index: Int = 0
@@ -62,12 +65,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if let customerName = UserDefaults.standard.string(forKey: Constants.USER_FirstName) {
             welcomeUser.text = "Welcome, \(customerName)!"
+            userEmail.text = UserDefaults.standard.string(forKey: Constants.USER_Email)
         } else {
             welcomeUser.text = "Welcome!"
         }
         
         getOrdersFromApi()
         favTableView.reloadData()
+        showFavouriteDetails()
+        showNoIntenetView()
         
         
     }
@@ -78,7 +84,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    
+    func showNoIntenetView(){
+        internetConnectivity = ConnectivityManager.connectivityInstance
+        if internetConnectivity?.isConnectedToInternet() == true {
+            noInternetView.isHidden = true
+        }else {
+            noInternetView.isHidden = false
+        }
+    }
     
     func getOrdersFromApi() {
         let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
