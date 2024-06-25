@@ -26,6 +26,10 @@ class BrandViewController: UIViewController, UICollectionViewDelegate, UICollect
 
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchData()
+        showData()
+    }
     
     func fetchData(){
         print("success")

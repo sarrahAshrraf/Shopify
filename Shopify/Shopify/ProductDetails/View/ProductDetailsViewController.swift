@@ -367,6 +367,7 @@ class ProductDetailsViewController: UIViewController {
             favoritesViewModel.addProduct(product: localProduct)
             self.favoritesViewModel.getAllProducts()
             favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            
             self.showProgress(message: "Added To Favourite")
             
         } else {
