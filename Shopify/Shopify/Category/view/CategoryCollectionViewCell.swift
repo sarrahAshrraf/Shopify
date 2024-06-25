@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class CategoryCollectionViewCell: UICollectionViewCell {
     
@@ -24,6 +25,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
     var currencySymbol: String = "USD"
+    var viewController: UIViewController?
 
     var product:Product!
     override func awakeFromNib() {
@@ -51,7 +53,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         containerView.layer.shadowRadius = 5
         containerView.layer.cornerRadius = 20
     }
-    func setValues(product:Product, isFav: Bool) {
+    func setValues(product:Product, isFav: Bool , viewController: UIViewController) {
         self.product = product
         BrandName.text = Splitter().splitBrand(text: product.title ?? "", delimiter: "| ")
         productName.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
@@ -63,9 +65,20 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         } else {
             self.favBtn.setImage(UIImage(systemName: Constants.heart), for: .normal)
         }
+        self.viewController = viewController
     }
     
-    
+    func showProgress(message: String, in view: UIView, navigationController: UINavigationController?) {
+        let hud = JGProgressHUD()
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.textLabel.text = message
+        hud.square = true
+        hud.style = .dark
+        hud.show(in: view)
+        hud.dismiss(afterDelay: 1, animated: true) {
+            navigationController?.popViewController(animated: true)
+        }
+    }
     func showFavoriteBtn(){
         if UserDefault().getCustomerId() == -1 {
             favBtn.isHidden = true
@@ -81,12 +94,18 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             favoritesViewModel.addProduct(product: localProduct)
             favoritesViewModel.getAllProducts()
             favBtn.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            if let viewController = viewController as? CategoryViewController {
+                showProgress(message: "Added to Favourite", in: viewController.view, navigationController: viewController.navigationController)
+            }
             
         } else {
             let retrievedProduct = favoritesViewModel.getProduct(productId: self.product.id )
             favoritesViewModel.removeProduct(id: product.id)
             favoritesViewModel.getAllProducts()
             favBtn.setImage(UIImage(systemName: Constants.heart), for: .normal)
+            if let viewController = viewController as? CategoryViewController {
+                showProgress(message: "Deleted", in: viewController.view, navigationController: viewController.navigationController)
+            }
             
         }
         

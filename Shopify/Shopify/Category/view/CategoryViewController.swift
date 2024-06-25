@@ -231,7 +231,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         
         if isFiltered {
-            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.categoryViewModel.filteredProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
+            cell.setValues(product: self.categoryViewModel.filteredProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.categoryViewModel.filteredProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)),viewController: self)
             if let variant = self.categoryViewModel.filteredProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
@@ -239,7 +239,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                 }
             }
         } else {
-            cell.setValues(product: self.allProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.allProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)))
+            cell.setValues(product: self.allProducts[indexPath.row],isFav: favoritesViewModel.checkIfProductIsFavorite(productId: self.allProducts[indexPath.row].id, customerId: UserDefaults.standard.integer(forKey: Constants.customerId)),viewController: self)
             if let variant = self.allProducts[indexPath.row].variants?.first {
                 if let price = Double(variant.price) {
                     let convertedPrice = price * currencyRate
