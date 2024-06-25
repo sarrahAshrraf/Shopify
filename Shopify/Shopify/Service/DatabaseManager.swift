@@ -102,26 +102,31 @@ class DatabaseManager {
             print(error.localizedDescription)
         }
     }
-    
-    func delete(id : Int) {
-        for (index, element) in nsManagedProducts.enumerated(){
-            let deletedID = element.value(forKey: "id") as? Int
-            if deletedID == id {
-                arrayOfProducts.remove(at: index)
+
+    func delete(id: Int) {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavouriteProduct")
+        do {
+            nsManagedProducts = try manager.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error)
+            return
+        }
+        
+        for element in nsManagedProducts {
+            if let deletedID = element.value(forKey: "id") as? Int, deletedID == id {
                 manager.delete(element)
-                break
             }
         }
-        do{
-            
+        
+        do {
             try manager.save()
             print("Deleted!")
-        }catch let error{
+            arrayOfProducts = arrayOfProducts.filter { $0.id != id } // Update arrayOfProducts
+        } catch let error {
             print(error.localizedDescription)
         }
-    
     }
-    
+
     func isFavorite(productId: Int, customerId: Int) -> Bool {
         let allProductsList = fetchAllProducts()
         for product in allProductsList! {

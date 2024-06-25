@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         favouriteViewModel = FavoritesViewModel()
         
         
-        favouriteViewModel.getAllProducts()
+        
         showFavouriteDetails()
         configureContainerView()
         configureContainerView2(stackView: orderStackView)
@@ -71,6 +71,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         getOrdersFromApi()
+        favouriteViewModel.getAllProducts()
         favTableView.reloadData()
         showFavouriteDetails()
         showNoIntenetView()
