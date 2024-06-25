@@ -4,6 +4,7 @@ import Dispatch
 
 class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var cartBtn: UIButton!
     let defaultColor = UIColor.black
     let selectedColor = UIColor.white
     
@@ -17,7 +18,8 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var noInternetView: UIView!
     
     
-    
+    var cartVm : ShoppingCartViewModel?
+
     var currencySymbol: String = "USD"
     
     var productDetailsViewModel: ProductDetailsViewModel!
@@ -36,6 +38,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         categoryViewModel = CategoryViewModel()
+        cartVm = ShoppingCartViewModel()
         productDetailsViewModel = ProductDetailsViewModel()
         favoritesViewModel = FavoritesViewModel()
         collectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
@@ -70,6 +73,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             self.collectionView.reloadData()
         }
         showNoIntenetView()
+        showCartQuantity()
     }
     
     func showNoIntenetView(){
@@ -225,7 +229,55 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             return allProducts.count
         }
     }
-    
+    func showBadge(count: Int) {
+        
+        
+//        lazy var badgeLabel: UILabel = {
+//          let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+//          label.translatesAutoresizingMaskIntoConstraints = false
+//          label.layer.cornerRadius = label.bounds.size.height / 2
+//          label.textAlignment = .center
+//          label.layer.masksToBounds = true
+//          label.textColor = .white
+//          label.font = label.font.withSize(16)
+//          label.backgroundColor = .red
+//          return label
+//        }()
+        lazy var badgeLabel: UILabel = {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.layer.cornerRadius = label.bounds.size.height / 2
+            label.textAlignment = .center
+            label.layer.masksToBounds = true
+            label.textColor = .white
+            label.font = UIFont.boldSystemFont(ofSize: 16) // Set bold font
+            label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+            
+            return label
+        }()
+        
+        
+      badgeLabel.text = "\(count)"
+        cartBtn.addSubview(badgeLabel)
+      let constraints = [
+        badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
+        badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
+        badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+        badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+      ]
+      NSLayoutConstraint.activate(constraints)
+    }
+    func showCartQuantity() {
+        cartVm?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                guard let cartBtn = self.cartBtn else { return }
+                let count = self.cartVm?.result?.line_items?.count ?? 0
+                self.showBadge(count: count)
+            }
+        }
+        cartVm?.showCartItems()
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as! CategoryCollectionViewCell
         
