@@ -16,25 +16,68 @@ class AddressVC: UIViewController , UITableViewDataSource, UITableViewDelegate ,
     var shipmentAdress : Bool = false
     var delegate : AddressSelectionDelegate!
     var editAdressVM = AddNewAddressViewModel()
-
-    @IBAction func backBtn(_ sender: Any) {
-        dismiss(animated: true)
-//        self.navigationController?.popViewController(animated: true)
-
-    }
-    @IBAction func addNewAddressBtn(_ sender: Any) {
-        coordinator?.showAddNewAddressWithEmptyFields()
+    let navigationBar = UINavigationBar()
+//    @IBAction func backBtn(_ sender: Any) {
+//        dismiss(animated: true)
+////        self.navigationController?.popViewController(animated: true)
+//
+//    }
+//    @IBAction func addNewAddressBtn(_ sender: Any) {
+//        coordinator?.showAddNewAddressWithEmptyFields()
+//        
+//
+//    }
+    
+    func setupNavigationBar() {
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
         
-
+        let navigationItem = UINavigationItem(title: "Your addresses")
+        
+        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            navigationItem.leftBarButtonItem = backButton
+        }
+        
+        // Create the add button with a plus icon
+        if let addButtonImage = UIImage(systemName: "plus") {
+            let addButton = UIBarButtonItem(image: addButtonImage, style: .plain, target: self, action: #selector(addButtonTapped))
+            addButton.tintColor = .black
+            navigationItem.rightBarButtonItem = addButton
+        }
+         
+        
+        navigationBar.items = [navigationItem]
+        navigationBar.barTintColor = .white
+        view.addSubview(navigationBar)
+        
+        NSLayoutConstraint.activate([
+            navigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
+
+    @objc func backButtonTapped() {
+        dismiss(animated: true)
+    }
+
+    @objc func addButtonTapped() {
+        coordinator?.showAddNewAddressWithEmptyFields()
+    }
+
+    
+    
+    
+    
+    
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var addressTableView: UITableView!
     private var viewModel = AddressViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setupNavigationBar()
         guard let state = UserDefaults.standard.string(forKey: Constants.KEY_USER_STATE) else { return }
         isGuestUser = (state == Constants.USER_STATE_GUEST)
         

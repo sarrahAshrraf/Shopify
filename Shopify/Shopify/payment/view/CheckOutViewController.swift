@@ -9,13 +9,11 @@ import UIKit
 import PassKit
 
 
-/* MARK:
-- discount
- */
 class CheckOutViewController: UIViewController , AddressSelectionDelegate{
 
 
-//    @IBOutlet weak var taxesLabel: UILabel!
+    @IBOutlet weak var changeAddress: UIButton!
+    //    @IBOutlet weak var taxesLabel: UILabel!
     @IBOutlet weak var applePayBtn: UIButton!
     @IBOutlet weak var cashOnBtn: UIButton!
     @IBOutlet weak var discountValue: UILabel!
@@ -98,7 +96,13 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     private func setupBindings() {
         addressVM.bindDefaultAddress = { [weak self] in
             DispatchQueue.main.async {
-                self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
+                self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "Add address"
+                if self?.addressVM.defautltAdress?.address1 == nil{
+                    self?.changeAddress.setTitle("Add", for: .normal)
+                } else {
+                    self?.changeAddress.setTitle("Edit", for: .normal)
+                    
+                }
             }
         }
         
@@ -174,7 +178,13 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         
         addressVM.bindDefaultAddress = { [weak self] in
             DispatchQueue.main.async {
-                self?.addressdetails.text = self?.addressVM.defautltAdress?.address1
+                self?.addressdetails.text = self?.addressVM.defautltAdress?.address1 ?? "Add address"
+                if self?.addressVM.defautltAdress?.address1 == nil{
+                    self?.changeAddress.setTitle("Add", for: .normal)
+                } else {
+                    self?.changeAddress.setTitle("Edit", for: .normal)
+                    
+                }
             }
         }
         addressVM.fetchDeafultCustomerAddress(customerID: customerId)
