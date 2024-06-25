@@ -104,6 +104,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             .orEmpty
             .subscribe(onNext: { [weak self] text in
                 guard let self = self else { return }
+                setupUI()
                 self.filter(searchText: text)
             })
             .disposed(by: disposeBag)
@@ -112,6 +113,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func filter(searchText:String) {
         if(!searchText.isEmpty){
+            
             products = searchViewModel.result.filter{(Splitter().splitName(text: $0.title!, delimiter: "| ").lowercased().contains(searchText.lowercased()))}
             if products.isEmpty{
                 products = []
@@ -154,6 +156,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }else {
             priceSlider.isHidden = false
             filterView.isHidden = false
+            
             if let heightConstraint = filterView.constraints.first(where: { $0.firstAttribute == .height }) {
                 heightConstraint.constant = UIScreen.main.bounds.height * 0.03
             }
@@ -190,8 +193,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("Minimum price: \(minPrice)")
         } else {
             // Handle case where prices array is empty
-            priceSlider.maximumValue = 1000
-            priceSlider.minimumValue = 0
+            priceSlider.maximumValue = 299
+            priceSlider.minimumValue = 20
             print("No prices available.")
         }
     }
@@ -199,6 +202,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func sliderFilterBtn(_ sender: Any) {
         filteredPrice.text = "price: \(Int(priceSlider.value))"
+        setupUI()
         filterBySlider()
     }
     

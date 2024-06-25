@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class SignUpViewController: UIViewController {
 
@@ -177,6 +178,18 @@ class SignUpViewController: UIViewController {
         let alert = Alert().showAlertWithPositiveButtons(title: title, msg: message, positiveButtonTitle: Constants.ok, positiveHandler: { _ in completion?() })
         present(alert, animated: true)
     }
+    
+    func showProgress(message : String){
+        let hud = JGProgressHUD()
+//        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.textLabel.text = message
+        hud.square = true
+        hud.style = .dark
+        hud.show(in: view)
+        hud.dismiss(afterDelay: 4, animated: true){
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 
         
     private func showAlertWithNegativeAndPositiveButtons(title: String, message: String) {
@@ -227,9 +240,6 @@ extension SignUpViewController{
     }
     
     func navigateToLoginFirebase(){
-//        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//        self.navigationController?.pushViewController(loginViewController, animated: true)
-        
         let login = storyboard?.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
         login.modalPresentationStyle = .fullScreen
         present(login, animated: true)
@@ -242,20 +252,9 @@ extension SignUpViewController{
                     // Handle the error
                     print("Error sending verification email: \(error.localizedDescription)")
                 } else {
+                    self.showProgress(message : "Loading")
                     print("Verification email sent successfully")
                 }
-            }
-        }
-    }
-    
-    
-    func checkVerification(){
-        if let user = Auth.auth().currentUser {
-            if user.isEmailVerified {
-                // User's email is verified, allow them to enter the app
-                
-            } else {
-                // User's email is not verified, show an error message
             }
         }
     }

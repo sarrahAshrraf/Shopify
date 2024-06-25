@@ -113,7 +113,10 @@ class SettingsTableViewController: UITableViewController {
             self?.defaults.set(-1, forKey: Constants.customerId)
             self?.defaults.set(nil, forKey: Constants.CURRENCY_KEY)
             self?.defaults.set(nil, forKey: Constants.CURRENCY_VALUE)
-            
+            self?.defaults.set(nil, forKey: Constants.copounValue)
+            self?.defaults.set(nil, forKey: Constants.copounPercent)
+            self?.defaults.set(nil, forKey: Constants.copounType)
+
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let nextViewController = storyboard.instantiateInitialViewController() {
                 nextViewController.modalPresentationStyle = .fullScreen
