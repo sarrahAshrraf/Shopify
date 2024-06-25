@@ -50,9 +50,9 @@
                                 <rect key="frame" x="0.0" y="109" width="393" height="709"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="338-RS-ZEx">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1458.6666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1290.3333333333333"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKA-9h-J8f">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-logo" translatesAutoresizingMaskIntoConstraints="NO" id="UKA-9h-J8f">
                                                 <rect key="frame" x="26" y="100" width="341" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="Acj-L0-ybT"/>
@@ -283,7 +283,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="dek-zI-7VG">
-                                                <rect key="frame" x="26" y="1152" width="341" height="280.66666666666674"/>
+                                                <rect key="frame" x="26" y="1152" width="341" height="112.33333333333326"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="xv3-pS-fK1">
                                                         <rect key="frame" x="0.0" y="0.0" width="341" height="112.33333333333333"/>
@@ -335,71 +335,6 @@
                                                                     <action selector="navigateToLogin:" destination="n6Q-bU-J9U" eventType="touchUpInside" id="xw9-Ck-sOU"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="L4A-wS-l1w">
-                                                        <rect key="frame" x="0.0" y="160.33333333333326" width="341" height="120.33333333333331"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gW7-DL-Udk">
-                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="16.333333333333332"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZg-2r-QYt">
-                                                                        <rect key="frame" x="0.0" y="7.6666666666667425" width="118.33333333333333" height="1"/>
-                                                                        <color key="backgroundColor" name="SecondaryFont"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="1" id="Vnu-Yv-NHD"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Sign in with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UK-gA-2Jm">
-                                                                        <rect key="frame" x="134.33333333333334" y="0.0" width="72.666666666666657" height="16.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="14"/>
-                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <color key="highlightedColor" name="SecondaryFont"/>
-                                                                    </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FGD-iQ-lVF">
-                                                                        <rect key="frame" x="223" y="7.6666666666667425" width="118" height="1"/>
-                                                                        <color key="backgroundColor" name="SecondaryFont"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="1" id="iPO-OG-12B"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="FGD-iQ-lVF" firstAttribute="width" secondItem="nZg-2r-QYt" secondAttribute="width" id="EUT-1b-Qa9"/>
-                                                                </constraints>
-                                                            </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Cvo-Lg-hIZ">
-                                                                <rect key="frame" x="0.0" y="32.333333333333485" width="341" height="88"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2N-W3-5jl">
-                                                                        <rect key="frame" x="8" y="8" width="325" height="72"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="72" id="sJ8-K9-5qF"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="13"/>
-                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                                                                        <state key="normal" title="GOOGLE" image="google">
-                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        </state>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_CornerRadius">
-                                                                                <real key="value" value="36"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="size" keyPath="_ShadowOffset">
-                                                                                <size key="value" width="1" height="1"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_ShadowOpacity">
-                                                                                <real key="value" value="0.10000000000000001"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_ShadowRadius">
-                                                                                <real key="value" value="1"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                    </button>
-                                                                </subviews>
-                                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -478,9 +413,9 @@
                                 <rect key="frame" x="0.0" y="109" width="393" height="709"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="GmY-tU-zaW">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="948"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="779.66666666666663"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="419-zi-EEl">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-logo" translatesAutoresizingMaskIntoConstraints="NO" id="419-zi-EEl">
                                                 <rect key="frame" x="26" y="100" width="341" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="D8C-56-Wbl"/>
@@ -573,7 +508,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="UIM-eA-7N0">
-                                                <rect key="frame" x="26" y="641.33333333333337" width="341" height="280.66666666666663"/>
+                                                <rect key="frame" x="26" y="641.33333333333337" width="341" height="112.33333333333337"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zBN-Sx-ydd">
                                                         <rect key="frame" x="0.0" y="0.0" width="341" height="112.33333333333333"/>
@@ -624,71 +559,6 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-Cj-lcU">
-                                                        <rect key="frame" x="0.0" y="160.33333333333326" width="341" height="120.33333333333331"/>
-                                                        <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="CzJ-mH-NuY">
-                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="16.333333333333332"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-AV-rHP">
-                                                                        <rect key="frame" x="0.0" y="7.6666666666667425" width="118.33333333333333" height="1"/>
-                                                                        <color key="backgroundColor" name="SecondaryFont"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="1" id="SVl-iT-XN2"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Sign in with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTz-57-pS0">
-                                                                        <rect key="frame" x="134.33333333333334" y="0.0" width="72.666666666666657" height="16.333333333333332"/>
-                                                                        <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="14"/>
-                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <color key="highlightedColor" name="SecondaryFont"/>
-                                                                    </label>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utl-UA-19w">
-                                                                        <rect key="frame" x="223" y="7.6666666666667425" width="118" height="1"/>
-                                                                        <color key="backgroundColor" name="SecondaryFont"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="1" id="eay-ZU-Yhx"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstItem="utl-UA-19w" firstAttribute="width" secondItem="vr9-AV-rHP" secondAttribute="width" id="7yg-ic-KQt"/>
-                                                                </constraints>
-                                                            </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="byr-O2-dS4">
-                                                                <rect key="frame" x="0.0" y="32.333333333333371" width="341" height="88"/>
-                                                                <subviews>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qd-XQ-JQI">
-                                                                        <rect key="frame" x="8" y="8" width="325" height="72"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="72" id="1rL-ap-ro2"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="13"/>
-                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
-                                                                        <state key="normal" title="GOOGLE" image="google">
-                                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        </state>
-                                                                        <userDefinedRuntimeAttributes>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_CornerRadius">
-                                                                                <real key="value" value="36"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="size" keyPath="_ShadowOffset">
-                                                                                <size key="value" width="1" height="1"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_ShadowOpacity">
-                                                                                <real key="value" value="0.10000000000000001"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                            <userDefinedRuntimeAttribute type="number" keyPath="_ShadowRadius">
-                                                                                <real key="value" value="1"/>
-                                                                            </userDefinedRuntimeAttribute>
-                                                                        </userDefinedRuntimeAttributes>
-                                                                    </button>
-                                                                </subviews>
-                                                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                            </stackView>
-                                                        </subviews>
-                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -729,9 +599,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="app-logo" width="341.33334350585938" height="341.33334350585938"/>
         <image name="back" width="35" height="35"/>
         <image name="envelope.fill" catalog="system" width="128" height="85"/>
-        <image name="google" width="30.666666030883789" height="30.333333969116211"/>
         <image name="lock.fill" catalog="system" width="125" height="128"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>

@@ -198,6 +198,7 @@ extension LoginViewController{
                 print("User's email is verified")
             } else {
                 // User's email is not verified, show an error message
+                showAlert(title: "⚠️ Your email is not verified", message: "click link sent to your mail and relogin!!")
                 print("User's email is not verified")
             }
         }
