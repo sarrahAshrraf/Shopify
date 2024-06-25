@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import JGProgressHUD
 
 
 class ProductDetailsViewController: UIViewController {
@@ -245,11 +246,14 @@ class ProductDetailsViewController: UIViewController {
             if variantCartStatus.0 {
                 if canUpdateCartAmount(variantIndex: variantCartStatus.1) {
                     updateCartAmountAndResetCounter(variantIndex: variantCartStatus.1)
+                    
+                    
                 }else {
                     presentAmountErrorAlert(variantIndex: variantCartStatus.1)
                 }
             }else{
                 addVariantToOrders(variantName: variantName)
+                self.showProgress(message: "Added To Cart")
             }
         }
     }
@@ -278,6 +282,7 @@ class ProductDetailsViewController: UIViewController {
                     shoppingCartViewModel.result?.line_items?.append(lineItem)
                     shoppingCartViewModel.editCart()
                     orderCount = 1
+                    
                 }else{
                     print("you can not")
                     let alert = UIAlertController(title: "Warning", message: "You can not order more than \(variant.inventoryQuantity!/3).", preferredStyle: .alert)
@@ -343,20 +348,36 @@ class ProductDetailsViewController: UIViewController {
     }
     
     
+    func showProgress(message : String){
+        let hud = JGProgressHUD()
+        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+        hud.textLabel.text = message
+        hud.square = true
+        hud.style = .dark
+        hud.show(in: view)
+        hud.dismiss(afterDelay: 1, animated: true){
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    
     @IBAction func favouriteButton(_ sender: UIButton) {
         if favoriteBtnOutlet.currentImage == UIImage(systemName: Constants.heart) {
             let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
             favoritesViewModel.addProduct(product: localProduct)
             self.favoritesViewModel.getAllProducts()
             favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+            self.showProgress(message: "Added To Favourite")
             
         } else {
             let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) { [weak self] action in
                 self?.favoritesViewModel.removeProduct(id : self!.product.id)
                 self?.favoritesViewModel.getAllProducts()
                 self?.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
+                self?.showProgress(message: "Deleted")
             }
             present(alert, animated: true, completion: nil)
+            
         }
     }
     
