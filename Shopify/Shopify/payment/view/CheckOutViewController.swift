@@ -108,8 +108,8 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         
         cartViewModel.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
-                self?.totalPrice.text = self?.cartViewModel.result?.total_price
-                print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.total_price))")
+                self?.totalPrice.text = self?.cartViewModel.result?.subtotal_price
+                print("TOTAL PRICE: \(String(describing: self?.cartViewModel.result?.subtotal_price))")
                 print("RESULT IS: \(String(describing:self?.cartViewModel.result))")
                 self?.discountValue.text = self?.cartViewModel.result?.applied_discount?.amount ?? "0.0"
 //                self?.orderItemsCount.text = String(self?.cartViewModel.result?.line_items?[CartList.cartItems.count].quantity ?? 0)
@@ -196,7 +196,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
    
         if !usingCopoun{
             
-            if let totalCartPrice = cartViewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
+            if let totalCartPrice = cartViewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
                 self.totalPrice.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
             } else {
                 totalPrice.text = String(format: "\(currencySymbol) %.2f", 0.0)
@@ -313,8 +313,8 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
              }
             let shippingAddress = Shipping_address(from: addresses)
         cartViewModel.updateShippingAddress(newAddress: shippingAddress)
-        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
-        var totalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var updatedTotalPrice = cartViewModel.result?.subtotal_price ?? "0.00"
+        var totalPrice = cartViewModel.result?.subtotal_price ?? "0.00"
            let totalPriceValue = Double(totalPrice)
         updatedTotalPrice = String((totalPriceValue ?? 0.00) * currencyRate)
         if usingCopoun{
@@ -358,8 +358,8 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         let shippingAddress = Shipping_address(from: addresses)
         cartViewModel.updateShippingAddress(newAddress: shippingAddress)
         
-        var updatedTotalPrice = cartViewModel.result?.total_price ?? "0.00"
-        let totalPrice = cartViewModel.result?.total_price ?? "0.00"
+        var updatedTotalPrice = cartViewModel.result?.subtotal_price ?? "0.00"
+        let totalPrice = cartViewModel.result?.subtotal_price ?? "0.00"
         var totalPriceValue = Double(totalPrice) ?? 0.00
         updatedTotalPrice = String(totalPriceValue * currencyRate)
         
