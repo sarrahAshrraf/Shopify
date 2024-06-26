@@ -87,6 +87,8 @@ class LoginViewController: UIViewController {
                 defaults.setValue(user.id, forKey: Constants.customerId)
                 let noteSpliter = user.note?.components(separatedBy: ",")
                 defaults.set(Int((noteSpliter?[1])!), forKey: Constants.cartId)
+                print("Carrrrtttttt")
+                print(noteSpliter?[1])
                 defaults.set(Int((noteSpliter?[0])!), forKey: Constants.favoritesId)
                 getFavoritesfromAPI()
 
