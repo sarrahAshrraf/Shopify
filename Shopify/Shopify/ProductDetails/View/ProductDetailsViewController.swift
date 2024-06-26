@@ -137,7 +137,7 @@ class ProductDetailsViewController: UIViewController {
     }
     func setupUI(){
         checkFavorite()
-        showFavoriteBtn()
+        //showFavoriteBtn()
     }
     
     func fetchData(){
@@ -362,23 +362,27 @@ class ProductDetailsViewController: UIViewController {
     
     
     @IBAction func favouriteButton(_ sender: UIButton) {
-        if favoriteBtnOutlet.currentImage == UIImage(systemName: Constants.heart) {
-            let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
-            favoritesViewModel.addProduct(product: localProduct)
-            self.favoritesViewModel.getAllProducts()
-            favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
-            
-            self.showProgress(message: "Added To Favourite")
-            
-        } else {
-            let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) { [weak self] action in
-                self?.favoritesViewModel.removeProduct(id : self!.product.id)
-                self?.favoritesViewModel.getAllProducts()
-                self?.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
-                self?.showProgress(message: "Deleted")
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: self)
+        }else {
+            if favoriteBtnOutlet.currentImage == UIImage(systemName: Constants.heart) {
+                let localProduct = LocalProduct(id: product.id, customer_id: defaults.integer(forKey: Constants.customerId), variant_id: product.variants?[0].id ?? 0, title: product.title ?? "", price: product.variants?[0].price ?? "", image: product.image?.src ?? "")
+                favoritesViewModel.addProduct(product: localProduct)
+                self.favoritesViewModel.getAllProducts()
+                favoriteBtnOutlet.setImage(UIImage(systemName: Constants.fillHeart), for: .normal)
+                
+                self.showProgress(message: "Added To Favourite")
+                
+            } else {
+                let alert = Alert().showRemoveProductFromFavoritesAlert(title: Constants.removeAlertTitle, msg: Constants.removeAlertMessage) { [weak self] action in
+                    self?.favoritesViewModel.removeProduct(id : self!.product.id)
+                    self?.favoritesViewModel.getAllProducts()
+                    self?.favoriteBtnOutlet.setImage(UIImage(systemName: Constants.heart), for: .normal)
+                    self?.showProgress(message: "Deleted")
+                }
+                present(alert, animated: true, completion: nil)
+                
             }
-            present(alert, animated: true, completion: nil)
-            
         }
     }
     
