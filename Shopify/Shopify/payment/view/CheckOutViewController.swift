@@ -425,6 +425,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         )
         
         checkOutVM.postOrder(order: order)
+        checkOutVM.updateVariantAfterPostOrder()
         print("Order currency:", UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD")
         print(order)
         print("-----------------------")
