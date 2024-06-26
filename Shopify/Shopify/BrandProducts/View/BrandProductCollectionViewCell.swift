@@ -35,7 +35,7 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
         let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
             currencySymbol = symbol
         
-        showFavoriteBtn()
+        //showFavoriteBtn()
     
     }
     
@@ -130,6 +130,9 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
 //    }
     
     @IBAction func checkFavouriteProduct(_ sender: Any) {
+        if UserDefault().getCustomerId() == -1 {
+            Utilities.navigateToGuestScreen(viewController: viewController!)
+        }else {
             if favouriteButton.currentImage == UIImage(systemName: Constants.heart) {
                 let localProduct = LocalProduct(
                     id: product.id,
@@ -156,4 +159,5 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
             }
             
         }
+    }
 }
