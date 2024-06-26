@@ -12,6 +12,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var orderCreatedAt: UILabel!
     
+    @IBOutlet weak var orderTimeLabel: UILabel!
     @IBOutlet weak var shopingTo: UILabel!
     @IBOutlet weak var containerView: UIStackView!
     
@@ -74,7 +75,8 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         self.tableView.register(UINib(nibName: "OrdersDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrdersDetailsTableViewCell")
         self.shopingTo.text = order?.customer?.firstName
         if let createdAtString = order?.createdAt {
-            self.orderCreatedAt.text = Utilities.formatDateString(createdAtString)
+            self.orderCreatedAt.text = Utilities.formatDateOnly(createdAtString)
+            self.orderTimeLabel.text = Utilities.formatTimeOnly(createdAtString)
         }
         self.orderAddress.text = order?.shippingAddress?.address1
         configureContainerView()
