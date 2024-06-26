@@ -100,42 +100,33 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     
     func showBadge(count: Int) {
-        
-        
-//        lazy var badgeLabel: UILabel = {
-//          let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-//          label.translatesAutoresizingMaskIntoConstraints = false
-//          label.layer.cornerRadius = label.bounds.size.height / 2
-//          label.textAlignment = .center
-//          label.layer.masksToBounds = true
-//          label.textColor = .white
-//          label.font = label.font.withSize(16)
-//          label.backgroundColor = .red
-//          return label
-//        }()
-        lazy var badgeLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.layer.cornerRadius = label.bounds.size.height / 2
-            label.textAlignment = .center
-            label.layer.masksToBounds = true
-            label.textColor = .white
-            label.font = UIFont.boldSystemFont(ofSize: 16) // Set bold font
-            label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+        if UserDefault().getCustomerId() != -1 {
             
-            return label
-        }()
-        
-        
-      badgeLabel.text = "\(count)"
-        cartBtn.addSubview(badgeLabel)
-      let constraints = [
-        badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
-        badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
-        badgeLabel.widthAnchor.constraint(equalToConstant: 20),
-        badgeLabel.heightAnchor.constraint(equalToConstant: 20)
-      ]
-      NSLayoutConstraint.activate(constraints)
+            
+            lazy var badgeLabel: UILabel = {
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.layer.cornerRadius = label.bounds.size.height / 2
+                label.textAlignment = .center
+                label.layer.masksToBounds = true
+                label.textColor = .white
+                label.font = UIFont.boldSystemFont(ofSize: 16)
+                label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+                
+                return label
+            }()
+            
+            
+            badgeLabel.text = "\(count)"
+            cartBtn.addSubview(badgeLabel)
+            let constraints = [
+                badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
+                badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
+                badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+                badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
     }
     func showCartQuantity() {
         cartVm?.bindResultToViewController = { [weak self] in

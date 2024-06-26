@@ -187,6 +187,7 @@
                         <outlet property="cartBtn" destination="f4j-ph-ZdR" id="7Nd-n5-Pwy"/>
                         <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
+                        <outlet property="favBtn" destination="oxd-z8-1Ao" id="zc6-rZ-VT4"/>
                         <outlet property="noInternetView" destination="UyO-mQ-95n" id="0up-cV-UgT"/>
                         <outlet property="shoes" destination="MS3-Lg-Qwc" id="Pte-CS-5Gx"/>
                         <outlet property="t_shirt" destination="l10-k0-mcm" id="i4P-Ma-DDz"/>
