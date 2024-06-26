@@ -31,13 +31,13 @@ class SummaryViewController: UIViewController {
         copounTF.setText("\(defaults.value(forKey: Constants.copounValue) ?? " ")")
 //        copounTF.text = "\(defaults.value(forKey: Constants.copounValue) ?? " ")"
 //        updatePriceLabels()
-//        setupCopounObserver()
+        setupCopounObserver()
     }
     func updatePriceLabels(){
         
         orderPriceLabel.text = String(format: "\(currencySymbol) %.2f", total)
                
-               if let totalCartPrice = viewModel.result?.total_price, let totalPrice = Double(totalCartPrice) {
+               if let totalCartPrice = viewModel.result?.subtotal_price, let totalPrice = Double(totalCartPrice) {
                    totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", totalPrice * currencyRate)
                } else {
                    totalPriceLabel.text = String(format: "\(currencySymbol) %.2f", 0.0)
@@ -97,6 +97,19 @@ class SummaryViewController: UIViewController {
         return 0.0
     }
     
+    func setupCopounObserver() {
+        copounTF.rx.text.orEmpty
+            .map { !$0.isEmpty }
+            .subscribe(onNext: { isEmpty in
+                if !isEmpty {
+                    self.dicountAMountLabel.text = "-0.00"
+                    self.updatePriceLabels()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    
     private func configureContainerView() {
         containerView.layoutMargins = .init(top: 10, left: 10, bottom: 10, right: 10)
         containerView.isLayoutMarginsRelativeArrangement = true
@@ -142,6 +155,11 @@ class SummaryViewController: UIViewController {
 //            let discountPercentage = validateCoupon(couponCode)
             updatePriceAfterCopoun()
             
+            
+        }
+        else if (copounTF.text == "") {
+            dicountAMountLabel.text = "-0.00"
+            updatePriceLabels()
             
         }
         else {
