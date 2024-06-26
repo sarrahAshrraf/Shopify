@@ -13,6 +13,7 @@ import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var cartBtn: UIButton!
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     
@@ -95,6 +96,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         putFavouriteListToAPI()
         showNoIntenetView()
         showCartQuantity()
+        showFavQuantity()
         
     }
 
@@ -140,7 +142,46 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         cartVm?.showCartItems()
     }
 
-    
+    func showFavBadge(count: Int) {
+        if UserDefault().getCustomerId() != -1 {
+            
+            lazy var badgeLabel: UILabel = {
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.layer.cornerRadius = label.bounds.size.height / 2
+                label.textAlignment = .center
+                label.layer.masksToBounds = true
+                label.textColor = .white
+                label.font = UIFont.boldSystemFont(ofSize: 16)
+                label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0)
+                
+                return label
+            }()
+            
+            
+            badgeLabel.text = "\(count)"
+            favBtn.addSubview(badgeLabel)
+            let constraints = [
+                badgeLabel.leftAnchor.constraint(equalTo: favBtn.centerXAnchor, constant: 2),
+                badgeLabel.topAnchor.constraint(equalTo: favBtn.topAnchor, constant: -6),
+                badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+                badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
+    }
+    func showFavQuantity() {
+        favoritesViewModel?.bindallProductsListToController = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                guard let cartBtn = self.favBtn else { return }
+                let count = self.favoritesViewModel?.allProductsList.count ?? 0
+                self.showFavBadge(count: count)
+            }
+        }
+        favoritesViewModel.getAllProducts()
+
+    }
     func showNoIntenetView(){
         internetConnectivity = ConnectivityManager.connectivityInstance
         if internetConnectivity?.isConnectedToInternet() == true {

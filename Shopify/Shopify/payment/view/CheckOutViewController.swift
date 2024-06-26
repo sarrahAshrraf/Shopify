@@ -100,7 +100,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                 if self?.addressVM.defautltAdress?.address1 == nil{
                     self?.changeAddress.setTitle("Add", for: .normal)
                 } else {
-                    self?.changeAddress.setTitle("Edit", for: .normal)
+                    self?.changeAddress.setTitle("Change", for: .normal)
                     
                 }
             }
@@ -182,7 +182,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                 if self?.addressVM.defautltAdress?.address1 == nil{
                     self?.changeAddress.setTitle("Add", for: .normal)
                 } else {
-                    self?.changeAddress.setTitle("Edit", for: .normal)
+                    self?.changeAddress.setTitle("Change", for: .normal)
                     
                 }
             }
