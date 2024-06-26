@@ -36,4 +36,28 @@ class Utilities{
         successVC.modalTransitionStyle = .crossDissolve
         viewController.present(successVC, animated: true)
     }
+    
+    static func formatDateOnly(_ dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            return dateFormatter.string(from: date)
+        }
+        
+        return dateString
+    }
+    
+    static func formatTimeOnly(_ dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let date = dateFormatter.date(from: dateString) {
+            dateFormatter.dateFormat = "h:mm a"
+            return dateFormatter.string(from: date)
+        }
+        
+        return dateString
+    }
+
+
 }

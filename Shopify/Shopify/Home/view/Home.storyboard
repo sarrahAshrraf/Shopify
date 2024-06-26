@@ -187,6 +187,7 @@
                         <outlet property="cartBtn" destination="f4j-ph-ZdR" id="7Nd-n5-Pwy"/>
                         <outlet property="categorySegmented" destination="c5g-GG-cjl" id="7H0-vt-9Zf"/>
                         <outlet property="collectionView" destination="7nM-5p-S2P" id="sd8-NN-2Fu"/>
+                        <outlet property="favBtn" destination="oxd-z8-1Ao" id="zc6-rZ-VT4"/>
                         <outlet property="noInternetView" destination="UyO-mQ-95n" id="0up-cV-UgT"/>
                         <outlet property="shoes" destination="MS3-Lg-Qwc" id="Pte-CS-5Gx"/>
                         <outlet property="t_shirt" destination="l10-k0-mcm" id="i4P-Ma-DDz"/>
@@ -462,6 +463,7 @@
                         <outlet property="brandsCollectionView" destination="vUi-pH-E9D" id="eNf-EH-za8"/>
                         <outlet property="cartBtn" destination="ioy-4H-oDx" id="Jkc-cV-Xr2"/>
                         <outlet property="couponsCollectionView" destination="BXX-k2-Uzz" id="uR6-wb-6IJ"/>
+                        <outlet property="favBtn" destination="uQT-kW-gs4" id="8hs-1R-xuf"/>
                         <outlet property="noInternetView" destination="ZK6-gv-rd3" id="ByX-xu-1np"/>
                         <outlet property="pageController" destination="BEt-l5-Sfk" id="4fz-6W-aLj"/>
                         <outlet property="searchBar" destination="deq-uL-fdE" id="dym-Pj-qpf"/>

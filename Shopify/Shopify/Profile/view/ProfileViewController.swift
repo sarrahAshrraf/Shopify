@@ -21,9 +21,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var favouriteStackView: UIStackView!
     @IBOutlet weak var noInternetView: UIView!
-    
-    @IBOutlet weak var noOrdersLabel: UILabel!
-    @IBOutlet weak var noFavoriteLabel: UILabel!
     var profileViewModel: ProfileViewModel!
     var favouriteViewModel: FavoritesViewModel!
     var productDetailsViewModel = ProductDetailsViewModel()
@@ -115,29 +112,32 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let backgroundImageView = UIImageView(image: UIImage(named: "no_product"))
+        backgroundImageView.contentMode = .center
         if tableView == ordersTableView {
             //return min(orders.count, 2)
             if orders.count > 1 {
-                noOrdersLabel.isHidden = true
+                ordersTableView.backgroundView = nil
                 return 2
             }else if orders.count == 1 {
-                noOrdersLabel.isHidden = true
+                ordersTableView.backgroundView = nil
                 return 1
+            }else {
+                ordersTableView.backgroundView = backgroundImageView
             }
         }else if tableView == favTableView {
             if favouriteViewModel.allProductsList.count > 1 {
-                noFavoriteLabel.isHidden = true
+                favTableView.backgroundView = nil
                 return 2
             }else if favouriteViewModel.allProductsList.count == 1 {
-                noFavoriteLabel.isHidden = true
+                favTableView.backgroundView = nil
                 return 1
             }else {
-                noFavoriteLabel.isHidden = false
+                favTableView.backgroundView = backgroundImageView
             }
         }
         return 0
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         145
     }

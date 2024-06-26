@@ -325,10 +325,10 @@
                                                                 <edgeInsets key="layoutMargins" top="8" left="32" bottom="8" right="32"/>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdA-N5-v0K">
-                                                                <rect key="frame" x="57.333333333333329" y="82" width="226.33333333333337" height="30.333333333333329"/>
-                                                                <color key="tintColor" name="SecondaryFont"/>
+                                                                <rect key="frame" x="54.000000000000014" y="82" width="233.33333333333337" height="30.333333333333329"/>
+                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" title="Areadyhave an account? Sign In">
+                                                                <buttonConfiguration key="configuration" style="plain" title="Already have an account? Sign In">
                                                                     <fontDescription key="titleFontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="14"/>
                                                                 </buttonConfiguration>
                                                                 <connections>
@@ -551,7 +551,7 @@
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-Cy-oei">
                                                                 <rect key="frame" x="57.000000000000014" y="82" width="227.33333333333337" height="30.333333333333329"/>
-                                                                <color key="tintColor" name="SecondaryFont"/>
+                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Don't have an account? Sign Up">
                                                                     <fontDescription key="titleFontDescription" name="SofiaProRegular" family="Sofia Pro" pointSize="14"/>

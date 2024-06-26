@@ -27,6 +27,7 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         print("viewWillAppear")
         //setupNavigationBar()
         getOrdersFromApi()
+        updateBackgroundView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +97,16 @@ class OrderViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         return cell
         
+    }
+    
+    private func updateBackgroundView() {
+        if orders.count == 0  {
+            let backgroundImageView = UIImageView(image: UIImage(named: "no_product"))
+            backgroundImageView.contentMode = .center
+            tableView.backgroundView = backgroundImageView
+        } else {
+            tableView.backgroundView = nil
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
