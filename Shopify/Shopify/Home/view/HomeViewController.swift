@@ -13,6 +13,7 @@ import Kingfisher
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var favBtn: UIButton!
     @IBOutlet weak var cartBtn: UIButton!
     @IBOutlet weak var couponsCollectionView: UICollectionView!
     
@@ -95,47 +96,39 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         putFavouriteListToAPI()
         showNoIntenetView()
         showCartQuantity()
+        showFavQuantity()
         
     }
 
     
     func showBadge(count: Int) {
-        
-        
-//        lazy var badgeLabel: UILabel = {
-//          let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-//          label.translatesAutoresizingMaskIntoConstraints = false
-//          label.layer.cornerRadius = label.bounds.size.height / 2
-//          label.textAlignment = .center
-//          label.layer.masksToBounds = true
-//          label.textColor = .white
-//          label.font = label.font.withSize(16)
-//          label.backgroundColor = .red
-//          return label
-//        }()
-        lazy var badgeLabel: UILabel = {
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.layer.cornerRadius = label.bounds.size.height / 2
-            label.textAlignment = .center
-            label.layer.masksToBounds = true
-            label.textColor = .white
-            label.font = UIFont.boldSystemFont(ofSize: 16) // Set bold font
-            label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+        if UserDefault().getCustomerId() != -1 {
             
-            return label
-        }()
-        
-        
-      badgeLabel.text = "\(count)"
-        cartBtn.addSubview(badgeLabel)
-      let constraints = [
-        badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
-        badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
-        badgeLabel.widthAnchor.constraint(equalToConstant: 20),
-        badgeLabel.heightAnchor.constraint(equalToConstant: 20)
-      ]
-      NSLayoutConstraint.activate(constraints)
+            
+            lazy var badgeLabel: UILabel = {
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.layer.cornerRadius = label.bounds.size.height / 2
+                label.textAlignment = .center
+                label.layer.masksToBounds = true
+                label.textColor = .white
+                label.font = UIFont.boldSystemFont(ofSize: 16)
+                label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0) // Darker red color
+                
+                return label
+            }()
+            
+            
+            badgeLabel.text = "\(count)"
+            cartBtn.addSubview(badgeLabel)
+            let constraints = [
+                badgeLabel.leftAnchor.constraint(equalTo: cartBtn.centerXAnchor, constant: 2),
+                badgeLabel.topAnchor.constraint(equalTo: cartBtn.topAnchor, constant: -6),
+                badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+                badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
     }
     func showCartQuantity() {
         cartVm?.bindResultToViewController = { [weak self] in
@@ -149,7 +142,46 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         cartVm?.showCartItems()
     }
 
-    
+    func showFavBadge(count: Int) {
+        if UserDefault().getCustomerId() != -1 {
+            
+            lazy var badgeLabel: UILabel = {
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.layer.cornerRadius = label.bounds.size.height / 2
+                label.textAlignment = .center
+                label.layer.masksToBounds = true
+                label.textColor = .white
+                label.font = UIFont.boldSystemFont(ofSize: 16)
+                label.backgroundColor = UIColor(red: 0.8, green: 0.1, blue: 0.1, alpha: 1.0)
+                
+                return label
+            }()
+            
+            
+            badgeLabel.text = "\(count)"
+            favBtn.addSubview(badgeLabel)
+            let constraints = [
+                badgeLabel.leftAnchor.constraint(equalTo: favBtn.centerXAnchor, constant: 2),
+                badgeLabel.topAnchor.constraint(equalTo: favBtn.topAnchor, constant: -6),
+                badgeLabel.widthAnchor.constraint(equalToConstant: 20),
+                badgeLabel.heightAnchor.constraint(equalToConstant: 20)
+            ]
+            NSLayoutConstraint.activate(constraints)
+        }
+    }
+    func showFavQuantity() {
+        favoritesViewModel?.bindallProductsListToController = { [weak self] in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                guard let cartBtn = self.favBtn else { return }
+                let count = self.favoritesViewModel?.allProductsList.count ?? 0
+                self.showFavBadge(count: count)
+            }
+        }
+        favoritesViewModel.getAllProducts()
+
+    }
     func showNoIntenetView(){
         internetConnectivity = ConnectivityManager.connectivityInstance
         if internetConnectivity?.isConnectedToInternet() == true {
@@ -299,31 +331,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == couponsCollectionView {
                   print("in collection click \(indexPath.row)")
                   guard let priceRule = homeViewModel?.priceRules?[indexPath.row] else { return }
-                  
-                  homeViewModel?.getAllDiscountCoupons(priceRule: priceRule)
-                  homeViewModel?.bindDiscountToViewController = { [weak self] in
-                      DispatchQueue.main.async {
-                          if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
-                              let alert = UIAlertController(title: "Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
-                              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                              self?.present(alert, animated: true, completion: nil)
-                              let defaults = UserDefaults.standard
-                              defaults.set(discountCode.code, forKey: Constants.copounValue)
-                              defaults.set(discountCode.id, forKey: Constants.copounID)
-                              defaults.set(Double(priceRule.value), forKey: Constants.copounPercent)
-                              defaults.set(priceRule.valueType.rawValue, forKey: Constants.copounType)
-                              UIPasteboard.general.string = discountCode.code
-      //                        print("in cell click \(indexPath.row)")
-                              print(discountCode.code)
-                              print(discountCode.id)
-                              print(priceRule.value)
-                              print(defaults.value(forKey: Constants.copounPercent))
-                              print(discountCode.priceRuleID)
-                              print(priceRule.id)
-                              
-                          }
-                      }
-                  }
+            if UserDefault().getCustomerId() == -1 {
+                Utilities.navigateToGuestScreen(viewController: self)
+            }else {
+                homeViewModel?.getAllDiscountCoupons(priceRule: priceRule)
+                homeViewModel?.bindDiscountToViewController = { [weak self] in
+                    DispatchQueue.main.async {
+                        if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
+                            let alert = UIAlertController(title: "Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self?.present(alert, animated: true, completion: nil)
+                            let defaults = UserDefaults.standard
+                            defaults.set(discountCode.code, forKey: Constants.copounValue)
+                            defaults.set(discountCode.id, forKey: Constants.copounID)
+                            defaults.set(Double(priceRule.value), forKey: Constants.copounPercent)
+                            defaults.set(priceRule.valueType.rawValue, forKey: Constants.copounType)
+                            UIPasteboard.general.string = discountCode.code
+                            //                        print("in cell click \(indexPath.row)")
+                            print(discountCode.code)
+                            print(discountCode.id)
+                            print(priceRule.value)
+                            print(defaults.value(forKey: Constants.copounPercent))
+                            print(discountCode.priceRuleID)
+                            print(priceRule.id)
+                            
+                        }
+                    }
+                }
+            }
         }else {
             let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
             brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
@@ -332,7 +367,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             products.modalPresentationStyle = .fullScreen
             present(products, animated: true, completion: nil)
         }
+            
     }
+        
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (collectionView == brandsCollectionView){
