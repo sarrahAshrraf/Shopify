@@ -299,31 +299,34 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         if collectionView == couponsCollectionView {
                   print("in collection click \(indexPath.row)")
                   guard let priceRule = homeViewModel?.priceRules?[indexPath.row] else { return }
-                  
-                  homeViewModel?.getAllDiscountCoupons(priceRule: priceRule)
-                  homeViewModel?.bindDiscountToViewController = { [weak self] in
-                      DispatchQueue.main.async {
-                          if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
-                              let alert = UIAlertController(title: "Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
-                              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                              self?.present(alert, animated: true, completion: nil)
-                              let defaults = UserDefaults.standard
-                              defaults.set(discountCode.code, forKey: Constants.copounValue)
-                              defaults.set(discountCode.id, forKey: Constants.copounID)
-                              defaults.set(Double(priceRule.value), forKey: Constants.copounPercent)
-                              defaults.set(priceRule.valueType.rawValue, forKey: Constants.copounType)
-                              UIPasteboard.general.string = discountCode.code
-      //                        print("in cell click \(indexPath.row)")
-                              print(discountCode.code)
-                              print(discountCode.id)
-                              print(priceRule.value)
-                              print(defaults.value(forKey: Constants.copounPercent))
-                              print(discountCode.priceRuleID)
-                              print(priceRule.id)
-                              
-                          }
-                      }
-                  }
+            if UserDefault().getCustomerId() == -1 {
+                Utilities.navigateToGuestScreen(viewController: self)
+            }else {
+                homeViewModel?.getAllDiscountCoupons(priceRule: priceRule)
+                homeViewModel?.bindDiscountToViewController = { [weak self] in
+                    DispatchQueue.main.async {
+                        if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
+                            let alert = UIAlertController(title: "Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self?.present(alert, animated: true, completion: nil)
+                            let defaults = UserDefaults.standard
+                            defaults.set(discountCode.code, forKey: Constants.copounValue)
+                            defaults.set(discountCode.id, forKey: Constants.copounID)
+                            defaults.set(Double(priceRule.value), forKey: Constants.copounPercent)
+                            defaults.set(priceRule.valueType.rawValue, forKey: Constants.copounType)
+                            UIPasteboard.general.string = discountCode.code
+                            //                        print("in cell click \(indexPath.row)")
+                            print(discountCode.code)
+                            print(discountCode.id)
+                            print(priceRule.value)
+                            print(defaults.value(forKey: Constants.copounPercent))
+                            print(discountCode.priceRuleID)
+                            print(priceRule.id)
+                            
+                        }
+                    }
+                }
+            }
         }else {
             let products = UIStoryboard(name: "BrandProduct", bundle: nil).instantiateViewController(withIdentifier: "BrandProduct") as! BrandViewController
             brandProductViewModel?.brandId = homeViewModel?.result?[indexPath.row].id ?? 0
@@ -332,7 +335,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             products.modalPresentationStyle = .fullScreen
             present(products, animated: true, completion: nil)
         }
+            
     }
+        
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (collectionView == brandsCollectionView){
