@@ -334,9 +334,17 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress, financialStatus: "paid", discount_codes: discountCodeArray)
             //TODO: shiiping addressssssssssss
             checkOutVM.postOrder(order: order)
+        let cartItemsFormatted = formatCartItems(CartList.cartItems)
+
+        var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is places successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(updatedTotalPrice) \(currencySymbol)", bcc: ["abdosayed20162054@gmail.com"])
+        print("==============================")
+        print(CartList.cartItems)
+        print("==============================")
+        checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
+//            checkOutVM.updateVariantAfterPostOrder()
             print("order cuurencyyyyyyyyyyyyyyy")
             print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
-            checkOutVM.updateVariantAfterPostOrder()
+//            checkOutVM.updateVariantAfterPostOrder()
             print(order)
             
         
@@ -433,6 +441,16 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
         print(order.totalPrice)
     }
 
+    
+    func formatCartItems(_ items: [LineItems]) -> String {
+        var formattedString = ""
+        for item in items {
+            if let name = item.name, let quantity = item.quantity {
+                formattedString += "Product name: \(name), Quantity: \(quantity)\n"
+            }
+        }
+        return formattedString
+    }
 }
 
 
