@@ -8,7 +8,7 @@
 import Foundation
 import PassKit
 var currencySymbol: String {
-  return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+  return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP"
 }
 var currencyValue: Double {
   var value = UserDefaults.standard.double(forKey: Constants.CURRENCY_VALUE)

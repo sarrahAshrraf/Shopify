@@ -32,7 +32,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
     var checkOutVM : CheckOutViewModel!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     var usingCopoun = false
     var copounPercent = 0.0
     let customerId = UserDefaults.standard.integer(forKey: Constants.customerId)
@@ -326,26 +326,50 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                     print("in using copouns \(discountCodeArray)")
                 }
             }
+            
+            let discountedTotal = total * (copounPercent / 100)
+            var totalCartPrice = cartViewModel.result?.subtotal_price
+            var totalPrice = Double(totalCartPrice ?? "0.0") ?? 0.0
+            let sentPrice = (totalPrice * currencyRate) - abs(discountedTotal)
+//                self.totalPrice.text = String(format: "\(currencySymbol) %.2f", (totalPrice * currencyRate) - abs(discountedTotal) )
+                
+            
+            
+            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress, financialStatus: "paid", discount_codes: discountCodeArray)
+                //TODO: shiiping addressssssssssss
+                checkOutVM.postOrder(order: order)
+            let cartItemsFormatted = formatCartItems(CartList.cartItems)
+
+            var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is places successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(sentPrice) \(currencySymbol), as you get a discount  \(abs(discountedTotal) )\(currencySymbol) for using the coupon", bcc: ["abdosayed20162054@gmail.com"])
+            print("==============================")
+            print(CartList.cartItems)
+            print("==============================")
+            checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
+            
+            
+            
+            
         
         } else {
             print("in remove all")
             discountCodeArray.removeAll()
-        }
-        let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress, financialStatus: "paid", discount_codes: discountCodeArray)
-            //TODO: shiiping addressssssssssss
-            checkOutVM.postOrder(order: order)
-        let cartItemsFormatted = formatCartItems(CartList.cartItems)
+            
+            
+            let order = Orders(currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP", lineItems: CartList.cartItems, number: CartList.cartItems.count, customer: customer, totalPrice: updatedTotalPrice, shippingAddress: shippingAddress, financialStatus: "paid", discount_codes: discountCodeArray)
+                //TODO: shiiping addressssssssssss
+                checkOutVM.postOrder(order: order)
+            let cartItemsFormatted = formatCartItems(CartList.cartItems)
 
-        var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is places successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(updatedTotalPrice) \(currencySymbol)", bcc: ["abdosayed20162054@gmail.com"])
-        print("==============================")
-        print(CartList.cartItems)
-        print("==============================")
-        checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
-//            checkOutVM.updateVariantAfterPostOrder()
-            print("order cuurencyyyyyyyyyyyyyyy")
-            print(UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY))
-//            checkOutVM.updateVariantAfterPostOrder()
-            print(order)
+            var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is places successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(updatedTotalPrice) \(currencySymbol)", bcc: ["abdosayed20162054@gmail.com"])
+       
+            checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
+            
+            
+            
+            
+        }
+            checkOutVM.updateVariantAfterPostOrder()
+
             
         
     }
@@ -406,39 +430,62 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
                     print("in using copouns \(discountCodeArray)")
                 }
             }
+            let discountedTotal = total * (copounPercent / 100)
+            var totalCartPrice = cartViewModel.result?.subtotal_price
+            var totalPrice = Double(totalCartPrice ?? "0.0") ?? 0.0
+            let sentPrice = (totalPrice * currencyRate) - abs(discountedTotal)
         
+            let order = Orders(
+                currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP",
+                lineItems: CartList.cartItems,
+                number: CartList.cartItems.count,
+                customer: customer,
+                totalPrice: updatedTotalPrice,
+                shippingAddress: shippingAddress,
+                financialStatus: "pending",
+                discount_codes: discountCodeArray
+            )
+            
+            checkOutVM.postOrder(order: order)
+                    checkOutVM.updateVariantAfterPostOrder()
+
+            let cartItemsFormatted = formatCartItems(CartList.cartItems)
+
+            var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is placed successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(sentPrice) \(currencySymbol), as you get a discount \(discountedTotal) \(currencySymbol) for using the coupon", bcc: ["abdosayed20162054@gmail.com"])
+       
+            checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
+            
+            
         } else {
             print("in remove all")
             discountCodeArray.removeAll()
-        }
-        
-//        if let copounValue = defaults.value(forKey: Constants.copounValue) as? String {
-//            if let copounPercentValue = defaults.value(forKey: Constants.copounPercent) as? String,
-//               let copounPercent = Int(copounPercentValue) {
-//                let positiveCopounPercent = abs(copounPercent)
-//                let discounts = Discount_Codes(code: copounValue, amount: "\(positiveCopounPercent)", type: "percentage")
-//
-//            }
-//        }
+            
+            
+            let order = Orders(
+                currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP",
+                lineItems: CartList.cartItems,
+                number: CartList.cartItems.count,
+                customer: customer,
+                totalPrice: updatedTotalPrice,
+                shippingAddress: shippingAddress,
+                financialStatus: "pending",
+                discount_codes: discountCodeArray
+            )
+            
+            checkOutVM.postOrder(order: order)
+                    checkOutVM.updateVariantAfterPostOrder()
 
-        let order = Orders(
-            currency: UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD",
-            lineItems: CartList.cartItems,
-            number: CartList.cartItems.count,
-            customer: customer,
-            totalPrice: updatedTotalPrice,
-            shippingAddress: shippingAddress,
-            financialStatus: "pending",
-            discount_codes: discountCodeArray
-        )
-        
-        checkOutVM.postOrder(order: order)
-        checkOutVM.updateVariantAfterPostOrder()
-        print("Order currency:", UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD")
-        print(order)
-        print("-----------------------")
-        print(order.discount_codes)
-        print(order.totalPrice)
+            let cartItemsFormatted = formatCartItems(CartList.cartItems)
+
+            var emailOrder = DraftOrderInvoice(to: UserDefaults.standard.string(forKey: Constants.USER_Email) ?? "", from: "abdosayed20162054@gmail.com", subject: "Your order is placed successfully!", customMessage: "\(cartItemsFormatted)\n For amount of money: \(updatedTotalPrice) \(currencySymbol)", bcc: ["abdosayed20162054@gmail.com"])
+       
+            
+            checkOutVM.postOrderToEmail(cartId: UserDefaults.standard.integer(forKey: Constants.cartId), emailOrder: emailOrder)
+            
+        }
+
+
+
     }
 
     
