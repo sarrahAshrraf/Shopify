@@ -11,7 +11,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var emptyTableImg: UIImageView!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     @IBOutlet weak var checkOutBtn: UIButton!
     let navigationBar = UINavigationBar()
 //    var activityIndicator = UIActivityIndicatorView(style: .large)

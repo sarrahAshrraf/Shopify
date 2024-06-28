@@ -18,7 +18,7 @@ class SummaryViewController: UIViewController {
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
     var copounUsed = false
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     @IBOutlet weak var totalPriceLabel: UILabel!
     @IBOutlet weak var dicountAMountLabel: UILabel!
     @IBOutlet weak var orderPriceLabel: UILabel!
@@ -99,11 +99,15 @@ class SummaryViewController: UIViewController {
     
     func setupCopounObserver() {
         copounTF.rx.text.orEmpty
-            .map { !$0.isEmpty }
+            .map { $0.isEmpty }
             .subscribe(onNext: { isEmpty in
+                print("EMPTYYY----")
+                print(isEmpty)
                 if !isEmpty {
+                    print("EMPTYYY----")
                     self.dicountAMountLabel.text = "-0.00"
                     self.updatePriceLabels()
+                    self.copounUsed = false
                 }
             })
             .disposed(by: disposeBag)
@@ -160,6 +164,7 @@ class SummaryViewController: UIViewController {
         else if (copounTF.text == "") {
             dicountAMountLabel.text = "-0.00"
             updatePriceLabels()
+            copounUsed = false
             
         }
         else {
