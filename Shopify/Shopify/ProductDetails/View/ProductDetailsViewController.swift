@@ -216,7 +216,7 @@ class ProductDetailsViewController: UIViewController {
                 if variant.title! == variantName{
                     if let price = Double(variant.price) {
                         let convertedPrice = price * currencyRate
-                        productPriceLabel.text = String(format: "%.0f %@", convertedPrice, currencySymbol)
+                        productPriceLabel.text = String(format: "%.2f %@", convertedPrice, currencySymbol)
                     }
                     if variant.inventoryQuantity == nil || variant.inventoryQuantity == 0 {
                         productStockCount.text = "Out of Stock"

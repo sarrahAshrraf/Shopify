@@ -193,7 +193,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print("Minimum price: \(minPrice)")
         } else {
             // Handle case where prices array is empty
-            priceSlider.maximumValue = 299
+            priceSlider.maximumValue = 300
             priceSlider.minimumValue = 20
             print("No prices available.")
         }

@@ -104,6 +104,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
                     categorySegmented.setTitleTextAttributes(defaultAttributes, for: .normal)
                 }
             }
+        setupUI()
         }
     
     func fetchCategoryData() {
