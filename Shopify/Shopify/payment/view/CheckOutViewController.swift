@@ -126,7 +126,7 @@ class CheckOutViewController: UIViewController , AddressSelectionDelegate{
      }
     
     func showOrderSuccessAlert() {
-        let alert = UIAlertController(title: "Success", message: "Order placed successfully!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "🥳 Success", message: "Order placed successfully!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
             self?.navigateToHome()
         }))

@@ -32,19 +32,43 @@ class AddressViewModel{
       }
     
     func fetchCustomerAddress(customerID: Int) {
-        //        let url = "https://349c94c1c855b8b029a39104a4ae2e13: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@mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(7309504250029)/addresses.json?limit=4"
         let url = URLs.shared.getAddressURL()
         NetworkManger.shared.getData(url: url) { response in
             if let response = response {
-                self.addresses = response.addresses ?? []
-                print("Fetched Addresses: \(response.addresses)")
+                self.addresses = self.filterAddresses(response.addresses ?? [])
+                print("Filtered Addresses: \(self.addresses)")
             } else {
                 print("Failed to fetch addresses")
             }
-            
         }
-
     }
+    
+    private func filterAddresses(_ addresses: [Address]) -> [Address] {
+        var uniqueAddresses = [String: Address]()
+        
+        for address in addresses {
+            if let address1 = address.address1 {
+                uniqueAddresses[address1] = address
+            }
+        }
+        
+        return Array(uniqueAddresses.values)
+    }
+    
+//    func fetchCustomerAddress(customerID: Int) {
+//        //        let url = "https://349c94c1c855b8b029a39104a4ae2e13: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@mad44-alx-ios-team1.myshopify.com/admin/api/2024-01/customers/\(7309504250029)/addresses.json?limit=4"
+//        let url = URLs.shared.getAddressURL()
+//        NetworkManger.shared.getData(url: url) { response in
+//            if let response = response {
+//                self.addresses = response.addresses ?? []
+//                print("Fetched Addresses: \(response.addresses)")
+//            } else {
+//                print("Failed to fetch addresses")
+//            }
+//            
+//        }
+//
+//    }
     func fetchDeafultCustomerAddress(customerID: Int) {
         let url = URLs.shared.getAddressURL()
         NetworkManger.shared.getData(url: url) { response in
