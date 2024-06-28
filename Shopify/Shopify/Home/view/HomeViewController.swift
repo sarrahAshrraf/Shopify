@@ -338,7 +338,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 homeViewModel?.bindDiscountToViewController = { [weak self] in
                     DispatchQueue.main.async {
                         if let discountCode = self?.homeViewModel?.priceRuleDiscounts?.first(where: { $0.priceRuleID == priceRule.id }) {
-                            let alert = UIAlertController(title: "🥳 Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
+                            var discount = Int(abs(Double(priceRule.value) ?? 0))
+                            let alert = UIAlertController(title: "🥳 \(discount)% Coupon Copied", message: "The coupon code has been copied to your clipboard.", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             self?.present(alert, animated: true, completion: nil)
                             let defaults = UserDefaults.standard

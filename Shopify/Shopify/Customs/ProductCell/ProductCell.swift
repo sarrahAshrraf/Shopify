@@ -21,7 +21,7 @@ class ProductCell: UITableViewCell {
     var product: Product!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     override func awakeFromNib() {
         super.awakeFromNib()
         configureContainerView()
