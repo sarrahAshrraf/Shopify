@@ -50,8 +50,10 @@ class ProductCell: UITableViewCell {
         productBrandLabel.text = Splitter().splitBrand(text: product.title ?? "", delimiter: "| ")
         productImageView.kf.setImage(with: URL(string: product.image?.src ?? ""))
         productNameLabel.text = Splitter().splitName(text: product.title ?? "", delimiter: "| ")
-        let price = Int((Double((product.variants?[0].price)! ) ?? 0.0)*currencyRate)
-        productPriceLabel.text = String(price)
+//        let price = (Double((product.variants?[0].price)! ) ?? 0.0)*currencyRate
+        let formattedPrice = String(format: "%.2f", (Double((product.variants?[0].price)!) ?? 0.0) * currencyRate)
+
+        productPriceLabel.text = formattedPrice
         curencyLabel.text = currencySymbol
     
     }
@@ -73,7 +75,7 @@ class ProductCell: UITableViewCell {
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
-        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "EGP"
             currencySymbol = symbol
     }
     
