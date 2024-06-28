@@ -90,7 +90,7 @@ class URLs{
         return baseURL + "products.json"
     }
     func getCurrencyURL()-> String{
-        let url = "https://api.apilayer.com/exchangerates_data/latest?base=USD&apikey=m2W72KxlI675De2w8mzxt1E2JlQZeWXD"
+        let url = "https://api.apilayer.com/exchangerates_data/latest?base=EGP&apikey=m2W72KxlI675De2w8mzxt1E2JlQZeWXD"
       return url
     }
     
@@ -98,6 +98,9 @@ class URLs{
         endPoint = "price_rules"
         return baseURL + endPoint + ".json"
     }
-    
+    func getPostOrderEmail(cartID : Int) -> String{
+        endPoint = "draft_orders/\(cartID)/send_invoice"
+        return baseURL + endPoint + ".json"
+    }
  
 }

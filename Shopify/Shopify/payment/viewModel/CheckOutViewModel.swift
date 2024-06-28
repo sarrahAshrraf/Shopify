@@ -8,8 +8,7 @@
 import Foundation
 class CheckOutViewModel{
     var bindOrderToViewController: (()->()) = {}
-//    var bindFailureToViewController: (()->()) = {} TODDDDDOOOO
-
+    
     var code: Int?
     var generalViewModel = ShoppingCartViewModel()
     
@@ -19,8 +18,10 @@ class CheckOutViewModel{
             
         }
     }
+    var emailOrder : DraftOrderInvoice?
+    
     func postOrder(order: Orders) {
-        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil, base: nil, rates: nil)
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: order, currencies: nil, base: nil, rates: nil, draft_order_invoice: nil)
         
         guard let params = JSONCoding().encodeToJson(objectClass: response) else {
             print("Failed to encode JSON")
@@ -31,7 +32,7 @@ class CheckOutViewModel{
            let jsonString = String(data: jsonData, encoding: .utf8) {
             print("JSON Payload: \(jsonString)")
         }
-
+        
         NetworkManger.shared.postData(path: URLs.shared.postOrderURL(), parameters: params) { [weak self] (response, code) in
             self?.order = response?.order
             self?.code = code
@@ -39,11 +40,11 @@ class CheckOutViewModel{
             print(response?.order)
             
             if let code = code, code != 200 {
-                            print("HTTP Status Code: \(code)")
-//                self?.bindFailureToViewController()
-                        } else {
-                            self?.bindOrderToViewController()
-                        }
+                print("HTTP Status Code: \(code)")
+                //                self?.bindFailureToViewController()
+            } else {
+                self?.bindOrderToViewController()
+            }
         }
     }
     
@@ -56,15 +57,15 @@ class CheckOutViewModel{
             let inventoryLevel = InventoryLevel(inventoryItemId: Int(itemId), locationId: 72172896429, available: (itemCountInStock - (item.quantity ?? 0)))
             NetworkManger.shared.postData(path: URLs.shared.postInventoryURL(), parameters: JSONCoding().encodeToJsonFromInvLevel(objectClass: inventoryLevel)!) {[weak self] response, code in
                 if let code = code {
-                                    if code == 200 {
-                                        print("Inventory updated successfully for item ID: \(itemId)")
-                                    } else {
-                                        print("Failed to update inventory for item ID: \(itemId). HTTP Status Code: \(code)")
-                                    }
-                                }
-                            }
-                        }
+                    if code == 200 {
+                        print("Inventory updated successfully for item ID: \(itemId)")
+                    } else {
+                        print("Failed to update inventory for item ID: \(itemId). HTTP Status Code: \(code)")
                     }
+                }
+            }
+        }
+    }
     
     
     func emptyCart(){
@@ -75,6 +76,36 @@ class CheckOutViewModel{
     func checkInternetConnectivity()->Bool{
         return ConnectivityManager.connectivityInstance.isConnectedToInternet()
     }
+    
+    func postOrderToEmail(cartId: Int , emailOrder : DraftOrderInvoice){
+        let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: nil, orders: nil, order: nil, currencies: nil, base: nil, rates: nil, draft_order_invoice: emailOrder)
+        
+        guard let params = JSONCoding().encodeToJson(objectClass: response) else {
+            print("Failed to encode JSON")
+            return
+        }
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("JSON Payload: \(jsonString)")
+        }
+        
+        NetworkManger.shared.postData(path: URLs.shared.getPostOrderEmail(cartID: cartId), parameters: params) { [weak self] (response, code) in
+            self?.emailOrder = response?.draft_order_invoice
+            self?.code = code
+            print("INSEIIIID ORDER POSTINGGGG")
+            print(response?.draft_order_invoice)
+            
+            if let code = code, code != 200 {
+                print("HTTP Status Code: \(code)")
+               
+            } else {
+                self?.bindOrderToViewController()
+            }
+        }
+        
+    }
+    
 }
 
 

@@ -99,7 +99,7 @@ struct LineItems: Codable {
     var quantity: Int?
     var requiresShipping: Bool?
     var sku: String?
-    var taxable: Bool?
+    var taxable = false 
     var title: String?
     var totalDiscount: String?
     var totalDiscountSet: TotalPriceSet?

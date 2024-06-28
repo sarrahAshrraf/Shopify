@@ -22,7 +22,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var cartVm : ShoppingCartViewModel?
 
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     
     var productDetailsViewModel: ProductDetailsViewModel!
     

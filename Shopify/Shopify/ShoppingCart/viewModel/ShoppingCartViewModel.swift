@@ -43,6 +43,7 @@ class ShoppingCartViewModel{
         if tempArr.isEmpty {
             let lineItem = LineItems(price: "0.0", quantity: 1, title: "dummy")
             tempArr.append(lineItem)
+            
         }
         let draftOrder = DraftOrder(id: nil, note: nil, line_items: tempArr, customer: nil)
         let response = Response(smart_collections: nil, customer: nil, customers: nil, addresses: nil, customer_address: nil, products: nil, product: nil, draft_order: draftOrder, orders: nil, order: nil, currencies: nil, base: nil, rates: nil)

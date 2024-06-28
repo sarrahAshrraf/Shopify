@@ -45,7 +45,7 @@ class ProductDetailsViewController: UIViewController {
     var currentIndex = 0
     var timer:Timer?
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     
     
     var selectedSize: String!{
@@ -120,7 +120,7 @@ class ProductDetailsViewController: UIViewController {
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
-        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "EGP"
             currencySymbol = symbol
     }
     

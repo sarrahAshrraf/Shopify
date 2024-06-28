@@ -26,5 +26,6 @@ struct Response : Codable{
     var price_rule: PriceRule?
     var discount_codes: [DiscountCode]?
     var discount_code: DiscountCode?
+    var draft_order_invoice : DraftOrderInvoice?
 
 }

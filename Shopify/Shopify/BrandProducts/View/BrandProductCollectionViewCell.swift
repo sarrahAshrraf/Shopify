@@ -21,7 +21,7 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
     var favoritesViewModel: FavoritesViewModel!
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     var viewController: UIViewController?
     
     override func awakeFromNib() {
@@ -32,7 +32,7 @@ class BrandProductCollectionViewCell: UICollectionViewCell {
         if let rate = defaults.value(forKey: Constants.CURRENCY_VALUE) as? Double {
             currencyRate = rate
         }
-        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+        let symbol = defaults.string(forKey: Constants.CURRENCY_KEY) ?? "EGP"
             currencySymbol = symbol
         
         //showFavoriteBtn()
