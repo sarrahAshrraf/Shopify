@@ -24,7 +24,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     var viewController: UIViewController?
 
     var product:Product!

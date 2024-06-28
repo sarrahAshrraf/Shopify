@@ -23,7 +23,7 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var orderAddress: UILabel!
    
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     let navigationBar = UINavigationBar()
     
     @IBAction func back(_ sender: Any) {
@@ -111,16 +111,16 @@ class OrdersDetailsViewController: UIViewController, UITableViewDataSource, UITa
         if let priceString = order?.lineItems?[indexPath.row].price, let price = Double(priceString), let orderCurrency = order?.currency {
                    let currencyRate: Double
                    let currencySymbol: String
-
+        
                    switch orderCurrency {
                    case "EGP":
-                       currencyRate = 47.707102
+                       currencyRate = 1
                        currencySymbol = "EGP"
                    case "USD":
-                       currencyRate = 1.0
+                       currencyRate = 0.020822
                        currencySymbol = "USD"
                    case "EUR":
-                       currencyRate =  0.934102
+                       currencyRate =  0.019466
                        currencySymbol = "EUR"
                    default:
                        currencyRate = 1.0

@@ -12,7 +12,7 @@ class CustomTableViewCell: UITableViewCell {
     static let identifier = "CustomTableViewCell"
     let defaults = UserDefaults.standard
     var currencyRate: Double = 1.0
-    var currencySymbol: String = "USD"
+    var currencySymbol: String = "EGP"
     
     @IBOutlet weak var orderName: UILabel!
     
@@ -67,20 +67,20 @@ class CustomTableViewCell: UITableViewCell {
                    let currencyRate: Double
                    let currencySymbol: String
 
-                   switch orderCurrency {
-                   case "EGP":
-                       currencyRate = 47.707102
-                       currencySymbol = "EGP"
-                   case "USD":
-                       currencyRate = 1.0
-                       currencySymbol = "USD"
-                   case "EUR":
-                       currencyRate =  0.934102
-                       currencySymbol = "EUR"
-                   default:
-                       currencyRate = 1.0
-                       currencySymbol = orderCurrency
-                   }
+                    switch orderCurrency {
+                    case "EGP":
+                        currencyRate = 1
+                        currencySymbol = "EGP"
+                    case "USD":
+                        currencyRate = 0.020822
+                        currencySymbol = "USD"
+                    case "EUR":
+                        currencyRate =  0.019466
+                        currencySymbol = "EUR"
+                    default:
+                        currencyRate = 1.0
+                        currencySymbol = orderCurrency
+                    }
                    
                    let convertedPrice = price * currencyRate
                    self.orderPrice.text = String(format: "%.2f %@", convertedPrice, currencySymbol)

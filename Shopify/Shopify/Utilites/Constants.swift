@@ -60,7 +60,7 @@ class Constants{
 
     
     var currencySymbol: String {
-      return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "USD"
+      return UserDefaults.standard.string(forKey: Constants.CURRENCY_KEY) ?? "EGP"
     }
     
     var currencyValue: Double {
